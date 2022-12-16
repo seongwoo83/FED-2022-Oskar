@@ -10,11 +10,11 @@
         <meta charset="UTF-8" />
         <!-- title : 탭에 표시 -->
         <title>네이버 요약 뉴스 - 사회</title>
-        <!-- 익스터널 스타일 시트 --> 
-        <link rel="stylesheet" href="../css/common.css">
-        <link rel="stylesheet" href="../css/sub.css">
+        <!-- 익스터널 스타일 시트 -->
+        <link rel="stylesheet" href="../css/common.css" />
+        <link rel="stylesheet" href="../css/sub.css" />
         <style>
-            #gnb a:nth-child(4){
+            #gnb a:nth-child(4) {
                 color: olive;
                 text-decoration: underline;
             }
@@ -29,11 +29,15 @@
 
             <nav id="gnb">
                 <a href="../index.html">
-                    <img src="../images/logo.png" alt="네이버로고" style="width: 20px;">
+                    <img
+                        src="../images/logo.png"
+                        alt="네이버로고"
+                        style="width: 20px"
+                    />
                 </a>
-                <a href="../html/sub1.html">정치</a> | 
+                <a href="../html/sub1.html">정치</a> |
                 <a href="../html/sub2.html">경제</a> |
-                <a href="../html/sub3.html">사회</a> | 
+                <a href="../html/sub3.html">사회</a> |
                 <a href="../html/sub4.html">IT/과학</a> |
                 <a href="../html/sub5.html">TV/연예</a>
             </nav>
@@ -42,10 +46,14 @@
         <main class="cont bx">
             <!-- 2-1 언론사 로고 -->
             <div class="prlogo">
-                <a href="" target="_blank" class="press">
-                    <img src="" alt="">
+                <a
+                    href="http://www.edaily.co.kr/"
+                    target="_blank"
+                    class="press"
+                >
+                    <img src="../images/pr3.png" alt="edaily" />
                 </a>
-<!-- 
+                <!-- 
     a요소 : anchor(닻)
     href 속성 : 이동할 페이지 주소
     (hyper text reference)
@@ -53,44 +61,90 @@
 -->
             </div>
             <!-- 2-2 기사 제목 -->
-            <h2 class="atit">
-                다누리, 넉달 여행 끝 '달나라'로..."이제 총알을 잡아라"
-            </h2>
+            <div id="atiTitle">
+                <h2 class="atit">
+                    독감 환자 일주일 새 75% '급증'…청소년, 2배 증가
+                </h2>
+                <h6 class="atidate">
+                    입력2022.12.16. 오전 11:59
+                </h6>
+            </div>
             <!-- 2-3 기사 사진(+사진 설명) -->
             <figure class="afig">
-                <img src="" alt="">
+                <img src="../images/arti3.jpg" alt="사회기사 사진" />
                 <!-- 이미지 설명 -->
                 <figcaption class="">
-
+                    계절성 인플루엔자(독감) 환자 증가세가 이어지는 가운데 11일
+                    오후 서울 동대문구 한국건강관리협회 건강증진의원
+                    서울동부지부를 찾은 시민들이 예방접종실로 들어가고 있다.
+                    (사진=연합뉴스)
                 </figcaption>
             </figure>
-<!-- 
+            <!-- 
     figure 요소 : 이미지나 표를 넣는 박스
     -> figurecaption 하위요소는 필요시 사용(optional)
 -->
             <!-- 2-4 기사 내용 -->
             <section class="arti">
+                <p>
+                    16일 질병관리청에 따르면 전국 197개 표본감시 의료기관을 통해
+                    집계한 최근 일주일간(12월 4~10일) 인플루엔자 의심환자 분율은
+                    외래환자 1000명당 30.3명이다. 지난주 1000명당 17.3명에서
+                    일주일 사이 75% 급증한 것이다.
+                </p>
 
+                <p>
+                    특히 청소년 의심환자가 일주일 새 2배 이상 증가했다. 13~18세
+                    독감 의심환자는 외래환자 1000명당 119.7명으로, 1주 전의
+                    58.1명에서 급증했다. 이번 절기 유행기준(1000명당 4.9명)의
+                    24.4배다.
+                </p>
+
+                <p>
+                    7~12세는 외래환자 1000명당 58.9명, 19~49세는 36.7명으로,
+                    주로 아동·청소년과 청·장년층이 독감 유행을 주도하고 있다.
+                </p>
+
+                <p>
+                    한동안 정체였던 코로나19 확진자 증가 추세가 최근 다시 시작된
+                    가운데, 독감 유행세도 거세지면서 감기약 수급과 병상 확보
+                    등에 대한 우려도 나오고 있다. 이 때문에 현재 방역당국이 검토
+                    중인 실내 마스크 착용 의무 조정에 독감 유행세가 영향을
+                    미칠지도 주목된다.
+                </p>
+
+                <p>
+                    임숙영 중앙방역대책본부 상황총괄단장은 전날 코로나19 대응
+                    방향 토론회에서 “독감은 겨울 들어서면 증가했다 방학 들어가면
+                    유행이 한번 꺾이고 개학하면 다시 증가하는 형태를 보여왔다”며
+                    “방학 들어가는 시점엔 독감 위험도도 많이 감소하지 않을까
+                    생각한다”고 말했다.
+                </p>
+
+                <p>
+                    한편, 겨울철에 주로 유행하는 바이러스성 위장염인
+                    노로바이러스 감염증 환자도 증가세가 이어지고 있다. 208개
+                    표본감시 의료기관에서 보고된 노로바이러스 환자는 최근
+                    일주일간 98명으로, 직전 주의 66명에서 32명 늘었다.
+                </p>
             </section>
             <!-- 2-5 기자 정보 -->
             <div class="rpt">
-
+                박경훈(view@edaily.co.kr)
             </div>
             <!-- 2-6 기사 원문 -->
             <h5>
-                <a href="" target="_blank">
-
+                <a href="https://n.news.naver.com/mnews/article/018/0005388459?sid=102" target="_blank">
+                    기사 원문
                 </a>
             </h5>
-        
-            
         </main>
         <!-- 3. 하단 영역 -->
         <footer class="info bx">
             <!-- 주소 블록 요소 -->
             <address>
-                서울시 OO구 OO동 OO빌딩<br>
-                대표 : Oskar <br>
+                서울시 OO구 OO동 OO빌딩<br />
+                대표 : Oskar <br />
                 전화 : 010-1111-1111
             </address>
         </footer>

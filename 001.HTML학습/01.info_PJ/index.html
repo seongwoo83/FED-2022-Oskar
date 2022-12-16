@@ -9,10 +9,25 @@
         <!-- meta : charset 필수 인코딩 설정 -->
         <meta charset="UTF-8" />
         <!-- title : 탭에 표시 -->
-        <title>네이버 요약뉴스</title>
-        <!-- 인터널 스타일 시트 -->
+        <title>네이버 요약 뉴스</title>
+        <!-- 인터널 스타일 시트 --> 
         <style>
+            /* 웹 폰트 CDN */
+            @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500&family=Hahmlet:wght@400;700&family=Josefin+Sans:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500&family=Ubuntu:wght@400;500&display=swap');
+            
             /* 
+            1. 타이틀용
+            font-family: 'Hahmlet', serif;
+            2. 본문 한글용
+            font-family: 'Noto Sans KR', sans-serif;
+            3. 본문 영어용
+            font-family: 'Ubuntu', sans-serif;
+            font-family: 'Exo 2', sans-serif;
+            font-family: 'La Belle Aurore', cursive;
+        
+            */
+            
+            /*
                 [스타일 시트 문법 영역 - 기본 문법]
 
                 선택자{
@@ -43,7 +58,6 @@
                 4. 종속 선택자 : 요소명#아이디명 / 요소명.클래스명 / 요소명#아이디명.클래스명
                     예) div#my{} -> div요소이면서 아이디가 my
                     예) a.my{} -> a요소이면서 클래스가 my
-
                     -> 기본적으로 종속선택자는 요소분석기에서 사용됨
                     -> 특정 요소에 특정 이름을 밝혀야 할 경우
                     -> 클래스 적용시 같은 이름으로 다른 디자인을 줄때 사용
@@ -52,6 +66,8 @@
                     예) h1, div, a {}
                 6. 자손 선택자 : 띄어쓰기
                     예) div a{} -> div하위의 모든 a요소 선택
+                7. 직계 자손 선택자 : ">"
+                    예) header>a{} -> header바로 밑의 a요소 선택
             */
             
             /* 기본 마진 패딩 없애기 */
@@ -74,7 +90,7 @@
                         - border-radius : 둥근 모서리 - 50%를 주면 원으로 됨*/
                 border: 5px #98b2fc;
                 border-style: dashed ridge;
-                border-radius: 7px;
+                border-radius: 30px;
 
                 /* 4) 안쪽 여백 
                     padding : 1; (4방향)
@@ -97,6 +113,35 @@
                 /* 글자 중앙 정렬 */
                 text-align: center;
             }
+
+            /* 타이틀 */
+            .top>h1{
+                /* 1) 글자 스타일 : font-style */
+                /* font-style: italic; */
+                /* 2) 글자 두께 : font-weight */
+                font-weight: bold;
+                /* 3) 글자 크기 : font-size - 단위 pt, px, em, rem, vw, vh*/
+                font-size: 50px;
+                /* 4) 글자 줄간격(글이 여러줄일때 사이 간격용, 글자 박스에서 세로 중앙정렬시 사용) : line-height - 단위 없을 시 글자 크기의 배수*/
+                line-height: 20px;
+                /* 5) 글자체 : font-family - 콤마 여러개로 대체할 체를 설정*/
+                font-family: 'hahmlet', 'Noto Sans KR', sans-serif;
+                /* 6) 글자색 : color - 해시코드/RGB/HSL/웹 색상명 */
+                color: darkblue;
+            }
+
+            /* GNB메뉴 */
+            #gnb a{
+                font-family: 'hahmlet';
+                font-size: 15px;
+                /* a요소는 기본적으로 밑줄과 글자색이 세팅되어있음 - 반드시 a에서 변경해야만 적용됨.(부모에서는 적용안됨9) */
+                color: rgb(103, 113, 255);
+                text-decoration: none;
+            }
+
+
+
+
             /* 2. 메인 영역 */
             /* 메인 영역 이미지 */
             .cont img{
@@ -116,7 +161,7 @@
         <!-- 1. 상단 영역 -->
         <header class="top bx">
             <!-- 1-1 제목 -->
-            <h1>네이버 요약뉴스</h1>
+            <h1>네이버 요약 뉴스</h1>
             <!-- 1-2 GNB메뉴 GNB(Global Navigation Bar) -->
 
             <nav id="gnb">

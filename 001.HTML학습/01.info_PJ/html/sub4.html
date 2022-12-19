@@ -118,7 +118,7 @@
                 </p>
 
                 <p>
-                    당초 항우연은 다누리를 달까지 약 1~2개월이 소요되는 '위상전이궤적' 방식을 사용하려 했으나 준비
+                    당초 항우연은 다누리를 달까지 약 1~2개월이 소요되는 <abbr title="위상전이궤적">'위적'</abbr> 방식을 사용하려 했으나 준비
                     과정에서 다누리 설계 중량이 늘어나면서 불가피하게 속도가 더 느리고 연료를 더 적게 소모하는 BLT
                     궤적으로 방식을 바꾸게 됐다. 다누리의 속도가 더 느린 BLT 궤적을 선택했음에도 이처럼 고난이도의 진입
                     기동 절차가 <ins>아직도 많이</ins> 남은 셈이다. <del>정말로 대단하다. 우리나라 자랑스러워.</del>
@@ -163,6 +163,24 @@ p요소 : pharagraph(문단)
             <h5>
                 <a href="https://n.news.naver.com/mnews/article/003/0011594397?sid=105" target="_blank"> 기사 원문 </a>
             </h5>
+            <hr>
+            <!-- 오늘의 작품 & 느낌 -->
+            <article class="work">
+                <h3>오늘의 작품 &amp; 느낌</h3>
+                <figure>
+                    <img src="../images/the scream.jpg" alt="뭉크의 절규">
+                    <figcaption>
+                        뭉크의 <cite>&lt;절규&gt;</cite>
+                    </figcaption>
+                </figure>
+            </article>
+                <!--
+                    [ html 요소에서 특수문자 처리 ]
+                    & : &amp;
+                    < 여는 꺽쇠 : &lt; (less than)
+                    > 닫는 꺽쇠 : &gt; (greater than)
+                    띄어쓰기 : &nbsp
+                -->
         </main>
         <!-- 3. 하단 영역 -->
         <footer class="info bx">
@@ -207,18 +225,35 @@ p요소 : pharagraph(문단)
 
 
             [ 1. 인용 관련 요소 ]
-                1) <blockquote> 
-                    - 블록요소로 별도의 인용구를 구분하는 박스
-                    - 내부에 블록요소 작성 금지
-                    - cite속성 : 단순 출처를 표시함(optional)
-                2) <q> 
-                    - 작은 인용구(쌍따옴표 자동 생성)
-                    - 인라인 요소임을 주의 blackquote와 구분할 것
-            <abbr>	Defines an abbreviation or acronym
-            <address>	Defines contact information for the author/owner of a document
-            <bdo>	Defines the text direction
-            <cite>	Defines the title of a work
+                1) 블록 인용요소
+                    <blockquote> 
+                        - 블록요소로 별도의 인용구를 구분하는 박스
+                        - 내부에 블록요소 작성 금지
+                        - cite속성 : 단순 출처를 표시함(optional)
+                2) 인라인 인용오소
+                    <q> 
+                        - 작은 인용구(쌍따옴표 자동 생성)
+                        - 인라인 요소임을 주의 blackquote와 구분할 것
 
+                3) 줄임말 인용
+                    <abbr>
+                        - 줄임말의 원래 뜻을 표시하는 요소
+                        - 필수속성 -> title 속성으로 툴팁을 띄움(원래 뜻)
+            
+                4) 주소 인용
+                    <address>
+                        - 주소, 대표자, 전화번호등 사이트 정보표시
+
+                5) 작품명 인용
+                    <cite>
+                        - 인용하고 있는 작품명을 표시
+
+                6) 반대방향글 인용
+                    <bdo>
+                        - 글 방향이 반대일때 사용함
+                        - Bi-Directon Override
+                        - dir 속성 : "rtl"(right to left), "ltr"(left to right)
+                        - 아랍어 등 반대방향으로 출력해야하는 글을 인용할때 사용
 
 
 

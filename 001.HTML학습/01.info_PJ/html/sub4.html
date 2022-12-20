@@ -118,10 +118,11 @@
                 </p>
 
                 <p>
-                    당초 항우연은 다누리를 달까지 약 1~2개월이 소요되는 <abbr title="위상전이궤적">'위적'</abbr> 방식을 사용하려 했으나 준비
-                    과정에서 다누리 설계 중량이 늘어나면서 불가피하게 속도가 더 느리고 연료를 더 적게 소모하는 BLT
-                    궤적으로 방식을 바꾸게 됐다. 다누리의 속도가 더 느린 BLT 궤적을 선택했음에도 이처럼 고난이도의 진입
-                    기동 절차가 <ins>아직도 많이</ins> 남은 셈이다. <del>정말로 대단하다. 우리나라 자랑스러워.</del>
+                    당초 항우연은 다누리를 달까지 약 1~2개월이 소요되는 <abbr title="위상전이궤적">'위적'</abbr> 방식을
+                    사용하려 했으나 준비 과정에서 다누리 설계 중량이 늘어나면서 불가피하게 속도가 더 느리고 연료를 더
+                    적게 소모하는 BLT 궤적으로 방식을 바꾸게 됐다. 다누리의 속도가 더 느린 BLT 궤적을 선택했음에도
+                    이처럼 고난이도의 진입 기동 절차가 <ins>아직도 많이</ins> 남은 셈이다.
+                    <del>정말로 대단하다. 우리나라 자랑스러워.</del>
                 </p>
                 <!--
 p요소 : pharagraph(문단)
@@ -163,24 +164,197 @@ p요소 : pharagraph(문단)
             <h5>
                 <a href="https://n.news.naver.com/mnews/article/003/0011594397?sid=105" target="_blank"> 기사 원문 </a>
             </h5>
-            <hr>
+            <hr />
             <!-- 오늘의 작품 & 느낌 -->
             <article class="work">
                 <h3>오늘의 작품 &amp; 느낌</h3>
                 <figure>
-                    <img src="../images/the scream.jpg" alt="뭉크의 절규">
-                    <figcaption>
-                        뭉크의 <cite>&lt;절규&gt;</cite>
-                    </figcaption>
+                    <img src="../images/the scream.jpg" alt="뭉크의 절규" />
+                    <figcaption>뭉크의 <cite>&lt;절규&gt;</cite></figcaption>
                 </figure>
             </article>
-                <!--
+            <!--
                     [ html 요소에서 특수문자 처리 ]
                     & : &amp;
                     < 여는 꺽쇠 : &lt; (less than)
                     > 닫는 꺽쇠 : &gt; (greater than)
                     띄어쓰기 : &nbsp
                 -->
+            <!-- 
+                    [ 순서 없는 리스트 : ul ]
+                        unordered list
+                    [ 순서 있는 리스트 : ol ]
+                        ordered list
+                        -> 하위 필수 요소 : li(개별 리스트)
+                        -> 주의 : 하위에 li이외의 블록요소나 그 어떤 요소도 쓸 수 없다.
+                    -->
+
+            <!-- 주요 뉴스 : ul-->
+
+            <article class="cnews">
+                <h3>주요뉴스</h3>
+                <ul>
+                    <li>
+                        <a href="https://www.newsis.com/view/?id=NISX20221214_0002123168" target="_blank"
+                            >손흥민 아버지 "왼발 잘 쓰려고 오른쪽에 압정 꽂아"</a
+                        >
+                    </li>
+                    <li>
+                        <a href="https://www.newsis.com/view/?id=NISX20221215_0002124962" target="_blank"
+                            >암투병 서정희 "내가 환갑이라니"</a
+                        >
+                    </li>
+                    <li>
+                        <a href="https://www.newsis.com/view/?id=NISX20221213_0002121312" target="_blank"
+                            >안정환 아들, 중학생 맞아?…"아빠 느낌 나오네"</a
+                        >
+                    </li>
+                </ul>
+            </article>
+
+            <!-- 랭킹 뉴스 : ol -->
+            <article class="rank">
+                <h3>랭킹뉴스</h3>
+                <ol>
+                    <li>
+                        <a
+                            href="https://n.news.naver.com/mnews/ranking/article/003/0011599659?ntype=RANKING"
+                            target="_blank"
+                            >월드컵 결승전 메시 연장전 골 무효?…득점 취소 어려워</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://n.news.naver.com/mnews/ranking/article/003/0011600371?ntype=RANKING"
+                            target="_blank"
+                            >내일 새벽 중부내륙 중심 눈폭탄…대중교통 이용 당부</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://n.news.naver.com/mnews/ranking/article/003/0011600407?ntype=RANKING"
+                            target="_blank"
+                            >코로나19 재유행 시작되나…신규 확진 8만 7559명 3개월 만에 '최다' [뉴시스Pic]</a
+                        >
+                    </li>
+                </ol>
+            </article>
+
+            <!--
+                        [ 용어 정리 리스트 : dl ]
+                        dl > dt + dd 
+                        _________________
+                        dl : 용어 리스트
+                        (defines the description list)
+                        
+                        dt : 용어 정리
+                        (defines the term)
+
+                        dd : 용어 설명
+                        (description each term)
+                        _____________________
+                        주의
+                            - dl은 반드시 자식요소로 dt와 dd를 한 번 이상 사용해야함
+                            - dt와 dd는 형제관계이므로 dt>dd 부모자식 관계 아님
+                    
+                    -->
+
+            <!-- 분야별 뉴스 : dl -->
+            <article class="secnews">
+                <h3>분야별 뉴스</h3>
+                <dl>
+                    <dt>경제</dt>
+                    <dd>
+                        <a href="https://n.news.naver.com/mnews/article/014/0004944374?sid=101" target="_blank"
+                            >부산 ‘수출 5억불탑’ 기업 2012년 이후 역대 최다</a
+                        >
+                    </dd>
+                    <dd>
+                        <a href="https://n.news.naver.com/mnews/article/421/0006529526?sid=101" target="_blank"
+                            >금융위원장 “핀테크 투자지원 강화…혁신펀드 1조원으로 확대”</a
+                        >
+                    </dd>
+                    <br />
+                    <dt>사회</dt>
+                    <dd>
+                        <a href="https://n.news.naver.com/mnews/article/005/0001574473?sid=102" target="_blank"
+                            >‘의정부 가장 폭행치사’ 10대 주범 징역 4년6개월</a
+                        >
+                    </dd>
+                    <dd>
+                        <a href="https://n.news.naver.com/mnews/article/055/0001021858?sid=102" target="_blank"
+                            >제주 유명 음식점 대표 살해범, 전날 부인과 배 타고 제주행</a
+                        >
+                    </dd>
+                    <br />
+                    <dt>TV/연예</dt>
+                    <dd>
+                        <a href="https://entertain.naver.com/ranking/read?oid=311&aid=0001537343" target="_blank"
+                            >이루 "음주운전, 변명의 여지 없어…활동 중단하겠다" [전문]</a
+                        >
+                    </dd>
+                    <dd>
+                        <a href="https://entertain.naver.com/ranking/read?oid=112&aid=0003605571" target="_blank"
+                            >새아빠, 딸 엉덩이 쿡쿡 "사랑해서" vs "싫어요"…최초 아동학대</a
+                        >
+                    </dd>
+                </dl>
+            </article>
+
+            <!-- 
+                        [ 테이블 요소 : table ]
+                        table > tr > td
+                        ________________________
+                        table : 테이블 박스 부모요소
+                        tr : 테이블 행 요소 (table row)
+                        td : 테이블 데이터 요소 (table data)
+                    -->
+            <!-- 사진 뉴스 : table-->
+            <article class="pnews">
+                <h3>사진뉴스</h3>
+                <table border="1">
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <a href="https://n.news.naver.com/mnews/article/003/0011600319" target="_blank"
+                                    >與, 노조회계 투명성 위한 법률 개정… <br />
+                                    "깜깜한 어둠 속에서 나와야"</a
+                                >
+                            </td>
+                            <td>
+                                <a href="https://n.news.naver.com/mnews/article/003/0011600319" target="_blank">
+                                    <img src="../images/newsis1.jpg" alt="사진1" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <a href="https://n.news.naver.com/mnews/article/003/0011600269" target="_blank">
+                                    중·장년층 소득 115만원 '찔끔' <br />
+                                    늘 때 대출 604만원 불었다</a>
+                                </td>
+                                <td>
+                                <a href="https://n.news.naver.com/mnews/article/003/0011600269" target="_blank">
+                                    <img src="../images/newsis2.jpg" alt="사진2" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <a href="https://n.news.naver.com/mnews/article/003/0011600202" target="_blank">
+                                    北, ICBM 정상각도 발사 위협 <br />
+                                    "쏴 보면 알것"…軍 "종합 분석"</a>
+                                </td>
+                                <td>
+                                <a href="https://n.news.naver.com/mnews/article/003/0011600202" target="_blank">
+                                    <img src="../images/newsis3.jpg" alt="사진3" />
+                                </a>
+                            </td>
+                        </tr>
+                </table>
+            </article>
         </main>
         <!-- 3. 하단 영역 -->
         <footer class="info bx">
@@ -222,8 +396,9 @@ p요소 : pharagraph(문단)
                             -> 병행표시글자(영문, 한문 등)
                     <sup> - 윗 첨자(Superscript text)
                             -> 주석표시숫자(숫자와 설명을 연결)
+                    -->
 
-
+        <!--
             [ 1. 인용 관련 요소 ]
                 1) 블록 인용요소
                     <blockquote> 

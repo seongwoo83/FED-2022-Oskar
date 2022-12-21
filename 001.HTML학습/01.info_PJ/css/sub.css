@@ -1,13 +1,53 @@
 @charset "UTF-8";
 /* 서브 페이지 공통 CSS - sub.css */
 
+/* [import로 파일 합치기]
+    - 외부 CSS 파일에서 다른 외부 CSS파일을 import방식으로 불러올 때의 장점
+        -> html파일에서 link요소로 호출할 경우 http request (웹요청)이 많아져서
+            페이지 렌더링 속도에 영향을 미침.
+        따라서 import 방식을 사용하면 더 적은 웹요청에 따라 처리 속도에 이점을 가짐
+        - 주의사항 : import는 CSS파일 상단에서 처리함
+*/
+/* @import url(파일주소); */
+@import url("./common.css");
+
+/* 본 CSS설정은 하단에서 불러옴 */
+
+
+/* 2. 메인 영역 */
+/* 메인 영역 박스 */
+.cont {
+    /* (기존 20px 재정의) */
+    padding: 15px;
+    /* 글씨체 */
+    font-family: 'Noto Sans KR', 'Ubuntu', sans-serif;
+}
+
+/* 2-1 언론사 로고 */
 .prlogo{
-    height: 70px;
+height: 50px;
 }
 .prlogo img{
+    height: 32px;
     margin-left: 20px;
-    height: 50px;
+}
+
+/* 2-2 기사 제목 */
+.atit{
+    /* 글자크기 */
+    font-size: 30px;
+    /* 글자두께 */
+    font-weight: normal;
+    /* 자간 */
+    letter-spacing: normal;
+    /* 단어간격 */
+    word-spacing: normal;
 }
 .atidate{
-    color: #888;
+    color: #999;
+    margin: 5px;
 }
+/* 2-3 기사 사진(+사진 설명) */
+/* 2-4 기사 내용 */
+/* 2-5 기자 정보 */
+/* 2-6 기사 원문 */

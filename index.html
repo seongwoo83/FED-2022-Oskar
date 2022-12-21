@@ -4,15 +4,33 @@
     <meta charset="UTF-8">
     <title>Archive Page</title>
     <style>
-        #wrap{ width: 800px; margin: 0 auto; background-color: #f4f4f4;} 
-        #wrap h1{ text-align: center; font-size: 40px;}
-        #wrap li{ border-bottom: 1px solid black;}
-        a:visited{ color: darkblue;}
+        html, body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        body{
+            padding-top: 50px;
+            /* 배경 이미지 넣기 */
+            background-image: url("./imgs/worksbg.jpg");
+            /* 배경 반복 여부 */
+            background-repeat: no-repeat;
+            /* 배경 크기 : 채우기 */
+            background-size: cover;
+        }
+        #wrap{ width: 700px; height: 800px; margin: 0 auto; border-radius: 8px; background-color: #f4f4f477; margin: 0 auto;} 
+        #wrap .tit{ margin: 0; padding: 20px; text-align: center; font-size: 40px;}
+        .titImg{margin: 0; height: 90px;;}
+        a, a:visited{ color: darkblue;}
     </style>
 </head>
 <body>
     <div id="wrap">
-        <h1>Oskar Archive Page</h1>
+        <h1 class="tit">
+            <img src="./imgs/mylogo_14.png" alt="Archive Image" class="titImg">
+            <br>
+            Oskar Archive Page
+        </h1>
         <h2>
             <ol>
                 <li>

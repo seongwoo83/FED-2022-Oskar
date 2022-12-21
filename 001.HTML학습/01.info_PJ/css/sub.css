@@ -59,7 +59,7 @@ height: 50px;
 /* 기사 이미지 */
 .afig img{
     width: 100%;
-}
+    }
 /* 기사 이미지 설명글 */
 .afig small{
     font-family: "hahmlet", san-serif;
@@ -76,30 +76,64 @@ height: 50px;
     /* text-indent: 20px; */
 }
     /* 마크요소 변경하기 */
-    .arti p mark{
-        /* inline을 block으로 */
-        display: block;
-        /* 글자크기 */
-        font-size: 20px;
-        line-height: 2;
-        padding: 20px 40px;
-        /* 배경색 */
-        background-color: #ededed;
-        border-top: 2px solid gray;
-        border-bottom: 2px solid gray;
-        /* 중앙 정렬 */
-        text-align: center;
-        margin: 15px 0;
-    }
+.arti p mark{
+    /* inline을 block으로 */
+    display: block;
+    /* 글자크기 */
+    font-size: 20px;
+    line-height: 2;
+    padding: 20px 40px;
+    /* 배경색 */
+    background-color: #ededed;
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+    /* 중앙 정렬 */
+    text-align: center;
+    margin: 15px 0;
+}
 
     /* p요소 내부 em요소 변경 */
-    .arti p em{
-        /* 글자 그림자 hoff: x축, voff: y축, blur:그림자 경계 흐림 */
-        text-shadow: 2px 2px 2px rgba(255, 0, 255, 0.514);
-        font-style: normal;
-        color: #f0f;
-        font-weight: bold;
-    }
+.arti p em{
+    /* 글자 그림자 hoff: x축, voff: y축, blur:그림자 경계 흐림 */
+    text-shadow: 2px 2px 2px rgba(255, 0, 255, 0.514);
+    font-style: normal;
+    color: #f0f;
+    font-weight: bold;
+}
 /* 2-5 기자 정보 */
+.rpt{
+    font-size: 14px;
+    background-color: #e9e9e9;
+    padding: 5px;
+    /* 디자인 적용과 동시에 inline특성인 글자만큼만 크기가 잡히도록 inline-block 적용 */
+    display: inline-block;
+    margin: 15px 0;
+}
+.cont>h5{
+    /* 내부의 inline요소 오른쪽 정렬 */
+    text-align: right;
+}
 /* 2-6 기사 원문 */
+.cont>h5>a{
+    display: inline-block;
+    margin: 0;
+    width: 70px;
+    height: 70px;
+    border: 2px solid #dbdbdb;
+    text-align: center;
+    /* 세로 중앙 : 같은 높이 */
+    line-height: 70px;
+    border-radius: 50%;
+    background-color: #ffa;
+}
+.cont>h5>a:hover{
+    /* 박스 그림자 x, y, blur spread 색
+        spread - 박스 그림자 크기
+        내부그림자는 inset */
+    box-shadow: 0 0 5px #f00;
+}
 
+ul>li:hover, ol>li:hover, dl>dd:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

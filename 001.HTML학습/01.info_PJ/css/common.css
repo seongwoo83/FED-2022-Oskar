@@ -76,6 +76,12 @@ body {
     padding-bottom: 40px;
 }
 
+/* 전체 a요소 */
+a{
+    color: #333;
+    text-decoration: none;
+}
+
 /* 박스 공통 클래스 */
 .bx {
     /* 1) 가로 크기 - 아무값도 없으면 auto가 기본값 -> 블록일 경우 부모요소 끝까지 차지 */

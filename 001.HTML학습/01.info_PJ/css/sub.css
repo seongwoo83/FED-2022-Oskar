@@ -91,6 +91,15 @@ height: 50px;
         text-align: center;
         margin: 15px 0;
     }
+
+    /* p요소 내부 em요소 변경 */
+    .arti p em{
+        /* 글자 그림자 hoff: x축, voff: y축, blur:그림자 경계 흐림 */
+        text-shadow: 2px 2px 2px rgba(255, 0, 255, 0.514);
+        font-style: normal;
+        color: #f0f;
+        font-weight: bold;
+    }
 /* 2-5 기자 정보 */
 /* 2-6 기사 원문 */
 

@@ -133,6 +133,32 @@ height: 50px;
     box-shadow: 0 0 5px #f00;
 }
 
+.cont article{
+    border-top: 2PX dashed #000;
+    margin-top: 40px;
+    padding: 15px;
+}
+
+/* 각 파트별 공통 타이틀 */
+.cont h3{
+    font-family: 'Hahmlet', 'noto sans KR', sans-serif;
+    font-size: 25px;
+    text-indent: 20px;
+    color: #444;
+}
+
+/* 기사관련 타이틀 */
+.cont article h5{
+    margin: 0 0 10px 0;
+    padding: 5px 5px;
+    display: inline-block;
+    background-color: #ddd;
+    border-radius: 10px;
+    font-family: 'Hahmlet', 'noto sans KR', sans-serif;
+    font-size: 14px;
+    color: #444;
+}
+
 ul>li:hover, ol>li:hover, dl>dd:hover{
     text-decoration: underline;
     cursor: pointer;

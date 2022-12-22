@@ -310,7 +310,11 @@ p요소 : pharagraph(문단)
 
             <!-- 
                         [ 테이블 요소 : table ]
-                        table > tr > td
+                        table (>tbody) > tr > td
+
+                        -> tbody는 작성하지 않아도 브라우저가 그려줌
+                        -> 직계자식으로 선택할 경우
+                        table>tr로 선택하면 적용되지 않음
                         ________________________
                         table : 테이블 박스 부모요소
                         tr : 테이블 행 요소 (table row)
@@ -319,7 +323,7 @@ p요소 : pharagraph(문단)
             <!-- 사진 뉴스 : table-->
             <article class="pnews">
                 <h3>사진뉴스</h3>
-                <table border="1">
+                <table>
                         <tr>
                             <td>1</td>
                             <td>

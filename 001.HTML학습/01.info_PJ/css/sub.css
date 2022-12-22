@@ -263,12 +263,12 @@ height: 50px;
     font-family: "Noto Sans KR", sans-serif;
     font-weight: normal;
     display: inline-block;
-    border: 3px dashed rgb(253, 207, 253);
+    border: 3px dashed rgb(171, 179, 248);
     border-radius: 50%;
     padding: 10px;
     font-size: 20px;
     margin-left: 20px;
-    box-shadow: 2px 1px 2px rgb(250, 98, 98);
+    box-shadow: 2px 1px 2px rgb(67, 155, 255);
 }
 
 /* 
@@ -294,5 +294,46 @@ height: 50px;
 }
 .secnews dd{
     margin-left: 100px;
+}
+
+/* 사진 뉴스 */
+.pnews table{
+    border: 1px solid #aaaaff;
+    /* 중앙 정렬 : 블록요소 또는  table에 적용됨 */
+    margin: 0 auto;
+    /* 테이블은 기본 사이간격이 존재 하므로 그 사이간격 없애기
+        -border-collapse : seperate(기본값) */
+    border-collapse: collapse;
+}
+
+.pnews tr+tr{
+    border-top: 2px solid #aaaaff;
+}
+
+
+/* tr이나 td에 child 선택자 사용가능 - 같은종류의 요소만 올 수 있으므로 */
+
+/*  첫 번째 td - 숫자 부분*/
+.pnews td:first-child{
+    background-color: #aaaaff;
+    text-align: center;
+    width: 50px;
+}
+/* 두 번째 td */
+.pnews td:nth-child(2){
+    background-color: #ccccff;
+    padding: 0 20px;
+}
+/* 세 번째 td */
+.pnews td:last-child{
+    background-color: #ccccff;
+    padding-right: 8px;
+}
+
+/* 사진 뉴스 이미지 */
+.pnews img{
+    height: 70px;
+    /* 세로정렬 : td안에서만 세로 정렬이 적용됨 일반적으로는  vertical align은 inline 요소간 세로정렬 */
+    vertical-align: middle;
 }
 

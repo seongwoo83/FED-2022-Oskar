@@ -16,7 +16,11 @@ font-family: 'Exo 2', sans-serif;
 font-family: 'La Belle Aurore', cursive;
 
 */
-
+/* 적용 우선순위
+    !important > inline css > id selector > class selector > type
+    - 유의사항 : 더 높은 선택자라도 부모요소를 업고 있는 css가 더 우선
+    예)  .container .my > #my
+*/
 /*
 [스타일 시트 문법 영역 - 기본 문법]
 

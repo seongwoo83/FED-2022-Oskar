@@ -200,8 +200,71 @@ height: 50px;
         3. content-box : 내용에만 적용*/
     background-clip: content-box;
 }
+.work img{
+    border: 15px ridge rgb(204, 108, 70);
+}
 
-ul>li:hover, ol>li:hover, dl>dd:hover{
+.work figcaption{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: normal;
+}
+.work figcaption cite{
+    font-style: normal;
+    font-family: 'hahmlet', serif;
+    font-weight: 600;
+}
+
+/* 파트별 a링크 요소 공통 디자인 */
+.cont article a{
+    font-size: 17px;
+    line-height: 2;
+    letter-spacing: -1px;
+}
+
+.cont article a:hover{
     text-decoration: underline;
+    text-shadow: 1px 1px 1px #222;
     cursor: pointer;
+}
+
+.cont article ul{
+    list-style-type: "💁‍♂️";
+}
+.cont article ol{
+    list-style-type: upper-roman;
+}
+
+/* 주요뉴스 li별 글자색 변경하기 */
+/* [ 자식 요소 선택 가상 클래스]
+    요소:first-child - 첫 번째 자식요소
+    요소:nth-child(n) - n 번째 자식요소
+    요소:last-child - 마지막 번째 자식요소  
+*/
+
+.cont article ul li:first-child a{
+    color: #f55;
+}
+.cont article ul li:nth-child(2) a{
+    color: #5f5;
+}
+.cont article ul li:last-child a{
+    color: #55f;
+}
+
+/* 불릿과 글자 사이 간격 */
+.cont article ul li, 
+.cont article ol li{
+    padding-left: 10px;
+}
+
+
+
+
+
+.pnews table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.pnews table td{
+    background-color: #efefef;
 }

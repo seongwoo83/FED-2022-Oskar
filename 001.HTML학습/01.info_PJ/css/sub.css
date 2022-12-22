@@ -74,6 +74,8 @@ height: 50px;
     padding: 0 10px;
     /* 글자 들여쓰기 : 양수는 들여쓰기, 음수는 내어쓰기*/
     /* text-indent: 20px; */
+    /* 양쪽 정렬 */
+    text-align: justify;
 }
     /* 마크요소 변경하기 */
 .arti p mark{
@@ -157,6 +159,46 @@ height: 50px;
     font-family: 'Hahmlet', 'noto sans KR', sans-serif;
     font-size: 14px;
     color: #444;
+    /* 박스 그림자 
+        - inset 속성 : 내부그림자
+            blur 속성 뒤의 값은 spread로 얼만큼 내부로 그림자를 퍼지게 할지 결정 */
+    box-shadow: inset 0 0 5px #000000dd;
+}
+
+/* 주해 박스 */
+.desc div{
+    padding: 20px 5px 0;
+    line-height: 1.7;
+    letter-spacing: 1px;
+    text-align: justify;
+}
+
+/* 인용 박스 */
+.qb blockquote{
+    margin: 0;
+    padding: 20px 5px 0;
+    line-height: 1.5;
+    font-size: 14px;
+    text-align: justify;
+}
+
+.work{
+    text-align: center;
+    /* 그라데이션 -> 이미지 */
+    background-image: 
+    /* ( 방향, 색1 %, 색2 %, ...) 
+        - 방향 : to top, to bottom, to left, to right
+        (방향에 각도를 쓰면 그라데이션 각도가 표현됨)
+        -> 방향대신 각도 : 수치deg(예: 45deg 45도)
+        * 색상을 콤마로 나열하면 등분할 하여 그라데이션 표현
+            색상뒤에 %를 쓰면 특정 비율만큼 그라데이션 표현 가능*/
+    linear-gradient(30deg, rgb(255, 193, 112), rgb(255, 132, 132));
+    /* 배경이 칠해지는 범위 결정 
+        background-clip
+        1. border-box : 보더까지 적용(기본값)
+        2. padding-box : 패딩까지 적용
+        3. content-box : 내용에만 적용*/
+    background-clip: content-box;
 }
 
 ul>li:hover, ol>li:hover, dl>dd:hover{

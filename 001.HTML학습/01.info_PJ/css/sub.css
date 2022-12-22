@@ -257,14 +257,42 @@ height: 50px;
     padding-left: 10px;
 }
 
-
-
-
-
-.pnews table{
-    border-collapse: collapse;
-    width: 100%;
+/* 분야별 뉴스 */
+/* 각 분야명 dt 공통 디자인 */
+.secnews dt{
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: normal;
+    display: inline-block;
+    border: 3px dashed rgb(253, 207, 253);
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 20px;
+    margin-left: 20px;
+    box-shadow: 2px 1px 2px rgb(250, 98, 98);
 }
-.pnews table td{
-    background-color: #efefef;
+
+/* 
+    [ 여러종류가 섞여있을 경우 형제 선택하기 ]
+    first-of-type - 같은 요소 중 첫 번째
+    nth-of-type(n) - 같은 요소 중 n 번째
+    last-of-type - 같은 요소 중 첫 번째
+*/
+/* dt별 글자색 다르게 하기 */
+.secnews dt:first-of-type{
+    color: #f55;
 }
+.secnews dt:nth-of-type(2){
+    color: #5f5;
+}
+.secnews dt:last-of-type{
+    color: #55f;
+}
+
+/* 앞에 dd가 있는 dt만 margin-top 밀기*/
+.secnews dd+dt{
+    margin-top: 20px;
+}
+.secnews dd{
+    margin-left: 100px;
+}
+

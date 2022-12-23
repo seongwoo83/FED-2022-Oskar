@@ -116,10 +116,10 @@
         h3{
             width: 800px;
             /* 부모박스보다 작은 크기를 가지는 블록에 적용됨 */
-            margin: 0 auto;
-            outline: 2px solid darkblue;
+            margin: 0 auto;;
             /* 내부 인라인 요소 오른쪽 */
             text-align: right;
+            box-sizing: border-box;
         }
 
         /* ul 기본 설정 리셋 */
@@ -134,10 +134,10 @@
                 list-style: none;
             }
 
-        ul.part1{
+        ul.part1, .part2{
             box-sizing: border-box;
             width: 800px;
-            margin: 0 auto;
+            margin: 30px auto;
             padding: 20px 0;
             border: 2px solid #ccc;
             border-radius: 10px;
@@ -146,7 +146,7 @@
         
         /* 
         [ font 한번에 세팅하기 ]
-        font : 스타일 두께 크기/줄간격 글자체
+        font : 스타일 두께 크기/줄간격 글씨체(必)
         font :스두크/줄체
         */
         
@@ -219,6 +219,26 @@
             이것의 우선순위를 쉽게 변경하려면 더 상위의 요소를 써주면 됨.
             (!important는 되도록 쓰지않을 것)    
         */
+
+        /* part2 */
+        /* 두 번째 */
+        .part2>div:nth-of-type(2){
+            font: 30px '궁서';
+            color: blueviolet;
+        }
+        .part2 i:first-of-type{
+            font: normal bold 20px '맑은 고딕';
+            color: palevioletred;
+        }
+
+        .part2 div:nth-of-type(2)~div{
+            font-family: '궁서';
+            color: red;
+        }
+
+
+
+
         /* 
             [ CSS 선택자 우선순위 ]
             

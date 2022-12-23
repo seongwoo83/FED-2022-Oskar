@@ -71,7 +71,123 @@
 
     */
 
+        /* 타이틀 중앙정렬 */
+        h1, h2{
+            text-align: center;
+        }
+        /* 링크 기본 상태 */
+        /* h2 a:link{
+            /* color: red;
+            text-decoration: none;
+        } */ */
+        /* 마우스 오버시 */
+        h2 a:hover{
+            color: darkgreen;
+            text-decoration: overline;
+            /* 글자 데코 스타일 */
+            text-decoration-style: wavy;
+        }
+        /* 링크 방문 후 상태 */
+        /* h2 a:visited{
+            color: lime;
+        } */
+        /* :active 왼쪽 클릭버튼을 누른상태 */
+        h2 a:active{
+            color: pink;
+            text-shadow: 2px 2px 2px darkred;
+        }
+        /* 요즘은 a요소에 바로 세팅하고 :hover정도만 변경해줌 */
 
+        h2 a{
+            color: darkorange;
+        }
+
+        /* :focus 요소를 클릭 또는 탭하여 초점이 올 때 */
+        h2 a:focus{
+            /* 외곽선 outline (border와 비슷)
+            -> border와 차이점은 주변에 영향을 주지 않음
+                박스 기본구성이 아님
+            -> 입력창 포커스 갈때 아웃라인 표시*/
+            outline: 10px dotted orangered;
+
+        }
+
+
+        h3{
+            width: 800px;
+            /* 부모박스보다 작은 크기를 가지는 블록에 적용됨 */
+            margin: 0 auto;
+            outline: 2px solid darkblue;
+            /* 내부 인라인 요소 오른쪽 */
+            text-align: right;
+        }
+
+        /* ul 기본 설정 리셋 */
+        /* 종속 선택자를 쓰는 경우
+            1. 개발자가 요소를 밝히고 싶은경우
+            2. 같은 클래스를 다르게 세팅할때 */
+
+            ul, ol{
+                /* 3가지 없애기 */    
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+        ul.part1{
+            box-sizing: border-box;
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* 
+            [ font 한번에 세팅하기 ]
+            font : 스타일 두께 크기/줄간격 글자체
+            font :스두크/줄체
+        */
+
+        /* 1번 li */
+        .part1 li:nth-child(1){
+            font:40px '궁서체';
+            color: red;
+        }
+        .part1 li:nth-child(1):hover{
+            font-size: 50px;
+            color: blueviolet;
+        }
+
+        .part1 li:nth-child(2){
+            font: bold 30px '굴림';
+            color: lightcoral;
+        }
+        .part1 li:nth-child(2):hover{
+            color: skyblue;
+        }
+        .part1 li:nth-child(){
+
+        }
+        .part1 li:nth-child(){
+
+        }
+        .part1 li:nth-child(){
+
+        }
+        .part1 li:nth-child(){
+
+        }
+        .part1 li:nth-child(){
+
+        }
+        .part1 li:nth-child(){
+
+        }
+        .part1 li:nth-child(){
+
+        }
 
         /* 
         [ CSS 선택자 우선순위 ]

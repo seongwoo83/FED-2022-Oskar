@@ -7,43 +7,130 @@
         html, body{
             margin: 0;
             padding: 0;
+            /* 보이는 화면에 기준하여 높이값을 설정 
+                -> 직계자식 하위요소가 높이값을 %로 설정할 때 body가 기준이 됨*/
             height: 100%;
         }
         body{
-            padding-top: 50px;
+            /* padding-top: 50px; */
+        }
+        /* 페이지 박스 : div 블록박스 */
+        .mybox{ 
+            width: 100%;
+            height: 100%;
             /* 배경 이미지 넣기 */
             background-image: url("./imgs/worksbg.jpg");
             /* 배경 반복 여부 */
             background-repeat: no-repeat;
+            /* 베경 고정 */
+            background-attachment: fixed;
+            /* 배경 위치 */
+            background-position: center;
             /* 배경 크기 : 채우기 */
             background-size: cover;
         }
-        #wrap{ width: 700px; height: 800px; margin: 0 auto; border-radius: 8px; background-color: #f4f4f477; margin: 0 auto;} 
-        #wrap .tit{ margin: 0; padding: 20px; text-align: center; font-size: 40px;}
-        .titImg{margin: 0; height: 90px;;}
-        a, a:visited{ color: darkblue;}
+        /* 두 번째 페이지박스 */
+        .mbx2{
+            background-image: url("./imgs/bg_mainvisual.jpg");
+        }
+        /* 페이지별 컨텐츠 박스 */
+        .pwrap{
+            margin: 0 auto;
+            border-radius: 8px;
+            background-color: #f4f4f477;
+        }
+        .wrap .tit{ 
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            font-size: 40px;
+        }
+        .titImg{
+            margin: 0;
+            height: 70px;;
+        }
+        a, a:visited{ 
+            color: darkblue;
+        }
     </style>
 </head>
 <body>
-    <div id="wrap">
+    <div class="mybox mbx1 wrap">
+        <!-- Title -->
         <h1 class="tit">
-            <img src="./imgs/mylogo_14.png" alt="Archive Image" class="titImg">
+            <img src="./imgs/archive.png" alt="Archive Image" class="titImg">
             <br>
             Oskar Archive Page
         </h1>
-        <h2>
-            <ol>
-                <li>
-                    <a href="./001.HTML학습/01.info_PJ/index.html" target="_blank">Info PJ</a>
-                </li>
-                <li>
-                    <a href="./001.HTML학습/01.info_PJ/html/sub4.html" target="_blank">IT/과학 페이지</a>
-                </li>
-                <li>
-                    <a href="./006.와이어프레이밍/도깨비PJ와이어프레임.pdf" target="_blank">도깨비PJ 와이어프레임</a>
-                </li>
-            </ol>
-        </h2>
+        <div class="pwrap">
+            <!-- 1. html학습 링크파트 -->
+            <section class="part pt1">
+                <ol>
+                    <li>
+                        <a href="./001.HTML학습/01.info_PJ/index.html" target="_blank">Info PJ</a>
+                    </li>
+                    <li>
+                        <a href="./001.HTML학습/01.info_PJ/html/sub4.html" target="_blank">IT/과학 페이지</a>
+                    </li>
+                    <li>
+                        <a href="./006.와이어프레이밍/도깨비PJ와이어프레임.pdf" target="_blank">도깨비PJ 와이어프레임</a>
+                    </li>
+                </ol>
+            </section>
+            <!-- 2. css학습 링크파트 -->
+            <section class="part pt2">
+                <ol>
+                    <li>
+                        <a href="./001.HTML학습/01.info_PJ/index.html" target="_blank">Info PJ</a>
+                    </li>
+                    <li>
+                        <a href="./001.HTML학습/01.info_PJ/html/sub4.html" target="_blank">IT/과학 페이지</a>
+                    </li>
+                    <li>
+                        <a href="./006.와이어프레이밍/도깨비PJ와이어프레임.pdf" target="_blank">도깨비PJ 와이어프레임</a>
+                    </li>
+                </ol>
+            </section>
+        </div>
+    </div>
+
+    <div class="mybox mbx2 wrap">
+        <!-- Title -->
+        <h1 class="tit">
+            <img src="./imgs/archive.png" alt="Archive Image" class="titImg">
+            <br>
+            Oskar Archive Page
+        </h1>
+        <div class="pwrap">
+            <!-- 1. html학습 링크파트 -->
+            <section class="part pt1">
+                <ol>
+                    <li>
+                        <a href="./001.HTML학습/01.info_PJ/index.html" target="_blank">Info PJ</a>
+                    </li>
+                    <li>
+                        <a href="./001.HTML학습/01.info_PJ/html/sub4.html" target="_blank">IT/과학 페이지</a>
+                    </li>
+                    <li>
+                        <a href="./006.와이어프레이밍/도깨비PJ와이어프레임.pdf" target="_blank">도깨비PJ 와이어프레임</a>
+                    </li>
+                </ol>
+            </section>
+            <!-- 2. css학습 링크파트 -->
+            <section class="part pt2">
+                <ol>
+                    <li>
+                        <a href="./001.HTML학습/01.info_PJ/index.html" target="_blank">Info PJ</a>
+                    </li>
+                    <li>
+                        <a href="./001.HTML학습/01.info_PJ/html/sub4.html" target="_blank">IT/과학 페이지</a>
+                    </li>
+                    <li>
+                        <a href="./006.와이어프레이밍/도깨비PJ와이어프레임.pdf" target="_blank">도깨비PJ 와이어프레임</a>
+                    </li>
+                </ol>
+            </section>
+        </div>
     </div>
 
 

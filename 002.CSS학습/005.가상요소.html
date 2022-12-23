@@ -94,25 +94,55 @@
             margin-left: 50px;
         }
 
+        dt{
+            margin: 25px 0 15px;
+        }
+
         /* 반복되는 요소의 앞에 아이콘 가상요소로 넣기 */
-        
+        dt::before{
+            content: '🕶';
+            font-size: 50px;
+            vertical-align: -7px;
+        }
 
         /* dd전체와 
         dd.story>h3에 가상요소 before적용하기 */
+        dd::before{
+            content: '🤦‍♂️';
+            font-size: 20px;
+            margin-right: 10px;
+            vertical-align: 4px;
+        }
         
-
 
         /* 출연배우의 dd부터 아이콘변경 */
-        
+        dt:nth-of-type(2)~dd::before{
+            content: '💁‍♂️';
+        }
         /* 아티스트의 dd부터 아이콘변경 */
+        dt:nth-of-type(3)~dd::before{
+            content: '🤷‍♂️';
+        }
         
-
+        
         /* 스토리의 dd는 가상요소 없애기 */
+        dd.story::before{
+            display: none;
+        }
+        
         
         /* 스토리의 dd 아래 h3 이모지변경 */
+        dd.story>h3::before{
+            content: '🙅‍♂️';
+        }
         
 
         /* .story의 첫번째 p태그의 첫번째 글자 디자인 변경하기 */
+        .story p:nth-of-type(1)::first-letter{
+            font-size: 50px;
+            font-weight: bold;
+            color: hotpink;
+        }
         
 
         /* .story의 첫번째 p태그의 첫번째줄 디자인 변경하기 */
@@ -122,7 +152,13 @@
 
         /* 두번째 p태그는 태그로 
         첫번째 글자(b태그), 첫번째 줄(span)변경 */
-        
+        .story p:nth-of-type(2) b{
+            font-size: 50px;
+            color: hotpink;
+        }
+        .story p:nth-of-type(2) span{
+                        
+        }
 
         /* 기타 가상요소 ::selection */
         /* 드래그 선택시 글자색 배경색 설정변경! */

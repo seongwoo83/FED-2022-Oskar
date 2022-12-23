@@ -60,11 +60,21 @@
                 margin-right: 20px;
                 /* 인라인 요소간 세로정렬 */
                 vertical-align: middle;
-        
+                
         }
 
         /* 맨뒤 추가요소 ::after */
-        
+        h2::after{
+            content: '';
+            /* content에 빈값은 마치 <span></span>이라고 쓴것과 비슷 -> inline 요소이다*/
+            display: inline-block;
+            /* display속성을 block라고 주는 순간 <div></div>처럼 바뀜 
+                inline-block을 주면 한줄에 오면서 디자인 적용이 됨*/
+            width: 40px;
+            height: 60px;
+            border: 2px solid red;
+            background: url("./imgs/bg_logo_a_01.png") no-repeat center/100%;
+        }
 
 
         /* dl요소 디자인 */

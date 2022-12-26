@@ -29,18 +29,30 @@ body{
 /********************************* 메인영역 *********************************/
 /* 메인영역 속박스 */
 .cont{
-
+    overflow: hidden;
+    /* 자식요소 위, 아래 margin 포함 */
 }
 /* 전체 캐릭터 박스 */
 .cbx{
     width: 90%;
     margin: 0 auto;
-
+    /* 상단margin -> 부모박스에 overflow: hidden 설정 */
+    margin-top: 470px;
 }
+
+/* 자식요소의 float 해제 clear설정 가상요소*/
+.cbx::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
 /* 캐릭터 각 박스 공통 */
 .cat{
-    /* 4등분 할 가로크기 -> 20% */
-    width: 20%;
+    /* 블록박스 옆으로 흐르게 */
+    float: left;
+    /* 4등분 할 가로크기 -> 25% */
+    width: 25%;
 }
 /* 캐릭터 이미지 */
 .cat img{

@@ -9,7 +9,7 @@
 
 /* 공사중 표시 */
 body *{
-    outline: 1px dotted gray;
+    outline: 1px dotted red;
 }
 
 
@@ -26,8 +26,3 @@ body{
     /* fixed인 배경이미지는 body의 높이값과 상관없이 보이는 화면을 기준하여 그 크기를 잡음. */
 }
 
-/* 중앙 속박스 */
-.ibx{
-    width: 1200px;
-    margin: 0 auto;
-}

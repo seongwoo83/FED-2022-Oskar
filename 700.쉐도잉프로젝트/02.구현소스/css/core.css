@@ -18,3 +18,10 @@
 body{
     font-family: "Nanum Gothic", sans-serif;
 }
+
+/* 중앙 속박스 클래스*/
+.ibx{
+    max-width: 1200px;
+    /* 1200px보다 작아지면 auto로 전환되어 가로스크롤이 생기지 않음*/
+    margin: 0 auto;
+}

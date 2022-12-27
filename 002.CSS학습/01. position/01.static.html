@@ -48,6 +48,13 @@
         #s2{
             margin-top: -20px;
             background-color: lightcoral;
+            animation: rotate_image 5s linear infinite;
+            transform-origin: 50% 50%;
+        }
+        @keyframes rotate_image {
+                100%{
+                transform: rotate(-360deg);
+            }
         }
         #s3{
             margin-top: -10px;

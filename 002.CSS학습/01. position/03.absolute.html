@@ -17,7 +17,7 @@
         /* 첫 번째 absolute */
         #a1{
             position: absolute;
-            /*
+/*
     *************************************************
 
             [ 3. absolute 포지션 ]
@@ -57,12 +57,43 @@
                 absolute는 내용만큼만 그 크기가 자동으로 설정됨
 
 
+            3. block이 아닌 요소에 absolute를 준 경우
+                - 자동으로 display: block으로 설정됨
+                이유는 자동크기를 설정할 경우 block이 아니면 크기 설정이 안되므로 자동전환 됨
+                -> 일반적으로 모든 absolute는 block
                 
+            4. absolute에 margin을 쓰는 경우
+                설정이 반영되는 경우는 위치 설정과 같은 방향으로 margin만 적용됨
+                예1) top을 적용햇으면 margin-top
+                예2) left을 적용햇으면 margin-left
+                예3) bottom을 적용햇으면 margin-bottom
+                예4) right을 적용햇으면 margin-right
+
+                -> 단, 위치설정 없을 경우에는 top, left가 기준 - 그래서 margin도 margin-top, margin-left만 적용
+
+            5. 위치이동 값의 초기화
+                - 값으로 auto를 주면 됨(미디어쿼리나 JS 코딩시에 발생할 수 있음)
+                예) top: 50px -> top: auto; bottom: 50px;
+                -> 언제 초기화 하나-> 기존에 이미 설정된 하나의 위치 값을 반대방향으로 위치값 변경시에 초기화를 사용함
+
+            6. 위치이동 값을 전부 다 사용하는 경우
+                - 부모박스를 가득 채우거나, 일정 위치를 잡고 크기가 유동적이어야 할 때 사용함
+
+                예) 부모박스를 채우는 absolute
+                    - position: absolut;
+                    - top: 0;
+                    - left: 0;
+                    - bottom: 0;
+                    - right: 0;
+                    (단, width와 height는 설정 안함) 
 
 
-
+                7. absolute끼리는 서로 겹침
+                8. absolute는 부모자격 박스가 overflow: hidden으로 세팅되어 넘치는 자식요소를 숨길 때
+                    부모자격이 아닌 박스가 overflow: hidden이어도 숨겨지지 않고 부모자격 박스만 숨겨짐
+                    
     *************************************************
-            */
+*/
             
             
             

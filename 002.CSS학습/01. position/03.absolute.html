@@ -26,7 +26,7 @@
             (단, 위치속성값을 쓴 경우에만 부모자격을 가짐)
 
             1. absolute 포지션은 위치 이동값을 쓰기 전과 후로 나눌 수 있음
-                (1) -위치이동값을 쓰지 않은경우
+                (1) 위치이동값을 쓰지 않은경우
                     - 자기보다 위에 있는 static한 요소를 존중하여 그 아래에 위치함
                         ->>>gentle absolute
                 
@@ -37,14 +37,28 @@
                     - 자기보다 아래쪽에 위치하고 있는 static한 요소는 absolute를 인식하지 못하여 같은자리에 위치함
                     (즉, 위나 아래에 위치함)
             
-            2. 위치 이동값을 사용한 경우
-                - 위치 이동값을 사용한 부분에 대해서만 absolute가 위치를 잡을 때 기준이 되는 부모는 static이 아닌 요소가 부모임
-                
-                - 일반적으로 부모 요소가 싸고 있는 요소지만 absolute가 위치를 잡기위한 기준이 되는 부모는 static이 아닌 요소가 부모임
-                    -> static이 아닌 포지션이란?
-                        - relative / absolute / fixed / sticky
+                (2) 위치 이동값을 사용한 경우
+                    - 위치 이동값을 사용한 부분에 대해서만 absolute가 위치를 잡을 때 기준이 되는 부모는 static이 아닌 요소가 부모임
+                    
+                    - 일반적으로 부모 요소가 싸고 있는 요소지만 absolute가 위치를 잡기위한 기준이 되는 부모는 static이 아닌 요소가 부모임
+                        -> static이 아닌 포지션이란?
+                            - relative / absolute / fixed / sticky
 
-                - 위치 이동값을 작성하지 않은 부분에 대해서는 부모를 찾지 않음
+                    - 위치 이동값을 작성하지 않은 부분에 대해서는 부모를 찾지 않음(gentle)
+
+                    -> 부모자격이 있는 부모요소들 중 가장 가까운 요소가 부모
+                    -> 만약 부모자격이 모두 없으면 보이는 화면(window)를 기준함
+                    (보이는 화면은 body가 아님 -> 스크롤이 생겨도 스크롤 위쪽에 보이는 화면만을 지칭함)
+
+                    ->>> 또한, width나 height값을 %로 줄 경우 부모자격이 있는 요소를 기준하여 크기가 설정됨
+                    (일반적인 포지션 박스는 바로 싸고 있는 직계부모박스를 기준으로 함)
+
+            2. absolute의 가로 세로 크기를 주지 않은경우 일반적으로 block요소 이므로 width: auto로써 부모 끝까지 차지하지만,
+                absolute는 내용만큼만 그 크기가 자동으로 설정됨
+
+
+                
+
 
 
     *************************************************
@@ -52,7 +66,7 @@
             
             
             
-            background: url("./images/ab1.jpg") no-repeat center/100%;
+            background: url("./images/ab1.jpg") no-repeat center/cover;
             
         }
         /* 두 번째 absolute */
@@ -112,7 +126,7 @@
             width: 50px;
             height: 50px;
             color: #fff;
-            background: url("./images/ab1.jpg") no-repeat center/100%;
+            background: url("./images/ab1.jpg") no-repeat center/cover;
         }
         /* .a3는 위치이동 값이 없으므로 gentle상태 -> 싸고 있는 박스 안에 가만히 있음 */
         /* 부모 찾는 absolut .a4 */
@@ -120,7 +134,35 @@
             top: 0;
             left: 0;
             /* 나의 부모는?  */
+            width: 20%;
+            height: 40%;
+            /* absolute인데 %로 가로세로 크기를 줄 경우 부모자격 박스를 기준으로 한다 */
         }
+
+        .a5{
+            position: absolute;
+            /* 크기를 안주면 내용만큼 늘어남 */
+            top: 20%;
+            right: 10%;
+            outline: 2px solid red;
+        }
+        .a5 img{
+            vertical-align: top;
+            /* 박스에 단일한 이미지를 넣을경우 하단에 자연스런 간극이 존재함(약 4px) 
+                - 이것을 없애려면 vertical-align을 이용해 inline요소간 세로 정렬 속성의 값으로
+                top/middle/bottom 중 어느 것이든 사용하면 사라짐 */
+        }
+
+        /* span을 absolute로 -> inline요소에 absolute 속성을 부여하면 자동으로 display: block으로 전환함*/
+        .spabs{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            /* 부모는 .s8 */
+            border: 4px dotted red;
+        }
+
+
     </style>
 </head>
 <body>
@@ -131,6 +173,10 @@
     <div class="bx" id="s2">s2</div>
     <div class="bx" id="a2">a2</div>
 
+    <div class="a5">
+        <img src="./images/ab2.jpg" alt="타노스">
+    </div>
+
     <!-- 부모를 찾는 absolute -->
     <div class="bx2 s5">s5
         <div class="bx2 s6">s6
@@ -138,6 +184,9 @@
                 <div class="bx2 s8">s8
                     <div class="abs a3">a3</div>
                     <div class="abs a4">a4</div>
+                    <span class="spabs">
+                        나는 span absolute다.
+                    </span>
                 </div>
             </div>
         </div>

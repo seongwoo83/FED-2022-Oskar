@@ -10,7 +10,7 @@
         /* sticky 포지션 요소 */
         .stk1{
             position: sticky;
-            top: 25%;
+            top: 100px;
             left: 50px;
             width: 600px !important;
             background-color: lightpink;
@@ -101,7 +101,7 @@
             line-height: 100px;
         }
 
-        /* 첫 번째 absolute */
+        /* 첫 번째 absolute */  */
         #a1{
             position: absolute;
             
@@ -228,8 +228,12 @@
         .absimg:hover img:last-child{
             opacity: 1;
         }
-
-
+            /* 스티키 버튼 */
+        .stkbtn{
+            position: sticky;
+            top: 0px;
+            font-size: 50px;
+        }
     </style>
 </head>
 <body>
@@ -278,6 +282,8 @@
                         <img src="./images/ab0.jpg" alt="포스터">
                         <span>포스터 보기</span>
                     </div>
+                    <!-- 스티키 버튼 -->
+                    <button class="stkbtn">나는 스티키</button>
                 </div>
             </div>
         </div>

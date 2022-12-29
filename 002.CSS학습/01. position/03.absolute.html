@@ -193,6 +193,28 @@
             border: 4px dotted red;
         }
 
+        /* absolute끼리는 서로 겹친다 */
+        .absimg{
+            width: 92px;
+            height: 115px;
+            border: 10px ridge goldenrod;
+        }
+        .absimg img{
+            position: absolute;
+            /* gentle absolute 부모 자격이 없는 일반 static 요소여도 그자리에 가만히 있음
+            -> absolute 이미지끼리는 서로 겹쳐짐 - 위, 아래 관계는 z-index로 변경 가능 */
+        }
+        /* 두 번째 이미지 '닥스'만 투명하게 */
+        .absimg img:last-child{
+            opacity: 0;
+            transition: 2s;
+            /* 투명도 : opacity (0-투명, 1-불투명, 0.~ 반투명) */
+        }
+        /* 부모박스 마우스 오버시 '닥스' 보이기 */
+        .absimg:hover img:last-child{
+            opacity: 1;
+        }
+
 
     </style>
 </head>
@@ -207,7 +229,11 @@
     <div class="a5">
         <img src="./images/ab2.jpg" alt="타노스">
     </div>
-
+    <!-- absolute끼리는 서로 겹친다 -->
+    <div class="absimg">
+        <img src="./images/ab3.jpg" alt="토르">
+        <img src="./images/ab4.jpg" alt="닥스">
+    </div>
     <!-- 부모를 찾는 absolute -->
     <div class="bx2 s5">s5
         <div class="bx2 s6">s6

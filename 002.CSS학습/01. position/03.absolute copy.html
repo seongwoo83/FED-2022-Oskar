@@ -150,6 +150,8 @@
         .s8{
             position: relative;
             background-color: lightsalmon;
+            overflow: hidden;
+            /* absolte 자식에 관하여 부모자격이 있는 경우메나  ㅐ=ㄷㄱ.딪ㅅ니 심 */
         }
         /* 부모를 찾는 absolute박스 */
         .abs{
@@ -162,8 +164,10 @@
         /* .a3는 위치이동 값이 없으므로 gentle상태 -> 싸고 있는 박스 안에 가만히 있음 */
         /* 부모 찾는 absolut .a4 */
         .a4{
-            top: 0;
+            top: -18px;
             left: 0;
+            overflow: hidden;
+            /* 부모자격 체크위해 overflow: hidden 적용안됨 */
             /* 나의 부모는?  */
             width: 20%;
             height: 40%;

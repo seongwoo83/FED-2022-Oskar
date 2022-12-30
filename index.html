@@ -3,65 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Archive Page</title>
-    <style>
-        html, body{
-            margin: 0;
-            padding: 0;
-            /* 보이는 화면에 기준하여 높이값을 설정 
-                -> 직계자식 하위요소가 높이값을 %로 설정할 때 body가 기준이 됨*/
-            height: 100%;
-        }
-        body{
-            /* padding-top: 50px; */
-        }
-        /* 페이지 박스 : div 블록박스 */
-        .mybox{ 
-            width: 100%;
-            height: 100%;
-            /* 배경 이미지 넣기 */
-            background-image: url("./imgs/worksbg.jpg");
-            /* 배경 반복 여부 */
-            background-repeat: no-repeat;
-            /* 베경 고정 */
-            background-attachment: fixed;
-            /* 배경 위치 */
-            background-position: center;
-            /* 배경 크기 : 채우기 */
-            background-size: cover;
-        }
-        /* 두 번째 페이지박스 */
-        .mbx2{
-            background-image: url("./imgs/bg_mainvisual.jpg");
-        }
-        /* 페이지별 컨텐츠 박스 */
-        .pwrap{
-            margin: 0 auto;
-            border-radius: 8px;
-            background-color: #f4f4f477;
-        }
-        .wrap .tit{ 
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-            font-size: 40px;
-        }
-        .titImg{
-            margin: 0;
-            height: 70px;;
-        }
-        a, a:visited{ 
-            color: darkblue;
-        }
-    </style>
+    <link rel="shortcut icon" href="./997.IMG/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="./999.CSS/main.css">
 </head>
 <body>
+    <div id="top">
+        <header class="top">
+            <!-- Title -->
+            <h1 class="tit">
+                <img src="./997.IMG/archive.png" alt="Archive Image" class="titImg">
+                <br>
+                Oskar Archive Page
+            </h1>
+        </header>
+    </div>
+    <!-- 1번 페이지 -->
     <div class="mybox mbx1 wrap">
-        <!-- Title -->
-        <h1 class="tit">
-            <img src="./imgs/archive.png" alt="Archive Image" class="titImg">
-            <br>
-            Oskar Archive Page
-        </h1>
         <div class="pwrap">
             <!-- 1. html학습 링크파트 -->
             <section class="part pt1">
@@ -97,7 +54,7 @@
     <div class="mybox mbx2 wrap">
         <!-- Title -->
         <h1 class="tit">
-            <img src="./imgs/archive.png" alt="Archive Image" class="titImg">
+            <img src="./997.IMG/archive.png" alt="Archive Image" class="titImg">
             <br>
             Oskar Archive Page
         </h1>

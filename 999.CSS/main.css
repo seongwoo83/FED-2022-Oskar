@@ -12,9 +12,6 @@ body {
                 -> 직계자식 하위요소가 높이값을 %로 설정할 때 body가 기준이 됨*/
     height: 100%;
 }
-body {
-    /* padding-top: 50px; */
-}
 
 /* 상단 영역 */
 #top{
@@ -75,6 +72,7 @@ body {
     background-position: center;
     /* 배경 크기 : 채우기 */
     background-size: cover;
+    margin-top: -1em;
 }
 .mbx1{
     background-image: url("../997.IMG/worksbg.jpg");
@@ -92,7 +90,7 @@ body {
 /* 페이지별 컨텐츠 박스 */
 .pwrap {
     margin: 0 auto;
-    border-radius: 8px;
+    border-radius: 40px;
     background-color: #f4f4f477;
     position: relative;
     top: 230px;

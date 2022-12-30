@@ -1,4 +1,9 @@
 @charset "UTF-8";
+html{
+    /* #아이디명 스크롤 이동시 부드럽게 이동함 */
+    scroll-behavior: smooth;
+}
+
 html,
 body {
     margin: 0;
@@ -10,12 +15,58 @@ body {
 body {
     /* padding-top: 50px; */
 }
+
+/* 상단 영역 */
+#top{
+    position: fixed;
+    width: 100%;
+    /* 100%가로폭 확장해줌 */
+    height: 230px;
+    top: 0;
+    left: 0;
+    text-align: center;
+    z-index: 1;
+    color: rgb(94, 71, 71);
+    background-color: rgba(238, 201, 247, 0.589);
+    border-radius: 0 0 40px 40px;
+}
+.gnb{
+    width: 600px;
+    margin: 0 auto;
+}
+.gnb ul{
+    margin: 0;
+    padding: 0;
+    list-style:none;
+}
+.gnb ul::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.gnb li{
+    text-align: center;
+    width: 150px;
+    float: left;
+}
+.gnb li a{
+    color: hotpink;
+    text-decoration: none;
+    font-size: 30px;
+    text-shadow: 
+    1px 0 0 black,
+    -1px 0 0 black,
+    0 1px 0 black,
+    0 -1px  0 black;
+
+}
+
 /* 페이지 박스 : div 블록박스 */
 .mybox {
     width: 100%;
     height: 100%;
     /* 배경 이미지 넣기 */
-    background-image: url("../997.IMG/worksbg.jpg");
+    /* background-image: url("../997.IMG/worksbg.jpg"); */
     /* 배경 반복 여부 */
     background-repeat: no-repeat;
     /* 베경 고정 */
@@ -25,17 +76,29 @@ body {
     /* 배경 크기 : 채우기 */
     background-size: cover;
 }
+.mbx1{
+    background-image: url("../997.IMG/worksbg.jpg");
+}
 /* 두 번째 페이지박스 */
 .mbx2 {
-    background-image: url("../997.IMG/bg_mainvisual.jpg");
+    background-image: url("../997.IMG/005.jpg");
+}
+.mbx3 {
+    background-image: url("../997.IMG/001.jpg");
+}
+.mbx4 {
+    background-image: url("../997.IMG/002.jpg");
 }
 /* 페이지별 컨텐츠 박스 */
 .pwrap {
     margin: 0 auto;
     border-radius: 8px;
     background-color: #f4f4f477;
+    position: relative;
+    top: 230px;
+    height: calc(100% - 300px);
 }
-.wrap .tit {
+.tit {
     margin: 0;
     padding: 20px;
     text-align: center;

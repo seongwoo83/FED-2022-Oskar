@@ -105,11 +105,13 @@ body {
     /* transition - 두가지 변화상태를 애니메이션 해주는 속성
         transition: 속성 시간 이징 지연 */
     transition: height .4s;
-}
+    border-radius: 10px 0 0 10px;
+}  
 /* .cat에 마우스 오버시 .cd 높이값 늘리기 */
 .cat:hover .cd{
     height: 250px;
 }
+
 /* 캐릭터 타이틀 */
 .cd h3{
     font-family: 'Gugi', cursive;
@@ -117,7 +119,19 @@ body {
     font-weight: normal;
     padding: 15px 10px 5px;
     letter-spacing: -1px;
+}       
+/* 캐릭터 타이틀 앞 아이콘 가상요소로 넣기 */
+.cd h3::before{
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 35px;
+    margin-right: 3px;
+    vertical-align: -6px;
+    background: url("../images/bg_logo_a_01.png") no-repeat -144px -181px;
+    /* 배경이미지 위치값은 본 이미지를 그림판으로 열어서 마우스 커서위치에 따라 표시되는 x,y축 좌표값을 마이너스 기호를 붙여서 가로,세로순으로 써주면 정확한 위치가됨 */
 }
+
 /* 캐릭터 설명 문단 */
 .cd p{
     font-family: 'Single Day', 'ZCOOL Kuaile',cursive;
@@ -125,4 +139,49 @@ body {
     line-height: 1.6;
     padding: 10px;
     text-align: justify;
+}
+/* 캐릭터 첫 번째 문단 첫 글자 가상요소로 디자인 변경하기 */
+.cat:first-child .cd p:first-child::first-letter{
+    font-size: 48px;
+    font-weight: bold;
+    color: cyan;
+    /* 블러 없는 그림자 4개 사용으로 글자 테두리 만들기*/
+    text-shadow: 
+    1px 0 black,
+    -1px 0 black,
+    0 1px black,
+    0 -1px black;
+}
+.cat:nth-child(2) .cd p:first-child::first-letter{
+    font-size: 48px;
+    font-weight: bold;
+    color: lightcoral;
+    /* 블러 없는 그림자 4개 사용으로 글자 테두리 만들기*/
+    text-shadow: 
+    1px 0 black,
+    -1px 0 black,
+    0 1px black,
+    0 -1px black;
+}
+.cat:nth-child(3) .cd p:first-child::first-letter{
+    font-size: 48px;
+    font-weight: bold;
+    color: lightgreen;
+    /* 블러 없는 그림자 4개 사용으로 글자 테두리 만들기*/
+    text-shadow: 
+    1px 0 black,
+    -1px 0 black,
+    0 1px black,
+    0 -1px black;
+}
+.cat:nth-child(4) .cd p:first-child::first-letter{
+    font-size: 48px;
+    font-weight: bold;
+    color: lightgoldenrodyellow;
+    /* 블러 없는 그림자 4개 사용으로 글자 테두리 만들기*/
+    text-shadow: 
+    1px 0 black,
+    -1px 0 black,
+    0 1px black,
+    0 -1px black;
 }

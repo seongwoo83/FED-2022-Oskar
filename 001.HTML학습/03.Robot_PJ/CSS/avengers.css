@@ -1,2 +1,87 @@
 @charset "UTF-8";
 /* 어벤저스 CSS - avengers.css */
+
+/* 웹폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Single+Day&display=swap');
+
+/* 
+    font-family: 'Monoton', cursive;
+    font-family: 'Single Day', cursive;
+*/
+
+
+/* 초기화 */
+html, body, h1, h2, ul, ol{
+    margin: 0;
+    padding: 0;
+}
+
+/* 초기 세팅 */
+a{
+    color: #fff;
+    text-decoration: none;
+}
+
+/* 배경이미지 채우기 */
+body{
+    background: url("../ab_img/space.jpg") no-repeat fixed center/cover;
+}
+
+/* 제목 */
+.tit{
+    font-family: 'Monoton', cursive;
+    color: #fff;
+    font-size: 70px;
+    font-weight: normal;
+    text-align: center;
+    padding: 50px 0;
+}
+
+/* 2. 메인 캐릭터 박스 */
+.abx{
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background: url("../ab_img/ab0.jpg") no-repeat center/cover;
+    border-radius: 50%;
+    margin: 0 auto;
+    /* glow효과는 밝은색 그림자로 해결 box-shadow: inset x, y, blur, spread 색 
+        spread - blur효과가 퍼지는 시작점*/
+    box-shadow: 0 0 50px 10px cyan,
+        inset 0 0 30px lightcyan;
+}
+
+/* 3. 캐릭터 박스 */
+.cbx{
+    position: absolute;
+    /* absolute position 위치값 주기전 상태: 모두 겹침, 부모박스에 그대로 있음, 크기는 내용만큼 자동 */
+    top: calc(50% - 75px);
+    left: calc(50% - 75px);
+    /* absolute 자식박스를 부모박스의 정중앙으로 보내기 
+        top: calc(50% - 자식박스 height값 절반)
+        left: calc(50% - 자식박스 width값 절반)
+        원리 -> 50% 밀고 자식박스 크기 절반 빼서 정중앙으로 위치를 이동하는 것.
+    */
+    /* 박스 크기 설정 */
+    width: 150px;
+    height: 150px;
+    /* 박스테두리 */
+    /* outline: 3px dotted yellow; */
+    
+}
+/* 캐릭터이미지 */
+.cbx img{
+    /* 크기를 박스에 맞춤 - 이미지가 왜곡됨 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 
+    object-fit 속성
+    -> 이미지나 동영상을 박스에 맞출 때 옵션을 설정해 사용하는 속성
+        1. fill: 설정값에 강제적용(기본값)
+        2. contain: 박스에 모두 보임
+        3. cover: 박스를 비율에 맞게 채움 0-> 빈틈 없이 채우며 배경cover와 유사한 효과를 준다
+    */
+    border-radius: 50%;
+    box-shadow: 0 0 30px lightgreen;
+}

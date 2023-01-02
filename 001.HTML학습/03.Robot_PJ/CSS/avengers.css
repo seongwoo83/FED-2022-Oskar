@@ -143,22 +143,32 @@ body:hover .cbx:nth-child(5) {
 .cd{
     position: absolute;
     top: 50%;
-    width: 300px;
-    border: 2px solid #fff;
-    padding: 15px;
-    border-radius: 15px;
-    background-color: #ffffff66;
+    height: 0;
+    overflow: hidden;
     color: #fff;
     font-family: 'single day', cursive;
     text-shadow: 1px 1px 1px #000;
     opacity: 0;
     transition: 0.4s ease-out;
 }
+
+/* .cd 직계 하위 div로 디자인 이전하기
+-> 만든이유 : height값을 0으로 숨기려는데 padding과 border때문에 숨겨지지 않음 따라서 이것을 직계하위 div로 이전함 */
+.cd>div{
+    width: 300px;
+    border: 2px solid #fff;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #ffffff66;
+}
+
 .cbx:hover .cd{
     opacity: 1;
     top: 0;
+    height: auto;
+    /* 전체적으로 transition 설정되어있으나 height값이 특정값(%, px)으로 설정되지 않고 auto일 경우 애니메이션 되지 않음 
+    적용되는 것을 안되게 하려면 transition 에서 개별 세팅 해야함*/
 }
-
 .ltxt{
     left: -230%;
 }

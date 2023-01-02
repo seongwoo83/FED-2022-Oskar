@@ -46,6 +46,7 @@ a {
 /* 배경이미지 채우기 */
 body {
     background: url("../ab_img/space.jpg") no-repeat fixed center/cover;
+    overflow: hidden;
 }
 
 /* 제목 */
@@ -88,6 +89,7 @@ body {
     height: 150px;
     /* 박스테두리 */
     /* outline: 3px dotted yellow; */
+    opacity: 0;
     transition: 0.8s ease-in-out;
 }
 /* 캐릭터이미지 */
@@ -105,6 +107,11 @@ body {
     */
     border-radius: 50%;
     box-shadow: 0 0 30px 10px lightgreen;
+}
+
+/* body에 hover시 전체 opacity:1 */
+body:hover .cbx{
+    opacity: 1;
 }
 
 /* 2-1. 아이언맨 */
@@ -130,4 +137,34 @@ body:hover .cbx:nth-child(4) {
 /* 2-5. 스타로드 */
 body:hover .cbx:nth-child(5) {
     top: 130%;
+}
+
+/*  캐릭터 설명박스 공통 */
+.cd{
+    position: absolute;
+    top: 50%;
+    width: 300px;
+    border: 2px solid #fff;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #ffffff66;
+    color: #fff;
+    font-family: 'single day', cursive;
+    text-shadow: 1px 1px 1px #000;
+    opacity: 0;
+    transition: 0.4s ease-out;
+}
+.cbx:hover .cd{
+    opacity: 1;
+    top: 0;
+}
+
+.ltxt{
+    left: -230%;
+}
+.ltxt h2{
+    text-align: right;
+}
+.rtxt{
+    right: -230%;
 }

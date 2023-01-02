@@ -256,6 +256,7 @@ body:hover .cbx:nth-child(5) img {
 .gobtn{
     font-size: 30px;
     position: absolute;
+    padding: 7px;
     right: 10%;
     font-family: 'overwatch';
     /* .page가 부모 */

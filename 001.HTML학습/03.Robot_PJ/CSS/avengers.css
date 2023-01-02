@@ -46,22 +46,32 @@ a {
 /* 배경이미지 채우기 */
 body {
     background: url("../ab_img/space.jpg") no-repeat fixed center/cover;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
-/* 제목 */
+/* 0. 전체 타이틀 */
 .tit {
+    position: fixed;
+    width: 100%;
     font-family: "Monoton", cursive;
     color: #fff;
     font-size: 70px;
     font-weight: normal;
     text-align: center;
     padding: 50px 0;
+    z-index: 9999;
+}
+
+/* 1. 페이지 박스 공통 */
+.page{
+    height: 100%;
+    /* 한 페이지당 html, body 보이는 화면 100%와 같이 보이는 화면만큼 크기 확장설정 */
 }
 
 /* 2. 메인 캐릭터 박스 */
 .abx {
     position: relative;
+    top: 210px;
     width: 300px;
     height: 400px;
     background: url("../ab_img/ab0.jpg") no-repeat center/cover;

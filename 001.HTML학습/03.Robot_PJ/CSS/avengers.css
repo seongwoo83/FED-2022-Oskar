@@ -2,34 +2,55 @@
 /* 어벤저스 CSS - avengers.css */
 
 /* 웹폰트 */
-@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Single+Day&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Monoton&family=Single+Day&display=swap");
 
 /* 
     font-family: 'Monoton', cursive;
     font-family: 'Single Day', cursive;
 */
 
-
 /* 초기화 */
-html, body, h1, h2, ul, ol{
+html,
+body,
+h1,
+h2,
+ul,
+ol {
     margin: 0;
     padding: 0;
 }
 
+/* body의 높이값을 보이는 화면에 맞추기 */
+html,
+body {
+    height: 100%;
+    /* body의 100%는 html을 기준으로 하며 html의 100%는 보이는 윈도우 화면을 기준으로 하기 때문에
+    html과 body모두 100%세팅을 적용해야 한다.
+    
+    _______________________________
+        가끔 width: 100%를 잡는 경우가 있다
+        아무것도 안주면 width: auto임. 둘간의 차이는
+        width: 100%는 content영역 크기를 채우도록 세팅함
+        따라서 border나 padding을 줄경우 박스가 커지고
+        스크롤바가 생김 특별한 경우가 아니라면 auto상태로 놓으면 보더와 패딩이 내부에 자동으로 포함된다
+
+    */
+}
+
 /* 초기 세팅 */
-a{
+a {
     color: #fff;
     text-decoration: none;
 }
 
 /* 배경이미지 채우기 */
-body{
+body {
     background: url("../ab_img/space.jpg") no-repeat fixed center/cover;
 }
 
 /* 제목 */
-.tit{
-    font-family: 'Monoton', cursive;
+.tit {
+    font-family: "Monoton", cursive;
     color: #fff;
     font-size: 70px;
     font-weight: normal;
@@ -38,7 +59,7 @@ body{
 }
 
 /* 2. 메인 캐릭터 박스 */
-.abx{
+.abx {
     position: relative;
     width: 300px;
     height: 400px;
@@ -47,12 +68,12 @@ body{
     margin: 0 auto;
     /* glow효과는 밝은색 그림자로 해결 box-shadow: inset x, y, blur, spread 색 
         spread - blur효과가 퍼지는 시작점*/
-    box-shadow: 0 0 50px 10px cyan,
-        inset 0 0 30px lightcyan;
+    box-shadow: 0 0 50px 10px cyan, inset 0 0 30px lightcyan;
+
 }
 
 /* 3. 캐릭터 박스 */
-.cbx{
+.cbx {
     position: absolute;
     /* absolute position 위치값 주기전 상태: 모두 겹침, 부모박스에 그대로 있음, 크기는 내용만큼 자동 */
     top: calc(50% - 75px);
@@ -67,10 +88,10 @@ body{
     height: 150px;
     /* 박스테두리 */
     /* outline: 3px dotted yellow; */
-    
+    transition: 0.8s ease-in-out;
 }
 /* 캐릭터이미지 */
-.cbx img{
+.cbx img {
     /* 크기를 박스에 맞춤 - 이미지가 왜곡됨 */
     width: 100%;
     height: 100%;
@@ -83,5 +104,30 @@ body{
         3. cover: 박스를 비율에 맞게 채움 0-> 빈틈 없이 채우며 배경cover와 유사한 효과를 준다
     */
     border-radius: 50%;
-    box-shadow: 0 0 30px lightgreen;
+    box-shadow: 0 0 30px 10px lightgreen;
+}
+
+/* 2-1. 아이언맨 */
+body:hover .cbx:nth-child(1) {
+    top: -9%;
+    left: -81%;
+}
+/* 2-2. 타노스 */
+body:hover .cbx:nth-child(2) {
+    top: -9%;
+    left: 121%;
+}
+/* 2-3. 토르 */
+body:hover .cbx:nth-child(3) {
+    top: 80%;
+    left: -81%;
+}
+/* 2-4. 닥터 스트레인지 */
+body:hover .cbx:nth-child(4) {
+    top: 80%;
+    left: 121%;
+}
+/* 2-5. 스타로드 */
+body:hover .cbx:nth-child(5) {
+    top: 130%;
 }

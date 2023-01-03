@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Starbucks</title>
+    <style>
+        body{
+            background: #000 url("./starbucks_img/reserve_bg.jpg") no-repeat fixed center/cover;
+        }
+        #trans10{
+                width: 334px;
+                height: 334px;
+                margin: 0 auto;
+                margin-top: 100px;
+                border-radius: 50%;
+            }
+            /* 이미지에 앱솔루트 포지션 세팅 */
+            #trans10 img{
+                position: absolute;
+            }
+
+            /* 두 번째 사진 오버시 회전 */
+            #trans10:hover img:nth-child(2){
+                transform: rotateY(90deg);
+                transition: transform 0.8s ease-in;
+            }
+            /* 두 번째 사진 원본 */
+            #trans10 img:nth-child(2){
+                transform: rotateY(0deg);
+                transition: transform 0.8s ease-out 0.8s;
+            }
+            /* 첫 번째 사진 오버시 회전 */
+            #trans10:hover img:nth-child(1){
+                transform: rotateY(0deg);
+                transition: transform 0.8s ease-out 0.8s;
+            }
+            /* 첫 번째 사진 원본 */
+            #trans10 img:nth-child(1){
+                transform: rotateY(90deg);
+                transition: transform 0.8s ease-in;
+            }
+    </style>
+</head>
+<body>
+    <div id="trans10">
+        <img src="./starbucks_img/reserve_medal01.png" alt="캐릭터" />
+        <img src="./starbucks_img/reserve_medal02.png" alt="캐릭터" />
+    </div>
+</body>
+</html>

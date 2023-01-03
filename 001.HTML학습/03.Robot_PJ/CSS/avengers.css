@@ -102,8 +102,8 @@ a {
     height: 150px;
     /* 박스테두리 */
     /* outline: 3px dotted yellow; */
-    opacity: 0;
     transition: 0.8s ease-in-out;
+    opacity: 0;
 }
 /* 캐릭터이미지 */
 .cbx img {
@@ -114,9 +114,9 @@ a {
     /* 
     object-fit 속성
     -> 이미지나 동영상을 박스에 맞출 때 옵션을 설정해 사용하는 속성
-        1. fill: 설정값에 강제적용(기본값)
-        2. contain: 박스에 모두 보임
-        3. cover: 박스를 비율에 맞게 채움 0-> 빈틈 없이 채우며 배경cover와 유사한 효과를 준다
+    1. fill: 설정값에 강제적용(기본값)
+    2. contain: 박스에 모두 보임
+    3. cover: 박스를 비율에 맞게 채움 0-> 빈틈 없이 채우며 배경cover와 유사한 효과를 준다
     */
     border-radius: 50%;
     box-shadow: 0 0 30px 10px lightgreen;
@@ -124,6 +124,7 @@ a {
 
 /* body에 hover시 전체 opacity:1 */
 body:hover .cbx{
+    transform: rotateY(36000deg);
     opacity: 1;
 }
 

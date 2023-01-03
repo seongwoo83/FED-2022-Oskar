@@ -7,6 +7,45 @@
             body {
                 background: url("./images/bg-main.jpg") no-repeat fixed center top/cover;
             }
+            .tit{
+                border-radius: 50px;
+                background-color: #00000044;
+                text-align: center;
+
+                color: #fff;
+                font-size: 50px;
+                text-shadow: 
+                2px 0 #000,
+                -2px 0 #000,
+                0 2px #000,
+                0 -2px #000;
+            }
+            .cont{
+                max-width: 1500px;
+                border: 10px solid lime;
+                border-radius: 20px;
+                padding: 20px;
+                margin: 100px auto;
+            }
+            /* 가상요소로 clear 세팅 */
+            .cont::after{
+                content: '';
+                display: block;
+                clear: both;
+            }
+
+            /* 캐릭터공통 */
+            .cont>div{
+                float: left;
+                /* 5등분 가로크기 */
+                width: 20%;
+                text-align: center;
+            }
+            .cont>div>img{
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+            }
         </style>
     </head>
     <body>

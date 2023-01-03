@@ -11,7 +11,7 @@
                 border-radius: 50px;
                 background-color: #00000044;
                 text-align: center;
-
+                padding: 10px;
                 color: #fff;
                 font-size: 50px;
                 text-shadow: 
@@ -47,10 +47,16 @@
                 height: 200px;
                 border-radius: 50%;
                 transition: transform .6s;
+                /* transition은 속시이지 나눠서 가능
+                    속성 transition-property: prop;
+                    시간 transition-duration: time;
+                    이징(가속도) transition-timing-function: inherit;
+                    지연시간 transition-delay: time;
+                */
             }
-
+            
             /* 
-                [ transform 효과주기 ]
+            [ transform 효과주기 ]
                 - 선택요소의 크기, 회정,이동, 기울임 등 변형을 주는 속성
                 - 2D, 3D 지원됨
 
@@ -64,12 +70,28 @@
                     - 기준점은 요소의 왼쪽
                     - % 단위를 사용할 경우 - 요소의 width값
                     - 이동방향 : +(오른쪽), -(왼쪽)
-                3. translateY(거리) - Y축 이동
+                4. translateY(거리) - Y축 이동
                     - 단위 : px, %
                     - 현재 위치로부터 이동
-                    - 기준점은 요소의 왼쪽
+                    - 기준점은 요소의 위쪽
                     - % 단위를 사용할 경우 - 요소의 height값
                     - 이동방향 : +(아래), -(위쪽)
+                5. translate(X축 거리, Y축 거리) - X, Y축 이동
+                    - 단위 : px, %
+                    - 현재 위치로부터 이동
+                    - 기준점은 요소의 왼쪽, 위쪽
+                    - % 단위를 사용할 경우 - 요소의 width, height값
+                    - 이동방향 : +(오른쪽, 아래), -(왼쪽, 위쪽)
+                6. rotate(각도deg) - 원형 회전
+                    - 각도의 숫자가 양수이면 시계방향, 음수이면 반시계방향
+                    - 기본 회전축은 정중앙
+                    (회전축 변경가능: transform-origin)
+                7. skew - X축, Y축 기울임
+                    - skewX(각도deg), skewY(각도deg)
+                    - skew(X축, Y축)
+                    - 각도 양수/음수에 따라 기울이는 방향이 다름
+                8. 복합 적용
+                    transform: [속성1] [속성2] [속성3] [속성4] [속성5] [속성6] [속성7]...
 
             */
             #trans1:hover img{
@@ -89,14 +111,49 @@
                 filter: blur(0px);
             }
             #trans3:hover img{
+                /* tftx */
                 transform: translateX(-50%);
-                filter: blur(0px);
             }
             #trans4:hover img{
-                transform: translateY(-50%);
-                filter: blur(0px);
+                /* tfty */
+                transform: translateY(-200%);
             }
-
+            #trans5:hover img{
+                /* tft */
+                transform: translate(120px, 100%);
+            }
+            #trans6:hover img{
+                /* tfr */
+                transform: rotate(5478deg);
+                transition-duration: 10s;
+            }
+            #trans6 img{
+                /* tfr */
+                transform-origin: 50px 170px;
+                /* 
+                [ 회전축 변경하기 ]
+                transform-origin: 가로 세로;
+                - 가로값 : left, right, center, px, %
+                - 세로값 : top, bottom, center, px, %
+                - 기본값 : 가로, 세로 center
+                */
+            }
+            #trans7:hover img{
+                transform: skew(-30deg, 70deg);
+            }
+            #trans8:hover img{
+                transform: scale(1.5);
+            }
+            /* 초기 배율 설정 */
+            #trans8 img{
+                transform: scale(0);
+            }
+            #trans9:hover img{
+                transform: scale(5) translate(-200%, -100%) rotateX(1200deg) skewX(50deg) rotate(5300deg);
+                transition-duration: 20s;
+            }
+            
+            
 
         </style>
     </head>

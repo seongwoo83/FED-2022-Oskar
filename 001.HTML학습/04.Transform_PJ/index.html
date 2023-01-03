@@ -40,12 +40,64 @@
                 /* 5등분 가로크기 */
                 width: 20%;
                 text-align: center;
+                margin-bottom: 50px;
             }
             .cont>div>img{
                 width: 200px;
                 height: 200px;
                 border-radius: 50%;
+                transition: transform .6s;
             }
+
+            /* 
+                [ transform 효과주기 ]
+                - 선택요소의 크기, 회정,이동, 기울임 등 변형을 주는 속성
+                - 2D, 3D 지원됨
+
+                1. rotateY(각도 deg) - Y축 회전
+                    - deg는 각도의 단위(도:degree)
+                2. rotateX(각도 deg) - X축 회전
+                    - deg는 각도의 단위(도:degree)
+                3. translateX(거리) - X축 이동
+                    - 단위 : px, %
+                    - 현재 위치로부터 이동
+                    - 기준점은 요소의 왼쪽
+                    - % 단위를 사용할 경우 - 요소의 width값
+                    - 이동방향 : +(오른쪽), -(왼쪽)
+                3. translateY(거리) - Y축 이동
+                    - 단위 : px, %
+                    - 현재 위치로부터 이동
+                    - 기준점은 요소의 왼쪽
+                    - % 단위를 사용할 경우 - 요소의 height값
+                    - 이동방향 : +(아래), -(위쪽)
+
+            */
+            #trans1:hover img{
+                transform: rotateY(180deg);
+                /* transform Y축 회전 tfry */
+                /* CSS 필터 적용하기 - 참고(https://www.w3schools.com/cssref/playit.php?filename=playcss_filter&preval=blur(5px)*/
+                filter: grayscale(100%);
+            }
+            #trans2 img{
+                transform: rotateX(180deg);
+                /* transform X축 회전 tfrx */
+                /* CSS 필터 적용하기 - 참고(https://www.w3schools.com/cssref/playit.php?filename=playcss_filter&preval=blur(5px)*/
+                filter: blur(2px);
+            }
+            #trans2:hover img{
+                transform: rotateX(0);
+                filter: blur(0px);
+            }
+            #trans3:hover img{
+                transform: translateX(-50%);
+                filter: blur(0px);
+            }
+            #trans4:hover img{
+                transform: translateY(-50%);
+                filter: blur(0px);
+            }
+
+
         </style>
     </head>
     <body>

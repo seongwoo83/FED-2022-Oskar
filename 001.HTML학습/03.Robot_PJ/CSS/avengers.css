@@ -63,7 +63,17 @@ a {
     text-align: center;
     padding: 50px 0;
     z-index: 9999;
+
+
+    transform: translateY(-200px) rotateX(90deg) scale(0);
+    transition: transform 2s ease-in-out;
 }
+
+body:hover .tit{
+    transform: translateY(0) rotateX(720deg) scale(1);
+}
+
+
 
 /* 1. 페이지 박스 공통 */
 .page{

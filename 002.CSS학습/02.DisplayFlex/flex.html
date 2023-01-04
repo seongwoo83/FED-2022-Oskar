@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex Display Layout</title>
+    <style>
+        /* 초기화 */
+        html, body, ul, ol, li{
+            margin: 0;
+            padding: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+
+        /* 보이는 화면에 채우기 세팅 */
+        html, body, #wrap, #wrap>ul{
+            height: 100%;
+        }
+        /* 
+            [ li세팅 기존방식 : float사용 ]
+            1. 옆으로 흐를 요소에 직접 float세팅
+            2. 등분할일 경우 width값 %계산
+            3. 높이값을 부모에 채울 경우 height값 100%세팅
+            4. 부모박스에 높이값 없이 자동으로 자식요소를 인식하려면 마지막 clear 속성 세팅 필요함
+                #wrap>ul>li{
+                    float: left;
+                    width: 20%;
+                    height: 100%;
+        }
+        */
+
+        /**************************************************************** 
+            [ Flex Display Box ]
+            flex란? - flexible
+
+            - 가변적인 자식요소를 컨트롤 하기 위해 CSS3에서 새롭게 선보인 display 기술
+
+            [ Flex 세팅법 ]
+            1. 대상: 컨트롤할 요소들의 직계 부모요소
+            2. 등분할 세팅
+                - 자식 요소를 같은 비율로 채울 때 자식요소에 flex속성값을 1로 쓰면 됨
+            3. 일반적인 세팅
+                - 특정한 크기나 내용이 있는 블록요소인 자식을 옆으로 흐르게 함(flex세팅 일단 불필요)
+
+        ****************************************************************/
+
+        /* Flex 적용 */
+        #wrap>ul{
+            /* flex 박스 - df */
+            display: flex;
+        }
+        /* Flex 적용 자식요소 */
+        #wrap>ul>li{
+            /* flex등분할 속성 */
+            flex: 1;
+        }
+
+
+        #wrap>ul>li:nth-child(1){
+            background: url("./images/m01_bg.jpg") no-repeat center/cover;
+        }
+        #wrap>ul>li:nth-child(2){
+            background: url("./images/m02_bg.jpg") no-repeat center/cover;
+        }
+        #wrap>ul>li:nth-child(3){
+            background: url("./images/m03_bg.jpg") no-repeat center/cover;
+        }
+        #wrap>ul>li:nth-child(4){
+            background: url("./images/m04_bg.jpg") no-repeat center/cover;
+        }
+        #wrap>ul>li:nth-child(5){
+            background: url("./images/m05_bg.jpg") no-repeat center/cover;
+            
+        }
+
+        /* 타이틀 공통 */
+        .tit{
+            position: absolute;
+            top: 100px;
+            width: 500px;
+            height: 100px;
+            border: 5px double #fff;
+            left: 50%;
+            /* 가로 중앙 이동: transform: translate 사용 */
+            transform: translateX(-50%);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 전체 랩핑 박스 -->
+    <div id="wrap">
+        <!-- 파티션 박스 -->
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <!-- 타이틀 박스 1 -->
+        <ol class="tit t1">
+            <li>L</li>
+            <li>O</li>
+            <li>T</li>
+            <li>T</li>
+            <li>E</li>
+        </ol>
+
+
+
+    </div>
+</body>
+</html>

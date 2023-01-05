@@ -8,6 +8,7 @@
             body {
                 margin: 0;
                 padding: 0;
+                height: 100%;
             }
             h1 {
                 text-align: center;
@@ -15,7 +16,7 @@
             }
             body {
                 color: #fff;
-                background: url("./images/nav1bg.png") no-repeat fixed center/cover;
+                background: #07114b url("./images/nav1bg.png") no-repeat fixed center/cover;
             }
             a {
                 color: #fff;
@@ -35,12 +36,77 @@
             }
             .gnb ul > li{
                 padding: 0 32px;
+                /* .smenu와 떨어져 있는 상황을 방지하기 위해 padding-bottom사용 */
+                padding-bottom: 10px;
+                position: relative;
             }
             .gnb a{
                 font-size: 18px;
                 font-weight: bold;
             }
 
+            
+            .smenu{
+                /* 서브메뉴는 아래쪽 컨텐츠 위로 떠다녀야 하므로 position: absolute; */
+                position: absolute;
+                z-index: 9999;
+                width: 200px;
+                background-color: rgba(0,0,0,0.3);
+                border-radius: 10px;
+                /* 부모는 싸고 있는 li */
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+                height: 0;
+                overflow: hidden;
+
+                transition: all 0.4s ease-out;
+            }
+            .gnb ul li:hover .smenu{
+                opacity: 1;
+            }
+
+            .gnb ul li:nth-child(1):hover .smenu{
+                height: 170px;
+            }
+            .gnb ul li:nth-child(2):hover .smenu{
+                height: 102px;
+            }
+            .gnb ul li:nth-child(3):hover .smenu{
+                height: 34px;
+            }
+            .gnb ul li:nth-child(4):hover .smenu{
+                height: 34px;
+            }
+            .gnb ul li:nth-child(5):hover .smenu{
+                height: 34px;
+            }
+            .gnb ul li:nth-child(6):hover .smenu{
+                height: 34px;
+            }
+
+            .smenu a{
+                display: block;
+                text-align: center;
+                padding: 8px 0;
+                font-size: 14px;
+                font-weight: normal;
+            }
+
+
+            /* 컨텐츠 박스 */
+            .cont{
+                /* z-index 관계 파악용 position: relative; */
+                position: relative;
+                max-width: 1000px;
+                height: 40%;
+                border-radius: 15px;
+                border: 10px dashed yellow;
+                margin: 200px auto;
+                font-size: 34px;
+                text-align: center;
+                background-color: rgba(0,0,0,0.5);
+            }
         </style>
     </head>
     <body>
@@ -52,12 +118,21 @@
                     <!-- 서브 메뉴 -->
                     <div class="smenu">
                         <ol>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
+                            <li>
+                                <a href="#">RVC</a>
+                            </li>
+                            <li>
+                                <a href="#">In-cabin</a>
+                            </li>
+                            <li>
+                                <a href="#">FVC</a>
+                            </li>
+                            <li>
+                                <a href="#">SVM</a>
+                            </li>
+                            <li>
+                                <a href="#">E-mirror</a>
+                            </li>
                         </ol>
                     </div>
                 </li>
@@ -65,12 +140,15 @@
                     <a href="#">ADAS Processor</a>
                     <div class="smenu">
                         <ol>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
+                            <li>
+                                <a href="#">APACHE4</a>
+                            </li>
+                            <li>
+                                <a href="#">APACHE5</a>
+                            </li>
+                            <li>
+                                <a href="#">APACHE6</a>
+                            </li>
                         </ol>
                     </div>
                 </li>
@@ -78,12 +156,9 @@
                     <a href="#">AHD™</a>
                     <div class="smenu">
                         <ol>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
+                            <li>
+                                <a href="#">1st Gen</a>
+                            </li>
                         </ol>
                     </div>
                 </li>
@@ -91,12 +166,9 @@
                     <a href="#">News</a>
                     <div class="smenu">
                         <ol>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
+                            <li>
+                                <a href="#">News</a>
+                            </li>
                         </ol>
                     </div>
                 </li>
@@ -104,12 +176,9 @@
                     <a href="#">About Us</a>
                     <div class="smenu">
                         <ol>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
+                            <li>
+                                <a href="#">About Us</a>
+                            </li>
                         </ol>
                     </div>
                 </li>
@@ -117,16 +186,17 @@
                     <a href="#">Career</a>
                     <div class="smenu">
                         <ol>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
+                            <li>
+                                <a href="#">Career</a>
+                            </li>
                         </ol>
                     </div>
                 </li>
             </ul>
         </nav>
+
+        <main class="cont">
+            여기에 내용이 들어갑니다.
+        </main>
     </body>
 </html>

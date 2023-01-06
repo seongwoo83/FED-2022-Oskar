@@ -91,14 +91,14 @@ body * {
 }
 /* 왼쪽눈 */
 .e1 {
-    top: 22px;
+    top: 50px;
     left: 50px;
     background-image: url(../images/e1.jpg);
 }
 /* 오른쪽눈 */
 .e2 {
     top: 50px;
-    right: 34px;
+    right: 50px;
     background-image: url(../images/e2.jpg);
 }
 
@@ -108,7 +108,7 @@ body * {
     height: 56px;
     border-radius: 40%;
     top: 113px;
-    left: 110px;
+    left: 100px;
     background: url(../images/nose.jpg) no-repeat -1px/114% 100%;
 }
 .nose::after, .nose::before {
@@ -144,8 +144,9 @@ body * {
     width: 95px;
     height: 53px;
     top: 176px;
-    left: 60px;
+    left: 77px;
     background: url(../images/mouth.png) no-repeat 0/100% 100%;
+    transform: rotate(-30deg) skewX(2deg);
 }
 
 /* 귀 공통 */
@@ -166,5 +167,57 @@ body * {
     top: 30px;
     border-radius: 0 20px 20px 0;
 }
+
+/* 로봇 몸통 */
+.body{
+    position: relative;
+    width: 200px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+
+.body>div{
+    position: absolute;
+}
+
+.body::before{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 350px;
+    height: 200px;
+    left: -75px;
+    background-color: #fff;
+}
+.body::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 350px;
+    height: 170px;
+    left: -75px;
+    bottom: -30px;
+    background-color: #fff; 
+}
+/* 목 */
+
+/* 왼팔 */
+
+/* 왼어깨 */
+
+/* 오른팔 */
+
+/* 오른어깨 */
+
+/* 왼다리 */
+
+/* 오른다리 */
+
+/* TV */
+
+/* 유튜브 영상 */
+
+
 
 /*************************** 3. 하단영역 ***************************/

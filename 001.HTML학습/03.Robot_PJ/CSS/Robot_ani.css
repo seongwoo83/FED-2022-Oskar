@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+/* Robot PJ - Animation CSS File */
+
+/* 
+[ CSS에서 애니메이션 구현하기 : animation ]
+
+- html요소의 변화를 키프레임(장면)에 주고 이를 호출하여
+브라우저에서 애니메이션이 연출 될 수 있게 하는 CSS 구현기술
+
+[ 키프레임이란? ]
+- 애니메이션 변화를 지정하는 코딩영역
+
+[ 2장면 코딩법 ]
+
+@keyframes 키프레임명{
+    from{시작CSS}
+    to{마지막CSS}
+}
+
+[ 여러장면 코딩법 ]
+- 퍼센트로 장면을 분할하여 사용함
+(무한대의 장면 연출가능)
+
+@keyframes 키프레임명{
+    0%{CSS설정}
+    10%{CSS설정}
+    20%{CSS설정}
+    ...
+    90%{CSS설정}
+    100%{CSS설정}
+} */
+
+/* 키프레임(장면연출) */
+
+/* 1-1. 로봇 등장 키프레임 */
+@keyframes showRobot {
+    0%{
+        transform:scale(.1) 
+        translate(200%, -300%);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+/* 1-2 키프레임 호출 설정 */
+.robx{
+    /* animation: 이시이지반방마 */
+    /* animation: showRobot 3s ease-in-out 1s 3; */
+}

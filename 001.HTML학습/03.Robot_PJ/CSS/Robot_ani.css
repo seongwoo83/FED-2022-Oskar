@@ -47,5 +47,5 @@
 /* 1-2 키프레임 호출 설정 */
 .robx{
     /* animation: 이시이지반방마 */
-    /* animation: showRobot 3s ease-in-out 1s 3; */
+    animation: showRobot 3s ease-in-out 1s 3 alternate;
 }

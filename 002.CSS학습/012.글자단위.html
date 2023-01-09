@@ -61,6 +61,10 @@
             - 부모로 부터 상속되는 em, % 는 상대적으로 변경된다!
             - 부분만 변경하고 싶은 경우엔 em 또는 %를 써야할 것이다!
 
+
+
+            [ html 글자크기가 자꾸 10px로 세팅되어 있는 이유 ]
+            -> rem 단위 설정시 계산하기 쉽게 하기위함.
          */
 
         html{
@@ -96,23 +100,50 @@
         /* rem 단위 - 기준은 html요소 글자크기 */
         .rf1{
             font-size: 2rem;
-            /* em = 원하는 px / html의px
+            /* rem = 원하는 px / html의px
                 32px / 16px = 2rem
             */
         }
         .rf2{
             font-size: 1.5rem;
-            /* em = 원하는 px / html의px
+            /* rem = 원하는 px / html의px
                 24px / 16px = 1.5rem
             */
         }
         .rf3{
             font-size: 0.87rem;
-            /* em = 원하는 px / html의px
+            /* rem = 원하는 px / html의px
                 14px / 16px = 0.87rem
             */
         }
         
+
+        /* % 단위 -> em단위 * 100*/
+        .pf1{
+            font-size: 200%;
+        }
+        .pf2{
+            font-size: 75%;
+        }
+        .pf3{
+            font-size: 58%;
+        }
+
+
+
+        /* 미디어 쿼리 */
+        @media screen and (max-width: 1000px){
+            /* root인 html만 글자크기를 변경하면 하위의 모든 상대단위 글자는 한번에 변경됨 */
+            html{
+                font-size: 40px;
+            }
+        }
+        @media screen and (max-width: 800px){
+            /* 부모를 기준한 상대 단위는 부모요소만 변경하면 별도로 그 부분만 상대적으로 변경됨 */
+            .f1{
+                font-size: 30px;
+            }
+        }
 
     </style>
 </head>

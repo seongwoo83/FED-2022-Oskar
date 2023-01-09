@@ -8,10 +8,9 @@
 @import url("./common.css");
 
 /* 공사중 표시 */
-body * {
+body *{
     outline: 1px dotted red;
 }
-
 /* 컨텐츠파트 최상위 부모 */
 
 body {

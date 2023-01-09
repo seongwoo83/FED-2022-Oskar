@@ -2,7 +2,7 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- [ 뷰포트(viewport)란? ]
         - 모바일 기기에서 볼때 모바일 기기의 랜더링 화면사이즈를
         일반적인 물리적 크기의 픽셀로 변환해 주는 메타태그임
@@ -124,33 +124,30 @@
                 <link rel="stylesheet" href="미디어쿼리CSS">
             </head> */
 
-
-
-
-
             /* 초기화 */
-            html, body{
+            html,
+            body {
                 margin: 0;
                 padding: 0;
                 overflow: hidden;
                 /* 스크롤바 없앰 */
             }
-            body{
+            body {
                 background-color: #000;
             }
-            .bx{
+            .bx {
                 height: 1000px;
                 background: url(./images/oldTVON.png) no-repeat center/auto 100%;
             }
-            .tit{
+            .tit {
                 text-align: center;
                 margin: 0;
                 padding: 50px 0;
                 color: #fff;
             }
             /* .tit에 가상요소로 서브제목 넣기 */
-            .tit::after{
-                content: '나야냐';
+            .tit::after {
+                content: "나야냐";
                 display: block;
                 font-size: 30px;
                 line-height: 3;
@@ -158,7 +155,7 @@
                 text-shadow: 0 0 5px #000;
                 transition: 3s;
             }
-            .screen{
+            .screen {
                 position: absolute;
                 left: 50%;
                 top: 313px;
@@ -167,17 +164,15 @@
                 height: 258px;
                 z-index: -1;
             }
-            .screen img{
+            .screen img {
                 width: 100%;
                 height: 100%;
                 display: none;
             }
-            .screen img:first-child{
+            .screen img:first-child {
                 display: inline;
             }
-            
-            
-            
+
             /* Mediaquery 적용하기 */
             /* 주의사항
             1. max-width만 사용할 경우 큰 사이즈부터 작은 사이즈 순으로 코딩해야 덮어씌워짐
@@ -185,188 +180,209 @@
             3. 브라우저 테스트 시 글자크기를 반드시 100%로 설정해야함(비율이 변경 되어있을 경우 수치가 정확하게 표시되지 않음)
             */
             /* 1200px이하 미디어 쿼리 시작*/
-            @media screen and (max-width: 1200px){
-                /* 타이틀 변경하기 */    
-                .tit::after{
-                    content: '최대 1200px 이하';
+            @media screen and (max-width: 1200px) {
+                /* 타이틀 변경하기 */
+                .tit::after {
+                    content: "최대 1200px 이하";
                     color: pink;
                 }
                 /* 기존 이미지 숨기기 */
-                .screen img:nth-child(1){
+                .screen img:nth-child(1) {
                     display: none;
                 }
                 /* 다음 이미지 보이기 */
-                .screen img:nth-child(2){
+                .screen img:nth-child(2) {
                     display: inline;
                 }
-                
             }
             /* 1200px이하 미디어 쿼리 끝 */
-            
+
             /* 1100px이하 미디어 쿼리 시작*/
-            @media screen and (max-width: 1100px){
-                .tit::after{
-                    content: '최대 1100px 이하';
+            @media screen and (max-width: 1100px) {
+                .tit::after {
+                    content: "최대 1100px 이하";
                     color: lightgreen;
                 }
                 /* 기존 이미지 숨기기 */
-                .screen img:nth-child(2){
+                .screen img:nth-child(2) {
                     display: none;
                 }
                 /* 다음 이미지 보이기 */
-                .screen img:nth-child(3){
+                .screen img:nth-child(3) {
                     display: inline;
                 }
             }
             /* 1100px이하 미디어 쿼리 끝 */
 
             /* 1000px이하 미디어 쿼리 시작*/
-            @media screen and (max-width: 1000px){
-                .tit::after{
-                    content: '최대 1000px 이하';
+            @media screen and (max-width: 1000px) {
+                .tit::after {
+                    content: "최대 1000px 이하";
                     color: lightsalmon;
                 }
                 /* 기존 이미지 숨기기 */
-                .screen img:nth-child(3){
+                .screen img:nth-child(3) {
                     display: none;
                 }
                 /* 다음 이미지 보이기 */
-                .screen img:nth-child(4){
+                .screen img:nth-child(4) {
                     display: inline;
                 }
             }
             /* 1000px이하 미디어 쿼리 끝 */
-            
+
             /* 900px이하 미디어 쿼리 시작*/
-            @media screen and (max-width: 900px){
-                .tit::after{
-                    content: '최대 900px 이하';
+            @media screen and (max-width: 900px) {
+                .tit::after {
+                    content: "최대 900px 이하";
                     color: lime;
                 }
                 /* 기존 이미지 숨기기 */
-                .screen img:nth-child(4){
+                .screen img:nth-child(4) {
                     display: none;
                 }
                 /* 다음 이미지 보이기 */
-                .screen img:nth-child(5){
+                .screen img:nth-child(5) {
                     display: inline;
                 }
             }
             /* 900px이하 미디어 쿼리 끝 */
-            
+
             /* 850px이하 미디어 쿼리 시작*/
-            @media screen and (max-width: 850px){
-                .tit::after{
-                    content: '최대 850px 이하';
+            @media screen and (max-width: 850px) {
+                .tit::after {
+                    content: "최대 850px 이하";
                     color: red;
                 }
                 /* 기존 이미지 숨기기 */
-                .screen img:nth-child(5){
+                .screen img:nth-child(5) {
                     display: none;
                 }
                 /* 다음 이미지 보이기 */
-                .screen img:nth-child(6){
+                .screen img:nth-child(6) {
                     display: inline;
                 }
             }
             /* 850px이하 미디어 쿼리 끝 */
-            
+
             /* 830px이하 미디어 쿼리 시작*/
-            @media screen and (max-width: 830px){
-                .tit::after{
-                    content: '최대 830px 이하';
+            @media screen and (max-width: 830px) {
+                .tit::after {
+                    content: "최대 830px 이하";
                     color: gold;
                 }
                 /* 기존 이미지 숨기기 */
-                .screen img:nth-child(6){
+                .screen img:nth-child(6) {
                     display: none;
                 }
                 /* 다음 이미지 보이기 */
-                .screen img:nth-child(7){
+                .screen img:nth-child(7) {
                     display: inline;
                 }
             }
             /* 830px이하 미디어 쿼리 끝 */
-            
+
             /* 810px이하 미디어 쿼리 시작*/
-            @media screen and (max-width: 810px){
-                .tit::after{
-                    content: '최대 810px 이하';
+            @media screen and (max-width: 810px) {
+                .tit::after {
+                    content: "최대 810px 이하";
                     color: skyblue;
                 }
                 /* 기존 이미지 숨기기 */
-                .screen img:nth-child(7){
+                .screen img:nth-child(7) {
                     display: none;
                 }
                 /* 다음 이미지 보이기 */
-                .screen img:nth-child(8){
+                .screen img:nth-child(8) {
                     display: inline;
                 }
             }
             /* 810px이하 미디어 쿼리 끝 */
-            
+
             /* 790px이하 미디어 쿼리 시작*/
-            @media screen and (max-width: 790px){
-                .tit::after{
-                    content: '최대 790px 이하';
+            @media screen and (max-width: 790px) {
+                .tit::after {
+                    content: "최대 790px 이하";
                     color: tomato;
                 }
                 /* 기존 이미지 숨기기 */
-                .screen img:nth-child(8){
+                .screen img:nth-child(8) {
                     display: none;
                 }
                 /* 다음 이미지 보이기 */
-                .screen img:nth-child(9){
+                .screen img:nth-child(9) {
                     display: inline;
                 }
             }
             /* 790px이하 미디어 쿼리 끝 */
-            
+
             /* 770px이하 미디어 쿼리 시작*/
-            @media screen and (max-width: 770px){
-                .tit::after{
-                    content: '최대 770px 이하';
+            @media screen and (max-width: 770px) {
+                .tit::after {
+                    content: "최대 770px 이하";
                     color: indigo;
                 }
                 /* 기존 이미지 숨기기 */
-                .screen img:nth-child(9){
+                .screen img:nth-child(9) {
                     display: none;
                 }
                 /* 다음 이미지 보이기 */
-                .screen img:nth-child(10){
+                .screen img:nth-child(10) {
                     display: inline;
                 }
             }
             /* 770px이하 미디어 쿼리 끝 */
 
-
-
             /*************************************************
                 가로모드와 세로모드 변경코드
-            
-
-            
+                -> 가로/세로 모드는 그 길이가 더 긴 것을 기준으로 함 모바일 전용이 아님
+                -> 모바일 화면의 제한을 주려면 가로크기의 한계값을 설정하는 방법을 사용해야 함
             *************************************************/
-
-
-
-
+            /* 세로모드 시작*/
+            @media screen and (orientation: portrait) and (max-width: 1000px) {
+                /* .bx의 배경속성변경 */
+                .bx {
+                    background-size: auto 60%;
+                    background-position: top;
+                }
+                .screen {
+                    top: 130px;
+                }
+            }
+            /* 세로모드 끝 */
+            /* 가로모드 시작*/
+            @media screen and (orientation: landscape) and (max-width: 1000px) {
+                .bx {
+                    background-size: auto 60%;
+                    background-position: top;
+                }
+                .tit {
+                    text-align: left;
+                    text-indent: 15px;
+                }
+                .screen {
+                    top: 178px;
+                    width: 200px;
+                    height: 180px;
+                }
+            }
+            /* 가로모드 끝 */
         </style>
     </head>
     <body>
         <div class="bx">
             <h1 class="tit">이정재 컬렉션</h1>
             <div class="screen">
-                <img src="./images/sc_noise.png" alt="노이즈화면">
-                <img src="./images/jeong1.jpg" alt="이정재1">
-                <img src="./images/jeong2.jpg" alt="이정재2">
-                <img src="./images/jeong3.jpg" alt="이정재3">
-                <img src="./images/jeong4.jpg" alt="이정재4">
-                <img src="./images/jeong5.jpg" alt="이정재5">
-                <img src="./images/jeong6.jpg" alt="이정재6">
-                <img src="./images/jeong7.jpg" alt="이정재7">
-                <img src="./images/jeong8.jpg" alt="이정재8">
-                <img src="./images/jeong9.jpg" alt="이정재9">
+                <img src="./images/sc_noise.png" alt="노이즈화면" />
+                <img src="./images/jeong1.jpg" alt="이정재1" />
+                <img src="./images/jeong2.jpg" alt="이정재2" />
+                <img src="./images/jeong3.jpg" alt="이정재3" />
+                <img src="./images/jeong4.jpg" alt="이정재4" />
+                <img src="./images/jeong5.jpg" alt="이정재5" />
+                <img src="./images/jeong6.jpg" alt="이정재6" />
+                <img src="./images/jeong7.jpg" alt="이정재7" />
+                <img src="./images/jeong8.jpg" alt="이정재8" />
+                <img src="./images/jeong9.jpg" alt="이정재9" />
             </div>
         </div>
     </body>

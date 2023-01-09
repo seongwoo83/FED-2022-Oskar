@@ -5,6 +5,7 @@
 
 /********************************************* 1. 상단영역 *********************************************/
 #top{
+    position: relative;
     background-color: #fff;
 }
 .top{
@@ -32,6 +33,18 @@ nav.gnb ul{
     font-weight: bold;
     margin: 0 10px;
 }
+aside.tmenu{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.tmenu>ul{
+    display: flex;
+}
+.tmenu ol{
+    display: flex;
+}
+
 /********************************************* 2. 메인영역 *********************************************/
 .cont{
     min-height: 800px;

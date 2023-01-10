@@ -201,13 +201,39 @@ body * {outline: 2px dashed yellow;}
     left: 76px;
     width: 50px;
     height: 50px;
+    border-radius: 0 0 20px 20px;
     z-index: -2;
+    border-bottom: 17px ridge goldenrod;
+}
+
+
+/* 팔 공통 */
+.arm{
+    width: 80px;
+    height: 200px;
+    z-index: -1;
+    border-radius: 0 0 25px 25px;
+}
+/* 팔 하단 */
+.arm span{
+    position: absolute;
+    top: 100%;
+    left: 5px;
+    display: block;
+    width: 70px;
+    height: 150px;
+    border-radius: 25px 25px 30px 30px;
 }
 /* 왼팔 */
-
+.a1{
+    left: -70px;    
+}
 /* 왼어깨 */
 
 /* 오른팔 */
+.a2{
+    right: -70px;
+}
 
 /* 오른어깨 */
 

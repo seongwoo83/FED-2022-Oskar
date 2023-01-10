@@ -211,7 +211,7 @@ body * {outline: 2px dashed yellow;}
 .arm{
     width: 80px;
     height: 200px;
-    z-index: -1;
+    z-index: -2;
     border-radius: 0 0 25px 25px;
 }
 /* 팔 하단 */
@@ -223,20 +223,49 @@ body * {outline: 2px dashed yellow;}
     width: 70px;
     height: 150px;
     border-radius: 25px 25px 30px 30px;
+    /* 공통 회전축 변경 */
+    transform-origin: top;
 }
 /* 왼팔 */
 .a1{
-    left: -70px;    
+    left: -70px;
+    transform: rotate(85deg);
+    transform-origin: 30% 15%;
 }
-/* 왼어깨 */
+/* 왼팔 하단 */
+.a1 span{
+    transform: rotate(120deg);
+}
 
 /* 오른팔 */
 .a2{
     right: -70px;
+    transform: rotate(-40deg);
+    transform-origin: 70% 15%;
+}
+/* 오른팔 하단 */
+.a2 span{
+    transform: rotate(-35deg);
 }
 
+/* 어깨 공통 */
+.shd{
+    width: 90px;
+    height: 90px;
+    border-radius: 15px 15px 50% 50%;
+}
+/* 왼어깨 */
+.s1{
+    top: -20px;
+    left: -90px;
+    clip-path: polygon(0 0, 0 100%, 58% 100%, 40% 22%, 100% 22%, 100% 0);
+}
 /* 오른어깨 */
-
+.s2{
+    top: -20px;
+    right: -90px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 42% 100%, 60% 22%, 0 22%);
+}
 /* 왼다리 */
 
 /* 오른다리 */

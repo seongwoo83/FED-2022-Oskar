@@ -35,17 +35,76 @@
 
 /* 1-1. 로봇 등장 키프레임 */
 @keyframes showRobot {
-    0%{
-        transform:scale(.1) 
-        translate(200%, -300%);
-    }
-    100%{
-        transform: scale(1);
+    to{
+        transform: 
+        translate(0 0)
+        scale(.6)
+        rotate(720deg);
     }
 }
+/* 왼팔 살짝 올리기 */
+@keyframes leftArm1 {
+    to{transform: rotate(25deg);}
+}
+@keyframes leftArm2 {
+    to{transform: rotate(149deg);}
+}
+@keyframes leftArm3 {
+    to{transform: rotate(-38deg);}
+}
 
-/* 1-2 키프레임 호출 설정 */
-.robx{
-    /* animation: 이시이지반방마 */
-    /* animation: showRobot 3s ease-in-out 1s 3 alternate; */
+@keyframes rightArm1 {
+    to{
+        transform: rotate(-124deg);
+    }
+}
+@keyframes rightArm1-1 {
+    from{transform: rotate(-114deg);}
+    to{
+        transform: rotate(-124deg);
+    }
+}
+@keyframes rightArm2 {
+    from{transform:rotate(10deg);}
+    to{transform: rotate(-10deg);}
+}
+@keyframes rightArm3 {
+    from{}
+    to{}
+}
+
+/* 
+    [ 애니메이션 기본특성 ]
+    1. 기본적으로 1회만 실행
+    2. 애니메이션 후 처음 설정된 값으로 돌아감
+    3. 반복할 경우 시작->끝 순으로 반복됨
+    
+    [ 기본특성 변경하기 ]
+    1. 반복실행 하고 싶으면 반복여부(animation-iteration-count) 속성값으로 반복횟수를 쓰거나
+    계속 반복실행하고 싶으면 infinite
+    2. 마지막 애니메이션 상태로 끝나고 싶을 때는 마지막 상태(animation-fill-mod) 속성값을
+    forwards로 작성
+    3. 시작->끝, 끝->시작 반복 애니메이션을 역순으로 설정하고 싶으면
+    (animation-direction) 속성값을 aleterenate으로 작성
+    */
+    
+    
+    /* 1-2 키프레임 호출 설정 */
+    .robx{
+        /* 초기 상태 지정하기 */
+        transform: 
+        rotate(0)
+        translate(20% 10%)
+        scale(.1);
+        
+        /* animation: showRobot 2s ease-in-out forwards; */
+    }
+    .a1{
+    animation: leftArm1 1s ease-in forwards;
+}
+.a1 span{
+    animation: leftArm2 2s ease-in 1s forwards;
+}
+.a1 span::after{
+    animation: leftArm3 1s ease-in 3.2s forwards;
 }

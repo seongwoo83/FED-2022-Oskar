@@ -256,39 +256,44 @@ body * {outline: 2px dashed yellow;}
     position: absolute;
     width: 90px;
     height: 130px;
-    outline: 2px dashed lime;
     bottom: -130px;
+    transform-origin: top;
 }
 
 /* 왼팔 */
 .a1{
     left: -70px;
-    transform: rotate(60deg);
+    transform: rotate(10deg);
     transform-origin: 42% 13%;
 }
 /* 왼팔 하단 */
 .a1 span{
-    transform: rotate(-45deg);
+    transform: rotate(2deg);
 }
 /* 왼쪽 손 */
 .a1 span::after{
     left: -15px;
     background: url(../images/hand_left.png) no-repeat bottom/100%;
+    transform: rotate(-1deg);
 }
 
 /* 오른팔 */
 .a2{
     right: -70px;
-    transform: rotate(-40deg);
+    transform: rotate(339deg);
     transform-origin: 51% 16%;
 }
 /* 오른팔 하단 */
 .a2 span{
-    transform: rotate(-35deg);
+    transform: rotate(12deg);
 }
+/* 오른손 */
 .a2 span::after{
     left: -23px;
     background: url(../images/hand_right.png) no-repeat bottom/100%;
+    transform: 
+    rotateY(35deg)
+    rotate(10deg);
 }
 
 /* 어깨 공통 */

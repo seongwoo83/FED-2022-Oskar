@@ -67,7 +67,7 @@
 
 @keyframes rightArm1 {
     to{
-        transform: rotate(-124deg);
+        transform: rotate(226deg);
     }
 }
 @keyframes rightArm1-1 {
@@ -77,12 +77,22 @@
     }
 }
 @keyframes rightArm2 {
-    from{transform:rotate(10deg);}
-    to{transform: rotate(-10deg);}
+    from{transform:rotate(30deg);}
+    to{transform: rotate(-30deg);}
 }
 @keyframes rightArm3 {
-    from{}
-    to{}
+    from{
+        transform: 
+        rotateY(180deg)
+        rotate(-50deg);
+        left: 2px;
+    }
+    to{
+        transform: 
+        rotateY(180deg)
+        rotate(50deg);
+        left: 2px;
+    }
 }
 
 /* 
@@ -114,11 +124,24 @@
     animation: showRobot2 3s ease-in-out forwards;
 }
 .a1{
-    animation: leftArm1 1s ease-in forwards;
+    animation: leftArm1 1s ease-in 3s forwards;
 }
 .a1 span{
-    animation: leftArm2 2s ease-in 1s forwards;
+    animation: leftArm2 2s ease-in 4s forwards;
 }
 .a1 span::after{
-    animation: leftArm3 1s ease-in 3.2s forwards;
+    animation: leftArm3 1s ease-in 6.2s forwards;
 }
+
+.a2{
+    animation: 
+    rightArm1 1s ease-in-out 3s forwards;
+    
+}
+.a2 span{
+    animation: rightArm2 .5s linear 4s  infinite alternate;
+}
+.a2 span::after{
+    animation: rightArm3 .5s linear 4s infinite alternate;
+}
+

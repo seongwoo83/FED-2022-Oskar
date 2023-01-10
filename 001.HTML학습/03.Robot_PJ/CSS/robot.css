@@ -28,7 +28,7 @@ body * {outline: 2px dashed yellow;}
 
 /* 로봇박스 */
 .robx {
-    padding: 200px 0 400px;
+    padding: 200px 0 600px;
 }
 /* 로봇 머리 */
 .head {
@@ -216,17 +216,24 @@ body * {outline: 2px dashed yellow;}
 }
 
 /* 팔공통 가상요소 연결부분 */
-.arm::before{
+.arm::before, .arm::after{
     content: '';
     display: block;
     position: absolute;
     width: 70px;
     height: 70px;
     bottom: -35px;
-    left: 5px;
+    left: 6px;
     z-index: 1;
     border-radius: 50%;
     background-color: #ccc;
+    border: 4px solid #999;
+    box-sizing: border-box;
+}
+.arm::after{
+    transform: scale(.6);
+    /* 선형 그라데이션 */
+    background-image: linear-gradient(-45deg, #444, #999, #eee);
 }
 
 
@@ -236,21 +243,37 @@ body * {outline: 2px dashed yellow;}
     top: 100%;
     left: 5px;
     display: block;
-    width: 70px;
+    width: 60px;
     height: 150px;
     border-radius: 25px 25px 30px 30px;
     /* 공통 회전축 변경 */
     transform-origin: top;
 }
+
+.arm span::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 90px;
+    height: 130px;
+    outline: 2px dashed lime;
+    bottom: -130px;
+}
+
 /* 왼팔 */
 .a1{
     left: -70px;
-    transform: rotate(85deg);
+    transform: rotate(60deg);
     transform-origin: 42% 13%;
 }
 /* 왼팔 하단 */
 .a1 span{
-    transform: rotate(120deg);
+    transform: rotate(-45deg);
+}
+/* 왼쪽 손 */
+.a1 span::after{
+    left: -15px;
+    background: url(../images/hand_left.png) no-repeat bottom/100%;
 }
 
 /* 오른팔 */
@@ -262,6 +285,10 @@ body * {outline: 2px dashed yellow;}
 /* 오른팔 하단 */
 .a2 span{
     transform: rotate(-35deg);
+}
+.a2 span::after{
+    left: -23px;
+    background: url(../images/hand_right.png) no-repeat bottom/100%;
 }
 
 /* 어깨 공통 */
@@ -282,10 +309,59 @@ body * {outline: 2px dashed yellow;}
     right: -90px;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 42% 100%, 60% 22%, 0 22%);
 }
+
+
+/* 다리 공통 */
+.leg{
+    top:80%;/* 부모박스 높이만큼 밂 */
+    width: 90px;
+    height: 270px;
+    z-index: -2;
+    border-radius: 25px 25px 30px 30px;
+}
+/* 다리 공통 가상요소로 연결부분 */
+.leg::before, .leg::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    left: 3px;
+    border-radius: 20px;
+    bottom: -40px;
+    z-index: 1;
+    transform: 
+    scaleX(.8)
+    rotate(45deg);
+    background-color: #bbb;
+    border: 3px solid #333;
+}
+.leg::after{
+    transform: 
+    scale(.7)
+    scaleX(.8)
+    rotate(45deg);
+    background-image: linear-gradient(-45deg, #444, #999, #eee);
+}
+
+/* 다리하단 공통 */
+.leg span{
+    position: absolute;
+    top: 100%;
+    left: 10px;
+    display: block;
+    width: 70px;
+    height: 280px;
+    border-radius: 25px 25px 30px 30px;
+}
 /* 왼다리 */
-
+.lg1{
+    left: -6px;
+}
 /* 오른다리 */
-
+.lg2{
+    right: -6px;
+}
 /* TV */
 
 /* 유튜브 영상 */

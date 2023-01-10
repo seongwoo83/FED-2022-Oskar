@@ -35,11 +35,23 @@
 
 /* 1-1. 로봇 등장 키프레임 */
 @keyframes showRobot {
-    to{
+    100%{
         transform: 
-        translate(0 0)
         scale(.6)
-        rotate(720deg);
+        translate(0 0);
+    }
+}
+@keyframes showRobot2 {
+    0%{
+        transform: rotate(0);
+    }
+    50%{
+        
+        transform: rotate(360deg);
+    }
+    100%{
+        transform: rotate(-360deg);
+
     }
 }
 /* 왼팔 살짝 올리기 */
@@ -90,16 +102,18 @@
     
     
     /* 1-2 키프레임 호출 설정 */
-    .robx{
-        /* 초기 상태 지정하기 */
-        transform: 
-        rotate(0)
-        translate(20% 10%)
-        scale(.1);
-        
-        /* animation: showRobot 2s ease-in-out forwards; */
-    }
-    .a1{
+    
+.robx{
+    transform: 
+    scale(0)
+    translate(20% 10%);
+
+    animation: showRobot 2s ease-in-out forwards ;
+}
+.robx>div{
+    animation: showRobot2 3s ease-in-out forwards;
+}
+.a1{
     animation: leftArm1 1s ease-in forwards;
 }
 .a1 span{

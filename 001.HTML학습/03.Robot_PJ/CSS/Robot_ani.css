@@ -54,6 +54,35 @@
 
     }
 }
+
+
+/* 로고 중앙에서 왼쪽 위로 이동하기 */
+@keyframes logoAni {
+    80%{
+        top: 50px;
+        left: 50px;
+        transform: 
+        scale(1); 
+    }
+    100%{
+        top: 50px;
+        left: 50px;
+        transform: 
+        scale(1) 
+        rotate(-20deg);
+    }
+    
+}
+@keyframes logoRo {
+    0%{
+        transform: rotate(-20deg);
+    }
+    100%{
+        transform: rotate(20deg);
+    }
+}
+
+
 /* 왼팔 살짝 올리기 */
 @keyframes leftArm1 {
     to{transform: rotate(25deg);}
@@ -112,7 +141,12 @@
     
     
     /* 1-2 키프레임 호출 설정 */
+.logo{
+    animation: logoAni 3s ease-in-out forwards,
+    logoRo .5s linear 3s infinite alternate;
+} 
     
+
 .robx{
     transform: 
     scale(0.6);

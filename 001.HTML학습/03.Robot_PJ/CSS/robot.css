@@ -22,6 +22,9 @@ ul {
     margin: 0;
     padding: 0;
 }
+html{
+    scroll-behavior: smooth;
+}
 
 body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x: hidden;}
 
@@ -604,3 +607,25 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
 }
 
 /*************************** 3. 하단영역 ***************************/
+
+#info{
+    color: #fff;
+    font: 30px "black ops one";
+    text-shadow: 2px 2px 2px #000;
+    background-color: #000000aa;
+    text-align: center;
+    padding: 50px;
+}
+.info::before{
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background: pink url("../images/robot_03.png") no-repeat;
+    background-position: -12px -3px;
+    background-size: 48px;
+    vertical-align: -5px;
+}
+

@@ -23,7 +23,7 @@ ul {
     padding: 0;
 }
 
-body {background: url("../images/bg.jpg") no-repeat fixed top/cover;}
+body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x: hidden;}
 
 /* 공통클래스 */
 /* 메탈소재1 배경 */
@@ -33,6 +33,23 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover;}
 
 /* body * {outline: 2px dashed yellow;} */
 /*************************** 1. 상단영역 ***************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*************************** 2. 메인영역 ***************************/
 
@@ -455,9 +472,66 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover;}
 
 
 /* 2-2-1 제목 */
+.dcbx h2{
+    position: sticky;
+    top: 5px;
+    font-family: "chakra petch";
+    text-align: center;
+    font-size: 35px;
+    color: lime;
+    border-radius: 15px;
+    background-color: #ffffff99;
+}
+
 /* 2-2-2 출처 */
+.dcbx small{
+    font-family: "chakra petch";
+    font-size: 12px;
+    color: #ff0;
+    line-height: 3;
+    display: block;
+    text-align: center;
+}
+
+
 /* 2-2-3 내용단락 */
+.dcbx p{
+    font-family: "barlow";
+    font-size: 15px;
+    line-height: 1.8;
+    letter-spacing: 1px;
+    word-spacing: 2px;
 
+    /*******************************
 
+    [ 다단 설정 ]
+    - 다중열 속성
+    -> column-count: 다중열 개수
+    -> column-rule: 다중열 구분선
+    -> column-gap: 다중열 사이간격
+    
+    *******************************/
+    column-count: 3;
+    /* column-rule: 두꼐 종류 색상 */
+    column-rule: 5px dotted lightgreen;
+    column-gap: 55px;
+    /* 양쪽 정렬 */
+    text-align: justify;
+    /* 단어 깨기 
+        1byte문자의 경우 단어 단위로 줄바꿈을 하는 세팅이 기본이기 때문에 이때 양쪽 정렬을 하면
+        중간에 큰 공백이 생기는 원인이 됨
+        따라서 단어를 깨기 위해
+        word-break: break-all 속성을 작성함
+        하지만, 2byte 문자인 한글은 알아서 단어가 깨짐
+    */
+    word-break: break-all;
+    text-indent: 20px;
+}
+.dcbx p::first-letter{
+    font-size: 42px;
+    font-weight: bold;
+    color: lightblue;
+    text-shadow: 2px 2px 2px cyan;
+}
 
 /*************************** 3. 하단영역 ***************************/

@@ -36,13 +36,15 @@
             }
             h1.logo{
                 margin: 0;
-                margin-left: 50px;
                 padding: 0;
+                margin-left: 50px;
+                margin-top: -20px;
             }
             /* 네비게이션 전체 박스 */
             .gnb ul {
                 display: flex;
                 justify-content: center;
+                white-space: nowrap;
             }
             .gnb ul > li {
                 padding: 0 32px;
@@ -53,6 +55,20 @@
             .gnb a {
                 font-size: 18px;
                 font-weight: bold;
+            }
+            /* 가상요소로 밑줄 애니 만들기 */
+            .gnb>ul>li>a::after, .tmenu li:nth-child(1) a::after, .tmenu li:nth-child(2) a::after{
+                content: '';
+                display: block;
+                margin-top: 3px;
+                width: 0%;
+                height: 2px;
+                background-color: #fff;
+                transition: width .3s;
+            }
+            .gnb>ul>li:hover>a:hover::after, .tmenu li:nth-child(1):hover a::after, .tmenu li:nth-child(2) a:hover::after{
+                width: 100%;
+
             }
 
             .smenu {

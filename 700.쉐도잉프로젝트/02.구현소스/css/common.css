@@ -35,13 +35,22 @@ nav.gnb ul{
 }
 aside.tmenu{
     position: absolute;
-    top: 0px;
+    top: 25px;
     right: 0px;
 }
 .tmenu>ul{
     display: flex;
+    align-items: center;
 }
-.tmenu ol{
+.tmenu>ul>li+li{
+    margin-left: 10px;
+}
+/* 탑 메뉴 a */
+.tmenu>ul>li>a{
+    color: #222;
+    font-size: 1.5rem;
+}
+.tmenu .sns{
     display: flex;
 }
 .sns li{

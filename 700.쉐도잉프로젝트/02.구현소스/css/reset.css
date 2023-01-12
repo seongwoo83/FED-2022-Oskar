@@ -14,3 +14,8 @@ ul, ol{
     /* 불릿 초기화 */
     list-style: none;
 }
+/* 3. root - html 글자크기 세팅 */
+html{
+    font-size: 10px;
+    /* rem단위를 계산하기 편하도록 10px로 설정 */
+}

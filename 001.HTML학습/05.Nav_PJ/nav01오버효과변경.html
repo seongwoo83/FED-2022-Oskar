@@ -62,17 +62,19 @@
                 content: '';
                 display: block;
                 margin-top: 3px;
+
+                /* 변경속성 - 바가 중앙에 있음 */
                 width: 0%;
-                margin-left: 100%;
+                margin-left: 50%;
+
                 height: 2px;
                 background-color: #fff;
                 transition: all .3s;
             }
             .gnb>ul>li:hover>a::after, .tmenu>ul>li:nth-child(1)>a::after, .tmenu>ul>li:nth-child(2)>a::after{
+                /* 바가 중앙에서 펼쳐짐 */
                 width: 100%;
                 margin-left: 0%;
-                transition-property: width;
-                /* margin-left값은 transition 속성을 width만 적용시킴. */
             }
             
             .smenu {

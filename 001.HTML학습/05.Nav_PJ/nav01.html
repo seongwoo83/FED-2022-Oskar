@@ -55,6 +55,7 @@
             .gnb a {
                 font-size: 18px;
                 font-weight: bold;
+                position: relative;
             }
             /* 가상요소로 밑줄 애니 만들기 */
             .gnb>ul>li>a::after, .tmenu li:nth-child(1) a::after, .tmenu li:nth-child(2) a::after{
@@ -62,15 +63,18 @@
                 display: block;
                 margin-top: 3px;
                 width: 0%;
+                margin-left: 100%;
                 height: 2px;
                 background-color: #fff;
-                transition: width .3s;
+                transition: all .3s;
             }
             .gnb>ul>li:hover>a:hover::after, .tmenu li:nth-child(1):hover a::after, .tmenu li:nth-child(2) a:hover::after{
                 width: 100%;
-
+                margin-left: 0%;
+                transition-property: width;
+                /* margin-left값은 transition 속성을 width만 적용시킴 */
             }
-
+            
             .smenu {
                 /* 서브메뉴는 아래쪽 컨텐츠 위로 떠다녀야 하므로 position: absolute; */
                 position: absolute;

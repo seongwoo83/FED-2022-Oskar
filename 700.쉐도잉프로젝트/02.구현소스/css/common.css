@@ -11,6 +11,9 @@
     /* position: relative; */
     height: 128px;
 }
+.tarea{
+    position: relative;
+}
 h1.logo{
     width: 100px;
     margin: 0 auto;
@@ -25,6 +28,7 @@ nav.gnb ul{
     justify-content: center;
     /* margin-top은 부모인 nav.gnb 바깥으로 나가서 위의 박스를 밂 */
     margin-top: 10px;
+    
 }
 .gnb>ul>li>a{
     color: #222;
@@ -52,16 +56,28 @@ nav.gnb ul{
     border-bottom: 2px solid red;
     height: 200px;
 }
+.gnb .smbx{
+    position: relative;
+}
 .gnb .smenu{
+    position: absolute;
+    width: 100%;
+    /* 줄바꿈 방지 */
+    white-space: nowrap;
+    padding: 0 5px;
     text-align: center;
     background-color: #fff; 
-    /* height: 0; */
-    /* overflow: hidden; */
-    transition: 0.4 ease-out;
+    height: 0;
+    overflow: hidden;
+    left: calc(50%);
+    transform: translateX(-50%);
+    outline: 2px dashed red;
 }
+
 /* 상위메뉴 오버시 하위메뉴 보이기 */
 .gnb>ul>li:hover .smenu{
     height: 120px;
+    transition: .4;
 }
 .gnb .smenu a{
     font-size: 1.4rem;
@@ -94,6 +110,10 @@ aside.tmenu{
 .tmenu>ul>li>a{
     color: #222;
     font-size: 1.5rem;
+    text-decoration: none;
+}
+.tmenu>ul>li>a:hover{
+    text-decoration: underline;
 }
 .tmenu .sns{
     display: flex;

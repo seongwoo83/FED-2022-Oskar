@@ -5,11 +5,11 @@
 
 /********************************************* 1. 상단영역 *********************************************/
 #top{
-    position: relative;
     background-color: #fff;
 }
 .top{
     height: 128px;
+    position: relative;
 }
 h1.logo{
     width: 100px;
@@ -44,7 +44,36 @@ aside.tmenu{
 .tmenu ol{
     display: flex;
 }
-
+.sns li{
+    width: 30px;
+    height: 30px;
+    background: url(../images/icons.png) no-repeat;
+    transition: .09s;
+    border-radius: 50%;
+}
+.sns li:nth-child(1){
+background-position: 0 0;
+}
+.sns li:nth-child(1):hover{
+    background-position: 0 -30px;
+}
+.sns li:nth-child(2){
+    background-position: -30px 0;
+}
+.sns li:nth-child(2):hover{
+    background-position: -30px -30px;
+}
+.sns li:nth-child(3){
+    background-position: -60px 0;
+}
+.sns li:nth-child(3):hover{
+    background-position: -60px -30px;
+}
+.sns li a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 /********************************************* 2. 메인영역 *********************************************/
 .cont{
     min-height: 800px;

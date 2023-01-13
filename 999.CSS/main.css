@@ -1,24 +1,13 @@
 @charset "UTF-8";
-html{
-    /* #아이디명 스크롤 이동시 부드럽게 이동함 */
-    scroll-behavior: smooth;
-}
+@import url(./reset.css);
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    /* 보이는 화면에 기준하여 높이값을 설정 
-                -> 직계자식 하위요소가 높이값을 %로 설정할 때 body가 기준이 됨*/
-    height: 100%;
-}
 
 /* 상단 영역 */
 #top{
     position: fixed;
     width: 100%;
     /* 100%가로폭 확장해줌 */
-    height: 230px;
+    height: 214px;
     top: 0;
     left: 0;
     text-align: center;
@@ -27,35 +16,37 @@ body {
     background-color: rgba(238, 201, 247, 0.589);
     border-radius: 0 0 40px 40px;
 }
+.titImg {
+    margin: 0;
+    height: 70px;
+}
+.tit {
+    margin: 0;
+    padding: 1.4rem;
+    text-align: center;
+    font-size: 4rem;
+}
 .gnb{
-    width: 600px;
+    width: 80%;
+    white-space: nowrap;
     margin: 0 auto;
 }
 .gnb ul{
-    margin: 0;
-    padding: 0;
-    list-style:none;
-}
-.gnb ul::after{
-    content: '';
-    display: block;
-    clear: both;
+    display: flex;
+    justify-content: space-evenly;
 }
 .gnb li{
     text-align: center;
-    width: 150px;
-    float: left;
 }
 .gnb li a{
     color: hotpink;
     text-decoration: none;
-    font-size: 30px;
-    text-shadow: 
-    1px 0 0 black,
-    -1px 0 0 black,
-    0 1px 0 black,
-    0 -1px  0 black;
-
+    font-size: 3rem;
+    text-shadow: 1px 1px black;
+}
+.gnb li a:hover{
+    text-decoration: underline;
+    text-decoration-style: dashed;
 }
 
 /* 페이지 박스 : div 블록박스 */
@@ -89,6 +80,8 @@ body {
 }
 /* 페이지별 컨텐츠 박스 */
 .pwrap {
+    display: flex;
+    width: 90%;
     margin: 0 auto;
     border-radius: 40px;
     background-color: #f4f4f477;
@@ -96,17 +89,42 @@ body {
     top: 230px;
     height: calc(100% - 300px);
 }
-.tit {
-    margin: 0;
-    padding: 20px;
+/* .pwarp 하위 .part 박스 */
+.part{
+    flex: 1;
+    padding: 2rem;
+    /* 일대일 비율로 등분할 */
+}
+/* .part 서브 타이틀 */
+.part h2{
+    padding: 2rem;
+    font-size: 3rem;
     text-align: center;
-    font-size: 40px;
+    background-color: #00000022;
+    border-radius: 20px;
+    color: #fff;
+    text-shadow:
+    0 2px 1px #000,
+    0 -2px 1px #000,
+    2px 0 1px #000,
+    -2px 0 1px #000;
 }
-.titImg {
-    margin: 0;
-    height: 70px;
+.part ol{
+    display: flex;
+    flex-direction: column;
 }
-a,
-a:visited {
-    color: darkblue;
+.part li{
+    display: block;
 }
+.part li a:hover{
+    text-decoration: underline;
+}
+.part a{
+    font-size: 2.5rem;
+    text-decoration: none;
+}
+.part a::before{
+    content: '📃';
+    margin-right: 1rem;
+}
+

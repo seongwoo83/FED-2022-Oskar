@@ -6,6 +6,41 @@
     <title>CGV에 오신 것을 환영합니다</title>
     <link rel="shortcut icon" href="./images/logo_cgv.png" type="image/x-icon" />
     <link rel="stylesheet" href="./css/main.css">
+    <!-- 스크립트 코드 구역 - internal 방식 -->
+    <script>
+        // JS 한줄 주석
+        /* JS 여러줄 주석 */
+
+        // JS 코드 구역/////////////////////////
+
+        /* JS는 만나는 즉시 실행함 */
+        // alert("나야나");
+
+        /* 바로 실행하지 않고 호출하면 실행하도록 코드 저장구역 만듦 -> 함수(function)
+        함수 작성폼 :
+        -> function 이름(전달변수){코드}
+        */
+        function 멍멍(먹이/* 전달변수 - 값이 내부로 전달
+                            변수는 메모리 공간의 이름 */){
+            //전달값 확인
+            //alert.log(먹이);
+
+
+            //JS는 철저히 대소문자 구분 필요함
+            //전체문서 객체 : document
+            //가저와 요소 아이디 이름으로() : getElementById('아이디명')
+            //-> src : 선택된 요소의 src속성
+            document.getElementById('ifr').src=
+            "https://www.youtube.com/embed/"+먹이+"?autoplay=1";
+
+
+
+        }///////  멍멍 함수 /////////////////
+        
+
+    </script>
+    <!-- 스크립트 코드 외부 파일 호출 - external 방식 -->
+    <!-- <script src="스크립트 외부파일.js"></script> -->
 </head>
 <body>
     <!-- 1. 상단 영역 -->
@@ -23,7 +58,7 @@
             <!-- 2-1 스크린 -->
             <div class="screen">
                 <!-- 유튜브 iframe -->
-                <iframe id="ifr" src="https://www.youtube.com/embed/X3EJVfHmUs0?autoplay=0&mute=1&loop=1&playlist=X3EJVfHmUs0&rel=0" allow="autoplay"></iframe>
+                <iframe id="ifr" src="https://www.youtube.com/embed/X3EJVfHmUs0?autoplay=1&mute=1&loop=1&playlist=X3EJVfHmUs0&rel=0" allow="autoplay"></iframe>
                 <!-- 
                 [iframe 요소 : inline frame]
                     - 다른 페이지를 삽입하는 요소
@@ -58,8 +93,19 @@
             <nav class="mlist">
                 <ul>
                     <li>
-                        <a href="#" onclick="document.getElementById('ifr').src='https://www.youtube.com/embed/mI9oyFMUlfg?autoplay=0'">
-                            <img src="./images/m1.jpg" alt="닥터스트레인지2">
+                        <!-- 
+                            [ 이벤트 속성 ]
+                            1. 모든 요소에 이미 이벤트 속성이 있음
+                                - on + 이벤트명
+                                예) click 이벤트 -> onclick
+                            2. 이벤트 속성의 값은 JS문법 구역
+                                -> 쌍따옴표 안에 쓰는 값이 JS코드 구역
+                        -->
+
+
+                        <!-- <a href="#" onclick="document.getElementById('ifr').src='https://www.youtube.com/embed/mI9oyFMUlfg?autoplay=0'"> -->
+                        <a href="#" onclick="멍멍('mI9oyFMUlfg')">
+                            <img src='./images/m1.jpg' alt="닥터스트레인지2">
                             <!-- 영화 정보 -->
                             <ol class="movtxt">
                                 <li>닥터스트레인지2</li>
@@ -69,7 +115,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" onclick="멍멍('DSEfRVqjbFA')">
                             <img src="./images/m2.jpg" alt="쥬라기월드">
                             <!-- 영화 정보 -->
                             <ol class="movtxt">
@@ -80,7 +126,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" onclick="멍멍('DpVAb7Bi5UQ')">
                             <img src="./images/m3.jpg" alt="브로커">
                             <!-- 영화 정보 -->
                             <ol class="movtxt">
@@ -91,7 +137,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" onclick="멍멍('aw9j_23nORs')">
                             <img src="./images/m4.jpg" alt="범죄도시2">
                             <!-- 영화 정보 -->
                             <ol class="movtxt">
@@ -102,7 +148,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" onclick="멍멍('ELuQ4sMp4yw')">
                             <img src="./images/m5.jpg" alt="몬스터싱어">
                             <!-- 영화 정보 -->
                             <ol class="movtxt">
@@ -113,7 +159,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" onclick="멍멍('W7edvITC9g4')">
                             <img src="./images/m6.jpg" alt="스파이더맨">
                             <!-- 영화 정보 -->
                             <ol class="movtxt">

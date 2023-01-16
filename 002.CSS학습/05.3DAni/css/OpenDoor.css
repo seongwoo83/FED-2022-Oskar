@@ -17,9 +17,20 @@ h1.tit{
     text-align: center;
     font-family: "Comfortaa";
     font-size: min(5vw, 42px);
-    padding: 5vh 0;
+    margin: 5vh 0;
     color: #fff;
     text-shadow: 2px 2px 2px #000;
+    overflow: hidden;
+}
+.tit span{
+    display: block;
+    transform: translateY(100%);
+    animation: titAni .4s ease-out 1s forwards;
+}
+@keyframes titAni {
+    to{
+        transform: translateY(0);
+    }
 }
 .cont{
     width: 200px;
@@ -34,7 +45,8 @@ h1.tit{
     height: 280px;
     margin: 0 auto;
     background: url(../images/seashore.jpg) no-repeat center/auto 100%;
-
+    animation: waveAni 3s ease-in-out 1s infinite alternate;
+    
     /*********************************************** 
         [ 3D 원근설정 ]
         1. 세팅위치: 3D원근 설정을 할 대상의 부모요소
@@ -54,6 +66,7 @@ h1.tit{
 .door{
     position: relative;
     /* .handle의 부모자격 */
+    z-index: 1;
     width: 150px;
     height: 280px;
     background-color: #c90;
@@ -66,15 +79,16 @@ h1.tit{
     openFirst 1s ease-in-out forwards,
     /* 계속 여닫기 애니 1초후 작동 */
     openDoor 2s ease-in-out 1s infinite alternate;
+    
     /* 애니메이션 상태관리 
-        속성:
-        running -> 작동
-        paused -> 멈춤
+    속성:
+    running -> 작동
+    paused -> 멈춤
     */
     animation-play-state: paused;
 }
 /* 마우스 오버시 문열기 애니 작동 */
-.cont:hover .door{
+.cont:hover .door, .cont:hover #elsa img{
     animation-play-state: running;
 }
 
@@ -96,6 +110,12 @@ h1.tit{
 }/* openDoor 키프레임 ***********/
 
 
+@keyframes waveAni {
+    to{
+        background-size: auto 110%;
+    }
+}
+
 .handle{
     position: absolute;
     width: 20px;
@@ -104,4 +124,30 @@ h1.tit{
     background-color: #00a;
     top: 50%;
     right: 10px;
+}
+
+/* 엘사 박스 */
+#elsa{
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 280px;
+    /* 엘사 이미지 숨기기 */
+    overflow: hidden;
+}
+/* 엘사 이미지 */
+#elsa img{
+    margin-left: 150px;
+    transform-origin: bottom left;
+    animation: elsaAni 1s ease-in-out infinite alternate;
+    animation-play-state: paused;
+}
+
+@keyframes elsaAni {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(-12deg);
+    }
 }

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>004-2.nth-child 활용</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        label{
+            display: inline-block;
+            line-height: 1.5;
+            font-size: 25px;
+            margin: 10px;
+        }
+        /* 라디오 버튼 숨기기 -> input 요소는 숨겨도 작동은 됨*/
+        input[type=radio]{
+            display: none;
+        }
+        ul.ball{
+            /* flex box */
+            display: flex;
+            /* flex wrapping */
+            flex-wrap: wrap;
+
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .ball li{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 5px solid orangered;
+            text-align: center;
+            line-height: 50px;
+            font-size: 25px;
+            font-weight: bold;
+            color: darkred;
+            margin: 5px;
+        }
+
+        /* 라디오 버튼 체크 시 하단 형제 요소 ul>li의 배경색 변경 */
+        /* 체크박스 라디오버튼 체크시 가상클래스는 :checked */
+        label:hover{
+            cursor: pointer;
+        }
+        input:checked + label{
+            outline: 10px dotted orangered;
+        }
+        
+        /*1. 짝수 번쨰 -> nth-child(even)*/
+        #rdo1:checked ~/* 형제요소 찾기 '~' */ ul>li:nth-child(even){
+            background-color: lightgreen;
+        }
+        /*2. 홀수 번쨰 -> nth-child(odd)*/
+        #rdo2:checked ~/* 형제요소 찾기 '~' */ ul>li:nth-child(odd){
+            background-color: lightcoral;
+        }
+        /*3. 3의배수 번쨰 -> nth-child(3n)*/
+        #rdo3:checked ~/* 형제요소 찾기 '~' */ ul>li:nth-child(3n){
+            background-color: lightseagreen;
+        }
+        /*4. 2의배수 + 1번째 -> nth-child(2n+1)*/
+        #rdo4:checked ~/* 형제요소 찾기 '~' */ ul>li:nth-child(2n+1){
+            background-color: lightskyblue;
+        }
+        /* 5. 1부터 20번째 -> nth-child(-n+20) 
+            -n이므로 뒤에서부터 선택되어 첫 번째까지 선택됨
+            -> (20-n)이라고 쓰면 문법오류로 작동X*/
+        #rdo5:checked ~/* 형제요소 찾기 '~' */ ul>li:nth-child(-n+20){
+            background-color: lightpink;
+        }
+        /* 6. 21번부터 37번째: li:nth-child(20) ~ li:nth-child(-n+37)
+            -> 출발은 20번째 요소 뒤인 21번 요소부터 출발함*/
+        #rdo6:checked ~/* 형제요소 찾기 '~' */ ul>li:nth-child(20) ~ li:nth-child(-n+37){
+            background-color: lightsteelblue;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <h1>nth-child 활용</h1>
+
+    <!--
+        라디오 버튼 활용
+        input 요소 중 type="radio" name속성을 같은 이름으로 설정하면 라디오버튼 선택이 하나만 선택되고
+        나머지 라디오 버튼은 해제됨
+
+        [ label 요소 ]
+        for속성에 input요소의 id명을 써서 클릭시 포커스가 해당 id를 가진 input요소로 들어감
+    -->
+    <input type="radio" name="rdo" id="rdo1">
+    <label for="rdo1">
+        1. 짝수 번째: nth-child(even)
+    </label>
+    <br>
+    
+    <input type="radio" name="rdo" id="rdo2">
+    <label for="rdo2">
+        2. 홀수 번째: nth-child(odd)
+    </label>
+    <br>
+
+    <input type="radio" name="rdo" id="rdo3">
+    <label for="rdo3">
+        3. 3의 배수 번째: nth-child(3n)
+    </label>
+    <br>
+
+    <input type="radio" name="rdo" id="rdo4">
+    <label for="rdo4">
+        4. 2의 배수 + 1번째: nth-child(2n+1)
+    </label>
+    <br>
+    
+    <input type="radio" name="rdo" id="rdo5">
+    <label for="rdo5">
+        5. 1부터 20번째: nth-child(-n+20)
+    </label>
+    <br>
+    
+    <input type="radio" name="rdo" id="rdo6">
+    <label for="rdo6">
+        6. 21번부터 37번째: li:nth-child(20) ~ li:nth-child(-n+37)
+    </label>
+    <br>
+
+    <ul class="ball">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+        <li>31</li>
+        <li>32</li>
+        <li>33</li>
+        <li>34</li>
+        <li>35</li>
+        <li>36</li>
+        <li>37</li>
+        <li>38</li>
+        <li>39</li>
+        <li>40</li>
+        <li>41</li>
+        <li>42</li>
+        <li>43</li>
+        <li>44</li>
+        <li>45</li>
+        <li>46</li>
+        <li>47</li>
+        <li>48</li>
+        <li>49</li>
+        <li>50</li>
+    </ul>
+</body>
+</html>

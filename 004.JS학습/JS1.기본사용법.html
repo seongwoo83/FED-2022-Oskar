@@ -414,7 +414,11 @@
                 // 호출하기
                 console.log("바꿔!");
                 // 대상 : .pbox배경이미지 변경
-                document.getElementsByClassName("pbox").item(0).style.backgroundImage="url(https://image.kmib.co.kr/online_image/2022/0727/2022072621325079008_1658838770_0017317378.jpg)";
+                var pbox = document.getElementsByClassName("pbox").item(0);
+                pbox.style.backgroundImage="url(https://image.kmib.co.kr/online_image/2022/0727/2022072621325079008_1658838770_0017317378.jpg)";
+
+                pbox.innerHTML = "우 to the 영 to the 우";
+
 
             }///////////////바꿔 함수/////////////
 

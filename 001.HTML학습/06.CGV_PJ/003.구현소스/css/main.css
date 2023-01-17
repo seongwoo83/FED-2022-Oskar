@@ -20,7 +20,9 @@ body{
 /***************************** 1. 상단 영역 *****************************/
 /* 속박스 */
 .top{
+    position: relative;
     height: 80px;
+    z-index: 999;
     /* 배경 이미지 */
     background: url(../images/curtain.jpg) repeat-x;
 }
@@ -38,6 +40,43 @@ body{
 }
 /* 타이틀 글로우 효과 애니메이션 키프레임*/
 @keyframes titAni {100%{text-shadow: 0 0 12px aquamarine;}}
+.gnb{
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+}
+.gnb ul{
+    display: flex;
+    font-family: "Jua", sans-serif;
+}
+.gnb ul>li+li{
+    margin-left: 20px;
+}
+.gnb ul>li>a{
+    font-size: 2rem;
+}
+
+/* 서브메뉴 */
+.smenu{
+    position: absolute;
+    width: 140px;
+    padding: 3px;
+    background: url(../images/bg_smenu.png) no-repeat center/cover;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #fff;
+}
+.smenu ol{
+    border: 1px solid #ccc;
+    padding: 10px;
+
+}
+.smenu a{
+    font-size: 1.6rem;
+    line-height:1.7;
+}
+
+
+
 /***************************** 2. 메인 영역 *****************************/
 /* 속박스 */
 .cont{

@@ -42,12 +42,16 @@ body{
 @keyframes titAni {100%{text-shadow: 0 0 12px aquamarine;}}
 .gnb{
     position: absolute;
-    bottom: 15px;
+    bottom: 10px;
     right: 10px;
 }
 .gnb ul{
     display: flex;
     font-family: "Jua", sans-serif;
+}
+.gnb ul>li{
+    position: relative;
+    padding-bottom: 6px;
 }
 .gnb ul>li+li{
     margin-left: 20px;
@@ -59,11 +63,34 @@ body{
 /* 서브메뉴 */
 .smenu{
     position: absolute;
+    left: 50%;
+    transform: translate(-50%, 5px);
     width: 140px;
     padding: 3px;
     background: url(../images/bg_smenu.png) no-repeat center/cover;
     border-radius: 5px;
     box-shadow: 0 0 5px #fff;
+
+    display: none;
+}
+/* 상위메뉴 li에 마우스 오버시 .smenu보이기 */
+.gnb ul>li:hover .smenu{
+    display: block;
+}
+
+.smenu::before{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* 삼각형 만들기: border사용 */
+    border-bottom: 10px solid #393939;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;;
 }
 .smenu ol{
     border: 1px solid #ccc;
@@ -71,8 +98,33 @@ body{
 
 }
 .smenu a{
+    display: block;
     font-size: 1.6rem;
     line-height:1.7;
+}
+.smenu a:hover{
+    color: red;
+}
+.gnb ul>li:nth-child(1) .smenu a:hover:after{
+    content: '😍';
+    float: right;
+}
+.gnb ul>li:nth-child(2) .smenu a:hover:after{
+    content: '🎥';
+    float: right;
+}
+.gnb ul>li:nth-child(3) .smenu a:hover:after{
+    content: '🎬';
+    float: right;
+}
+.gnb ul>li:nth-child(4) .smenu a:hover:after{
+    content: '💻';
+    float: right;
+}
+
+/* 서브메뉴 사이구분선 클래스 */
+.bdt{
+    border-top: 1px solid #ccc;
 }
 
 

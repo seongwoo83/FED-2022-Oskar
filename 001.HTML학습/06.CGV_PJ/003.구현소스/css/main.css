@@ -8,9 +8,9 @@
 
 
 /* 공사중 표시 */
-body *{
+/* body *{
     outline: 2px dashed green;
-}
+} */
 
 /* 전체 배경 */
 body{
@@ -57,7 +57,15 @@ body{
     margin-left: 20px;
 }
 .gnb ul>li>a{
+    display: inline-block;
     font-size: 2rem;
+    transition: transform 1s;
+    
+}
+.gnb ul>li:hover>a{
+    color: aquamarine;
+    transform: scale(1.2);
+    animation: titAni .5s ease-in infinite alternate;
 }
 
 /* 서브메뉴 */
@@ -204,5 +212,72 @@ body{
 /***************************** 3. 하단 영역 *****************************/
 /* 속박스 */
 .info{
+    display: flex;
+    /* 수직방향 정렬 */
+    align-items: center;
     height: 100px;
 }
+
+/* 3-1 로고 */
+.logo{
+    margin-right: 100px;
+}
+/* 3-2 회사정보 */
+.corp address{
+    color: #999;  
+    font-family: 'Cute Font', cursive;
+    font-style: normal;
+    line-height: 2rem;
+    font-size: 1.8rem;
+}
+/* 3-3 SNS */
+.sns{
+    /* 오른쪽 끝에 위치 */
+    margin-left: auto;
+}
+.sns ol{
+    display: flex;
+}
+.sns ol li{
+    width: 34px;
+    height: 34px;
+}
+.sns li+li{
+    margin-left: 5px;
+}
+.sns a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 34px;
+    text-align: center;
+}
+/* 마우스 오버시 글자색 변환 */
+/* 페이스북 */
+.sns a[class$=book]:hover{
+    color: lightskyblue;
+}
+/* 트위터 */
+.sns a[class^='fa-brands fa-square-tw']:hover{
+    color: lightcoral;
+}
+/* 인스타그램 */
+.sns a[class*=ins]:hover{
+    color: lightgreen;
+}
+/* 
+    속성 선택자: [속성명] 
+    - 속성명의 어떤 특정 값을 비교하는 3가지 방법
+    
+    1. [속성명=값] -> 정확히 일지하는 값을 선택
+    2. [속성명*=값] -> 값이 내용중에 존재 하는 문자열 선택
+    3. [속성명^=값] -> 값으로 시작하는 문자열 선택
+    4. [속성명$=값] -> 값으로 끝나는 문자열 선택
+
+    * 하늘에 있고 모두가 볼 수 있음 *= -> 모든 일치내용
+    ^ 만날 때는 웃으면서 만남 ^= -> 시작하는 내용
+    $ 끝날 때는 돈받고 끝냄 $= -> 끝나는 내용
+
+
+    - 사용하는 문자열에 띄어쓰기나 특수문자가 존재한다면 따옴표로 묶어서 사용
+*/

@@ -64,10 +64,6 @@ html, body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    outline: 4px dotted lime;
-
-    
 }
 #enter span{
     display: block;
@@ -80,9 +76,8 @@ html, body{
 
 /* 엔터박스 마우스 오버시 글자박스 */
 #enter:hover span{
-    transform: scale(2);
+    transform: scale(2) rotateX(360deg);
     color: chartreuse;
-
 }
 
 /* 엔터박스 로고 이미지 */
@@ -97,13 +92,14 @@ html, body{
 /* 엔터박스 로고 이미지 마우스 오버 */
 #enter:hover img{
     transform: rotate(-15deg) scale(1.5);
+    animation: logoAni .7s ease-in-out 1s infinite alternate;
 }
 
-
-
-
-
-
-
-
-*/
+@keyframes logoAni {
+    0%{
+        transform: rotate(-15deg) scale(1.5);
+    }
+    100%{
+        transform: rotate(15deg) scale(1.5);
+    }
+}

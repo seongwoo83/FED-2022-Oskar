@@ -1,16 +1,37 @@
 @charset "UTF-8";
 
 /* Robot PJ 미디어쿼리 CSS */
-
+@import url(./Robot_ani.css);
 /* 1024px이하 */
 @media screen and (max-width: 1024px){
+    body{
+        overflow-x: hidden; 
+    }
+    .link{
+        top: 40px;
+    }
     .link a{
         font-size: 35px;
+    }
+    
+    .logo{
+        transform: scale(1);
+        width: 150px;
+        height: 150px;
+        font-size: 3vw;
+        top: 0;
+        left: 0;
+    }
+    .logo{
+        animation: logoRo .5s ease-in-out 3s infinite alternate;
     }
 }
 
 /* 900px 이하 */
 @media screen and (max-width: 900px) {
+    body{
+        overflow-x: hidden; 
+    }
     .dcbx{
         margin: 0 30px;
     }
@@ -22,6 +43,27 @@
 }
 /* 500px 이하 */
 @media screen and (max-width: 500px) {
+    body{
+        overflow-x: hidden; 
+    }
+    .link{
+        position: static;
+        text-align: center;
+        padding: 20px 0;
+    }
+    .logo{
+        animation: none ;
+        top: 90px;
+        left: 30px;
+        transform: scale(1);
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        font-size: 20px;
+    }
+    .logo{
+        animation: logoRo .5s ease-in-out 3s infinite alternate;
+    }
     .dcbx{
         margin: 0 30px;
     }

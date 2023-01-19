@@ -48,11 +48,10 @@ html{
 }
     /* 타이틀 7 */
     .t7{
-        transform: none;
         top: 50px;
-        right: 50px;
+        left: 50%;
+        transform: translateX(-50%);
         /* 기존의 left해제 */
-        left: auto;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
@@ -151,3 +150,12 @@ html{
 }
 
 /* 3. 하단영역 */
+
+.info{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 7px 0;
+    background-color: #da041c;
+    text-align: center;
+}

@@ -76,6 +76,7 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     position: absolute;
     top: 100px;
     right: 50px;
+    z-index: 1;
 }
 .link a{
     text-decoration: none;
@@ -149,6 +150,7 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     height: 150px;
     margin: 0 auto;
     background: url(../images/metal01.jpg) no-repeat top/100%;
+    
 }
 .head::after{
     content: '';
@@ -279,10 +281,12 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     margin: 0 auto;
     margin-top: 133px;
     border-radius: 0 0 50% 50%;
+    box-shadow: 0 0 10px 5px cyan
 }
 
 .body>div{
     position: absolute;
+    box-shadow: 0 0 10px 5px cyan
 }
 
 .body::before{
@@ -294,6 +298,7 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     left: -75px;
     background-image: linear-gradient(27deg, #f77373, #4d163a, #f77373, #4d163a, #f77373, #4d163a, #f77373);
     clip-path: polygon(0 0, 0 20%, 10% 30%, 20% 100%, 80% 100%, 90% 30%, 100% 20%, 100% 0);
+    box-shadow: 0 0 10px 5px cyan
 }
 .body::after{
     content: '';
@@ -305,6 +310,7 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     bottom: -37px;
     background-image: linear-gradient(153deg, #73acf7, #16174d, #73acf7, #16174d, #73acf7, #16174d, #73acf7);
     clip-path: polygon(10% 0, 0 20%, 10% 80%, 44% 100%, 56% 100%, 90% 80%, 100% 20%, 90% 0);
+    box-shadow: 0 0 10px 5px cyan
 }
 /* 목 */
 .neck{
@@ -340,11 +346,13 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     background-color: #ccc;
     border: 4px solid #999;
     box-sizing: border-box;
+    /* box-shadow: 0 0 10px 5px cyan */
 }
 .arm::after{
     transform: scale(.6);
     /* 선형 그라데이션 */
     background-image: linear-gradient(-45deg, #444, #999, #eee);
+    /* box-shadow: 0 0 10px 5px cyan */
 }
 
 
@@ -359,6 +367,7 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     border-radius: 25px 25px 30px 30px;
     /* 공통 회전축 변경 */
     transform-origin: top;
+    box-shadow: 0 0 10px 5px cyan
 }
 
 .arm span::after{
@@ -369,6 +378,7 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     height: 130px;
     bottom: -130px;
     transform-origin: top;
+    /* box-shadow: 0 0 10px 5px cyan */
 }
 
 /* 왼팔 */
@@ -386,6 +396,7 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     left: -15px;
     background: url(../images/hand_left.png) no-repeat bottom/100%;
     transform: rotate(-1deg);
+    /* box-shadow: 0 0 10px 5px cyan */
 }
 
 /* 오른팔 */
@@ -412,18 +423,21 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     width: 90px;
     height: 90px;
     border-radius: 15px 15px 50% 50%;
+    box-shadow: 0 0 10px 5px cyan
 }
 /* 왼어깨 */
 .s1{
     top: -20px;
     left: -90px;
     clip-path: polygon(0 0, 0 100%, 58% 100%, 40% 22%, 100% 22%, 100% 0);
+    box-shadow: 0 0 10px 5px cyan
 }
 /* 오른어깨 */
 .s2{
     top: -20px;
     right: -90px;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 42% 100%, 60% 22%, 0 22%);
+    box-shadow: 0 0 10px 5px cyan
 }
 
 
@@ -469,6 +483,7 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     width: 70px;
     height: 280px;
     border-radius: 25px 25px 30px 30px;
+    box-shadow: 0 0 10px 5px cyan
 }
 .leg span::before{
     content: '';
@@ -482,6 +497,7 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     border-top: 25px solid #000;
     box-sizing: border-box;
     background-image: linear-gradient(-90deg, #16174d, #73acf7, #eee);
+    box-shadow: 0 0 10px 5px cyan
 }
 .leg span::after{
     content: '';
@@ -496,6 +512,7 @@ body {background: url("../images/bg.jpg") no-repeat fixed top/cover; overflow-x:
     border-bottom: 25px solid #000;
     box-sizing: border-box;
     background-image: linear-gradient(-45deg, #4d163a, #f77373,#eee);
+    box-shadow: 0 0 10px 5px cyan
 }
 /* 왼다리 */
 .lg1{

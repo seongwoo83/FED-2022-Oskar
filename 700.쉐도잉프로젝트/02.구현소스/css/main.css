@@ -190,3 +190,11 @@ body {
     0 1px black,
     0 -1px black;
 }
+
+/* 등장글자이미지 */
+#mvtxt{
+    position: absolute;
+    width: min(20vw, 327px);
+    top: 25vh;
+    right: 5vw;
+}

@@ -201,6 +201,73 @@ background-position: 0 0;
     /* 자식요소가 많아지면 자동으로 늘어남 */
 }
 /********************************************* 3. 하단영역 *********************************************/
+/* 겉박스 */
+#info{
+    background-color: #ffffff77;
+}
+/* 속박스 */
 .info{
     height: 241px;
+    position: relative;
+}
+
+/************** 3-1 하단링크 ************/
+.blink{
+    padding-top: 5px;
+}
+/* 하단 링크 리스트 */
+.blink ul{
+    display: flex;
+    justify-content: center;
+}
+.blink a{
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: #222;
+    font-weight: bold;
+}
+.blink li a:hover{
+    color: red;
+    text-decoration: underline;
+}
+.blink li+li{
+    margin-left: 15px;
+}
+
+/************** 3-2 회사정보 ************/
+.addr{
+    padding: 10px;
+}
+.addr address{
+    font-size: 1.4rem;
+    font-style: normal;
+    text-align: center;
+    line-height: 2;
+
+    max-width: 804px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 4px double #222;
+}
+/************** 3-3 하단로고 ************/
+.blogo{
+    text-align: center;
+}
+/************** 3-4 바로가기 ************/
+.brand{
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+/* 선택박스 */
+#sel{
+    font-size: 1.4rem;
+    color: #222;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 7px;
+}
+/* 선택시(포커스) 브라우저 기본 아웃라인 없애기 */
+#sel:focus{
+    outline: none;
 }

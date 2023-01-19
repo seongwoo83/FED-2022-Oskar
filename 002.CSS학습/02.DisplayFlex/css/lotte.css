@@ -1,0 +1,153 @@
+@charset "UTF-8";
+/* 요소 리셋 CSS - reset.css 
+
+    - 초기화 대상 : 기본 세팅이 있는 요소들에 적용*/
+
+/* 1. margin, padding 초기화 */
+html, body, h1, h2, h3, h4, h5, h6, p, figure, ul, ol, dl, dt, dd{
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. 리스트 초기화 */
+ul, ol{
+    /* 불릿 초기화 */
+    list-style: none;
+}
+/* 3. root - html 글자크기 세팅 */
+html{
+    font-size: 10px;
+    /* rem단위를 계산하기 편하도록 10px로 설정 */
+}
+
+
+/* 1. 상단영역 */
+/* 타이틀 공통 */
+.tit{
+    z-index: 1;
+    position: absolute;
+    top: 50px;
+    width: 500px;
+    left: 50%;
+    /* 가로 중앙 이동: transform: translate 사용 */
+    transform: translateX(-50%);
+}
+
+/* 타이틀 하위 공통 li */
+.tit>li{
+    /* 박스세팅 */
+    width: 50px;
+    height: 50px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background-color: red;
+    text-align: center;
+    /* 글자세팅 - font: 스두크/줄체*/
+    font: bold 14px/50px Verdana;
+    color: #fff;
+}
+    /* 타이틀 7 */
+    .t7{
+        transform: none;
+        top: 50px;
+        right: 50px;
+        /* 기존의 left해제 */
+        left: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: center;
+    }
+
+    /* 
+    자체응용 - 줄바꿈을 위한 li 
+    - 줄바꿈을 할 부분에서 가로크기 100%를 차지하게 해서 줄바꿈 효과를 준다
+    */
+    .t7 li.brk{
+        width: 100%;
+        height: 0;
+        border: none;
+        margin: 10px;
+    }
+
+/* 2. 메인영역 */
+.cont>ul{
+    display: flex;
+    height: 100vh;
+    /* 높이값을 보이는 화면 기준으로 채움 */
+}
+
+/* 파티션 박스 */
+.cont>ul>li{
+    position: relative;
+    /* 플렉스 자식요소 등분할 설정 */
+    flex: 1;
+    /* 가로는 등분할, 세로는 100% 채우기 */
+    transition: all .5s ease-out;
+    cursor: pointer;
+}
+
+/* 파티션 li박스 가상요소로 오버레이 효과주기 */
+.cont>ul>li::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* 앱솔루트 사방채우기 */
+    background-color: #000;
+    opacity: .5;
+    transition: opacity .5s ease-out;
+}
+
+/* 파티션에 마우스 오버시 */
+/* li 넓어지기 */
+.cont>ul>li:hover {
+    flex: 1.4;
+    
+    /* 
+    flex: 1; -> 등분할설정
+    -> 여기에 다른숫자를 쓰면 기존 1로 등분할 된 것에 비교하여 2를 쓰면 2배 3을 쓰면 3배..
+    이런식의 배수를 세팅하게 됨
+    */
+
+}
+
+/* 가상요소 암전 밝아지기 */
+.cont>ul>li:hover::before{
+    opacity: 0;
+}
+
+
+.cont>ul>li:nth-child(1){
+    background: url(../images/m01_bg.jpg) no-repeat center/cover;
+}
+.cont>ul>li:nth-child(2){
+    background: url(../images/m02_bg.jpg) no-repeat center/cover;
+}
+.cont>ul>li:nth-child(3){
+    background: url(../images/m03_bg.jpg) no-repeat center/cover;
+}
+.cont>ul>li:nth-child(4){
+    background: url(../images/m04_bg.jpg) no-repeat center/cover;
+}
+.cont>ul>li:nth-child(5){
+    background: url(../images/m05_bg.jpg) no-repeat center/cover;
+}
+
+/* 타이틀 + 로고 이미지 공통세팅 */
+.cont>ul>li>img{
+    position: absolute;
+    width: min(70%, 250px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.cont>ul>li>img:last-child{
+    top: 80%;
+    width: auto;
+}
+
+/* 3. 하단영역 */

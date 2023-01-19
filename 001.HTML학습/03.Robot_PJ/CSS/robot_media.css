@@ -29,8 +29,9 @@
 
 /* 900px 이하 */
 @media screen and (max-width: 900px) {
-    body{
-        overflow-x: hidden; 
+    html, body{
+        width: 100vw;
+        overflow-x: hidden;
     }
     .dcbx{
         margin: 0 30px;
@@ -43,8 +44,9 @@
 }
 /* 500px 이하 */
 @media screen and (max-width: 500px) {
-    body{
-        overflow-x: hidden; 
+    html, body{
+        width: 100vw;
+        overflow-x: hidden;
     }
     .link{
         position: static;

@@ -12,3 +12,83 @@ html,body{
     margin: 0;
     padding: 0;
 }
+
+/* 테이블 공통 */
+.tbl{
+    font-family: 'hahmlet', serif;
+    color: #222;
+    /* 테이블 기본 간격 없애기 */
+    border-collapse: collapse;
+}
+
+/* 드라마 테이블 */
+#drama{
+    font-size: 24px;
+    margin: 0 auto;
+    width: 1000px;
+    /* 테이블은 width 지정이 없으면 내용만큼 늘어나며 내용이 많으면
+    아래로 밀려나서 떨어짐 */
+}
+
+/* 테이블 제목 */
+#drama caption{
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    padding: 50px 0 20px;
+}
+
+/* td와 th패딩 */
+#drama td, #drama th{
+    padding: 8px 10px;
+}
+
+/* td에 밑줄 넣기 */
+#drama tbody td{
+    border-bottom: 1px solid #ccc;
+}
+
+/* th에 윗줄, 아랫줄 두꺼운 보더 넣기 */
+#drama th{
+    border-top: 2px solid #555;
+    border-bottom: 2px solid #555;
+}
+
+/* tbody 마지막 tr에 아랫줄 두꺼운 보더 넣기 */
+#drama tbody tr:last-child td{
+    border-bottom: 2px solid #555;
+}
+
+/* tbody의 첫 번째 td '번호' 가운데 정렬 */
+#drama tbody tr td:first-child{
+    text-align: center;
+}
+
+/* 페이징 부분(tfoot) */
+#drama tfoot td{
+    text-align: center;
+    padding: 45px 0 0;
+}
+
+/* tbody 배경색 홀수만 넣기 */
+#drama tbody tr:nth-child(even) td{
+    background-color: #ddd;
+}
+
+/* a요소 변경 */
+#drama a{
+    color: #222;
+    text-decoration: none;
+}
+#drama tbody a:hover{
+    color: hotpink;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: orangered;
+}
+#drama tfoot a:hover{
+    color: darkgreen;
+    text-decoration: overline;
+    text-decoration-style: double;
+    text-decoration-color: lime;
+}

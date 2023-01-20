@@ -47,6 +47,7 @@
         display: block;
     }
     .top{
+        position: relative;
         height: 80px;
     }
     .cat{

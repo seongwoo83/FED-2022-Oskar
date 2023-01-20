@@ -39,9 +39,12 @@
 }
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 780px) {
     .tmenu, .gnb{
         display: none;
+    }
+    .ham{
+        display: block;
     }
     .top{
         height: 80px;

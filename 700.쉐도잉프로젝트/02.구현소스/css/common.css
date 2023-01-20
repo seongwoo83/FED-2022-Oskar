@@ -207,6 +207,7 @@ background-position: 0 0;
     border: none;
     font-size: 8vw;
     transform: scaleX(1.5);
+    display: none;
 }
 /********************************************* 2. 메인영역 *********************************************/
 .cont{

@@ -115,8 +115,9 @@ body {
 /* 캐릭터 타이틀 */
 .cd h3{
     font-family: 'Gugi', cursive;
-    font-size: 24px;
+    font-size: min(24px, 1.7vw);
     font-weight: normal;
+    white-space: nowrap;
     padding: 15px 10px 5px;
     letter-spacing: -1px;
 }       
@@ -135,19 +136,17 @@ body {
 /* 캐릭터 설명 문단 */
 .cd p{
     font-family: 'Single Day', 'ZCOOL Kuaile',cursive;
-    font-size: 18px;
+    font-size: min(1.3vw, 18px);
     line-height: 1.6;
-    padding: 10px;
-    text-align: justify;
-    
+    padding: min(1v  w, 16px);
 }
 /* 캐릭터 첫 번째 문단 첫 글자 가상요소로 디자인 변경하기 */
 .cat:first-child .cd p:first-child::first-letter{
-    font-size: 48px;
+    font-size: min(50px, 3vw);
     font-weight: bold;
     line-height: 0.9;
     color: cyan;
-    /* 블러 없는 그림자 4개 사용으로 글자 테두리 만들기*/
+    /* 블러 없는 그림자 4개 사용으로 글자 테두리 만들기*/ 
     text-shadow: 
     1px 0 black,
     -1px 0 black,

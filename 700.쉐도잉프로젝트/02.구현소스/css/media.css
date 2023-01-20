@@ -1,0 +1,73 @@
+@charset "UTF-8";
+@media screen and (max-width: 1200px) {
+    .brand{
+        top: 159px;
+        right: 10px;
+
+    }
+}
+@media screen and (max-width: 900px) {
+    /* 전체 글자 크기 변경 */
+    html{
+        font-size: 8.235px;
+    }
+    .cont{
+        min-height: 100vw;
+    }
+    /* 전체 캐릭터 박스 */
+    .cbx{
+        margin-top: 10vw;
+    }
+    .cat {
+        width: 49%;
+        position: relative;
+        margin-bottom: 20px;
+    }
+    .cat:hover .ci{
+        margin-top: 0;
+    }
+    #mvtxt{
+        display: none;
+    }
+    .cd{
+        position: absolute;
+        z-index: 1;
+    }
+    .cd p:first-child::first-letter{
+        font-size: 100vw;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .tmenu, .gnb{
+        display: none;
+    }
+    .top{
+        height: 80px;
+    }
+    .cat{
+        width: 99%;
+    }
+    .cd{
+        position: static;
+    }
+    .cd h3{
+        font-size: 4.5vw;
+    }
+    .cd p{
+        font-size: 4vw;
+        padding: 3vw;
+    }
+    .cd p:first-child::first-letter{
+        font-size: 10vw;
+    }
+    .brand{
+        bottom: 10px;
+        top: auto;
+    }
+    .blink li:nth-child(-n+2){
+        display: none;
+    }
+}
+

@@ -44,7 +44,6 @@
         -> 정의: 박스가 자체적인 비율을 가지고 있는 경우의 박스 */
         .bx3{
             position: relative;
-            padding-top: 56.25%;
             /* 1. height값 없이 높이값만들기 */
             /* padding-top: 400px; */
 
@@ -55,11 +54,13 @@
         /* 하위 직계 블록박스에 padding-top을 %로 주면? 
         100%일 경우 가로,세로 비가 1:1인 박스를 만들 수 있다.*/
         .bx3>.test{
-            /* padding-top: 100%; */
+            padding-top: 100%;
         }
         /* 직접 블록 자식요소를 넣는 대신 가상요소를 넣고 블록화하여 패딩탑을 %로 세팅한다 */
         .bx3::before{
-            
+            content: '';
+            display: block;
+            padding-top: 56.25%;
             /* 비율을 만들어 보자 
             예) 16:9 = 100 : x
                 x = 9 * 100 / 16
@@ -74,7 +75,16 @@
         .rbx::before{
             content: '';
             display: block;
-            padding-top: 56.25%;
+            padding-top: calc(100% / 16 * 9);
+            /* 
+                [ 비율 calc()사용법 ]
+
+                calc(100% / 가로비율 * 세로비율)
+
+
+                예) 16:9 비율
+                padding-top: calc((100% / 16)*9)
+            */
         }
         /* 비율유지 속박스 - 겉박스 밀착 앱솔루트 속박스
         -> 전제조건: rbx가 최소한 relative여야함
@@ -109,6 +119,28 @@
 
 
         ********************************************/
+
+        /* 5. 비율유지박스: aspect-ratio 속성사용 */
+        .arbx{
+            /* 
+                [ aspect-ratio 속성 사용하기 ]
+                aspect-ratio: 가로비 / 세로비;
+                -> width값은 세팅하고 height값은 auto임
+                -> 값을 하나만 쓰면 가로비만 세로를 1로보는 설정이 세팅됨
+
+                예)
+                1. 1:1 비율
+                aspect-ratio: 1 / 1; = aspect-ratio: 1;
+                2. 16:9 비율
+                aspect-ratio: 16 / 9;
+                3. 세로에 대한 가로 80% 비율
+                aspect-ratio: .8;
+                4. 세로에 대한 가로 200% 비율
+                aspect-ratio: 2;
+            */
+            aspect-ratio: 16  / 9;
+        }
+
     </style>
 </head>
 <body>
@@ -140,6 +172,16 @@
                 <dd>김의성(장성철역)</dd>
             </dl>
         </div>
+    </div>
+    <h2>5. 비율유지박스 : aspect-ratio 속성 사용</h2>
+    <div class="bx arbx">
+        <!-- 컨텐츠 넣기 -->
+        <dl class="cat">
+            <dt>출연진</dt>
+            <dd>이제훈(김도기역)</dd>
+            <dd>이솜(강하나역)</dd>
+            <dd>김의성(장성철역)</dd>
+        </dl>
     </div>
 </body>
 </html>

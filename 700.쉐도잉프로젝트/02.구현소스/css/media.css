@@ -40,11 +40,44 @@
 
 
 @media screen and (max-width: 780px) {
-    .tmenu, .gnb{
+    .tmenu, .smbx, .gnb>ul>li>a::after, .gnb{
         display: none;
+    }
+    /* gnb메뉴 변경하기
+    -> .top에 .on을 준 경우 적용됨
+    -> 메뉴를 fixed로 고정*/
+    .top.on .gnb{
+        display: block;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000000bb;
+        z-index: 9999;
+    }
+    /* flex방향을 column으로 세로로 고정 */
+    nav.gnb ul{
+        flex-direction: column;
+        text-align: center;
+        margin-top: 15vh;
+    }
+    /* gnb메뉴 a변경 */
+    .gnb>ul>li>a{
+        font-size: 5vh;
+        line-height: 10vh;
+        color: #fff;
+    }
+    h1.logo{
+        position: relative;
+        z-index: 99999;
     }
     .ham{
         display: block;
+    }
+    /* .ham버튼에 상위 .top에 클래스 on줄경우 x버튼으로변경 */
+    .top.on .ham{
+        z-index: 9999;
+        color: #fff;
     }
     .top{
         position: relative;

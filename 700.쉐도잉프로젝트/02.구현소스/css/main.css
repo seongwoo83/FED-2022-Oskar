@@ -142,7 +142,7 @@ body {
 }
 /* 캐릭터 첫 번째 문단 첫 글자 가상요소로 디자인 변경하기 */
 .cat:first-child .cd p:first-child::first-letter{
-    font-size: min(50px, 3vw);
+    font-size: min(50px, 5vw);
     font-weight: bold;
     line-height: 0.9;
     color: cyan;
@@ -154,7 +154,7 @@ body {
     0 -1px black;
 }
 .cat:nth-child(2) .cd p:first-child::first-letter{
-    font-size: 48px;
+    font-size: min(50px, 5vw);
     font-weight: bold;
     line-height: 0.9;
     color: lightcoral;
@@ -166,7 +166,7 @@ body {
     0 -1px black;
 }
 .cat:nth-child(3) .cd p:first-child::first-letter{
-    font-size: 48px;
+    font-size: min(50px, 5vw);
     font-weight: bold;
     line-height: 0.9;
     color: lightgreen;
@@ -178,7 +178,7 @@ body {
     0 -1px black;
 }
 .cat:nth-child(4) .cd p:first-child::first-letter{
-    font-size: 48px;
+    font-size: min(50px, 5vw);
     font-weight: bold;
     line-height: 0.9;
     color: lightgoldenrodyellow;

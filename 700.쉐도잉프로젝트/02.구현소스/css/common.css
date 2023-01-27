@@ -53,34 +53,39 @@ nav.gnb ul{
     background-color: #fff;
     transition: height .45s ease-out;
 }
-/* 상위메뉴 오버시 서브배경 보이기 */
-.gnb>ul>li.sm:hover::before{
-    border-bottom: 2px solid red;
-    transition-duration: .25s;
-    height: 120px;
-}
-/* 상위메뉴 오버시 하위메뉴 보이기 */
-.gnb>ul>li:nth-child(1):hover .smenu,
-.gnb>ul>li:nth-child(1):hover::before{
-    height: 140px;
-}
-.gnb>ul>li:nth-child(1):hover .smenu{
-    height: 100px;
-}
-.gnb>ul>li:nth-child(3):hover .smenu,
-.gnb>ul>li:nth-child(3):hover::before{
-    height: 170px;
-}
-.gnb>ul>li:nth-child(3):hover .smenu{
-    height: 130px;
-}
-.gnb>ul>li:nth-child(4):hover .smenu,
-.gnb>ul>li:nth-child(4):hover::before{
-    height: 110px;
-}
-.gnb>ul>li:nth-child(4):hover .smenu{
-    height: 70px;
-}
+
+/* 모바일에서는 오버시 설정이 적용되지 않도록 미디어쿼리 min-width를 사용한 구역에 넣어준다 */
+/* 780px초과일때만 적용됨 */
+@media screen and (min-width: 781px){
+    /* 상위메뉴 오버시 서브배경 보이기 */
+    .gnb>ul>li.sm:hover::before{
+        border-bottom: 2px solid red;
+        transition-duration: .25s;
+        height: 120px;
+    }
+    /* 상위메뉴 오버시 하위메뉴 보이기 */
+    .gnb>ul>li:nth-child(1):hover .smenu,
+    .gnb>ul>li:nth-child(1):hover::before{
+        height: 140px;
+    }
+    .gnb>ul>li:nth-child(1):hover .smenu{
+        height: 100px;
+    }
+    .gnb>ul>li:nth-child(3):hover .smenu,
+    .gnb>ul>li:nth-child(3):hover::before{
+        height: 170px;
+    }
+    .gnb>ul>li:nth-child(3):hover .smenu{
+        height: 130px;
+    }
+    .gnb>ul>li:nth-child(4):hover .smenu,
+    .gnb>ul>li:nth-child(4):hover::before{
+        height: 110px;
+    }
+    .gnb>ul>li:nth-child(4):hover .smenu{
+        height: 70px;
+    }
+}/*781px초과일때 오버시 적용 ############################*/
 .gnb .smbx{
     position: relative;
 }

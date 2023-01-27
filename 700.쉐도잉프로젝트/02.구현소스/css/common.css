@@ -214,6 +214,10 @@ background-position: 0 0;
     transform: scaleX(1.5);
     display: none;
 }
+/* 햄버거 모양 가상요소 넣기 */
+.ham::before{
+    content: '≡';
+}
 /********************************************* 2. 메인영역 *********************************************/
 .cont{
     min-height: 800px;

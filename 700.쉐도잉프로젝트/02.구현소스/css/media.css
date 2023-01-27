@@ -78,6 +78,10 @@
     .top.on .ham{
         z-index: 9999;
         color: #fff;
+        transform: scale(1.5);
+    }
+    .top.on .ham::before{
+        content: '×';
     }
     .top{
         position: relative;

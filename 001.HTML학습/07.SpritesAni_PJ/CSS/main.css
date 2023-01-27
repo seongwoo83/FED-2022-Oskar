@@ -136,6 +136,8 @@ body {
 
     [ 여러줄 애니메이션 처리법 ]
     배경이미지 이동을 x,y축으로 분리하여 셋팅함
+    -> 시간설정은 x축은 적당히 설정후 y축은 x축 애니시간*줄수로 설정함
+    예) x축 애니를 2초로 설정후 y축은 5줄이면 -> 2초*5줄 = 10초
 
     1. x축이동 : steps(장면수)
         background-position-x : 값;
@@ -191,13 +193,14 @@ body {
     position: absolute;
     top: 10vh;
     right: 5vw;
-    width: 254px;
-    height: 407px;
-    border: 20px ridge goldenrod;
+    width: 256px; /* 1280 / 5장면 */
+    height: 407px; /* 1222 / 3줄 */
+    border: 20px ridge plum;
     background: url(../images/girl_frames.png);
     animation:
-    spani4X 1s steps(5) infinite,
-    spani4Y 3s steps(3) infinite;
+    spani4X .6s steps(5) infinite,
+    spani4Y 1.8s steps(3) infinite;
+    transform: scale(.7);
 }
 /* 웃는여자 키프레임 X축 */
 @keyframes spani4X {

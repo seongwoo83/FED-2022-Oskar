@@ -66,14 +66,14 @@ nav.gnb ul{
     /* 상위메뉴 오버시 하위메뉴 보이기 */
     .gnb>ul>li:nth-child(1):hover .smenu,
     .gnb>ul>li:nth-child(1):hover::before{
-        height: 140px;
+        height: 104px;
     }
     .gnb>ul>li:nth-child(1):hover .smenu{
         height: 100px;
     }
     .gnb>ul>li:nth-child(3):hover .smenu,
     .gnb>ul>li:nth-child(3):hover::before{
-        height: 170px;
+        height: 130px;
     }
     .gnb>ul>li:nth-child(3):hover .smenu{
         height: 130px;

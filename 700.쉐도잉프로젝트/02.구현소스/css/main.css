@@ -26,6 +26,7 @@ body {
 /********************************* 메인영역 *********************************/
 /* 메인영역 속박스 */
 .cont {
+    position: relative;
     overflow: hidden;
     /* 자식요소 위, 아래 margin 포함 */
 }
@@ -194,6 +195,6 @@ body {
 #mvtxt{
     position: absolute;
     width: min(20vw, 327px);
-    top: 25vh;
+    top: 15vh;
     right: 5vw;
 }

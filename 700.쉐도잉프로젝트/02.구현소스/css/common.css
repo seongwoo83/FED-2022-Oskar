@@ -7,9 +7,10 @@
 #top{
     background-color: #fff;
     border-bottom: 2px solid #ccc;
+    position: relative;
+    z-index: 9999;
 }
 .top{
-    /* position: relative; */
     height: 128px;
 }
 .tarea{
@@ -128,7 +129,7 @@ nav.gnb ul{
     /* 변경속성 - 바가 중앙에 있음 */
     width: 0%;
     margin-left: 50%;
-    margin-top: 15px;
+    margin-top: 17px;
 
     height: 2px;
     background-color: #f00;

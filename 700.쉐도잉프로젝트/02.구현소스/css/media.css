@@ -43,6 +43,9 @@
     .tmenu, .smbx, .gnb>ul>li>a::after, .gnb{
         display: none;
     }
+    .top.on .tmenu{
+        display: block;
+    }
     /* gnb메뉴 변경하기
     -> .top에 .on을 준 경우 적용됨
     -> 메뉴를 fixed로 고정*/
@@ -55,11 +58,37 @@
         background-color: #000000bb;
         z-index: 9999;
     }
+    aside.tmenu{
+        position: fixed;
+        z-index: 99999;
+        top: 85vh;
+        width: 100vw;
+    }
+    .tmenu ul{
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .tmenu>ul ol{
+        justify-content: center;
+        margin-top: 2vh;
+        transform: scale(1.5);
+    }
+    .tmenu>ul>li:last-child{
+        width: 100%;
+    }
+    .tmenu>ul>li>a{
+        color: #fff;
+        font-size: 6vw;
+    }
     /* flex방향을 column으로 세로로 고정 */
     nav.gnb ul{
         flex-direction: column;
         text-align: center;
         margin-top: 15vh;
+    }
+    .gnb>ul>ul{
+        margin: 0;
+        height: 10vh;
     }
     /* gnb메뉴 a변경 */
     .gnb>ul>li>a{

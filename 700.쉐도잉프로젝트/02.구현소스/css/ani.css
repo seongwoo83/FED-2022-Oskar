@@ -63,7 +63,7 @@ body.on::after{
     width: 100vw;
     height: 100vh;
     /* background-color: blue; */
-    opacity: 0.5;
+    /* opacity: 0.5; */
     animation: cover .07s 6.5s forwards;
 }
 

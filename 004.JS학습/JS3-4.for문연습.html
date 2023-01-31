@@ -42,7 +42,7 @@
             ***********************************/
             function loadFn(){
                 /* 1. 호출확인 */
-                console.log("로딩완료");
+                // console.log("로딩완료");
 
                 /* 2. 대상선정 */
                 /* 2-1 이벤트 대상: .mini */
@@ -50,6 +50,10 @@
                 console.log(mini);
                 /* 2-2 변경대상: .Bcase */
                 var Bcase = document.querySelector(".Bcase");
+                /* 2-3 리셋버튼: .rbtn */
+                var rbtn = document.querySelector(".rbtn");
+
+
 
                 /* 3. 이벤트 세팅하기(mini, Bcase) */
                 /* 이벤트 종류: click */
@@ -58,6 +62,8 @@
                     /* 반복조건: 0부터 작작 */
                     /* mini 개수보다 작을동안 1씩 증가하면서 돎 */
                     /* 1) 미니언즈 이미지마다 클릭설정하기 */
+                    // mini.item(순번)
+                    // mini[순번]
                     mini[i].onclick = function(){
                         /* 1// 클릭된 이미지의 data-cnt값 읽어오기 */
                         var cnt = this.getAttribute("data-cnt");
@@ -69,17 +75,22 @@
                         for(var j = 0; j < cnt; j++){
                             Bcase.innerHTML += `<img src="./images/Minions.png" alt="미니언즈">`;
                         }//#########for문#############
-
-
-
                     };//##########click이벤트함수##########
-                    // mini.item(순번)
-                    // mini[순번]
                 }//#############for문################
 
 
 
-
+                    /* 4. 리셋버튼 세팅하기 */
+                    /* 대상: 이벤트대상 - rbtn / 변경대상 - Bcase */
+                    rbtn.onclick = function(){
+                        /* 1. 호출확인 */
+                        // console.log("다지워");
+                        /* 2. 파란상자 내용지우기 */
+                        Bcase.innerHTML = "";
+                    }//##############click이벤트함수############
+                    
+                    rbtn.style.fontSize = "40px";
+                    rbtn.style.margin = "10px";
             }//#################loadFn함수###########
     </script>
 </head>

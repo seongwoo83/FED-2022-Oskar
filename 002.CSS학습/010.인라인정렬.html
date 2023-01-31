@@ -88,6 +88,31 @@
                 /* 인라인요소의 위아래 마진은 적용되지 않는다! */
                 margin: 0 50px 0 80px;
             }
+
+            .bx7{
+                display: table;
+                width: 50%;
+                aspect-ratio: 4/3;
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            /* 테이블디스플레이 아래에는 테이블 셀피필요 */
+            .bx7 span{
+                display: table-cell;
+                vertical-align: middle;
+                /* td에서만 vertical-align: middle;
+                세로 중앙정렬됨*/
+            }
+
+            .bx8{
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+                /* 높이값을 보이는 화면의 20%로 설정 */
+                height: 20vh;
+                line-height: 20vh;
+            }
         </style>
     </head>
     <body>
@@ -113,8 +138,18 @@
         <div class="bx bx5">
             <img src="imgs/blogo.png" alt="로고" />
         </div>
-
+        
         <h2>인라인 요소간 간격밀기</h2>
         <div class="bx bx6"><i>봄</i><em>여름</em><strong>가을</strong><span>겨울</span></div>
+
+        <h2>동적인 높이의 박스의 글자가 정중앙에 오기</h2>
+        <div class="bx bx7">
+            <span> 
+                나는 bts가 좋다
+            </span>
+        </div>
+
+        <h2>동적인 높이가 vh단위인 박스의 글자가 정중앙에 오기</h2>
+        <div class="bx bx8">나는 김유정도 좋다</div>
     </body>
 </html>

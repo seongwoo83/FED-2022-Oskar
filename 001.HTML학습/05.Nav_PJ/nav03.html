@@ -41,7 +41,7 @@
         /* 겉박스 */
         #top{
             position: relative;
-            transition: .4s ease-out;
+            transition: background-color .4s ease-out;
         }
         /* #top에 오버시 자기자신 색변화 */
         #top:hover{
@@ -58,31 +58,29 @@
             transition: .4s ease-out;
         }
         #top:hover::after{
+            border-top: 1px solid #ddd;
             height: 300px;
         }
         /* 속박스 */
         .top{
             display: flex;
+            justify-content: space-between;
             max-width: 1600px;
             margin: 0 auto;
             font-family: 'maven pro','noto sans kr', sans-serif;
         }
-        /* 상단영역 직계요소들 - 파티션 박스 */
-        .top>div{
-            outline: 2px dotted yellow;
-        }
         .logo{
-            margin-right: 180px;
+            transform: translateY(50%);
         }
         .logo img{
             height: 50px;
         }
         /* 로고 두번째 이미지 처음에 숨김 */
-        .logo img:last-child, #top:hover .logo img:first-child, .lang:last-child, .store:last-child, #top:hover .lang:first-child, #top:hover .store:first-child{
+        .logo img:last-child, #top:hover .logo img:first-child, .lang:last-child, .store:last-child, #top:hover .lang:first-child, #top:hover .store:first-child, .simg:last-child, #top:hover .simg:first-child{
             display: none;
         }
         /* #top오버시 두번째 이미지 보이기 */
-        #top:hover .logo img:last-child, .logo img:first-child, #top:hover .lang:last-child, #top:hover .store:last-child{
+        #top:hover .logo img:last-child, .logo img:first-child, #top:hover .lang:last-child, #top:hover .store:last-child, .simg:first-child, #top:hover .simg:last-child{
             display: inline;
         }
         .gnb{
@@ -93,8 +91,11 @@
             overflow: hidden;
             transition: .4s ease-out;
         }
+        .simg{
+            vertical-align: -25px;
+        }
         #top:hover .gnb{
-            height: 300px;
+            height: 400px;
         }
         .gnb dl{
             text-align: center;
@@ -117,21 +118,55 @@
             line-height: 40px;
         }
         .gnb dd a{
-            color: #222;
+            font-size: 15px;
+            color: #999;
+        }
+        .gnb dd:first-of-type{
+            margin-top: 30px;
+        }
+        .gnb dl:first-child dd:last-of-type{
+            line-height: 20px;
+            padding-top: 10px;
         }
 
         .tlink{
             display: flex;
-            margin-left: 140px;
             margin-top: 40px;
         }
         .tlink li+li{
-            margin-left: 10px;
+            margin-left: 20px;
         }
-        .store, .lang{
+        .tlink img{
             height: 30px
         }
+        .langt::after{
+            content: 'KOR';
+            font-size: 12px;
+            margin-left: -12px;
+        }
+        .storet::after{
+            content: 'STORE';
+            font-size: 12px;
+            margin-left: -21px
+        }
+        #top:hover .langt::after, #top:hover .storet::after{
+            color: #222;
+        }
+        .langt:hover::after, .storet:hover::after{
+            color: red !important;
+        }
     </style>
+    <script>
+        window.addEventListener("load", function(){
+            /* 1. 호출확인 */
+            console.log("로딩완료");
+            /* 구현1: 메뉴 이미지 오버시 이미지 변경 */
+            /* 대상: .simg */
+            var tg = document.querySelectorAll(".simg").item(1);
+            console.log('tg: ', tg);
+            
+        });
+    </script>
 </head>
 <body>
     <h1 class="tit">
@@ -161,7 +196,8 @@
                     <dl>
                         <dt>
                             <a href="#">
-                                <img src="./images/nav03/story_white_s.png" alt="스토리 이미지">
+                                <img class="simg" src="./images/nav03/story_white_s.png" alt="스토리 이미지">
+                                <img class="simg" src="./images/nav03/story_gray_s.png" alt="스토리 이미지">
                             </a>
                         </dt>
                         <dd>
@@ -174,7 +210,7 @@
                             <a href="#">아름다운 공장</a>
                         </dd>
                         <dd>
-                            <a href="#">알파레이S</a>
+                            <a href="#">알파레이S <br> 개발스토리</a>
                         </dd>
                     </dl>
                     <!-- 2. about us -->
@@ -308,13 +344,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" class="langt">
                             <img class="lang" src="./images/nav03/lang_i_w.png" alt="다국어아이콘">
                             <img class="lang" src="./images/nav03/lang_i.png" alt="다국어아이콘">
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" class="storet">
                             <img class="store" src="./images/nav03/store_i3_w.png" alt="장바구니">
                             <img class="store" src="./images/nav03/store_i3.png" alt="장바구니">
                         </a>

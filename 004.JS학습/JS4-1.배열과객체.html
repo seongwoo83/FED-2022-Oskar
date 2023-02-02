@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>JS4-1. 배열변수와 객체</title>
+        <!-- 영화객체 JS 불러오기 -->
+        <script src="./JS4-1.배열과객체_object.js"></script>
         <style>
             h1 {
                 text-align: center;
@@ -23,6 +25,69 @@
         </style>
         <!-- ⁡⁢⁣⁢####################JS 코드 구역####################⁡ -->
         <script>
+            /*********************************************
+                    함수명: playMv
+                    기능: 영화 예고편 화면에 띄우기
+                    -> 다른 영화객체에서 호출하고 있으므로 로드구역 바깥으로 옮겨서 전역변수로 변경함
+                *********************************************/
+            var playMv = function (mvcode) {
+                //mvcode는 예고편 아이디
+
+                /* 예고편 동영상용 박스 */
+                var mvbx = document.querySelector("#mvbx");
+                // console.log('mvbx: ', mvbx);
+
+                /* 1. 함수 호출 확인 */
+                console.log("플레이어", mvcode);
+
+                /* 2. 영화박스에 iframe 넣기 */
+                /* 대상: #mvbx -> mvbx */
+                mvbx.innerHTML = `
+                                <div id="mv">
+                                    <!-- 유튜브 iframe -->
+                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${mvcode}?autoplay=1" allow="autoplay" style="border:none;"></iframe>
+                                    <!-- 닫기 버튼 -->
+                                    <button class="cbtn">×</button>
+                                </div>
+                                `;
+
+                /* 삽입된 동영상 박스(#mv) CSS설정하기 */
+                var mv = document.querySelector("#mv");
+                var msy = mv.style;
+
+                msy.position = "fixed";
+                msy.top = "50%";
+                msy.left = "50%";
+                msy.transform = "translate(-50%, -50%)";
+                msy.width = "700px";
+                msy.height = "450px";
+                msy.backgroundColor = "#000";
+
+                /* 닫기버튼 CSS설정하기 */
+                var cbtn = document.querySelector(".cbtn");
+                var csy = cbtn.style;
+
+                csy.position = "absolute";
+                csy.top = "0";
+                csy.right = "-70px";
+                csy.width = "50px";
+                csy.height = "50px";
+                csy.border = "none";
+                csy.color = "#fff";
+                csy.fontSize = "40px";
+                csy.fontWeight = "bold";
+                csy.cursor = "pointer";
+                csy.lineHeight = "50px";
+                csy.backgroundColor = "blue";
+                csy.borderRadius = "50%";
+
+                /* 닫기버튼 클릭시 #mv 제거하기 */
+                cbtn.onclick = function () {
+                    mv.remove();
+                };
+                /* remove() 메서드 -> DOM에서 요소를 삭제하는 메서드 */
+            }; //⁡⁢⁣⁢############ playMv 함수 ##############⁡
+
             window.addEventListener("DOMContentLoaded", function () {
                 console.log("로딩완료");
 
@@ -61,7 +126,14 @@
 **********************************************⁡*/
 
                 /* 배열의 선언과 할당 */
-                var arr1 = new Array("1993년 10월 12일", "183cm", "65kg", "너도 인간이니? 치인트", 4567, "서강준"); //⁡⁢⁣⁢################# arr1 ###################⁡
+                var arr1 = new Array("1993년 10월 12일"
+                , "183cm"
+                , "65kg"
+                , "너도 인간이니? 치인트"
+                , 4567
+                , "서강준"
+                ); //⁡⁢⁣⁢################# arr1 ###################⁡
+
                 /* 원래 배열형을 만들 때는 대괄호를 사용하는 것이 일반적 */
                 /* 변수 = [];
                 new 키워드로 선언과 할당을 동시에 할 수 있다.
@@ -347,89 +419,71 @@
 
                         /* 플레이함수 호출 */
                         playMv("KxDbaP-k6i4");
-
-                    }//⁡⁢⁣⁢########## 예고편 함수 #############⁡
-
+                    }, //⁡⁢⁣⁢########## 예고편 함수 #############⁡
                 }; //⁡⁢⁣⁢########## SW_obj 객체 ###############⁡
 
-                tg[5].innerHTML = `
-                🎞영화명: ${SW_obj.제목} 🎞감독: ${SW_obj.감독} <br> 🎞배우: ${SW_obj.배우} 🎞장르: ${SW_obj.장르} <br>🎞관람가: ${SW_obj.관람가}
-            `;
-
                 tg[5].style.lineHeight = "25px";
-                tg[5].title = "클릭하시면 해리포터와 마법사의 돌 예고편을 보실 수 있습니다.";
                 tg[5].style.cursor = "pointer";
-                tg[5].onclick = SW_obj.예고편;
 
-
-
-                /* 예고편 동영상용 박스 */
-                var mvbx = document.querySelector("#mvbx");
-                // console.log('mvbx: ', mvbx);
-
-
-
-                /*********************************************
-                    함수명: playMv
-                    기능: 영화 예고편 화면에 띄우기
-                *********************************************/
-                var playMv = function(mvcode){ //mvcode는 예고편 아이디
-                    /* 1. 함수 호출 확인 */
-                    console.log("플레이어", mvcode);
-
-                    /* 2. 영화박스에 iframe 넣기 */
-                    /* 대상: #mvbx -> mvbx */
-                    mvbx.innerHTML = `
-                        <div id="mv">
-                            <!-- 유튜브 iframe -->
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${mvcode}?autoplay=1" allow="autoplay" style="border:none;"></iframe>
-                            <!-- 닫기 버튼 -->
-                            <button class="cbtn">×</button>
-                        </div>
+                /* 내용출력하기 함수로 변경 */
+                var expFn = function (SW_obj) {
+                    tg[5].innerHTML = `
+                        🎬영화명: ${SW_obj.제목} 
+                        🎬감독: ${SW_obj.감독} <br> 
+                        🎬배우: ${SW_obj.배우} 
+                        🎬장르: ${SW_obj.장르} <br>
+                        🎬관람가: ${SW_obj.관람가}
                     `;
 
-                    /* 삽입된 동영상 박스(#mv) CSS설정하기 */
-                    var mv = document.querySelector("#mv");
-                    var msy = mv.style;
+                    tg[5].onclick = SW_obj.예고편;
+                    tg[5].title = `클릭하시면 ${SW_obj.제목}의 예고편을 보실 수 있습니다.`;
+                }; //⁡⁢⁣⁢########### expFn 함수 #############⁡
 
-                    msy.position = "fixed";
-                    msy.top = "50%";
-                    msy.left= "50%";
-                    msy.transform = "translate(-50%, -50%)";
-                    msy.width = "700px";
-                    msy.height = "450px";
-                    msy.backgroundColor = "#000";
+                /* 할당된 expFn함수를 처음 실행 호출 */
+                expFn(SW_obj);
 
-                    /* 닫기버튼 CSS설정하기 */
-                    var cbtn = document.querySelector(".cbtn");
-                    var csy = cbtn.style;
-                    
-                    csy.position = "absolute";
-                    csy.top = "0";
-                    csy.right = "-70px";
-                    csy.width = "50px";
-                    csy.height = "50px";
-                    csy.border = "none";
-                    csy.color = "#fff";
-                    csy.fontSize = "40px";
-                    csy.fontWeight = "bold";
-                    csy.cursor = "pointer";
-                    csy.lineHeight = "50px";
-                    csy.backgroundColor = "blue";
-                    csy.borderRadius = "50%";
+                /*********************************************
+                    영화초이스 버튼 클릭시
+                    영화정보와 동영상을 변경한다
+                *********************************************/
+                /* 대상: .choice button */
+                var cho = document.querySelectorAll(".choice button");
+                console.log("cho: ", cho);
+                console.log(SW_obj);
+                /* for문으로 버튼들을 click 이벤트 설정 */
+                for (var i = 0; i < cho.length; i++) {
+                    cho[i].onclick = function () {
+                        /* 1. 버튼 텍스트 */
+                        var btxt = this.innerText;
+                        // console.log('btxt: ', btxt);
 
-                    /* 닫기버튼 클릭시 #mv 제거하기 */
-                    cbtn.onclick = function(){mv.remove();};
-                    /* remove() 메서드 -> DOM에서 요소를 삭제하는 메서드 */
+                        /* 버튼 텍스트에 해당하는 객체를 기존 변수에 할당하기 */
+                        /* switch()문 사용 */
+                        /* 새로운 객체를 기존객체에 할당하기 */
+                        switch (btxt) {
+                            case "정찬 초이스":
+                                SW_obj = jcObj;
+                                break;
+                            case "임성해 초이스":
+                                SW_obj = shObj;
+                                break;
+                            case "최소미 초이스":
+                                SW_obj = somObj;
+                                break;
+                            case "지수진 초이스":
+                                SW_obj = mvtxt;
+                                break;
+                            case "오동한 초이스":
+                                SW_obj = myV;
+                                break;
+                        } //⁡⁢⁣⁢############## switch 문 ############⁡
+                        /* 기존 영화객체변수값이 변경되었는지 확인 */
+                        console.log(SW_obj);
 
-                };//⁡⁢⁣⁢############ playMv 함수 ##############⁡
-
-
-
-
-
-
-
+                        /* 3. 실제적용요소에 객체 데이터 넣기 */
+                        expFn(SW_obj);
+                    }; //⁡⁢⁣⁢############## click 이벤트함수#############⁡
+                } //⁡⁢⁣⁢################### for 문 ####################⁡
             }); //⁡⁢⁣⁢################### 로드 구역 ###################⁡
         </script>
     </head>
@@ -443,6 +497,14 @@
         <div class="cont"></div>
         <div class="cont"></div>
         <div class="cont"></div>
+        <!-- 영화 초이스 박스 -->
+        <div class="cont choice">
+            <button>정찬 초이스</button>
+            <button>임성해 초이스</button>
+            <button>최소미 초이스</button>
+            <button>지수진 초이스</button>
+            <button>오동한 초이스</button>
+        </div>
 
         <!-- 예고편 동영상용 박스 -->
         <aside id="mvbx"></aside>

@@ -21,7 +21,7 @@
             background-color: #f00;
             opacity: 0.6;
             /* 트랜지션 - 이징을 반드시 ease-out을 준다: 따라다니는 반응이 시작할 때 바로 움직여야함 */
-            transition: .3s ease-out;
+            transition: .07s ease-out;
         }
     </style>
     <!-- ⁡⁢⁣⁢######################JS 코딩구역######################⁡ -->
@@ -39,6 +39,9 @@
                 /* Y좌표: event.pageY */
                 console.log('X좌표: ', event.pageX, "\nY좌표: ", event.pageY);
 
+                /* mover에게 위치값 이동 세팅하기 (mover 중앙위치 고정)*/
+                mover.style.top = (event.pageY - 15)+"px";
+                mover.style.left = (event.pageX - 15)+"px";
 
             }//⁡⁢⁣⁢################ mousemove 이벤트함수 ###########################⁡
 

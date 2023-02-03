@@ -81,7 +81,8 @@
              */
             z-index: 2;
             bottom: 10%;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
 
             color: #fff;
@@ -108,7 +109,7 @@
             var mover = document.querySelector(".mover");
 
             /* 무버 크기의 절반 계산하기*/
-            var gap = mover.clientWidth;
+            var gap = mover.clientWidth/2;
             console.log('gap: ', gap);
 
             /* [ 자바스크립트 요소의 크기 구하기 ] */
@@ -130,8 +131,8 @@
 
 
                 /* mover에게 위치값 이동 세팅하기 (mover 중앙위치 고정)*/
-                mover.style.top = (event.pageY - gap/2)+"px";
-                mover.style.left = (event.pageX - gap/2)+"px";
+                mover.style.top = posy+"px";
+                mover.style.left = posx+"px";
 
             }//⁡⁢⁣⁢################ mousemove 이벤트함수 ###########################⁡
 

@@ -36,10 +36,10 @@ body{
     transform-style: preserve-3d;
 
     /* 입체를 잘 보이게 하기 위해서 살짝 회전 */
-    transform: rotateX(10deg ) rotateY(30deg);
+    transform: rotateX(10deg) rotateY(30deg);
 
 
-    outline: 2px solid red;
+    /* outline: 2px solid red; */
 }
 
 /* 큐브각면 공통 */
@@ -51,7 +51,7 @@ body{
 
 
     opacity: 0.8;
-    outline: 1px dashed #000;
+    outline: 1px solid #555;
 }
 
 /* 1. 앞면 */
@@ -61,4 +61,78 @@ body{
     /* 화면방향(z축) */
     transform: translateZ(calc(var(--csz)/2));
     /* 큐브사이즈 절반을 앞쪽으로 이동 */
+}
+
+/* 2. 오른쪽 면 */
+.cube span:nth-child(2){
+    background: url(../images/seoulCity.jpg) no-repeat center/cover;
+
+    transform: 
+    rotateY(90deg)
+    translateZ(calc(var(--csz)/2));
+    /* 먼저 Y축 회전 후 큐브사이즈 절반을 앞쪽으로 이동 */
+}
+
+/* 3. 뒤쪽면 */
+.cube span:nth-child(3){
+    background: url(../images/parisCity.jpg) no-repeat center/cover;
+
+    transform: 
+    rotateY(180deg)
+    translateZ(calc(var(--csz)/2));
+    /* 먼저 Y축 회전 후 큐브사이즈 절반을 앞쪽으로 이동 */
+}
+
+/* 4. 왼쪽면 */
+.cube span:nth-child(4){
+    background: url(../images/cityMain.jpg) no-repeat center/cover;
+
+    transform: 
+    rotateY(-90deg)
+    translateZ(calc(var(--csz)/2));
+    /* 먼저 Y축 회전 후 큐브사이즈 절반을 앞쪽으로 이동 */
+}
+
+/* 5. 윗면 */
+.cube span:nth-child(5){
+    background: url(../images/citys.jpg) no-repeat center/cover;
+
+    transform: 
+    rotateX(90deg)
+    translateZ(calc(var(--csz)/2));
+    /* 먼저 Y축 회전 후 큐브사이즈 절반을 앞쪽으로 이동 */
+}
+
+/* 6. 아랫면 */
+.cube span:nth-child(6){
+    background: url(../images/London_city.jpg) no-repeat center/cover;
+
+    transform: 
+    rotateX(-90deg)
+    translateZ(calc(var(--csz)/2));
+    /* 먼저 Y축 회전 후 큐브사이즈 절반을 앞쪽으로 이동 */
+}
+
+/* 큐브회전 클래스 */
+.cube-ani{
+    animation: cubeAni 4s linear infinite;
+}
+
+/* 큐브회전 키프레임 */
+@keyframes cubeAni {
+    to{
+        transform: 
+        rotateX(370deg) 
+        rotateY(-330deg);
+        /* 
+            X축 양의 방향으로 10도에서 출발 같은 양의 방향으로 10도+360도 = 370도
+            -> 음의 방향으로는 10도-360도 = -350도
+            _______________________________________
+            
+            Y축 양의 방향으로 30도에서 출발 같은 양의 방향으로 30도+360도 = 390도
+            -> 음의 방향으로는 30도-360도 = -330도
+        */
+
+        /* Z축 회전도 적용할 수 있음 */
+    }
 }

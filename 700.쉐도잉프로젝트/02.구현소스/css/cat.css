@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/* 도깨비 PJ 서브페이지 CSS - temp.css
+-> 메인페이지에만 나오는 디자인*/
+
+/* 공통 외부 CSS 합치기 */
+@import url("./reset.css");
+@import url("./core.css");
+@import url("./common.css");
+
+/* 메인 겉박스 */
+#cont{
+    background-color: #d7d7d7;
+}
+/* 메인 속박스 */
+.cont{
+    text-align: center;
+}
+/* 인물관계도 이미지 */
+#catimg{
+    max-width: 100%;
+    /* 이미지 최대크기 100% - 싸고있는 박스가 이미지 크기보다 작아질 때 가로크기는 100%로 자동전환됨. 이미지를 박스에 무조건보이게 할 경우 이것을 세팅함 */
+    
+}

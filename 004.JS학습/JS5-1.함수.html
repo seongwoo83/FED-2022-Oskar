@@ -339,16 +339,28 @@
         /* 일정시간 후 한 번만 애국가 가사 body에 h2태그로 넣기 */
         /* setTimeout(함수, 시간) */
         setTimeout(function(){
-            myFn();
+            myFn("동해물과", "백두산이", "마르고 닳도록", "하느님이 보우하사", "우리나라 만세");
         }, 2000); //######## 타임아웃 함수############
         
         /*############################################
             함수명: myFn
             기능: 파라미터 얼마든지 받아서 h2만들며 넣기
         ############################################*/
-
+        /* 함수의 전달변수가 없어도 보내는 전달값이 있으면 함수의 arguments라는 전달변수 */
+        // const myFn = () => { /* 파라미터 없음 */ arguments는 익명함수에서 사용할 수 없다
+        /* 선언적 함수, 할당형 익명함수에서는 arguments 사용가능 */
+        // const myFn = function(){ /* 파라미터 없음 */
         function myFn(){ /* 파라미터 없음 */
-            console.log('내함수!',);
+            console.log('내함수!', arguments, typeof(arguments), typeof(scene));
+
+            /* 대상 선정: body */
+            const tg = document.body;
+            /* 베열값 자동 돌리기 */
+            for(let i = 0; i < arguments.length; i++){
+                tg.innerHTML += /* 대입연산자로 기존 값에 더함 */` 
+                    <h2>${arguments[i]}</h2>
+                `;
+            }
             
         }//############## myFn 함수 ####################
 

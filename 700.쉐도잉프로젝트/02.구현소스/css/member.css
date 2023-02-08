@@ -29,10 +29,10 @@
 
 /* 2-2 컨텐츠 박스 */
 .scont{
-    min-width: 700px;
+    max-width: 700px;
     min-height: 275px;
 
-margin: 0;    
+    margin: 0 auto;    
     background-color: #fff;
     padding: 60px 15px;
     border-radius: 10px;

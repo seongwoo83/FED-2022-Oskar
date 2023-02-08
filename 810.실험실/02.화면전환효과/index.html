@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02.화면전환효과</title>
+    <style>
+        html, body, h1{
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 페이지 전환효과용 가림막 */
+        body::after{
+            content: '';
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 0; /* 변경요소 */
+            background-color: lightseagreen;
+            z-index: 9999;
+            transition: all .8s ease-in-out;
+        }
+        /* body.on일때 적용 */
+        body.on::after{
+            height: 100vh;
+        }
+        body.on.go::after{
+            top: 100%;
+            height: 0;
+        }
+
+
+
+        .pg{
+            /* width: 100%;
+            -> 100vw로 잡경경우 DT에서 가로스크롤이 약간 생김. 이유는 스크롤바 트랙을 포함하기 때문
+            -> 모바일에서는 스크롤바 트랙이 없기 때문에 상관 없음 
+            설정시 100%나 안주면 auto이므로 안줘도 되면 안주는게 나음 */
+            height: 100vh;
+        }
+        .pg h1{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            font-size: 8vw;
+        }
+    </style>
+    <script>
+        /* 타임아웃으로 일정시간뒤 작동함수 세팅 */
+        setTimeout(() => {
+            console.log("작동");
+            /* 대상: body */
+            let tg = document.body;
+            tg.classList.add("on");
+
+            /* 2단계 .go 넣기 */
+            setTimeout(() => {
+
+                /* 자체글자 변경 */
+                document.querySelector(".pg h1").innerText = "짜잔잔잔짠~~";
+
+                /* body에 .go넣기 */
+                tg.classList.add("go");
+            }, 1000);
+            
+        }, 2000);
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="pg">
+            <h1>This is First One!</h1>
+        </div>
+        <div class="pg">
+            <h1>This is Second One!</h1>
+        </div>
+    </div>
+</body>
+</html>

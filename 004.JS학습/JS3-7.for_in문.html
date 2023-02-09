@@ -1,94 +1,98 @@
 <!DOCTYPE html>
 <html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>객체를 위한 for in문</title>
-    <style>
-        h1,.btns,.show{
-            text-align: center;
-        }
-        button {
-            font-size: 30px;
-        }
-
-        .minfo {
-            display: flex;
-            /* 자식요소 박스 옆으로 흐르게! */
-            /* outline: 1px solid red; */
-            width: 500px;
-            margin: 0 auto;
-        }
-
-        .photo img {
-            height: 200px;
-            margin-right: 20px;
-        }
-
-        /* 영화한마디 글자박스 */
-        .showtit {
-            display: none;
-            text-align: center;
-        }
-
-        .show span {
-            display: inline-block;
-            /* 가로,세로 등 디자인 적용+한줄에 나옴 */
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            /* 원 */
-            border: 5px solid #d30000;
-            background-color: #00f;
-            font-size: 30px;
-            color: #fff;
-
-            /* 동그라미 박스 정중앙 */
-            text-align: center;
-            line-height: 50px;
-            text-align: center;
-        }
-    </style>
-    <script>
-        /// 영화정보 객체 ////
-        const mvi = {
-            "조제": {
-                "포스터": "https://movie-phinf.pstatic.net/20201116_276/1605491658399poUOC_JPEG/movie_image.jpg?type=m99_141_2",
-                "제목": "조제",
-                "개요": "멜로/로맨스, 드라마",
-                "감독": "김종관",
-                "출연": "한지민, 남주혁",
-                "문구": "조제 보러 오세요"
-            },
-            "이웃사촌": {
-                "포스터": "https://movie-phinf.pstatic.net/20201111_193/1605056611896fc6Ef_JPEG/movie_image.jpg?type=m99_141_2",
-                "제목": "이웃사촌",
-                "개요": "드라마, 코미디",
-                "감독": "이환경",
-                "출연": "정우, 김희원",
-                "문구": "이웃을 사랑합시다"
-            },
-            "도굴": {
-                "포스터": "https://movie-phinf.pstatic.net/20201104_45/160445535053439akc_JPEG/movie_image.jpg?type=m99_141_2",
-                "제목": "도굴",
-                "개요": "범죄",
-                "감독": "박정배",
-                "출연": "이제훈, 조우진, 신혜선, 임원희",
-                "문구": "도굴은 범죄예요"
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>객체를 위한 for in문</title>
+        <style>
+            h1,
+            .btns,
+            .show {
+                text-align: center;
             }
-        }; ///////////////// mvi 객체 //////////////////////
+            button {
+                font-size: 30px;
+            }
 
-        //////////////////// 로드구역 ///////////////////////
-        window.addEventListener("DOMContentLoaded", () => {
+            .minfo {
+                display: flex;
+                /* 자식요소 박스 옆으로 흐르게! */
+                /* outline: 1px solid red; */
+                width: 600px;
+                margin: 0 auto;
+            }
 
-            console.log("로딩완료");
+            .photo img {
+                height: 200px;
+                margin-right: 20px;
+            }
 
-            /* document.querySelector 선택함수 */
-            const qs = x => document.querySelector(x);
-            const qsa = x => document.querySelectorAll(x);
+            /* 영화한마디 글자박스 */
+            .showtit {
+                display: none;
+                text-align: center;
+            }
 
-            /******************************************************** 
+            .show span {
+                display: inline-block;
+                /* 가로,세로 등 디자인 적용+한줄에 나옴 */
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                /* 원 */
+                border: 5px solid #d30000;
+                background-color: #00f;
+                font-size: 30px;
+                color: #fff;
+
+                /* 동그라미 박스 정중앙 */
+                text-align: center;
+                line-height: 50px;
+                text-align: center;
+            }
+        </style>
+        <script>
+            /// 영화정보 객체 ////
+            const mvi = {
+                조제: {
+                    포스터: "https://movie-phinf.pstatic.net/20201116_276/1605491658399poUOC_JPEG/movie_image.jpg?type=m99_141_2",
+                    제목: "조제",
+                    개요: "멜로/로맨스, 드라마",
+                    감독: "김종관",
+                    출연: "한지민, 남주혁",
+                    문구: "조제 보러 오세요",
+                },
+                이웃사촌: {
+                    포스터: "https://movie-phinf.pstatic.net/20201111_193/1605056611896fc6Ef_JPEG/movie_image.jpg?type=m99_141_2",
+                    제목: "이웃사촌",
+                    개요: "드라마, 코미디",
+                    감독: "이환경",
+                    출연: "정우, 김희원",
+                    문구: "이웃을 사랑합시다",
+                },
+                도굴: {
+                    포스터: "https://movie-phinf.pstatic.net/20201104_45/160445535053439akc_JPEG/movie_image.jpg?type=m99_141_2",
+                    제목: "도굴",
+                    개요: "범죄",
+                    감독: "박정배",
+                    출연: "이제훈, 조우진, 신혜선, 임원희",
+                    문구: "도굴은 범죄예요",
+                },
+            }; ///////////////// mvi 객체 //////////////////////
+
+            //////////////////// 로드구역 ///////////////////////
+            window.addEventListener("DOMContentLoaded", () => {
+                console.log("로딩완료");
+
+                /* document.querySelector 선택함수 */
+                const qs = (x) => document.querySelector(x);
+                const qsa = (x) => document.querySelectorAll(x);
+                /* 선언적 함수로 만들면
+                function qs(x){
+                    return documnet.querySelector(x);
+                }
+            */
+                /******************************************************** 
                 [ 구현내용 ]
                 - 버튼을 클릭하면 해당 영화의 정보를 화면에 보여준다!
                 - 이벤트 대상: button
@@ -98,39 +102,87 @@
                 - 변경내용: 
                     대상의 각 내용에 맞게 객체로부터 정보를 셋팅함!
             ********************************************************/
-
-            /* 1. 대상변수 할당하기 */
+                /* 1. 대상변수 할당하기 */
                 /* 이벤트 대상: .btns button */
-            const btns = qsa(".btns button");
-            // console.log('btns: ', btns);
-            
+                const btns = qsa(".btns button");
+                // console.log('btns: ', btns);
 
-            /* 2. 이벤트 대상에 click 이벤트 설정하기 */
+                /* 2. 이벤트 대상에 click 이벤트 설정하기 */
                 /* for of 문 사용하기 */
-            for(let x of btns){ //x는 각각의 버튼을 순서대로 할당
-                /* 2-1 클릭이벤트 설정하기 */
-                x.onclick = () =>{
-                    /* 1) 클릭된 버튼의 글자 읽기 */
-                    let btxt = x.innerText;
-                    // console.log('btxt: ', btxt);
-                    /* 2) 버튼 텍스트와 같은 객체속성명의 값을 변수에 할당 */
-                    let data = mvi[btxt];
-                    console.log('data: ', data);
-                }
-            }
+                for (let x of btns) {
+                    //x는 각각의 버튼을 순서대로 할당
+                    /* 2-1 클릭이벤트 설정하기 */
+                    x.onclick = () => {
+                        /* 1) 클릭된 버튼의 글자 읽기 */
+                        let btxt = x.innerText;
+                        // console.log('btxt: ', btxt);
+                        /* 2) 버튼 텍스트와 같은 객체속성명의 값을 변수에 할당 */
+                        let data = mvi[btxt];
+                        // console.log('data: ', data);
+                        /* 3) 해당요소에 데이터 넣기 */
+                        /* for in 문 사용 : for(변수 in 객체){코드} */
+                        /* -> 변수는 속성명 */
+                        for (let z in data) {
+                            // console.log(z, typeof(z), data[z]); //-> 속성명, 객체명[속성명]
+                            /* 각 속성명에 해당하는 데이터 세팅하기 */
+                            /* switch case문으로 분기 */
+                            switch (z) {
+                                /* 1. 포스터 넣기 -> photo */
+                                case "포스터":
+                                    qs(".photo").innerHTML = `<img src="${data[z]}" alt="${btxt}의 포스터">`;
+                                    break;
+                                /* 2. 제목 넣기 -> tit */
+                                case "제목":
+                                    qs(".tit").innerText = "🎬영화명:" + data[z];
+                                    break;
+                                /* 3. 장르 넣기 -> sum */
+                                case "개요":
+                                    qs(".sum").innerText = "🎬장르:" + data[z];
+                                    break;
+                                /* 4. 감독 넣기 -> dir */
+                                case "감독":
+                                    qs(".dir").innerText = "🎬감독:" + data[z];
+                                    break;
+                                /* 5. 배우 넣기 -> act */
+                                case "출연":
+                                    qs(".act").innerText = "🎬배우:" + data[z];
+                                    break;
+                            } //######### switch case
+
+                            /* 영화한마디 넣기 */
+                            /* for of 문으로 문자데이터 잘라 넣기 -> 한 글자씩 span태그로 싸서 해당요소에 넣음 */
+                            if(z==="문구"){
+                                /* (1) 데이터 담기 */
+                                let txt = data[z];
+                                console.log('txt: ', txt);
+                                
+                                /* 태그로 싼 새로운 데이터 넣을 변수 */
+                                let newtxt = "";
+
+                                /* 문구 데이터를 for of 문으로 하나씩 넣기 */
+                                for(let m of txt){ //m은 한 글자 씩
+                                    // console.log(m);
+                                    /* 스페이스 문자일경우 띄어쓰기 기호 작성 */
+                                    if(m!==" "){
+                                        newtxt += `<span>${m}</span>`;
+                                    }else{
+                                        newtxt +="&nbsp; &nbsp; &nbsp;";
+                                    }//######## if 
+                                    
+                                }//######### for of
+
+                                /* 문구데이터를 대상에 출력: .show */
+                                qs(".show").innerHTML = newtxt;
+                                qs(".showtit").style.display = "block";
+
+                            }//########## if
 
 
+                        } //########## for in
+                    }; //############ click
+                } //############ for of
 
-
-
-
-
-
-
-
-
-
-            /************************************************* 
+                /************************************************* 
                 [ 객체를 위한 for in 문 ]
 
                 - 구문: 
@@ -145,43 +197,39 @@
                     객체[변수] 로 쓰면됨!
 
             *************************************************/
+            }); //////////////// 로드구역 ///////////////////////
+            /////////////////////////////////////////////////////
+        </script>
+    </head>
 
-
-        }); //////////////// 로드구역 ///////////////////////
-        /////////////////////////////////////////////////////
-    </script>
-</head>
-
-<body>
-    <h1>영화정보</h1>
-    <div class="btns">
-        <button>조제</button>
-        <button>이웃사촌</button>
-        <button>도굴</button>
-    </div>
-
-    <hr>
-
-    <div class="minfo">
-        <!-- 1. 포스터 -->
-        <div class="photo"></div>
-        <div class="cont">
-            <!-- 2. 제목 -->
-            <h2 class="tit"></h2>
-            <!-- 3. 개요 -->
-            <h3 class="sum"></h3>
-            <!-- 4. 감독 -->
-            <h3 class="dir"></h3>
-            <!-- 5. 출연 -->
-            <h3 class="act"></h3>
+    <body>
+        <h1>영화정보</h1>
+        <div class="btns">
+            <button>조제</button>
+            <button>이웃사촌</button>
+            <button>도굴</button>
         </div>
-    </div>
 
-    <!-- 영화 한마디 -->
-    <h2 class="showtit">♥ 영화한마디!</h2>
-    <!-- 6. 문구 -->
-    <div class="show"></div>
+        <hr />
 
-</body>
+        <div class="minfo">
+            <!-- 1. 포스터 -->
+            <div class="photo"></div>
+            <div class="cont">
+                <!-- 2. 제목 -->
+                <h2 class="tit"></h2>
+                <!-- 3. 개요 -->
+                <h3 class="sum"></h3>
+                <!-- 4. 감독 -->
+                <h3 class="dir"></h3>
+                <!-- 5. 출연 -->
+                <h3 class="act"></h3>
+            </div>
+        </div>
 
+        <!-- 영화 한마디 -->
+        <h2 class="showtit">♥ 영화한마디!</h2>
+        <!-- 6. 문구 -->
+        <div class="show"></div>
+    </body>
 </html>

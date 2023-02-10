@@ -21,9 +21,9 @@ function loadFn() {
         const cube = document.querySelector(".cube");
         /* ⁡⁣⁣⁢1-3 변경대상2: .cbx⁡ */
         const cbx = document.querySelector(".cbx");
-        /* ⁡⁣⁣⁢1-3 변경대상2: .cbx⁡ */
+        /* ⁡⁣⁣⁢1-4 변경대상3: .cname⁡ */
         const cname = document.querySelector(".cname");
-        /* ⁡⁣⁣⁢1-3 변경대상2: .cbx⁡ */
+        /* ⁡⁣⁣⁢1-5 변경대상4: .ci⁡⁣⁣⁢nfo⁡⁡ */
         const cinfo = document.querySelector(".cinfo");
 
     /* ⁡⁢⁣⁢2. 메뉴에 클릭이벤트 설정하기⁡ */
@@ -31,6 +31,10 @@ function loadFn() {
     for(let x of menu){
         /* 1. 클릭이벤트 설정 */
         x.onclick = ()=>{
+            /* ⁡⁣⁣⁢0) 도시 정보 박스 숨기기 ⁡⁣⁣⁢(트랜지션 없애기)⁡⁡*/
+            cbx.style.opacity = 0;
+            cbx.style.transition = "none";
+
             /* ⁡⁣⁣⁢1) 메뉴 텍스트 읽기⁡ */
             let mtxt = x.innerText;
             
@@ -61,8 +65,14 @@ function loadFn() {
             /* 변경대상2: .cinfo - 도시정보 */
             cinfo.innerText = city[mtxt];
 
-            cbx.style.transition = "opacity .5s ease-in-out 1.5s";
-            cbx.style.opacity = "1";
+            /* ⁡⁣⁣⁢5. 도시 정보 박스 보이기⁡ */
+            /* 대상: .cbx */
+            /* 변경내용: 큐브 1.5초간 회전후 도시 정보 박스 보여야 함 */
+
+            setTimeout(() => {
+                cbx.style.opacity = 1;
+                cbx.style.transition = "opacity .8s ease-in-out";
+            }, 1500);
         };
     }
 }/************************ 로딩구역 ************************/

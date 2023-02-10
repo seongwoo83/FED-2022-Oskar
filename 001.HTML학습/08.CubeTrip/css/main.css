@@ -23,7 +23,24 @@ body{
     height: 100vh;
     background-image: linear-gradient(to bottom, #777 30%, #ccc 70%);
 }
-
+/* 스크롤바 디자인 클래스 */
+/* -webkit- 밴더사명(크롬, 사파리) 접두어 */
+/* (참고: -ms-(ie), -o-(opera), -moz-(firefox) */
+/* 클래스명 scbar */
+.scbar::-webkit-scrollbar{
+    /* 전체 스크롤바 크기 변경 */
+    width: 5px;
+}
+.scbar::-webkit-scrollbar-thumb{
+    /* 전체 스크롤바*/
+    background-color: #ccc;
+    border-radius: 3px;
+}
+.scbar::-webkit-scrollbar-track{
+    /* 스크롤바가 움직이는 길 */
+    background-color: #777;
+    border-radius: 3px;
+}
 
 /********************** 1. 전체제목 **********************/
 .tit{
@@ -229,7 +246,7 @@ body{
     height: calc(100% - min(7vw, 100px));
     padding: min(10px, 2vw);
     font-size: min(16px, 1.1vw);
-    line-height: min(28px, 1.5vw);
+    line-height: min(28px, 2.5vw);
     background-color: #00000044;
     box-sizing: border-box;
     overflow: auto;

@@ -34,6 +34,8 @@ function loadFn() {
             /* ⁡⁣⁣⁢0) 도시 정보 박스 숨기기 ⁡⁣⁣⁢(트랜지션 없애기)⁡⁡*/
             cbx.style.opacity = 0;
             cbx.style.transition = "none";
+            /* 도시정보 스크롤 생길경우 내려놓고 다른도시 가면 스크롤 위치가 내려가있기 떄문에 맨위로 세팅하기 */
+            cinfo.scrollTo(0,0);
 
             /* ⁡⁣⁣⁢1) 메뉴 텍스트 읽기⁡ */
             let mtxt = x.innerText;

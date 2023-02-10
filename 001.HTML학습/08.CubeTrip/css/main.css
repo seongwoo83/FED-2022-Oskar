@@ -14,15 +14,82 @@
     --csz: 300px;
 }
 
-html,body{
+html,body,h1,h2,h3,h4,h5,h6,ul{
     margin: 0;
     padding: 0;
 }
 
+body{
+    height: 100vh;
+    background-image: linear-gradient(to bottom, #777 30%, #ccc 70%);
+}
+
 
 /********************** 1. 전체제목 **********************/
+.tit{
+    text-align: center;
+    font-family: "Black And White Picture", sans-serif;
+    color: #fff;
+    font-size: 60px;
+    font-weight: normal;
+    padding-top: 50px;
+    background: url(../images/citybg.png) no-repeat center 20px/auto 85%;
+}
 
 /********************** 2. 메뉴버튼 **********************/
+
+.city{
+    position: fixed;
+    top: 50px;
+    right: 50px;
+}
+.city ul{
+    list-style: none;
+    width: min(200px, 15vw);
+    perspective: 50vw;
+}
+.city li{
+    height: 10vh;
+    background-image: linear-gradient(to right, transparent, blue);
+    transition: .3s;
+    transform-origin: right;
+}
+.city li a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    font: 5vh/10vh "East Sea Dokdo";
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+}
+
+/* li에 오버시 y축 회전하기 */
+.city li:nth-child(1):hover{
+    transform: rotateY(50deg);
+    background-image: linear-gradient(to right, transparent, red);
+}
+.city li:nth-child(2):hover{
+    transform: rotateY(30deg);
+    background-image: linear-gradient(to right, transparent, orange);
+}
+.city li:nth-child(3):hover{
+    transform: rotateY(-60deg);
+    background-image: linear-gradient(to right, transparent, yellow);
+}
+.city li:nth-child(4):hover{
+    transform: rotateY(20deg);
+    background-image: linear-gradient(to right, transparent, green);
+}
+.city li:nth-child(5):hover{
+    transform: rotateY(-10deg);
+    background-image: linear-gradient(to right, transparent, navy);
+}
+.city li:nth-child(6):hover{
+    transform: rotateY(45deg);
+    background-image: linear-gradient(to right, transparent, purple);
+}
+
 
 /********************** 3. 큐브박스 **********************/
 

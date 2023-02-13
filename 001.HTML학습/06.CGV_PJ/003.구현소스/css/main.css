@@ -191,17 +191,29 @@ body{
 
 
 /* 극장가는길 타이틀 */
-.anibx span{
+.anibx>span{
+    /* 커튼 대문역할 */
+    position: absolute;
+    z-index: 1;
     display: block;
+    top: 0;
     width: 144px;
     height: 80px;
+    background: url(../images/curtain.jpg) no-repeat;
     text-align: center;
     line-height: 80px;
     font-family: "Cute Font";
+    overflow: hidden;
     font-size: 20px;
     color: #fff;
     white-space: nowrap;
+    transition: top .5s ease-in-out .1s;
     animation: anibxAni 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+/* 오버시 들춰지는 효과 */
+.anibx:hover>span{
+    outline: 2px solid aqua;
+    top: -100%; /* -> top은 기본값이 auto이므로 애니메이션 하려면 초기값 top: 0; 필요 */
 }
 
 
@@ -226,6 +238,7 @@ body{
         text-indent: 0;
     }
 }
+
 
 /* 스크린 */
 .cellAni{
@@ -270,15 +283,16 @@ body{
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 50px;
-    height: 72px;
+    width: 20px;
+    height: 29px;
     background: url(../images/spAni01.png) no-repeat;
+    background-size: 200px;
     animation: spani2 1s steps(10) infinite;
 }
 /* 꼬마 키프레임 */
 @keyframes spani2 {
     to{
-        background-position: -500px 0;
+        background-position: -200px 0;
     }
 }
 /* 3-3.몬스터 */
@@ -289,6 +303,7 @@ body{
     width: 40px;
     height: 40px;
     background: url(../images/spAni02.png) no-repeat;
+    background-size: 240px;
     animation: 
     spani3X 1s steps(6) infinite,
     spani3Y 3s steps(3) infinite;

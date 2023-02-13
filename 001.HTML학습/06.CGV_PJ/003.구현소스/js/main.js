@@ -64,5 +64,25 @@ window.addEventListener("DOMContentLoaded",()=>{
     };
 
 
+    /* sns 링크 이동하기 */
+    /* 1. 대상선정 */
+    const sns = qsa(".sns a");
+    /* 2. 클릭이벤트 설정 */
+    sns.forEach((ele)=>{
+        ele.onclick = ()=>{
+            let btxt = ele.innerText;
+            // console.log('btxt: ', btxt); 
+            let url = "";
+            switch(btxt){
+                case "트위터 바로가기": url = "https://twitter.com/CGV_ID"; break
+                case "인스타그램 바로가기": url = "https://www.instagram.com/cgv_korea/"; break
+                case "페이스북 바로가기": url = "https://www.facebook.com/CJCGV"; break
+            }
+            /* 새창에서 열기 ->  window.open() */
+            window.open().location.href = url;
+        }
+    });
+
+
 
 })/*################## 로드구역 ##################*/

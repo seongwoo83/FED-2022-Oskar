@@ -215,6 +215,9 @@ body{
     outline: 2px solid aqua;
     top: -100%; /* -> top은 기본값이 auto이므로 애니메이션 하려면 초기값 top: 0; 필요 */
 }
+.anibx:hover{
+    cursor: pointer;
+}
 
 
 /* 타이틀 애니 키프레임*/
@@ -501,3 +504,37 @@ body{
 
     - 사용하는 문자열에 띄어쓰기나 특수문자가 존재한다면 따옴표로 묶어서 사용
 */
+
+
+.gmap{
+    position: fixed;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 450px;
+    background-color: #fff;
+    border: 20px solid lime;
+    border-radius: 10px;
+    z-index: 9999;
+    transition: top .8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+/* 구글맵에 클래스 "on"적용시 등장 */
+.gmap.on{
+    top: 50%;
+}
+
+.cbtn{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #000;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.cbtn:focus{
+    outline: none;
+}

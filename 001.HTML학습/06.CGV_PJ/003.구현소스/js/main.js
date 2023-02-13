@@ -38,6 +38,11 @@ window.addEventListener("DOMContentLoaded",()=>{
 
         }// ######### click()
     }// ########## for of
+    const anibx = qs(".anibx");
+    const gmap = qs(".gmap");
+    const cbtn = qs(".cbtn");
+    anibx.onclick = ()=>{gmap.classList.add("on")};
+    cbtn.onclick = ()=>{gmap.classList.remove("on")};
 
 
 

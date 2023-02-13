@@ -210,8 +210,8 @@ body{
     transition: top .5s ease-in-out .1s;
     animation: anibxAni 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
 }
-/* 오버시 들춰지는 효과 */
-.anibx:hover>span{
+/* 오버시 보이는 효과 */
+.anibx:hover>span, .anibx.on span{
     outline: 2px solid aqua;
     top: -100%; /* -> top은 기본값이 auto이므로 애니메이션 하려면 초기값 top: 0; 필요 */
 }

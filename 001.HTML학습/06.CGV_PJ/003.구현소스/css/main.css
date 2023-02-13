@@ -225,11 +225,26 @@ body{
 .mlist ul{
     display: flex;
     justify-content: space-between;
+    /* 보이는 화면 높이값의 50% */
+    perspective: 50vh;
 }
 .mlist ul>li{
     flex: 1;
     position: relative;
     overflow: hidden;
+
+    /* 회전-초기설정 */
+    transform: rotateX(30deg);
+    transform-origin: bottom;
+    transition: .4s ease-in;
+}
+/* 마우스 오버시 일어나기 + 클래스"on"적용시 */
+.mlist ul>li.on,
+.mlist ul>li:hover {
+    transform: rotateX(0);
+    z-index: 1;
+    outline: 2px solid cyan;
+    
 }
 .mlist ul>li+li{
     margin-left: 1.5%;

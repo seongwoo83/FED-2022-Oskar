@@ -19,6 +19,7 @@
     flex: 1;
 
 }
+/* 1-1-1 sns박스 */
 .sns a{
     width: 16px;
     height: 16px;
@@ -44,6 +45,55 @@
 .sns a.cas{
     background: url(../images/sns_kakao.png) no-repeat center/auto 100%;
 }
+
+/* 1-1-2 사이드메뉴 */
+.smbx{
+    display: flex;
+    justify-content: flex-end;
+    font-family: "Roboto", "nbg";
+}
+.smbx>li>a{
+    display: block;
+    padding: 0 13px;
+    line-height: 44px;
+    color: #747474;
+}
+.smbx>li:first-child{
+    border-right: 1px solid #e5e5e5
+}
+.smbx>li:first-child>a{
+    cursor: text;
+}
+
+/* 사이드메뉴 서브박스 */
+.smsub{
+    position: absolute;
+    height: 0;
+    /* display: none; */
+    border: 1px solid #e5e5e5;
+    opacity: 0;
+    transition: .5s;
+    overflow: hidden;
+}
+.smbx>li:hover .smsub{
+    height: auto;
+    /* display: block; */
+    opacity: 1;
+}
+.smsub a{
+    display: block;
+    padding: 7px 10px;
+    padding-right: 19px;
+    color: #747474;
+}
+.smsub a:hover{
+    background-color: #fafafa;
+    color: #333;
+}
+
+
+
+
 /* 1-2 로고박스 */
 .logo{
     height: 104px;

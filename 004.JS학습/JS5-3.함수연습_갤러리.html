@@ -145,7 +145,10 @@
             ];
 
             // 3. 이미지 설명 글자색 배열변수
-            
+            const tcolor = [
+                "red","orange","yellow","green",
+                "blue","navy","purple"
+            ];
 
 
             // 변경대상1: 메인이미지 - #mbox img
@@ -206,10 +209,44 @@
                 /* 글자출력박스: .imgtxt -> imgtxt변수 */
 
                 imgtxt.innerText = itxt[inum-1];
+                imgtxt.style.color = tcolor[inum-1];
             };
             
+            /***************************************
+                [ 자동넘김 기능 구현하기 ]
+                - "자동넘김" 버튼 클릭시 일정시간간격으로 롤링갤러리가 넘어감
+                - "멈춤"버튼 클릭시 정지됨
+            ***************************************/
+            /* 이벤트 대상: .abtn button*/
+            const abtn = document.querySelectorAll(".abtn button");
+
+            /* 인터벌용 변수 */
+            let autoI;
 
 
+            for(let x of abtn){
+                x.onclick = ()=>{
+                    let isB = x.classList.contains("start");
+                    /* classList.contains("클래스명") -> 클래스 이름이 있으면 true 리턴 */
+                    console.log("isB인가? ", isB);
+
+                    /* isB가 true면 자동넘김 */
+                    if(isB){
+                        autoI = setInterval(() => goSlide(1), 1000);
+                    }else{
+                        clearInterval(autoI);
+                    }
+                    /* 항상 클릭된 버튼은 숨김 */
+                    x.style.display= "none";
+                    /* "멈춤"/"자동넘김" 버튼 전환하며 보이기 */
+                    abtn[isB?1:0].style.display="inline-block";
+                    /* isB가 true이면 "멈춤"버튼 보이기/ false이면 "자동넘김"버튼 보이기 */
+                    console.log("autoI변수 ", autoI);
+                    /* 숫자가 찍힘 -> Number형으로 체크됨 */
+                    /* 인터벌 함수의 특징 */
+
+                };
+            }
 
 
             /******************************************* 

@@ -5,17 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS실험실 02 - 글자등장액션 1편</title>
     <script>
+        window.addEventListener("DOMContentLoaded", ()=>{
+            /* 구현내용: 글자를 박스에 넣고 하나씩 날아오면서 등장 */
+            /* 1. 대상: .stage */
+            const stage = document.querySelector(".stage");
 
+            /* 2. 데이터 변수할당 */
+            const mytxt = "무궁화꽃이 피었습니다";
+
+            /* 3. 데이터 글자 한글자씩 태그하기 */
+            let hcode = "";
+            let idx = 0;
+            for(let x of mytxt){
+                if(x===" ") x = "&nbsp&nbsp&nbsp";
+                hcode += `<span style="transition-delay:${idx*0.1}s">${x}</span>`;
+                idx++;
+            }
+
+            stage.innerHTML = hcode;
+            
+            /* 일정시간후 스테이지 박스에 클래스 "on"주고 애니작동 */
+            setTimeout(() => {
+                stage.classList.add("on");
+            }, 2000);
+
+        });
     </script>
     <style>
         body{
             background-color: darkslateblue;
         }
-        .𝘴𝘵𝘢𝘨𝘦{
+        .stage{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            outline: 2px dashed yellow;
+
+            font-size: 5vw;
+            color: #fff;
+            white-space: nowrap;
+        }
+        /* 글자 개별박스 세팅 */
+        .stage span{
+            display: inline-block;
+            transform: translate(500%, -300%);
+            opacity: 0;
+            transition: .3s ease-in;
+        }
+        .stage.on span{
+            transform: translate(0, 0);
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <div class="𝘴𝘵𝘢𝘨𝘦"></div>
+    <div class="stage"></div>
 </body>
 </html>

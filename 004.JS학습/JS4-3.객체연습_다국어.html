@@ -173,10 +173,28 @@
                 * TODO - 요소.on이벤트명 = function(전달변수){} 
                 * TODO - 여기서 전달변수가 event에서 전달하는 변수임 
                 * TODO - 변수명을 보통 e/evt로 많이 씀 
-                * */
+                * */ 
                 let opt = e.currentTarget.value;
-                console.log('opt: ', opt);
-            }
+
+                /* 다국어 언어코드에 따른 객체값 세팅하기 */
+                let data = lang[opt];
+
+                /* 메뉴 변경하기 */
+                menu.forEach((ele,idx) => {
+                    ele.innerText = data["메뉴"][idx];
+                });
+                /* 메인 이미지 변경하기 */
+                // mimg.setAttribute("src", `images/${opt}.jpg`);
+                /* 요소.setAttribut(속성명,값) */
+                mimg.src = `images/${opt}.jpg`;
+                /* 요소.속성명 = 값 */
+
+                /* 하단 주소 변경하기 */
+                info.innerText = data["주소"];
+
+
+
+            };
             
 
         }); ////////// 로드구역 ////////////////////////

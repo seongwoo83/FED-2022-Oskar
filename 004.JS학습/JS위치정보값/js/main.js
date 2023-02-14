@@ -15,7 +15,7 @@
 
     ※ 참고: 바운딩 값은 소수점 아래 많은 자릿수까지 표시하므로
         이것을 소수점자리 제한하여 사용할 수 있다!
-        -> toFiexd(자릿수) : 자릿수에 0을 넣으면 소수점 아래버림
+        -> toFixed(자릿수) : 자릿수에 0을 넣으면 소수점 아래버림
     ___________________________________________________________
 
     ★[[ JavaScript에서 요소의 크기 구하기 ]]★
@@ -121,7 +121,63 @@ window.addEventListener("DOMContentLoaded", () => {
                         ${i + 1}번째박스</div>`;
     }
 
+    /* 6) 내부생성박스에 일부패딩, 내용넣기 */
+    const pnt = qsa(".inbox .point");
 
+    pnt.forEach((ele, idx) => {
+        if (idx === 2 || idx === 4) {
+            ele.innerHTML += `<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est  laborum.`;
+        }
+        if (idx === 1 || idx === 4) {
+            ele.style.padding = "2vw";
+        }
+    }); /////////// forEach ///////////
+
+    /* [ 1. 벌새 위치찍기 ] */
+    setInterval(function () {
+        /// 화면표시 ////
+        qs(".i1").innerText = bird.offsetTop;
+        qs(".i2").innerText = bird.offsetLeft;
+        qs(".i3").innerText = bird.getBoundingClientRect().top.toFixed(0);
+        qs(".i4").innerText = bird.getBoundingClientRect().left.toFixed(0);
+        qs(".i31").innerText = (bird.getBoundingClientRect().top + window.scrollY).toFixed(0);
+        qs(".i42").innerText = window.scrollY.toFixed(0);
+    }, 100); ///// setInterval //////
+
+    /* [ 2. 마우스 커서 이벤트 발생시 위치값 찍기 ] */
+    ibx.onmousemove = (e) => {
+        /// 화면표시 ////
+        qs(".i5").innerText = e.pageX;
+        qs(".i6").innerText = e.pageY;
+
+        qs(".i7").innerText = e.screenX;
+        qs(".i8").innerText = e.screenY;
+
+        qs(".i71").innerText = e.offsetX;
+        qs(".i82").innerText = e.offsetY;
+
+        qs(".i9").innerText = e.clientX;
+        qs(".i10").innerText = e.clientY;
+    };
+
+    /* [ 3. 클릭된 박스요소의 위치정보 표시 ] */
+    for (let x of pnt) {
+        x.onclick = () => {
+            console.log("여기요!");
+            /// 화면표시 ////
+            qs(".i11").innerText = x.clientWidth;
+            qs(".i12").innerText = x.clientHeight;
+
+            qs(".i13").innerText = x.scrollWidth;
+            qs(".i14").innerText = x.scrollHeight;
+
+            qs(".i15").innerText = x.offsetWidth;
+            qs(".i16").innerText = x.offsetHeight;
+
+            qs(".i17").innerText = x.offsetTop;
+            qs(".i18").innerText = x.offsetLeft;
+        };
+    } ////////// for of //////////////
 
 
 }); //// 로드구역  ///////////////////////

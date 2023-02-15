@@ -84,6 +84,7 @@
     display: block;
     padding: 7px 10px;
     padding-right: 19px;
+    background-color: #fff;
     color: #747474;
 }
 .smsub a:hover{
@@ -104,9 +105,31 @@
 .gnb{
     min-height: 46px;
     padding: 0 30px;
+    font-weight: bold;
 }
-
-
+.gnb a{
+    transition: color .2s linear;
+}
+.gnb a:hover{
+    color: red;
+}
+.gnb ul{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;/* 플렉스 줄바꿈 */
+    gap: 0 45px;
+}
+.gnb li{
+    font-family: 'roboto condenced';
+    line-height: 40px;
+}
+.gnb li:last-child{
+    padding: 0;
+}
+.gnb li:last-child a{
+    font-weight: bold;
+    padding-top: 2px;
+}
 /**************** 2. 메인영역 ****************/
 .cont{
     /* 최소높이 */

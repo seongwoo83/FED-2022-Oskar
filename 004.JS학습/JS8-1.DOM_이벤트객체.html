@@ -37,7 +37,7 @@
                     event.currentTarget.style.backgroundColor = "green";
                     // event.target.style.backgroundColor = "green";
 
-                    /* 이벤트 버블링 막기 */
+                    /* 이벤트 버블링만 막기 */
                     // event.stopPropagation();
                     showLog("친척네집",event);
                 };
@@ -46,8 +46,24 @@
                     event.currentTarget.style.backgroundColor = "yellow";
                     // event.target.style.backgroundColor = "yellow";
 
+                    /* 이벤트 버블링 막기 */
+                    // event.stopPropagation();
+
+                    /* 이벤트 버블링과 같은 이벤트에 기능설정된것 까지 모두 막기 */
+                    event.stopImmediatePropagation();
+                    /* 이것이 설정된 함수의 기능은 실행되지만 다른곳에 설정된 동일이벤트 기능은 실행을 막음 */
+
                     showLog("엄마집", event);
                 };
+                /* 엄마집 추가 기능 동일 이벤트등록하기 */
+                /* -> 동일요소 동일이벤트 등록은 addEventListener로 해야함 */
+
+                qs("p").addEventListener("click",(e)=>{
+                    event.currentTarget.style.border = "10px dotted red";
+                    // event.target.style.backgroundColor = "yellow";
+
+                    showLog("엄마집", event);
+                });
                 /* 내방 */
                 const sonFn = (e)=>{
 
@@ -79,6 +95,9 @@
                     
                     /* 2. addEventListener로 등록한 이벤트 지우는 방법 */
                     qs("a").removeEventListener("click",sonFn);
+
+                    /* 기존 a요소 디자인 제거하기 */
+                    qs("a").setAttribute("style","");
                 };
 
 

@@ -54,7 +54,7 @@
 
     ★[[ 이벤트발생시 위치값 ]]★
     1. clientX, clientY
-        -> 현재 보이는 브라우저 화면이 기준
+        -> 현재 보이는 브라우저 화면이 기준 -> position: fixed; 일때 사용
 
     2. offsetX, offsetY
         -> 이벤트 대상이 기준

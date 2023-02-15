@@ -31,7 +31,7 @@
         }
         body{
             width: 100vw;
-            height: 100vh;
+            height: 300vh;
         }
         .mover{
             position: fixed;
@@ -124,10 +124,16 @@
                 /* X좌표: event.pageX */
                 /* Y좌표: event.pageY */
                 // console.log('X좌표: ', event.pageX, "\nY좌표: ", event.pageY);
+                // console.log('X좌표: ', event.clientX, "\nY좌표: ", event.clientY);
 
                 /* 위치값 보정 */
-                var posx = event.pageX-gap;
-                var posy = event.pageY-gap;
+                // var posx = event.pageX-gap;
+                // var posy = event.pageY-gap;
+                /* pageX, pageY는 전체 웹문서에서의 위치이므로 .mover의 position을 absolute로 설정하면 사용가능 */
+
+                var posx = event.clientX-gap;
+                var posy = event.clientY-gap;
+                /* clientX, clientY는 브라우저화면에서의 위치이므로 .mover가 fixed일때 사용가능 */
 
 
                 /* mover에게 위치값 이동 세팅하기 (mover 중앙위치 고정)*/
@@ -135,6 +141,17 @@
                 mover.style.left = posx+"px";
 
             }//⁡⁢⁣⁢################ mousemove 이벤트함수 ###########################⁡
+
+            /* body 영역바깥으로 나가면 사라지고 들어오면 나타남 */
+            document.body.onmouseenter = ()=>{
+                mover.style.display = "block"
+            };
+            document.body.onmouseleave = ()=>{
+                mover.style.display = "none";
+                
+            };
+
+
 
             /* a요소 오버시 무버크게 하기 */
              /* 대상: .cont a -> .pt */

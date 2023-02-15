@@ -163,6 +163,18 @@ window.addEventListener("DOMContentLoaded", () => {
         qs(".i10").innerText = e.clientY;
     };
 
+
+    /** 
+     * .inbox 하위 .bird 위에서 마우스 움직일때
+     * 이벤트 버블링으로 offsetX, offsetY는 이벤트 대상의 위치를 리턴하므로 벌새값이 .inbox이벤트찍기에 나타남
+     * .bird의 같은 이벤트를 버블링 막기를 하면 bird위에서는 이벤트가 발생하지 않음
+     */
+    bird.onmousemove = (e)=>{
+        e.stopPropagation();
+    }
+
+
+
     /* [ 3. 클릭된 박스요소의 위치정보 표시 ] */
     for (let x of pnt) {
         x.onclick = () => {

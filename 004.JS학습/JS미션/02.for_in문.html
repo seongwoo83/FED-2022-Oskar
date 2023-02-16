@@ -199,11 +199,6 @@
                 /* 최종태그 담는 변수 */
                 let hcode = "";
 
-                let obj = Object.values(mvi);
-                obj.forEach((x,y) => {
-                    console.log(Object.values(x));
-                });
-
                 /* for of 문 사용하기 */
                 for (let x in mvi) {
                     /* 각 속성명에 해당하는 데이터 세팅하기 */
@@ -212,14 +207,10 @@
 
                     let mtxt = "";
                     let arr = data["문구"].split('');
-                    arr.forEach(x => {
-                        (x !== " ") ? mtxt +=`<span>${x}</span>` : mtxt += `&nbsp; &nbsp; &nbsp;`;
-                    });
+                    arr.forEach(x => { (x !== " ") ? mtxt +=`<span>${x}</span>` : mtxt += `&nbsp; &nbsp; &nbsp;`; });
 
                     let newtxt = "";
-                    for (let m of data["문구"]) {
-                        (m !== " ")? newtxt += `<span>${m}</span>` : newtxt += `&nbsp; &nbsp; &nbsp;`
-                    }
+                    for (let m of data["문구"]){ (m !== " ")? newtxt += `<span>${m}</span>` : newtxt += `&nbsp; &nbsp; &nbsp;` }
 
                     hcode += `
                         <section class="cbx">

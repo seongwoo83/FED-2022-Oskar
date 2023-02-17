@@ -7,44 +7,56 @@
     <link rel="stylesheet" href="./css/Solar3D.css">
 </head>
 <body>
+        <!-- 타이틀 -->
+        <h1 class="tit">Solar System</h1>
+        <!-- 배율버튼 -->
+        <h2 class="tit tit2">
+            <a href="#" onclick="sView(0.3,this)">X 0.3</a> |
+            <a href="#" onclick="sView(0.5,this)">X 0.5</a> |
+            <a href="#" onclick="sView(0.7,this)">X 0.7</a> |
+            <a href="#" class="on" onclick="sView(1,this)">X 1</a> |
+            <a href="#" onclick="sView(1.5,this)">X 1.5</a>
+        </h2>
+
+
     <!-- 태양계 박스 -->
-    <div id="solar">
-        <!-- 태양 -->
-        <div id="sun">
-            <img src="./images/sun.png" alt="태양">
-        </div>
-        <!-- 지구 -->
-        <div id="earth" class="orbit">
-            <div class="pos">
-                <div class="planet">
-                    <span class="ir">지구</span>
-
-                </div>
+    <div class="scbx">
+        <div id="solar">
+            <!-- 태양 -->
+            <div id="sun">
+                <img src="./images/sun.png" alt="태양">
             </div>
-        </div>
-        <!-- 목성 -->
-        <div id="jupiter" class="orbit">
-            <div class="pos">
-                <div class="planet">
-
-                    <span class="ir">목성</span>
-                </div>
-            </div>
-        </div>
-        <!-- 토성 -->
-        <div id="saturn" class="orbit">
+            <!-- 지구 -->
+            <div id="earth" class="orbit">
                 <div class="pos">
                     <div class="planet">
-                        <span class="ir">토성</span>
+                        <span class="ir">지구</span>
                     </div>
                 </div>
-        </div>
-        <div id="pluto" class="orbit">
+            </div>
+            <!-- 목성 -->
+            <div id="jupiter" class="orbit">
                 <div class="pos">
                     <div class="planet">
-                        <span class="ir">명왕성</span>
+                        <span class="ir">목성</span>
                     </div>
                 </div>
+            </div>
+            <!-- 토성 -->
+            <div id="saturn" class="orbit">
+                    <div class="pos">
+                        <div class="planet">
+                            <span class="ir">토성</span>
+                        </div>
+                    </div>
+            </div>
+            <div id="pluto" class="orbit">
+                    <div class="pos">
+                        <div class="planet">
+                            <span class="ir">명왕성</span>
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
 </body>

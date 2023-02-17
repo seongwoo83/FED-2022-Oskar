@@ -28,8 +28,8 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 250px;
-    height: 250px;
+    width: var(--sunsz);
+    height: var(--sunsz);
 }
 
 /* 태양 */
@@ -37,12 +37,24 @@ body{
     position: absolute;
     top: 0;
     left: 0;
-    width: 250px;
-    height: 250px;
+    width: var(--sunsz);
+    height: var(--sunsz);
+
+    border-radius: 50%;
+    box-shadow: 0 0 60px 10px orange;
+    overflow: hidden;
 }
 #sun img{
     width: 100%;
     height: 100%;
+
+    animation: flame 40s linear infinite alternate;
+}
+/* 태양이 이글거리는 키프레임 */
+@keyframes flame {
+    to{
+        transform: scale(1.5);
+    }
 }
 
 /* 
@@ -60,10 +72,16 @@ var(--변수명)
 -> 미디어 쿼리 등에서 변경이 필요한 경우 변수값만 변경하면 복잡한 값변경 필요X
 */
 :root{
+    /* 해 크기 */
+    --sunsz: 250px;
+    /* 달 크기 */
+    --msz: 40px;
     /* 지구 크기 */
     --esz: 80px;
     /* 목성 크기 */
     --jsz: 150px;
+    /* 토성 크기 */
+    --ssz: 140px;
     /* 명왕성 크기 */
     --psz: 30px
 }
@@ -80,6 +98,19 @@ var(--변수명)
     background: url(../images/earth.png) no-repeat 0/100%;
     animation: earth 20s linear infinite;
 }
+#moon   {
+    position: absolute;
+    top: calc(50% - var(--msz)/2);
+    left: calc(50% - var(--msz)/2);
+    width: var(--msz);
+    height: var(--msz);
+    background: url(../images/moon.png) no-repeat 0/100%;
+    animation: moon 4s linear infinite;
+}
+
+
+
+
 /* 지구회전 키프레임 */
 @keyframes earth {
     from{
@@ -95,6 +126,20 @@ var(--변수명)
         transform: rotate(360deg) translateX(-250px) rotate(-360deg);
     }
 }/* 지구회전 키프레임 *************************/
+@keyframes moon {
+    from{
+        transform: rotate(0deg) translateX(80px) rotate(0);
+    }
+    /* 
+        [ 주변 회전 만들기 ]
+        1. rotate 0deg-> 360deg : 공전
+        2. traslateX : 공전 반지름 결정
+        3. rotate 0 -> -360deg : 자전
+    */
+    to{
+        transform: rotate(360deg) translateX(80px) rotate(-360deg);
+    }
+}/* 지구회전 키프레임 *************************/
 
 /* 목성 */
 #jupiter{
@@ -106,7 +151,7 @@ var(--변수명)
     background: url(../images/jupiter.png) no-repeat 0/100%;
     animation: jupiter 35s linear infinite;
 }
-/* 지구회전 키프레임 */
+/* 목성회전 키프레임 */
 @keyframes jupiter {
     from{
         transform: rotate(0deg) translateX(-400px) rotate(0);
@@ -115,6 +160,33 @@ var(--변수명)
         transform: rotate(360deg) translateX(-400px) rotate(-360deg);
     }
 }/* 목성회전 키프레임 *************************/
+
+#saturn{
+    position: absolute;
+    top: calc(50% - var(--ssz)/2);
+    left: calc(50% - var(--ssz)/2);
+    width: var(--ssz);
+    height: var(--ssz);
+    animation: saturn 45s linear infinite;
+}
+#saturn::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -30%;
+    width: 160%;
+    height: 100%;
+    background: url(../images/saturn.png) no-repeat 0/ 100% 100%;
+}
+/* 토성회전 키프레임 */
+@keyframes saturn {
+    from{
+        transform: rotate(0deg) translateY(-460px) rotate(0);
+    }
+    to{
+        transform: rotate(360deg) translateY(-460px) rotate(-360deg);
+    }
+}/* 토성회전 키프레임 *************************/
 #pluto{
     position: absolute;
     top: calc(50% - var(--psz)/2);

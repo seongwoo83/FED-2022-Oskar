@@ -96,6 +96,7 @@ body{
 .tit2 a:hover,
 .tit2 a.on {
     color: aqua;
+    font-size: 30px;
 }
 
 /* 태양계박스 축소확대용 부모박스 */

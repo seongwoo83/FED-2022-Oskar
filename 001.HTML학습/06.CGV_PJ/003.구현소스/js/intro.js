@@ -25,11 +25,14 @@ function loadFn(){
     myvid.addEventListener("timeupdate", chkVid);
     
     function chkVid(){
-        console.log("재생중?", myvid.paused);
+        console.log("Stop?", myvid.paused);
         /* 비디오가 멈추면 재생끝이므로
         비디오 멈춤상태 체크함 */
         /* paused 속성은 멈추면 true/ 재생중이면 false 리턴 */
         /* 주의, 비디오의 자동재생 속성이 없어야함 */
+        if(myvid.paused){
+            location.href = "main.html";
+        }
     }
 
 

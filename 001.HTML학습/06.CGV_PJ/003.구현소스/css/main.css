@@ -42,7 +42,7 @@ body{
 @keyframes titAni {100%{text-shadow: 0 0 12px aquamarine;}}
 .gnb{
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     right: 10px;
 }
 .gnb ul{

@@ -40,9 +40,14 @@ window.addEventListener("DOMContentLoaded", loadFn);
 function loadFn() {
     console.log("로딩완료");
 
-    /* 슬라이드 갯수 */
-    let scnt = document.querySelectorAll("#slide li").length;
-    console.log("슬개수: ", scnt);
+    /* 슬라이드 li리스트 */
+    let slist = document.querySelectorAll("#slide li");
+    /* 잘라내기로 li순번이 뒤섞이므로 불릿변경 매칭을 위한 고유순번을 사용자 정의 속성(data-)으로 만들어줌 */
+    slist.forEach((ele, idx)=>{
+        /* data- 사용자 정의 속성 만들어 넣기 */
+        ele.setAttribute("data-seq",idx);
+    });
+
 
     /* 1. 대상선정 */
     /* 1-1 이벤트 대상: .abtn */
@@ -50,17 +55,32 @@ function loadFn() {
     // console.log('abtn: ', abtn);
     /* 1-2 변경 대상: #slide */
     const slide = document.querySelector("#slide");
+    /* 1-3 불릿: .indic li */
+    const indic = document.querySelectorAll(".indic li");
+
+
+    /* 여러번 클릭 금지 변수: 0일때는 허용, 1일때는 불허용 */
+    let prot = 0;
 
     /* 2. 슬라이드 변경함수 만들기 */
     const goSlide = (seq) => {
-        console.log("슬고우", seq);
+        // console.log("슬고우", seq);
+
+        // console.log("못들어갔어");
+        /* 여러번 클릭 금지설정하기 */
+        if(prot) return;
+        prot = 1;
+        // console.log("나는 들어왔어");
+        setTimeout(() => {
+            prot = 0;
+        }, 400);/* //////////////// */
         let clist = slide.querySelectorAll("li");
         /* 1) 방향에 따른 분기 */
         /* 1-1) 오른쪽 버튼 클릭시: seq===1일때 */
         if(seq){
             console.log("오른");
             slide.style.left = "-100%";
-            slide.style.transition = "left .3s ease-in-out";
+            slide.style.transition = "left .4s ease-in-out";
             
             /* 슬라이드 이동후 */
             setTimeout(() => {
@@ -69,23 +89,37 @@ function loadFn() {
                     );
                     slide.style.transition = "none";
                     slide.style.left = "0";
-                }, 400);
+                }, 400);/* //////////////// */
             }else{
                 console.log("왼");
                 slide.insertBefore(clist[clist.length-1], clist[0]);
                 slide.style.left = "-100%";
+                slide.style.transition = "none";
                 /* 동일속성인 left가 같은 코딩처리공간에 있기 때문에 동시에 일어나는 것처럼 보임
                 이것을 분리해야 효과가 있음 */
                 setTimeout(() => {
                     slide.style.left = "0";
                     slide.style.transition = "left .3s ease-in-out";
-                }, 0);
-        }
-        
+                }, 0);/* //////////////// */
+        }/* //////////////// */
+
+        /* 2) 불릿 설정하기 */
+        /* 2-1) 해당 순번에 불릿 색 입히기 */
+        /* 현재 배너리스트 업데이트 */
+        clist = slide.querySelectorAll("li");
+        /* 2-2) 방향별 읽어올 슬라이드 순번으로 "data-seq"값을 읽어옴 */
+        let cseq = clist[seq].getAttribute("data-seq");
+        /* 오른쪽 클릭시 두번째 슬라이드, 왼쪽 클릭시 첫번째 슬라이드 순번 가져와야함 */
+
+        /* 2-3) 불릿 초기화 */
+        for(let x of indic) x.classList.remove("on");
+
+        /* 2-4) 읽어온 슬라이드 순번의 불릿에 클래스 "on"넣기 */
+        indic[cseq].classList.add("on");
 
 
-
-    };
+    };/* //////////////////// */
+    
     /* 3. 대상에 이벤트 설정하기 */
     abtn.forEach((ele, idx) => {
         ele.onclick = () => {

@@ -238,6 +238,17 @@
                 // -> 기존요소를 선택하면 이동이 됨!
                 /////////////////////////////////////////////////
 
+                /* 대상선정: .mvl */
+                const mvl = document.querySelector(".mvl");
+                mvl.onclick = () => { 
+                    /* 1) 호출확인 */
+                    // console.log("맨뒤로가");
+                    /* 2) 이동할 대상 선정: #div02 ul 하위의 첫번째 li*/
+                    let fele = ctg.querySelectorAll("li")[0];
+                    /* 3) 맨뒤로 이동: appendChild(요소) -> 기존 요소를 선택하면 이동됨*/
+                    ctg.appendChild(fele);
+                };
+
                 /// 맨뒤요소 맨앞으로 이동하기 ///////////////////////
                 // 이벤트 종류: click
                 // 이벤트 대상: .mvf
@@ -248,6 +259,22 @@
                 // 넣을놈 - 마지막 li요소
                 // 넣을놈전놈 - 맨처음 li요소
                 //////////////////////////////////////////////////
+
+                const mvf = document.querySelector(".mvf");
+                mvf.onclick = () =>{
+                    /* 1) 호출확인 */
+                    // console.log("맨앞으로가");
+                    /* 2) 이동대상: 변수ctg 아래 li요소들 */
+                    let eles  = ctg.querySelectorAll("li");
+                    /* 3) 맨앞으로 이동하기 -> insertBefore(맨뒤li, 맨앞li)*/
+                    ctg.insertBefore(eles[eles.length-1], eles[0]);
+                    
+
+                };
+
+
+
+
 
                 /************************************************* 
                     ※ appendChild() 와 insertBefore()는 대상을

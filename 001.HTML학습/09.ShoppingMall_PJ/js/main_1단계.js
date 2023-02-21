@@ -40,6 +40,8 @@ window.addEventListener("DOMContentLoaded", loadFn);
 function loadFn() {
     console.log("로딩완료");
 
+    /* 슬라이드 번호변수 */
+    let snum = 0;
     /* 슬라이드 갯수 */
     let scnt = document.querySelectorAll("#slide li").length;
     console.log("슬개수: ", scnt);
@@ -54,36 +56,27 @@ function loadFn() {
     /* 2. 슬라이드 변경함수 만들기 */
     const goSlide = (seq) => {
         console.log("슬고우", seq);
-        let clist = slide.querySelectorAll("li");
         /* 1) 방향에 따른 분기 */
         /* 1-1) 오른쪽 버튼 클릭시: seq===1일때 */
         if(seq){
-            console.log("오른");
-            slide.style.left = "-100%";
-            slide.style.transition = "left .3s ease-in-out";
-            
-            /* 슬라이드 이동후 */
-            setTimeout(() => {
-                slide.appendChild(
-                    clist[0]
-                    );
-                    slide.style.transition = "none";
-                    slide.style.left = "0";
-                }, 400);
-            }else{
-                console.log("왼");
-                slide.insertBefore(clist[clist.length-1], clist[0]);
-                slide.style.left = "-100%";
-                /* 동일속성인 left가 같은 코딩처리공간에 있기 때문에 동시에 일어나는 것처럼 보임
-                이것을 분리해야 효과가 있음 */
-                setTimeout(() => {
-                    slide.style.left = "0";
-                    slide.style.transition = "left .3s ease-in-out";
-                }, 0);
+            /* 슬라이드 번호 증가 */
+            snum++;
+            console.log("오른", snum);
+        }else{
+            /* 슬라이드 번호 감소 */
+            snum--;
+            console.log("왼", snum);
         }
-        
 
-
+        /* 2) 한계값 체크 */
+        //처음이전 -> 끝
+        if(snum === -1) snum = scnt-1;
+        //끝다음 -> 처음
+        else if(snum === scnt) snum = 0;
+        /* 3) 이동하기 */
+        /* 이동대상: slide */
+        slide.style.left = (-snum*100) + "%";
+        slide.style.transition = "left .3s ease-in-out";
 
     };
     /* 3. 대상에 이벤트 설정하기 */

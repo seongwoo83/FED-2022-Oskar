@@ -171,6 +171,6 @@ function loadFn() {
         /* 2. 타임아웃도 지우지 않으면 쌓여서 타임아웃 쓰나미 실행*/
         clearTimeout(autoT);
         /* 2. 잠시 후 다시 작동하도록 타임아웃 */
-        setTimeout(autoSlide, 5000);
+        autoT = setTimeout(autoSlide, 5000);
     }
 }

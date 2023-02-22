@@ -9,6 +9,7 @@ html, body, h1{
 .page{
     position: relative;
     width: 100%;
+    /* width를 100vw로 세팅하면 dt에서 가로스크롤바가 스크롤바 트랙만큼 생기기 때문*/
     height: 100vh;
     overflow: hidden;
 }

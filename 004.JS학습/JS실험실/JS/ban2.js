@@ -21,7 +21,6 @@ function loadFn() {
         }, 400);
         let clist = slide.querySelectorAll("li");
         if (seq) {
-            console.log("오른");
             slide.style.left = "-330%";
             slide.style.transition = ".4s ease-in-out";
             clist.forEach((ele) => ele.classList.remove("on"));
@@ -32,7 +31,6 @@ function loadFn() {
                 slide.style.left = "-220%";
             }, 400);
         } else {
-            console.log("왼");
             slide.insertBefore(clist[clist.length - 1], clist[0]);
             clist.forEach((ele) => ele.classList.remove("on"));
             slide.style.left = "-330%";

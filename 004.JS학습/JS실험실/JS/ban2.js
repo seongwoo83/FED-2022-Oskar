@@ -129,7 +129,8 @@ function loadFn() {
     
     /* 3. 대상에 이벤트 설정하기 */
     abtn.forEach((ele, idx) => {
-        ele.onclick = () => {
+        ele.onclick = (e) => {
+            e.preventDefault();
             /* 1) 인터벌지우기 함수 호출 */
             clearAuto(); 
             /* 2) 슬라이드함수 호출 */

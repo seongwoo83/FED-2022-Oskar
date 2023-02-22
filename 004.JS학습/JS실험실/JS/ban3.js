@@ -127,7 +127,7 @@ function loadFn() {
             setTimeout(() => {
                 slide.style.left = "-220%";
                 slide.style.transition = "left .4s ease-in-out";
-            }, 0); //// 타임아웃 //////
+            }, 1); //// 타임아웃 //////
 
             // -> 타이밍함수는 기존 함수인 스택(Stack)메모리 공간이 아닌
             // 대기실행 공간인 큐(Queue)메모리공간에서 실행하므로
@@ -183,7 +183,9 @@ function loadFn() {
 
     // 3. 이동버튼대상에 이벤트 설정하기
     abtn.forEach((ele, idx) => {
-        ele.onclick = () => {
+        ele.onclick = (e) => {
+            /* 0. 기본이동 막기 */
+            e.preventDefault();
             // 1. 인터발지우기함수 호출!
             clearAuto();
             // 2. 슬라이드 함수 호출!

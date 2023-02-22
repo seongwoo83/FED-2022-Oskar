@@ -123,9 +123,54 @@ function loadFn() {
     /* 3. 대상에 이벤트 설정하기 */
     abtn.forEach((ele, idx) => {
         ele.onclick = () => {
+            /* 1) 인터벌지우기 함수 호출 */
+            clearAuto(); 
+            /* 2) 슬라이드함수 호출 */
             goSlide(idx);
         };
     });
+
+    /* 자동 넘김 설정하기 */
+    /* 일정 시간간격 넘어가기 -> setInterval함수 */
+    /* 인터벌함수 함수 전달값 사용 예 - 타임아웃함수 역시 동일 */
+    /* 1. 함수에 전달값이 없으면 함수명만 사용가능 */
+        // setInterval(goSlide(1), 3000);
+    /* 2. 전달값이 있다면 익명함수구역에 코딩 */
+        // setInterval(function(){goSlide(1)}, 3000);
+    /* 3. 화살표함수 사용가능 */
+        // setInterval(()=>{goSlide(1)}, 3000);
+    /* 4. 화살표함수에서 중괄호 생략 */
+    // setInterval(()=>goSlide(1), 3000);
+
+
+    /* 인터벌 함수 멈추기위한 변수 */
+    let autoI;
+    /* 타임아웃 함수 지우기위한 변수 */
+    let autoT; 
+    
+    /** 
+     * 함수명: autoSlide
+     * 기능: 인터벌 함수로 슬라이드 함수 호출
+     */
+    function autoSlide(){
+        autoI = setInterval(() => goSlide(1), 3000);
+    }
+
+    /* 자동넘김 최초호출 */
+    autoSlide();
+
+    /** 
+     * 함수명: clearAuto
+     * 기능: 인터벌함수 지우고 다시세팅
+     */
+    function clearAuto(){
+        /* 1. 인터벌 지우기 */
+        clearInterval(autoI);
+        /* 2. 타임아웃도 지우지 않으면 쌓여서 타임아웃 쓰나미 실행*/
+        clearTimeout(autoT);
+        /* 2. 잠시 후 다시 작동하도록 타임아웃 */
+        setTimeout(autoSlide, 5000);
+    }
 }
 
 //////////////// loadFn 함수 ///////////////

@@ -1,4 +1,5 @@
 @charset "utf-8";
+@import url(./core.css);
 
 /* 보그 PJ 공통모듈 CSS - common.css */
 
@@ -119,14 +120,63 @@
 .gnb a:hover{
     color: red;
 }
+
+/* #top.on 인경우 슬림디자인 상단영역 적용 */
+/* 0. 상단영역 최상위 고정 */
+#top.on{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 999;
+}
+/* 1. 상단영역 최소높이 해제 */
+#top.on .top{
+    min-height: 50px;
+}
+/* 2. 상단메뉴 없애기 */
+#top.on .tmenu{
+    display: none;
+}
+/* 3. 로고이미지 박스 */
+#top.on .logo {
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    height: auto;
+    /* margin-bottom: 10px; */
+    /* text-align: center; */
+}
+/* 4. 로고이미지 */
+#top.on .logo img{
+    width: 100px;
+}
+/* 5. gnb메뉴 */
+#top.on .gnb{
+    padding-top: 5px;
+    min-height: 45px;
+    /* padding: 5px 30px 0 120px; -> 미디어쿼리로 처리*/
+}
+/* 6. gnb메뉴 a */
+#top.on .gnb a{
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+}
+/* 7. gnb메뉴 ul */
+#top.on .gnb ul{
+    gap: 0 35px;
+}
+
 .gnb ul{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;/* 플렉스 줄바꿈 */
     gap: 0 45px;
 }
 .gnb li{
-    font-family: 'roboto condenced';
+    font-family: "Roboto Condenced";
     line-height: 40px;
 }
 .gnb li:last-child{

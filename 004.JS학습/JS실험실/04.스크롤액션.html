@@ -25,6 +25,12 @@
                 /* 화면높이값의 2/3 구하기 */
                 const hv = window.innerHeight*2/3;
                 const winH = window.innerHeight;
+                const docH = document.body.clientHeight;
+                /* 스크롤 한계값 */
+                const scLimit = docH - winH;
+                /* 스크롤 한계값은 전체문서길이 - 윈도우 높이 */
+                /* 단, body에 기본마진 8px을 초기화 해야 정확히 일치함 */
+
 
 
                 /* 등장액션 대상 위치값 리턴 함수 */
@@ -57,7 +63,8 @@
                 /* 스크롤시 이동할 타이틀 대상 */
                 const tit = document.querySelector(".tit");
                 tit.style.transition = ".8s ease-in-out";
-
+                /* 스크롤시 떨어지는 여자 대상 */
+                const woman = document.querySelector("#woman");
                 
 
                 window.addEventListener("scroll",()=>{
@@ -79,7 +86,7 @@
                 /* 대상: window */
                 /* 이벤트: scroll */
                 let scTop = window.scrollY;
-                console.log(scTop);
+                // console.log(scTop);
 
 
                 /* 스크롤 위치에 따른 타이틀 위치 이동하기 */
@@ -93,8 +100,8 @@
                 let obj1 = retVal(setit[0]);
                 let obj2 = retVal(setit[1]);
                 let obj3 = retVal(setit[2]);
-                /* 첫 번째 포스터 구간일 때 */
-                if(obj1 < winH/2 && obj1 >0) {
+                /* 첫 번째 포스터 구간일 때 / 세 번째 포스터 구간일 때 */
+                if((obj1 < winH/2 && obj1 >0) || (obj3 < winH/2 && obj3 >0)) {
                     tit.style.left = "5vw";
                     tit.style.transform = "translateX(0)";
                 }else if(obj2 < winH/2 && obj2 > 0){
@@ -106,8 +113,19 @@
                 }
 
 
-
-
+                /* 떨어지는 여자 스크롤 시작부터 끝까지 애니 */
+                /* 구현내용: 여자이미지가 맨 위에서 부터 보이는 화면에서 스크롤 맨 아래 까지 동일하게 비율로 떨지지게 다다 */
+                /* 비례식으로 비율을 계산 */
+                /* 페이지 전체길이 : 윈도우높이 = 스크롤 이동값 : 이미지 이동값 */
+                /* 이미지 이동값 = 윈도우 높이 * 스크롤이동값 / 페이지 전체길이 */
+                /* x = winH * scTop / scLimit */
+                /* -> 사실 페이지 전체길이는 스크롤 한계값으로 해야함 */
+                /* 떨어지는 여자 top 위치 값 계산하기 */
+                let wtop = winH * scTop / scLimit;
+                console.log('w위치: ', wtop);
+                woman.style.top = wtop+"px";
+                /* 맨 위일때 위쪽으로 숨기기 */
+                if(scTop === 0) woman.style.top = "-15%"
 
                 })
 
@@ -150,6 +168,7 @@
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap");
             body {
+                margin: 0;
                 height: 350vh;
                 background-image: linear-gradient(to bottom, lightcoral, lightgreen, lightblue);
             }
@@ -166,6 +185,13 @@
                 font-size: 10vh;
                 z-index: 1;
                 text-shadow: 0 0 20px #ff0;
+            }
+            #woman{
+                position: fixed;
+                top: -15%;
+                width: 10%;
+                left: 50%;
+                transform: translateX(-50%);
             }
             /* 스크롤액션 박스 */
             .scact {
@@ -235,5 +261,6 @@
         <div class="scact sa1 setit"></div>
         <div class="scact sa2 setit"></div>
         <div class="scact sa3 setit"></div>
+        <img src="./images/fall.png" alt="떨어짐" id="woman">
     </body>
 </html>

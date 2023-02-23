@@ -9,11 +9,22 @@
             ////// 로드구역 //////////
             window.addEventListener("DOMContentLoaded", () => {
 
+                /* 새로고침시 맨위로 보내기 */
+                /* scrollTo(가로,세로)-> 스크롤 위치 동동 내장함수 */
+                /* 브라우저가 스크롤 위치 캐싱을 적용한 후 위로 이동 */
+                setTimeout(() => {
+                    window.scrollTo(0,0);
+                }, 100);
+
+
                 /* 등장액션 대상: .setit */
                 const setit = document.querySelectorAll(".setit");
-                console.log(setit);
+                // console.log(setit);
 
-                const hv = window.innerHeight/2;
+
+                /* 화면높이값의 2/3 구하기 */
+                const hv = window.innerHeight*2/3;
+                const winH = window.innerHeight;
 
 
                 /* 등장액션 대상 위치값 리턴 함수 */
@@ -24,21 +35,78 @@
                     보이는 화면 상에에 닿을 경우 0
                     통과하여 위로 올라가면 마이너스 값
                 */
+                /* 메서드명 구성 */
+                /* get 가져와 */
+                /* bounding 한계에서 */
+                /* cliend 사용자 브라우저 화면으로 부터 */
 
 
                 /* 클래스 넣기 함수 만들기 */
                 const showIt = x => {
-                    if(retVal(x)<hv && retVal(x) > hv-40){
+                    /* 대상요소에 현재스크롤 위치 */
+                    let xval = retVal(x);
+
+                    /* 구간적용 검사하기 */
+                    /* 0보다 크고 화면의 2/3보다 작은 구조 */
+                    if(xval< hv && xval > 0){
+                        /* 해당요소에 클래스 넣기 */
                         x.classList.add("on");
                     }
                 };
 
-                /* 스크롤 이동시 윈도우에 세로스크롤 위치값찍기 */
-                /* 대상: window */
-                /* 이벤트: scroll */
+                /* 스크롤시 이동할 타이틀 대상 */
+                const tit = document.querySelector(".tit");
+                tit.style.transition = ".8s ease-in-out";
+
+                
+
                 window.addEventListener("scroll",()=>{
                     /* 스크롤 등장 요소 갯수만큼 for문으로 돌리기 */
                     for(let x of setit) showIt(x);
+
+                    /* 순서 */
+                    /* 1. 스크롤이벤트시 setit에 담긴 요소를 수집 */
+                    /* 2. 요소만큼 x에 하나씩 순서대로 담음 */
+                    /* 3. showit(x) 호출시 x, 즉 요소 자신을 보냄 */
+                    /* 4. showit함수는 그 으의 위치값을 조사해서 if문 구간에 해당하는지 검사후 해당요소에 클래스 "on" 을 넣어줌 */
+
+                    /* 스크롤 이동시 윈도우에 세로스크롤 위치값찍기 */
+                /* ★[[ 현재 스크롤바 위치값 가져오기 ]]★
+                1. window.scrollY (IE6~11지원안함)
+                2. document.scrollingElement.scrollTop
+                3. document.documentElement.scrollTop
+                4. document.querySelector('html').scrollTop */
+                /* 대상: window */
+                /* 이벤트: scroll */
+                let scTop = window.scrollY;
+                console.log(scTop);
+
+
+                /* 스크롤 위치에 따른 타이틀 위치 이동하기 */
+                /* 1. 스크롤바 위치 0이상 300 미만시 원위치 */
+                if(scTop < 300) tit.style.top = "0";
+                /* 2. 스크롤바 위치 300 이상 400미만*/
+                if(scTop >= 300 && scTop < 400) tit.style.top = "45vh";
+                
+                /* retval() 함수를 이용하여 해당요소의 위치를 구함 */
+                /* 첫번째 요소위치 */
+                let obj1 = retVal(setit[0]);
+                let obj2 = retVal(setit[1]);
+                let obj3 = retVal(setit[2]);
+                /* 첫 번째 포스터 구간일 때 */
+                if(obj1 < winH/2 && obj1 >0) {
+                    tit.style.left = "5vw";
+                    tit.style.transform = "translateX(0)";
+                }else if(obj2 < winH/2 && obj2 > 0){
+                    tit.style.left = "45%"
+                    tit.style.transform = "translateX(0)";
+                }else{
+                    tit.style.left = "50%";
+                    tit.style.transform = "translateX(-50%)";
+                }
+
+
+
 
 
                 })
@@ -88,7 +156,9 @@
             .tit {
                 position: fixed;
                 top: 0;
-                width: 100%;
+                /* width: 100%; */
+                left: 50%;
+                transform: translateX(-50%);
                 font-family: "Nanum Brush Script", cursive;
                 margin: 0;
                 padding: 3vh;

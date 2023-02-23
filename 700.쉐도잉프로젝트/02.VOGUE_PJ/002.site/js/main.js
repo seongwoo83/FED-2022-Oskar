@@ -29,16 +29,40 @@ window.addEventListener('DOMContentLoaded', ()=>{
     ***************************************/
     /* 대상: .scAct */
     const scAct = q(".scAct");
+
+    /* 상단메뉴 대상: #top */
+    const topA = q("#top");
+
+    /* 위로가기버튼 대상: .tbtn */
+    const tbtn = q(".tbtn");
+
     /* 화면높이값의 2/3 구하기 */
     const hv = window.innerHeight*2/3;
+    
+    /* 현재 스크롤 위치변수 */
+    let scTop;
+
 
     /* 스크롤 이벤트 세팅하기 */
     window.addEventListener("scroll", ()=>{
+
+        /* 현재 스크롤 위치 */
+        scTop = window.scrollY;
+        cg(scTop);
+
+        /* 상단메뉴 슬림메뉴 적용하기 */
+        if(scTop >= 100){topA.classList.add("on");}
+        else {topA.classList.remove("on");}
+
+        if(scTop >= 300){tbtn.classList.add("on");}
+        else {tbtn.classList.remove("on");}
+
         /* 값확인하기 */
         // cg("박스1: "+retVal(scAct[0]));
 
         /* 스크롤 등장 요소 갯수만큼 for문으로 돌리기 */
         for(let x of scAct) showIt(x);
+        // showIt(x)
 
     });
     

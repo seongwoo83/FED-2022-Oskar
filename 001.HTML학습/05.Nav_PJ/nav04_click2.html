@@ -241,7 +241,7 @@
                 /* 구현 내용중 다음형제요소로 올라가는 방법: 선택요소.nextElementSibling */
                 /* 구현 내용중 이전형제요소로 올라가는 방법: 선택요소.previousElementSibling */
                 const gnb = q(".gnb>ul>li:has(.smenu)>a");
-                // console.log('gnb: ', gnb);
+                console.log('gnb: ', gnb);
 
                 /***************************************** 
                     css선택자 중 하위요소를 포함하는 요소 선택하기
@@ -256,7 +256,7 @@
 
                 /* 2. 이벤트 세팅하기 */
                 gnb.forEach((x, idx)=>{ /* x는 li요소, idx는 요소순번 */
-                    x.parentElement.onclick = ()=>{
+                    x.onclick = ()=>{
                         /* 초기화함수 호출 */
                         /* idx(순번)을 보내는 이유 */
                         /* 자신의 순번을 빼고 초기화 하기 위하여 */

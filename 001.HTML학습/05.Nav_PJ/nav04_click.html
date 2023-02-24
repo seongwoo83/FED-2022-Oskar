@@ -200,7 +200,7 @@
                 transition: 0.2s;
             }
             /* 서브메뉴 오버시 */
-            .smenu a:hover {
+            .gnb ul .smenu a:hover {
                 background-color: lightskyblue;
                 color: darkblue;
             }
@@ -325,13 +325,31 @@
                 }
                 /* gnb요소자체 */
                 const gnbBx = q(".gnb");
+                /* 타임아웃 변수 */
+                let autoTgnb;
                 /* 마우스 아웃시 */
-                // gnbBx.addEventListener("mouseout", ()=>{
-                //     setTimeout(() => {
-                //         console.log("out!");
-                //         initMenu();
-                //     }, 2000);
-                // })
+                gnbBx.addEventListener("mouseleave", ()=>{
+                    console.log("leave!");
+                    autoTgnb  = setTimeout(() => {
+                        initMenu();
+                    }, 500);
+                })
+                /* 마우스 오버시 타임아웃 지우기 - 실행 쓰나미 방지*/
+                gnbBx.addEventListener("mouseenter", ()=>{
+                    /* 타임아웃 지우기 */
+                    clearTimeout(autoTgnb);
+                })
+                /*************************************
+                    [ mouseover / mouseout ] vs [ mouseenter / mouseleave ]
+                    -> mouseover, mouseout은 하위 요소에 발생한 같은 이벤트가 버블링됨. 반면, mouseenter, mouseleave는 하위 요소에 발생한 같은 이벤트가 버블링되지 않음.
+
+                    -> Why? 이벤트가 요소의 경계선을 기준한 것이므로 하위 요소의 경계선과 불일치하므로 이벤트버블링이 겹쳐지지 않음.
+                    -> 주의사항: 이벤트버블링이 필요한 경우에는 반드시 mouseover, mouseout을 써야함.
+                *************************************/
+
+
+
+
             });
 
         </script>

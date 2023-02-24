@@ -251,8 +251,12 @@
 
 
                 /* 2. 이벤트 세팅하기 */
-                for(let x of gnb){
-                    x.addEventListener("click",()=>{
+                gnb.forEach((x, idx)=>{ /* x는 li요소, idx는 요소순번 */
+                    x.onclick = ()=>{
+                        /* 초기화함수 호출 */
+                        /* idx(순번)을 보내는 이유 */
+                        /* 자신의 순번을 빼고 초기화 하기 위하여 */
+                        initMenu(idx);
                         /* 0) 하위 .smenu  */
                         let tg = x.querySelector(".smenu");
                         /* 1) 하위 .smenu ol의 높이값 */
@@ -274,21 +278,60 @@
 
                         /* 4) 상위메뉴에 클래스 넣어 효과주기 */
                         x.classList.toggle("on");
-                    });
+                    };
+                });
+                /* .smenu 클릭시 li요소 클릭이벤트 버블링 막기 */
+                const smenu = q(".smenu");
+                for(let x of smenu){
+                    x.addEventListener("click", e => e.stopPropagation());
+                    /* stopPropagation() -> 이벤트 버블링을 막는 event 객체의 메서드 */
+                }
+                /* a요소 클릭시 기본기능 */
+                const atag = q("a");
+                for(let x of atag){
+                    x.addEventListener("click", e => e.preventDefault());
+                    /* preventDefault() -> 요소의 기본기능 막기 */
                 }
 
 
+            
 
+                /***************************************
+                    메뉴 초기화 함수
+                ***************************************/
+                /* 참고: function initMenu(seq=1000) 이라고 parameter에 값을 할당해 놓으면 함수호출시 아무값도 입력하지 않으면 초기값으로 들어감 */
+                function initMenu(seq=1000){
+                    // console.log("초기화 함수 호출완료", seq);
+                    /* 1. 모든 서브메뉴 높이값 0만들기 */
+                    smenu.forEach((ele, idx)=>{
+                        if(idx === seq) return; /* forEach()에서 return을 쓰면 그 순번만 제외하고 나머지 반복함 */
+                        
+                        // console.log("smenu순번", idx);
+                        ele.style.height = "0"
+                    });
+                    /* 2. 서브메뉴 있는 li의 클래스 on 지우기 */
+                    gnb.forEach((ele, idx)=>{
+                        if(idx === seq) return; /* forEach()에서 return을 쓰면 그 순번만 제외하고 나머지 반복함 */
+                        
+                        // console.log("li순번", idx);
+                        ele.classList.remove("on");
+                    });
 
-
-
-
-
-
-
-
-
-
+                    /*************************************
+                        [forEach()에서 중간 뛰어넘기]
+                        -> for문과 같은 제어문이 아니므로 continue를 사용할 수 없음
+                        -> 함수 구역이므로 return 키워드를 사용하면 해당 순번을 빠져나가서 제외되고 나머지 순번의 순회는 계속됨
+                    *************************************/
+                }
+                /* gnb요소자체 */
+                const gnbBx = q(".gnb");
+                /* 마우스 아웃시 */
+                // gnbBx.addEventListener("mouseout", ()=>{
+                //     setTimeout(() => {
+                //         console.log("out!");
+                //         initMenu();
+                //     }, 2000);
+                // })
             });
 
         </script>
@@ -333,6 +376,23 @@
                                 </li>
                                 <li>
                                     <a href="#">방명록</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><span>웹튜닝</span></a>
+                        <!-- 서브메뉴 -->
+                        <div class="smenu">
+                            <ol>
+                                <li>
+                                    <a href="#">서버튜닝</a>
+                                </li>
+                                <li>
+                                    <a href="#">DB튜닝</a>
+                                </li>
+                                <li>
+                                    <a href="#">개발환경튜닝</a>
                                 </li>
                             </ol>
                         </div>

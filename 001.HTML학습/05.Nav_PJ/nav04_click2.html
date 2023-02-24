@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>유형4. 세로네비 서브별 드롭다운 세로형 - 클릭이벤트JS2</title>
+        <style>
+            /* 초기화 */
+            html,
+            body,
+            ul,
+            ol {
+                margin: 0;
+                padding: 0;
+            }
+
+            /* ul,ol초기화 */
+            ul,
+            ol {
+                /* 리스트박스 기본3無
+            - 마진0, 패딩0, 리스트스타일없음 */
+                list-style: none;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+
+            /* 전체 컨테이너 랩핑박스 */
+            .wrap{
+                display: flex;
+            }
+
+            /* GNB메뉴박스 */
+            .gnb {
+                position: relative;
+                z-index: 999;
+                /* 포지션이 있어야 z-index적용됨!
+                GNB 하위메뉴가 위에 오도록 z-index를 높인다! */ 
+                background-color: lightskyblue;
+                width: 200px;
+                height: 800px;
+
+            }
+
+            /* ul 초기화 */
+            .gnb ul {
+                /* 플렉스박스 : 직계li만 옆으로 흐름! */
+                display: flex;
+                /* flex 진행방향 세로형 */
+                flex-direction: column;
+                /* 수평방향 flex 중앙정렬 */
+                justify-content: center;
+                /* width: 800px;
+                margin: 0 auto; -> flex에서 중앙정렬설정 안씀*/
+                /* outline: 1px solid red; */
+            }
+
+            /* 가상요소로 clear설정하기 -> flex는 불필요! */
+            /* .gnb ul::after {
+                content: '';
+                display: block;
+                clear: both;
+                } */
+
+            /* 상위li 리스트요소 */
+            .gnb > ul > li {
+                width: 200px;
+                /* height: 40px; */
+                text-align: center;
+                /* outline: 1px dashed blue; */
+                /* float: left; -> 사용안함! flex쓸것임! */
+                /* box-sizing: border-box; */
+            }
+
+            /* li사이에 구분선 넣기 */
+            .gnb > ul > li + li::before {
+                content: "";
+                display: block;
+                position: absolute;
+                /* 젠틀앱솔루트:
+        부모박스안에 그대로있음! */
+                width: 1px;
+                height: 20px;
+                margin-top: 10px;
+                margin-left: 1px;
+                background-color: blue;
+
+                /* border-left: 1px solid #000; */
+            }
+
+            /* li 상위메뉴 a요소 */
+            .gnb > ul > li > a {
+                /* a요소 확장 */
+                display: block;
+                width: 100%;
+                height: 100%;
+
+                font-size: 17px;
+                line-height: 40px;
+                color: #000;
+                text-decoration: none;
+                /* 트랜지션:속시이지 */
+                transition: 0.3s;
+            }
+
+            /* 부모li에 마우스 오버시 상위메뉴 a요소 변경 */
+            .gnb > ul > li:hover > a, .gnb>ul>li.on a{
+                color: lightskyblue;
+                background-color: darkblue;
+            }
+
+            /* 상단 메뉴 글자에 밑줄애니 */
+            .gnb > ul > li > a > span {
+                position: relative;
+                /* 부모자격 */
+            }
+
+            /* 가상요소로 밑줄넣기 */
+            .gnb > ul > li > a > span::after {
+                content: "";
+                display: block;
+                position: absolute;
+                bottom: -3px;
+                left: 0;
+                /* 부모는? 싸고있는 span */
+                width: 0;
+                /* 마우스오버시 100% */
+                height: 2px;
+                background-color: #fff;
+                /* 트랜지션: 속시이지 - 돌아올때 지연시간 없음! */
+                transition: width 0.2s ease-out;
+            }
+
+            /* 상위메뉴 오버시 가상요소 밑줄애니 */
+            .gnb > ul > li:hover > a > span::after, .gnb > ul > li.on > a > span::after{
+                width: 100%;
+                /* 오버시에 기다리는 시간 0.4초 */
+                transition-delay: 0.4s;
+            }
+
+            /* 
+        [ 부모요소로 부터 상속되는 속성은 무엇인가? ]
+        글자체, 글자색, 글자크기, 글자정렬 등 글자관련속성들
+      */
+
+            /* 서브메뉴 */
+            .smenu {
+                /* 앱솔루트 포지션 */
+                /* position: absolute; */
+                /* 자리를 차지하고 아래를 밀어내려면 position: static; 이어야함 */
+                width: 200px;
+
+                /* 메뉴 숨기기 
+                - 높이값0,overflow:hidden */
+                height: 0;
+                overflow: hidden;
+                /* 주의: 숨기는 박스에 상하패딩이
+                있으면 완전히 숨길 수 없다! */
+
+                /* 배경색 
+                - 상위메뉴 오버시 배경색과 동일 */
+                background-color: darkblue;
+                /* 둥근모서리 - 양쪽아래만 */
+                border-radius: 0 0 5px 5px;
+
+                /* 트랜지션: 속시이지 */
+                transition: height 0.4s ease-out;
+            }
+
+            /* 상위메뉴 li오버시 서브메뉴 보이기
+            - 두번째 메뉴 */
+            /* .gnb > ul > li:nth-child(2):hover .smenu {
+                height: 170px;
+            } */
+            /* 상위메뉴 li오버시 서브메뉴 보이기
+            - 세번째 메뉴 */
+            /* .gnb > ul > li:nth-child(3):hover .smenu {
+                height: 100px;
+            } */
+
+            /* 서브메뉴 ol */
+            .smenu ol {
+                /* 패딩 */
+                padding: 15px;
+            }
+
+            /* 서브메뉴 a */
+            .smenu a {
+                /* a요소 확장 */
+                display: block;
+
+                /* 글자셋팅 */
+                color: lightskyblue;
+                text-decoration: none;
+                font-size: 14px;
+                line-height: 35px;
+
+                /* 트랜지션: 속시이지 */
+                transition: 0.2s;
+            }
+            /* 서브메뉴 오버시 */
+            .gnb ul .smenu a:hover {
+                background-color: lightskyblue;
+                color: darkblue;
+            }
+
+            /* 본문내용 */
+            .cont {
+                position: relative;
+                /* 하위 박스가 포지션이 있으면 나중에 그린박스가
+        윗박스보다 위에 올라온다! 따라서 메뉴박스가 위에 오도록
+        z-index를 상위박스에서 높여줘야 하위메뉴가 밑에 깔리지 않는다! */
+                background-color: #fdfccf;
+                text-align: center;
+                line-height: 50;
+                width: 100%;
+                /* flex-shrink: 1; -> 상태이기 때문에 부모박스가 줄어들 때 같이 줄어듦. 0으로 설정하면 본인 크기만큼 늘어나기 때문에 가로스크롤이 생김 
+
+                원래는 calc(100% - 200px)로 크기를 맞춰줘야 하지만 플렉스 박스의 자식요소이므로 100%를 줘도 더이상 커지지않고 부모크기만큼 강제로 맞춰진다! 이것은 flex-shrink: 1 로 기본셋팅 되어 있기 때문! 1의 의미는 부모가 줄어들때 줄어들래? true(응)의 의미
+                */
+
+                /* (비교바람~!)
+                    width: calc(100% - 200px);
+                    flex-shrink: 0; 
+                */
+            }
+        </style>
+        <script>
+            window.addEventListener("DOMContentLoaded",()=>{
+                const q = x => {
+                    let rv =  document.querySelectorAll(x);
+                    if(rv.length === 1) rv = rv[0];
+                    return rv;
+                }
+
+                /* 구현내용: 메뉴 li클릭시 하위메뉴(.smenu) 열림 */
+                /* 1. 클릭 이벤트 대상: .gnb>ul>li>a*/
+                /* -> 대상을  li하위 직계 상단메뉴인  a요소로 선정한 경우 코드 변경하기*/
+                /* 구현 내용중 부모로 올라가는 방법: 선택요소.parentElement */
+                /* 구현 내용중 다음형제요소로 올라가는 방법: 선택요소.nextElementSibling */
+                /* 구현 내용중 이전형제요소로 올라가는 방법: 선택요소.previousElementSibling */
+                const gnb = q(".gnb>ul>li:has(.smenu)>a");
+                // console.log('gnb: ', gnb);
+
+                /***************************************** 
+                    css선택자 중 하위요소를 포함하는 요소 선택하기
+                    구문: 선택자:has(하위/형제선택자)
+                    예)
+                    ul>li:has(.my) -> 클래스my가 자식으로 있는 li를 선택
+                    ul>li:has(>.my) -> 클래스my가 직계자식으로 있는 li를 선택
+                    h1:has(+div) -> 바로뒤에 div요소가 있는 h1을 선택
+                *****************************************/
+
+
+
+                /* 2. 이벤트 세팅하기 */
+                gnb.forEach((x, idx)=>{ /* x는 li요소, idx는 요소순번 */
+                    x.parentElement.onclick = ()=>{
+                        /* 초기화함수 호출 */
+                        /* idx(순번)을 보내는 이유 */
+                        /* 자신의 순번을 빼고 초기화 하기 위하여 */
+                        initMenu(idx);
+                        /* 0) 하위 .smenu  */
+                        let tg = x.nextElementSibling;
+                        /* 1) 하위 .smenu ol의 높이값 */
+                        let hv = tg.querySelector("ol").clientHeight;
+                        /* clientHeight -> padding을 포함한 요소의 높이값 */
+                        // console.log(hv);
+
+                        /* 2) hv값 전환하기 */
+                        // tg.clientHeight !==0 ? tg.style.height = "0" : tg.style.height = hv+"px"; 
+                        // console.log('tg.clientHeight: ', tg.clientHeight);
+                        if(tg.clientHeight !== 0) hv = 0;
+                        /* tg의 높이값이 0이 아니면 hv값을 0으로 설정 */
+                        /* 클릭시 내의의 ol높이값과 같은 크기로 tg의 높이값을 주어 보이게 함 */
+                        /* 만약 높이값이 들어간 경우라면 높이값이 0이 아님 그러므로 0으로 만들어줌 */
+                        /* 유사 토글 기능 */
+
+                        /* 3) 대상에 적용하기 */
+                        tg.style.height = hv+"px";
+
+                        /* 4) 상위메뉴에 클래스 넣어 효과주기 */
+                        x.parentElement.classList.toggle("on");
+                    };
+                });
+                /* .smenu 클릭시 li요소 클릭이벤트 버블링 막기 */
+                const smenu = q(".smenu");
+                for(let x of smenu){
+                    x.addEventListener("click", e => e.stopPropagation());
+                    /* stopPropagation() -> 이벤트 버블링을 막는 event 객체의 메서드 */
+                }
+                /* a요소 클릭시 기본기능 */
+                const atag = q("a");
+                for(let x of atag){
+                    x.addEventListener("click", e => e.preventDefault());
+                    /* preventDefault() -> 요소의 기본기능 막기 */
+                }
+
+
+            
+
+                /***************************************
+                    메뉴 초기화 함수
+                ***************************************/
+                /* 참고: function initMenu(seq=1000) 이라고 parameter에 값을 할당해 놓으면 함수호출시 아무값도 입력하지 않으면 초기값으로 들어감 */
+                function initMenu(seq=1000){
+                    // console.log("초기화 함수 호출완료", seq);
+                    /* 1. 모든 서브메뉴 높이값 0만들기 */
+                    smenu.forEach((ele, idx)=>{
+                        if(idx === seq) return; /* forEach()에서 return을 쓰면 그 순번만 제외하고 나머지 반복함 */
+                        
+                        // console.log("smenu순번", idx);
+                        ele.style.height = "0"
+                    });
+                    /* 2. 서브메뉴 있는 li의 클래스 on 지우기 */
+                    gnb.forEach((ele, idx)=>{
+                        if(idx === seq) return; /* forEach()에서 return을 쓰면 그 순번만 제외하고 나머지 반복함 */
+                        
+                        // console.log("li순번", idx);
+                        ele.parentElement.classList.remove("on");
+                    });
+
+                    /*************************************
+                        [forEach()에서 중간 뛰어넘기]
+                        -> for문과 같은 제어문이 아니므로 continue를 사용할 수 없음
+                        -> 함수 구역이므로 return 키워드를 사용하면 해당 순번을 빠져나가서 제외되고 나머지 순번의 순회는 계속됨
+                    *************************************/
+                }
+                /* gnb요소자체 */
+                const gnbBx = q(".gnb");
+                /* 타임아웃 변수 */
+                let autoTgnb;
+                /* 마우스 아웃시 */
+                gnbBx.addEventListener("mouseleave", ()=>{
+                    console.log("leave!");
+                    autoTgnb  = setTimeout(() => {
+                        initMenu();
+                    }, 500);
+                })
+                /* 마우스 오버시 타임아웃 지우기 - 실행 쓰나미 방지*/
+                gnbBx.addEventListener("mouseenter", ()=>{
+                    /* 타임아웃 지우기 */
+                    clearTimeout(autoTgnb);
+                })
+                /*************************************
+                    [ mouseover / mouseout ] vs [ mouseenter / mouseleave ]
+                    -> mouseover, mouseout은 하위 요소에 발생한 같은 이벤트가 버블링됨. 반면, mouseenter, mouseleave는 하위 요소에 발생한 같은 이벤트가 버블링되지 않음.
+
+                    -> Why? 이벤트가 요소의 경계선을 기준한 것이므로 하위 요소의 경계선과 불일치하므로 이벤트버블링이 겹쳐지지 않음.
+                    -> 주의사항: 이벤트버블링이 필요한 경우에는 반드시 mouseover, mouseout을 써야함.
+                *************************************/
+
+
+
+
+            });
+
+        </script>
+    </head>
+
+    <body>
+        <h1>유형4. 세로네비 서브별 드롭다운 세로형 - 클릭이벤트JS2</h1>
+        <!-- GNB 네비게이션 -->
+        <div class="wrap">
+            <nav class="gnb">
+                <ul>
+                    <li>
+                        <a href="#"><span>Home</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span>웹개발</span></a>
+                        <!-- 서브메뉴 -->
+                        <div class="smenu">
+                            <ol>
+                                <li>
+                                    <a href="#">웹디자인</a>
+                                </li>
+                                <li>
+                                    <a href="#">HTML5+CSS3</a>
+                                </li>
+                                <li>
+                                    <a href="#">jQuery</a>
+                                </li>
+                                <li>
+                                    <a href="#">웹+모바일</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><span>게시판</span></a>
+                        <!-- 서브메뉴 -->
+                        <div class="smenu">
+                            <ol>
+                                <li>
+                                    <a href="#">Q&amp;A</a>
+                                </li>
+                                <li>
+                                    <a href="#">방명록</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><span>웹튜닝</span></a>
+                        <!-- 서브메뉴 -->
+                        <div class="smenu">
+                            <ol>
+                                <li>
+                                    <a href="#">서버튜닝</a>
+                                </li>
+                                <li>
+                                    <a href="#">DB튜닝</a>
+                                </li>
+                                <li>
+                                    <a href="#">개발환경튜닝</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><span>프로필</span></a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- 내용박스 -->
+            <div class="cont">본문내용</div>
+        </div>
+    </body>
+</html>

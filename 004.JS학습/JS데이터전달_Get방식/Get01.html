@@ -94,7 +94,10 @@
                     let atxt = x.innerText;
                     console.log(atxt);
                     /* 2. 전달할 페이지에 Get방식 데이터 전송하기 */
-                    location.href = "Get02.html?shop="+atxt;
+                    location.href = "Get02.html?shop="+encodeURIComponent(atxt);
+                    /* 2byte 문자인 한글을 보낼떄 인코딩함수사용 */
+                    /* ->인코딩함수를 안써도 최신 브라우저는 자동인코딩을 내부적으로 지원한다. 하지만 지원하지 않는 경우도 있으므로 반드시 인코딩함수로 보내고 디코딩 함수로 받아야함 */
+
                 };
             }
             
@@ -122,6 +125,7 @@
                 '한글'은 %uD55C%uAE00'이 된다.
 
             */
+           
 
 
 

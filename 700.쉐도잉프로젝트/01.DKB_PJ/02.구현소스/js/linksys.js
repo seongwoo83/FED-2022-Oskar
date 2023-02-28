@@ -60,7 +60,10 @@ window.addEventListener("DOMContentLoaded", ()=>{
                 /* 새창 열기 */
                 window.open().location.href = url;
             }else{
-                location.href = url+".html";
+
+                /* 메인페이지 이동일경우 html?code=m 을 보내주자 */
+
+                location.href = url+".html"+(atxt==="tvN로고"?"?code=m":"");
                 /* 
                 [ 페이지 이동하기 ]
                     ((현재창 열기))

@@ -24,7 +24,7 @@ function loadFn(){
     /* 4) 컨텐츠 상위박스 */
     const cont = document.querySelector(".cont");
     /* 5) title 요소(타이틀 내용에 카테고리명 추가) */
-    const titag = document.querySelector(".title");
+    const titag = document.querySelector("title");
     
     /* 2. 메뉴데이터(sinfo 변수) 객체에서 카테고리값 선택하기 */
     const mdata = sinfo[pm];
@@ -65,6 +65,10 @@ function loadFn(){
         ele.innerHTML = mdata["타이틀"][idx];
     })
     /* 4) 컨텐츠박스에 pm과 같은 이름의 클래스 넣기*/
-    cont.classList.add(pm.replace(" & ", "-")); /* '&' 있으면 '-'로 바꿈
-     */
+    cont.classList.add(mdata["경로"]); 
+    // cont.classList.add(pm.replace(" & ", "-")); /* '&' 있으면 '-'로 바꿈
+
+    /* 5) 탭메뉴 출력 title 요소 데이터 넣기 */
+     /* 기존값을 앞에 "제목"속성값을 넣음 */
+        titag.innerText = mdata["제목"] + titag.innerText;
 }

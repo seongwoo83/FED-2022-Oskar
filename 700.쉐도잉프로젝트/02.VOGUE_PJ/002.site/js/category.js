@@ -19,9 +19,11 @@ function loadFn(){
     const stit = document.querySelector(".stit");
     /* 2) 서브메뉴 */
     const lnb = document.querySelector(".lnb");
-    /* 3) 컨텐츠 상위박스 */
+    /* 3) 내용 타이틀 */
+    const contit = document.querySelectorAll(".icont h2");
+    /* 4) 컨텐츠 상위박스 */
     const cont = document.querySelector(".cont");
-    /* 4) title 요소(타이틀 내용에 카테고리명 추가) */
+    /* 5) title 요소(타이틀 내용에 카테고리명 추가) */
     const titag = document.querySelector(".title");
     
     /* 2. 메뉴데이터(sinfo 변수) 객체에서 카테고리값 선택하기 */
@@ -32,7 +34,37 @@ function loadFn(){
     /* 대상: .stit -> stit변수 */
     stit.innerText = mdata["제목"];
     /* 2) lnb 메뉴 넣기 */
-    /* 3) 컨텐츠박스에 pm과 같은 이름의 클래스 넣기*/
+    let mvalue = mdata["메뉴"];
+    if(mdata["메뉴"] !== "없음"){
+        let con = `<ul>`;
+        for(let x of mdata["메뉴"]){
+            con += `
+                <li>
+                    <a href="#">${x}</a>
+                </li>`;
+        }
+        con += `</ul>`;
+        lnb.innerHTML = con;
+        // let temp = `<ul>`;
+        // mvalue.forEach((val)=>{
+        //     temp +=`
+        //         <li>
+        //             <a href="#">${val}</a>
+        //         </li>
+        //     `;
+        // })
+        // temp += `</ul>`
+        // lnb.innerHTML = temp;
+    }else{
+        lnb.remove();
+    }
+    /* 3) 내용 타이틀 넣기 */
+    /* ->  h2개수만큼 순번대로 mdata["타이틀"][순번] */
+    /* h2를 돌릴때 for of가 아닌 forEach() 메서드 사용 */
+    contit.forEach((ele,idx)=>{
+        ele.innerHTML = mdata["타이틀"][idx];
+    })
+    /* 4) 컨텐츠박스에 pm과 같은 이름의 클래스 넣기*/
     cont.classList.add(pm.replace(" & ", "-")); /* '&' 있으면 '-'로 바꿈
      */
 }

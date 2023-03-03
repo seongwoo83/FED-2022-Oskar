@@ -11,8 +11,52 @@
         }
         body{
             overflow-x: hidden;
+            background-image: linear-gradient(to bottom, orange, white, lightgreen);
         }
         
+        .gnb{
+            position: fixed;
+            top: 5vh;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            border-radius: 40px;
+        }
+        /* 가상요소로 움직이는 박스 만들기 */
+        .mbg{
+            position: absolute;
+            /* 변경내용 -> left, width => li의 사이즈에 기준함 */
+            left: 0;
+            width: 206px;
+            height: 78px;
+            background-color:  rgb(255, 182, 72);
+            border-radius: 40px;
+            transition: .4s ease-in-out;
+            opacity: 0 ;
+        }
+
+
+        .gnb ul{
+            position: relative;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .gnb a{
+            text-decoration: none;
+            color: #000;
+            font-size: 24px;
+            display: block;
+            padding: 23px 35px;
+            transition: color .2s;
+        }
+        .gnb a:hover{
+            color: #fff;
+            transition-delay: .4s;
+        }
+
+
         .pg{
             height: 100vh;
             outline: 1px solid blue;
@@ -28,7 +72,6 @@
             top: 0;
             left: 0;
             height: 100vh;
-            
             background-color: orange;
         }
         .slidePg ul{
@@ -83,12 +126,53 @@
             /* 가로이동박스에 코드 넣기 */
             spg.innerHTML = hcode;
 
+            /*  GNB메뉴 오버시 움직이는 배경 */
+            const gnb = document.querySelectorAll(".gnb li");
+            const mbg = document.querySelector(".mbg");
+        
+            gnb.forEach(ele =>{
+                ele.onmouseenter = e=>{
+                    /* 1. 요소 정보 알아내기 */
+                    /* 1) left 위치값 */
+                    let eleft = ele.offsetLeft;
+                    /* 2) width 값 */
+                    let ewidth = ele.offsetWidth;
+
+                    mbg.style.left = eleft+"px";
+                    mbg.style.width = ewidth+"px";
+                    mbg.style.opacity = "1";
+                }
+
+                ele.onmouseleave = e =>{
+                    mbg.style.opacity = "0";
+                }
+
+            })
+
+
 
 
  }); ////////// load /////////////////
     </script>
 </head>
 <body>
+    <nav class="gnb">
+        <div class="mbg"></div>
+        <ul>
+            <li>
+                <a href="#">Let's explore</a>
+            </li>
+            <li>
+                <a href="#">Let's attend</a>
+            </li>
+            <li>
+                <a href="#">Let's meet</a>
+            </li>
+            <li>
+                <a href="#">Let's dance</a>
+            </li>
+        </ul>
+    </nav>
     <div class="pg"></div>
     <div class="pg"></div>
     <!-- 타겟페이지 -> 스크롤시 가로이동 -->

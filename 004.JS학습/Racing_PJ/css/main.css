@@ -95,7 +95,11 @@ body *{
     left: 0;
 }
 .racer{
+    width: 200px;
     transform-origin: right;
+}
+.racer img{
+    width: 100%;
 }
 .racer::after{
     content: '';

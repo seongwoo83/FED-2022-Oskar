@@ -61,6 +61,11 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
                 t1pos += 16;
                 t1.style.left = (++t1pos)+"px";
+                /* 거북버튼 클릭시 포커스가 들어가므로 키보드 엔터버튼 비활성화 필요 매번 포커스를 빼야함 */
+                ele.blur();
+                /* blur()메서드 - 포커스가 사라짐 */
+                /* focus()메서드 - 포커스가 들어감 */
+
                 goR1();
             }
             /* (2-3) 처음으로 */
@@ -86,6 +91,10 @@ window.addEventListener("DOMContentLoaded", ()=>{
         if(!autoI){
             autoI = setInterval(()=>{
                 r1.style.left = (++r1pos) + "px";
+
+                whoWinner()
+
+
             }, level.value)
             /* 인터벌 시간은 선택박스의 옵션값을 읽어서 사용함 */
         }
@@ -110,17 +119,31 @@ window.addEventListener("DOMContentLoaded", ()=>{
             t1Stop = 1;
 
             /* (3) 승자판별후 메시지 보여주기 */
-            if(r1pos > t1pos) msg.innerText = "토끼 승리";
-            else if(r1pos < t1pos) msg.innerText = "거북 승리";
+            if(r1pos > t1pos) msg.innerText = msgtxt.토끼[rnum];
+            else if(r1pos < t1pos) msg.innerText = msgtxt.거북[rnum];
             else msg.innerText = "비김! 재승부!";
 
             /* (4) 메시지 보이기 */
             msg.style.display = "block";
+            msg.style.zIndex = "101";
+
+            /* (5) 전체 반투명 암전주기 */
+            const cover = qs(".cover");
+            cover.innerHTML += `<div style="position:fixed; top:0; left:0; width:100vw; height:100vh; background-color: #000; opacity:0.5; z-index:100;"></div>`;
+            /* 주의사항:  body 하위에 새로운 요소를 추가하면 전체 body 직계하에에 있는 요소들에 세팅된 이벤트가 소실됨 -> DOM이 재구조화 되기 때문 */
+            /* 처음부터 편성된 박스에 넣어주면 이 문제가 해결됨 */
+
+            /* (6) 버튼 위로 올리기 */
+            qs("#btns").style.zIndex = "200";
         }
     }
     
-    
+    /* 메시지 변수 */
+    const msgtxt = {
+        "토끼":["역시, 토끼가 이겼군", "넌 안돼! 오~ 노노노! 토끼 승!", "토끼는 잠자고 가도 이겨"],
+        "거북":["넌 뭐니? 토끼야? 내가 승!", "대대로 거북이 이겼단다!", "이제 넌 어쩌니? 토끼퇴출"],
+    };
 
-
+    const rnum = Math.floor(Math.random()*msgtxt.토끼.length);
 
 }); /////////// 로드구역 ///////////////////////////

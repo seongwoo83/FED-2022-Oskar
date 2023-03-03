@@ -53,7 +53,7 @@
         }
         .gnb a:hover{
             color: #fff;
-            transition-delay: .4s;
+            transition-delay: .2s;
         }
 
 
@@ -137,10 +137,12 @@
                     let eleft = ele.offsetLeft;
                     /* 2) width 값 */
                     let ewidth = ele.offsetWidth;
+                    let eheight = ele.offsetHeight;
 
                     mbg.style.left = eleft+"px";
                     mbg.style.width = ewidth+"px";
                     mbg.style.opacity = "1";
+                    mbg.style.height = eheight+"px";
                 }
 
                 ele.onmouseleave = e =>{

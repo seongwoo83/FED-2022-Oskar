@@ -21,6 +21,7 @@
             transform: translateX(-50%);
             background-color: #fff;
             border-radius: 40px;
+            z-index: 9999;
         }
         /* 가상요소로 움직이는 박스 만들기 */
         .mbg{
@@ -50,6 +51,7 @@
             display: block;
             padding: 23px 35px;
             transition: color .2s;
+            white-space: nowrap;
         }
         .gnb a:hover{
             color: #fff;
@@ -105,26 +107,84 @@
     <script>
         window.addEventListener("DOMContentLoaded",()=>{
             console.log("loaded");
-
             /* 1. 대상선정 */
             /* 1) 타겟박스: .tpg */
             const tpg = document.querySelector(".tpg");
-            /* 2) 가로 이동 페이지: .slidePg */
+            /* 2) sticky 페이지: .slidePg */
             const spg = document.querySelector(".slidePg");
+            
+            /* 리스트 넣기 함수 호출 */
+            makeList()
 
-            /* 2.  가로이동박스에 디자인 요소 넣기 */
-            /* html 코드 변수 */
-            let hcode = `<ul>`;
-            for(let x = 1; x<8; x++){
-                hcode += `
-                    <li>
-                        <img src="images/dance/${x}.jpg" alt="댄스">
-                    </li>
-                `;
+            /* 3) 가로이동 박스:  */
+            const mvbx = spg.querySelector("ul");
+
+
+            /* **********************************
+                스크롤시 스티키 구간에서 가로방향 이동 구현하기
+
+            ***********************************/
+            
+            /* **************************
+                함수명: retval()
+                기능: getBoundingClientRect() 값리턴
+            ***************************/
+            function retVal (x) {
+                return x.getBoundingClientRect().top;
             }
-            hcode += `</ul>`;
-            /* 가로이동박스에 코드 넣기 */
-            spg.innerHTML = hcode;
+            /* 대상: mvbx */
+            /* 이벤트: scroll */
+            window.addEventListener("scroll", movePage)
+            
+
+            /* *****************************
+                함수명: movePage()
+                기능: 가로방향 이동하기
+            ******************************/
+
+            function movePage(){
+
+                /* 1. 타겟박스의 바운딩 위치값 찍기 */
+                /* 타겟박스 -> 스티기 박스의 부모 박스(멈추는 구간) */
+                let tgpos = retVal(tpg);
+
+                /* 2. 가로이동박스(mvbx)의 left값 변경하기 */
+                /* 타겟박스의 바운딩값을 left값으로 넣어줌 */
+                /* 적용구간 설정: 0 이하 -3000px 이상 */
+                if(tgpos <= 0 && tgpos >= -3000){
+                    mvbx.style.left = tgpos+"px";
+                }else if(tgpos >0){
+                    mvbx.style.left = "0";
+                }
+                
+
+            }
+
+
+
+
+            
+            /* ********************************
+                함수명: makeList();
+                기능: 리스트 넣기
+            *********************************/
+            
+            function makeList(){
+                /* 2.  가로이동박스에 디자인 요소 넣기 */
+                /* html 코드 변수 */
+                let hcode = `<ul>`;
+                for(let x = 1; x<8; x++){
+                    hcode += `
+                        <li>
+                            <img src="images/dance/${x}.jpg" alt="댄스">
+                        </li>
+                    `;
+                }
+                hcode += `</ul>`;
+                /* 가로이동박스에 코드 넣기 */
+                spg.innerHTML = hcode;
+            }
+            
 
             /*  GNB메뉴 오버시 움직이는 배경 */
             const gnb = document.querySelectorAll(".gnb li");

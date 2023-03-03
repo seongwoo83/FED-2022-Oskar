@@ -52,15 +52,75 @@ window.addEventListener("DOMContentLoaded", ()=>{
             /* (2-1) 토끼이동 */
             if(btxt === "토끼출발"){
                 /* 위치이동하기 */
-                r1.style.left = (++r1pos)+"px";
+                goR1();
             }
             /* (2-2) 거북이동 */
             else if(btxt === "거북출발"){
+                /* 거북멈춤상태값(t1Stop)이 1이면 함수 나가기 */
+                if(t1Stop) return;
+
                 t1pos += 16;
                 t1.style.left = (++t1pos)+"px";
+                goR1();
+            }
+            /* (2-3) 처음으로 */
+            else if(btxt === "처음으로"){
+                /* 브라우저 캐싱을 지우고 다시 부르기 */
+                // location.replace("index.html");
+                /* 현재 페이지 리로딩 */
+                location.reload();
             }
 
         };
     });
+
+
+    /* ******************************************
+        함수명: goR1()
+        기능: 토끼자동이동(인터벌함수)
+    *******************************************/
+    /* 인터벌용 함수 */
+    let autoI;
+    function goR1(){
+        /* 할당되지 않은 변수는 undefined이고 if문에서 false 처리되므로 할당전 상태일때만 if문에 들어가게 하기 위해 '!' 연산자를 사용하면 됨 */
+        if(!autoI){
+            autoI = setInterval(()=>{
+                r1.style.left = (++r1pos) + "px";
+            }, level.value)
+            /* 인터벌 시간은 선택박스의 옵션값을 읽어서 사용함 */
+        }
+    }
+
+    /* ******************************************
+        함수명: whoWinner();
+        기능: 기준값보다 레이서 위치값이 큰경우 승자를 판별하여 메세지를 보여줌
+    *******************************************/
+    let t1Stop = 0; /* 거북 멈춤값 1이면 머머묾ㅁ 횢ㄴㅂ */
+    function whoWinner(){
+
+        /* 1) 토끼 / 거북의 위치값이 기준값 이상일때 */
+        /*  기준값: 650px*/
+
+        if(r1pos >= 650 || t1pos >=650){
+            /* 거북멈춤 상태값(t1Stop=1)이면 함수 나가기 */
+
+            /* (1) 토끼 멈추기 */
+            clearInterval(autoI);
+            /* (2) 거북 멈추기 */
+            t1Stop = 1;
+
+            /* (3) 승자판별후 메시지 보여주기 */
+            if(r1pos > t1pos) msg.innerText = "토끼 승리";
+            else if(r1pos < t1pos) msg.innerText = "거북 승리";
+            else msg.innerText = "비김! 재승부!";
+
+            /* (4) 메시지 보이기 */
+            msg.style.display = "block";
+        }
+    }
+    
+    
+
+
 
 }); /////////// 로드구역 ///////////////////////////

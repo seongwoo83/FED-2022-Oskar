@@ -56,7 +56,6 @@
     /* display: flex; */
     position: absolute;
     left: 0;
-    width: 1300px;
     /* 숨기기 장치 */
     overflow: hidden;
     height: 0;
@@ -66,6 +65,8 @@
 /* 하위메뉴 구조 랩핑박스 */
 .smbx{
     display: flex;
+    width: 1300px;
+    margin: 0 auto;
 }
 
 /* 서브메뉴 타이틀 */

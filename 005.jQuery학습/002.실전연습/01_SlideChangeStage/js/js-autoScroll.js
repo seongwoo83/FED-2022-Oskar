@@ -105,6 +105,9 @@ function loadFn(){
         }
         
         console.log("페이지 번호: ", pgnum);
+
+        /* 4) 페이지 이동하기 */
+        window.scrollTo(0, window.innerHeight*pgnum);
     }
 
 

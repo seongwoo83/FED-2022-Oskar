@@ -32,39 +32,37 @@
 }
 /* 1-2.GNB영역 */
 .gnb{
-    position: relative;
     max-width: 1300px;
     margin: 0 auto;
     white-space: nowrap;
-    /* GNB배경박스보다 위에 위치 */
-    z-index: 1;
 }
 .gnb>ul{
     display: flex;
+    gap: 0 40px;
 }
 .gnb>ul>li>a{
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 0 20px;
-    line-height: 60px;
     color: #ccc;
+}
+
+.smenu_wrap{
+    position: absolute;
+    margin-top: 15px;
+    width: 100%;
+    background-color: #fff;
+    left: 0;
+    box-shadow: 0px 1px 5px 0px #888;
 }
 
 /* 하위메뉴 */
 .smenu{
     /* display: flex; */
-    position: absolute;
-    left: 0;
+    margin: 0 auto;
+    /* background-color: #ddd; */
     width: 1300px;
-    /* 숨기기 장치 */
-    overflow: hidden;
-    height: 0;
-    opacity: 0;
-    transition: .4s ease-in-out;
+    display: none;
 }
-/* 하위메뉴 구조 랩핑박스 */
-.smbx{
+/* 임시 첫번째메뉴만 보임 */
+.gnb>ul>li:nth-child(5) .smenu{
     display: flex;
 }
 
@@ -73,6 +71,7 @@
     width: 166px;
     padding: 20px;
     font-weight: normal;
+    border-right: 1px solid #ddd;
 }
 /* 타이틀 */
 .smenu h2 div{
@@ -102,8 +101,17 @@
     width: 120px;
     border-bottom: 1px solid #ddd;
     padding-bottom:  5px;
-    margin-bottom: 10px;
 }
+.swrap dd{
+    margin: 5px 0;
+}
+.swrap dd a{
+    position: relative;
+    display: inline-block;
+    font-size: 13px;
+    color: #aaa;
+}
+
 .swrap dt::after{
     content: '';
     display: block;
@@ -113,15 +121,7 @@
     background-color: #555;
     transition: width .2s;
 }
-.swrap dd{
-    margin: 5px 0;
-}
-.swrap dd a{
-    position: relative;
-    color: #aaa;
-    display: inline-block;
-    font-size: 13px;
-}
+
 .swrap dd a::after{
     content: '';
     display: block;
@@ -135,16 +135,4 @@
 }
 .swrap dt:hover::after, .swrap dd:hover a::after{
     width: 100%;
-}
-
-/* 서브메뉴 배경박스 */
-.bgbx{
-    position: absolute;
-    top: 140px;
-    width: 100%;
-    height: 0;
-    opacity: 0;
-    transition: .4s ease-in-out;
-    background-color: #fff;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.211);
 }

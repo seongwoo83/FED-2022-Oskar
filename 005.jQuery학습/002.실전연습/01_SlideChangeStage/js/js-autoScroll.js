@@ -188,10 +188,23 @@ function  initCSS (ele, seq){
     console.log("초기화", seq);
     /* 해당요소 스타일 속성 선택 */
     let sty  = ele.style;
+    /* 트랜지션 공통 초기화 */
+    sty.transition = "none";
+
     if(seq === 0){
-        
+        sty.left = "150%";
     }else if(seq === 1){
         sty.opacity = "0";
+    }else if(seq === 2){
+        sty.top = "-50%";
+    }else if(seq === 3){
+        sty.transform = "translate(-50%,-50%) scale(0) "
+    }else if(seq === 4){
+        sty.transform = " translate(-50%,-50%) rotateY(720deg)"
+    }else if(seq === 5){
+        sty.transform = "translate(-50%, -50%) rotateX(720deg) "
+    }else if(seq === 6){
+        sty.transform = "translate(-50%, -50%) rotate(360deg) "
     }
 }
 
@@ -204,16 +217,37 @@ function pageAction(seq){
     console.log("액션");
     /* 해당 페이지 액션주기 */
     let sty = minfo[seq].style;
+    minfo.forEach((ele,idx)=>{initCSS(ele,idx)});
 
     if(seq === 0){
-        
+        sty.left = "50%";
+        sty.transition = "1s ease-out"
     }else if(seq === 1){
         /* 투명도 복원 */
         sty.opacity = "1";
         sty.transition = "1.5s ease-in";
+    }else if(seq === 2){
+        sty.top = "50%";
+        sty.transition = "1.5s cubic-bezier(0, -3.67, 0.81, 4.04)";
+    }else if(seq === 3){
+        sty.transform = "translate(-50%,-50%) scale(1)";
+        sty.transition = "1.5s ease-in-out";
+    }else if(seq === 4){
+        sty.transform = " translate(-50%,-50%) rotateY(0)";
+        sty.transition = "1s ease";
+    }else if(seq === 5){
+        sty.transform = "translate(-50%, -50%) rotateX(0)";
+        sty.transition = "2s ease-out";
+    }else if(seq === 6){
+        sty.transform = "translate(-50%, -50%) rotate(0)";
+        sty.transition = "1.5s ease-in-out";
     }
 }
 
+
+setTimeout(() => {
+    pageAction(0);
+}, 1000);
 
 
 

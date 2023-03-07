@@ -75,13 +75,22 @@ function loadFn(){
     console.log("로딩완료");
 
 /* 이벤트 연결 함수 등록하기 */
-/* GNB메뉴 */
+/* 1) GNB메뉴 */
 const gnb = document.querySelectorAll(".gnb a");
-
-
-gnb.forEach((ele, idx)=>{
-    ele.addEventListener("click",  ()=>movePg(idx));
+gnb.forEach((ele, idx, obj)=>{
+    ele.addEventListener("click",  ()=>movePg(idx, obj));
+    /* 전체 객체(obj)를  함수에 전달하는 이유는?
+    -> 인디케이터도 gnb와 같은 기능을 수행하기 때문에 호출시 자기자신 전체를 보내야
+    각각에 맞게 기능을 수행할 수 있음 */
 });
+/* 2) 인디케이터 메뉴 */
+const indic = document.querySelectorAll(".indic a");
+indic.forEach((ele, idx, obj)=>{
+    ele.addEventListener("click", ()=>movePg(idx, obj));
+});
+
+
+
 /******************************************** 
     함수명: movePg
     기능: 메뉴클릭시 해당위치로 이동
@@ -94,23 +103,17 @@ function movePg(seq){
     /* 페이지 번호 업데이트하기 */
     pgnum = seq;   
     console.log("메뉴클릭 페이지 번호: ", pgnum);
-    /* 페이지 이동하기 */
-    window.scrollTo(0, window.innerHeight*pgnum);
-    /* 메뉴 초기화 하기(class on 빼기) */
-    for(let x of gnb) x.parentElement.classList.remove("on");
-    /* 클래스 on넣기 */
-    gnb[seq].parentElement.classList.add("on");
-
-
-
-
+    /* 업데이트 함수 호출 */
+    /*  개별 객체를 업데이트 할 때는 obj변수가 필요했으나, gnb 메뉴와 
+    인디케이터 메뉴가 모두 업데이트 되어야하므로 개별 obj가 필요없어짐 */
+    updatePg(gnb);
+    updatePg(indic);
 }
 
-
-
-
-
-
+/*************************************
+    함수명: wheelFn
+    기능: 휠 이동시 페이지 이동
+*************************************/
     /* 0. 변수 설정하기 */
         /* 1) 전체 페이지 변수 */
     let pgnum = 0;
@@ -126,7 +129,7 @@ function movePg(seq){
     /* 2. 휠 이벤트 함수 만들기 */
     function wheelFn(e){
         /* 0) 기본 기능 멈추기 - addEventListener 옵션 passive: false 필수*/
-        e.preventDefault();
+    e.preventDefault();
 
         /* 광스크롤 막기 */
         if(prot_sc) return;
@@ -148,9 +151,25 @@ function movePg(seq){
             pgnum--;
             if(pgnum<0)pgnum = 0;
         }
-        
-        
+        /* 페이지 이동 + 메뉴에 클래스 부여 */
+        updatePg(gnb);
+        updatePg(indic);
     }
+
+/*************************************************
+    함수명: updatePg
+    기능: 페이지 이동시 설정값 업데이트하기
+*************************************************/
+function updatePg(obj){
+    /* 함수호출확인 */
+    console.log("업데이트");
+    /* 페이지 이동하기 */
+    window.scrollTo(0, window.innerHeight*pgnum);
+    /* 메뉴 초기화 하기(class on 빼기) */
+    for(let x of obj) x.parentElement.classList.remove("on");
+    /* 클래스 on넣기 */
+    obj[pgnum].parentElement.classList.add("on");
+}
 
 
 }

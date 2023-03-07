@@ -72,7 +72,7 @@ setTimeout(() => {
 window.addEventListener("DOMContentLoaded",  loadFn);
 
 function loadFn(){
-    console.log("로딩완료");
+    // console.log("로딩완료");
 
 /* 이벤트 연결 함수 등록하기 */
 /* 1) GNB메뉴 */
@@ -99,10 +99,10 @@ function movePg(seq){
     /* 기본기능 막기 */
     event.preventDefault();
     /* 호출확인 */
-    console.log("이동", seq);
+    // console.log("이동", seq);
     /* 페이지 번호 업데이트하기 */
     pgnum = seq;   
-    console.log("메뉴클릭 페이지 번호: ", pgnum);
+    // console.log("메뉴클릭 페이지 번호: ", pgnum);
     /* 업데이트 함수 호출 */
     /*  개별 객체를 업데이트 할 때는 obj변수가 필요했으나, gnb 메뉴와 
     인디케이터 메뉴가 모두 업데이트 되어야하므로 개별 obj가 필요없어짐 */
@@ -136,11 +136,11 @@ function movePg(seq){
         prot_sc = 1;
         setTimeout(()=>prot_sc=0 ,800);
         /* 1) 호출 확인 */
-        // console.log("휠~~");
+        // // console.log("휠~~");
         /* 2) 휠 방향 알아내기 */
         /* 이벤트객체.wheelDelta */
         let dir = e.wheelDelta;
-        console.log("방향 ",dir);
+        // console.log("방향 ",dir);
         /* 휠 내리면 마이너스(올리면 플러스) */
 
         /* 3) 방향에 따른 페이지번호 증감 */
@@ -162,7 +162,7 @@ function movePg(seq){
 *************************************************/
 function updatePg(obj){
     /* 함수호출확인 */
-    console.log("업데이트");
+    // console.log("업데이트");
     /* 페이지 이동하기 */
     window.scrollTo(0, window.innerHeight*pgnum);
     /* 메뉴 초기화 하기(class on 빼기) */
@@ -185,7 +185,7 @@ minfo.forEach((ele,idx)=>{initCSS(ele, idx)})
 /* 함수 만들기 */
 function  initCSS (ele, seq){
     /* 호출확인 */
-    console.log("초기화", seq);
+    // console.log("초기화", seq);
     /* 해당요소 스타일 속성 선택 */
     let sty  = ele.style;
     /* 트랜지션 공통 초기화 */
@@ -214,7 +214,7 @@ function  initCSS (ele, seq){
 ************************************/
 function pageAction(seq){
     /* 호출확인 */
-    console.log("액션");
+    // console.log("액션");
     /* 해당 페이지 액션주기 */
     let sty = minfo[seq].style;
     minfo.forEach((ele,idx)=>{initCSS(ele,idx)});

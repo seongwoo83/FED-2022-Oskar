@@ -169,7 +169,57 @@ function updatePg(obj){
     for(let x of obj) x.parentElement.classList.remove("on");
     /* 클래스 on넣기 */
     obj[pgnum].parentElement.classList.add("on");
+
+    /* 페이지 이동 후 해당 페이지 액션 */
+    setTimeout(() =>pageAction(pgnum), 1000);
 }
+
+
+/****************************
+    함수명: initCSS
+    기능: 등장할 요소들의 초기값 세팅
+****************************/
+/* 대상: .minfo */
+const minfo = document.querySelectorAll(".minfo");
+minfo.forEach((ele,idx)=>{initCSS(ele, idx)})
+/* 함수 만들기 */
+function  initCSS (ele, seq){
+    /* 호출확인 */
+    console.log("초기화", seq);
+    /* 해당요소 스타일 속성 선택 */
+    let sty  = ele.style;
+    if(seq === 0){
+        
+    }else if(seq === 1){
+        sty.opacity = "0";
+    }
+}
+
+/************************************
+    함수명: pageAction
+    기능: 페이지별 액션주기
+************************************/
+function pageAction(seq){
+    /* 호출확인 */
+    console.log("액션");
+    /* 해당 페이지 액션주기 */
+    let sty = minfo[seq].style;
+
+    if(seq === 0){
+        
+    }else if(seq === 1){
+        /* 투명도 복원 */
+        sty.opacity = "1";
+        sty.transition = "1.5s ease-in";
+    }
+}
+
+
+
+
+
+
+
 
 
 }

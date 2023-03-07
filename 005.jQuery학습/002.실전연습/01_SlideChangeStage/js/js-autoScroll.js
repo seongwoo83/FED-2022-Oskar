@@ -74,8 +74,12 @@ function loadFn(){
     
     
     /* 0. 변수 설정하기 */
-    /* 전체 페이지 변수 */
+        /* 1) 전체 페이지 변수 */
     let pgnum = 0;
+        /* 2) 전체 페이지 수 */
+    const pgcnt = document.querySelectorAll(".page").length;
+        /* 3) 광스크롤 금지변수 */
+    let prot_sc = 0; /* 0이면 광스크롤 허용, 1이면 광스크롤 금지 */
     
     
     /* 1. 전체 휠 이벤트 설정하기 */
@@ -98,7 +102,7 @@ function loadFn(){
         /* 3) 방향에 따른 페이지번호 증감 */
         if(dir<0) {
             pgnum++;
-            if(pgnum > 6) pgnum=6;
+            if(pgnum > pgcnt-1) pgnum=pgcnt-1;
         }else{
             pgnum--;
             if(pgnum<0)pgnum = 0;

@@ -2,14 +2,6 @@
 
 /* 새로고침시 스크롤 위치 캐싱 무시하고 맨위로 이동 */
 /* scrollTo(가로, 세로) -> 위치 이동 메서드 */
-setTimeout(() => {
-    window.scrollTo(0, 0);
-}, 100);
-
-window.addEventListener("DOMContentLoaded",  loadFn);
-
-function loadFn(){
-    console.log("로딩완료");
 
     /************************************
         [ 휠 이벤트를 이용한 페이지 이동 컨트롤하기 ]
@@ -73,6 +65,52 @@ function loadFn(){
     ************************************/
     
     
+setTimeout(() => {
+    window.scrollTo(0, 0);
+}, 100);
+
+window.addEventListener("DOMContentLoaded",  loadFn);
+
+function loadFn(){
+    console.log("로딩완료");
+
+/* 이벤트 연결 함수 등록하기 */
+/* GNB메뉴 */
+const gnb = document.querySelectorAll(".gnb a");
+
+
+gnb.forEach((ele, idx)=>{
+    ele.addEventListener("click",  ()=>movePg(idx));
+});
+/******************************************** 
+    함수명: movePg
+    기능: 메뉴클릭시 해당위치로 이동
+********************************************/
+function movePg(seq){
+    /* 기본기능 막기 */
+    event.preventDefault();
+    /* 호출확인 */
+    console.log("이동", seq);
+    /* 페이지 번호 업데이트하기 */
+    pgnum = seq;   
+    console.log("메뉴클릭 페이지 번호: ", pgnum);
+    /* 페이지 이동하기 */
+    window.scrollTo(0, window.innerHeight*pgnum);
+    /* 메뉴 초기화 하기(class on 빼기) */
+    for(let x of gnb) x.parentElement.classList.remove("on");
+    /* 클래스 on넣기 */
+    gnb[seq].parentElement.classList.add("on");
+
+
+
+
+}
+
+
+
+
+
+
     /* 0. 변수 설정하기 */
         /* 1) 전체 페이지 변수 */
     let pgnum = 0;
@@ -89,10 +127,13 @@ function loadFn(){
     function wheelFn(e){
         /* 0) 기본 기능 멈추기 - addEventListener 옵션 passive: false 필수*/
         e.preventDefault();
-        
+
+        /* 광스크롤 막기 */
+        if(prot_sc) return;
+        prot_sc = 1;
+        setTimeout(()=>prot_sc=0 ,800);
         /* 1) 호출 확인 */
         // console.log("휠~~");
-
         /* 2) 휠 방향 알아내기 */
         /* 이벤트객체.wheelDelta */
         let dir = e.wheelDelta;
@@ -108,10 +149,7 @@ function loadFn(){
             if(pgnum<0)pgnum = 0;
         }
         
-        console.log("페이지 번호: ", pgnum);
-
-        /* 4) 페이지 이동하기 */
-        window.scrollTo(0, window.innerHeight*pgnum);
+        
     }
 
 

@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <title> ID 선택자  </title>
 <!-- jQuery library -->
-<script src="jquery-1.7.2.min.js"></script>
+<script src="../jquery-3.6.3.min.js"></script>
+<script src="../jquery-ui.min.js"></script>
 <script>
 $(document).ready(function(e) {
     // 미션: h2요소를 클릭하면
@@ -16,12 +17,43 @@ $(document).ready(function(e) {
 	// 텍스트 변경하는 jQuery 메서드
 	// $(선택자).text(글자)
 	
-	
+	$("h2").click(function(){
+    /* animate()를 위한 보더 초기값 세팅 */
+    $("#sub").text("이승기").css({border: "10px dotted #000"}).animate({
+      backgroundColor: "yellow",
+      color: "blue",
+      borderWidth: "1px",
+      borderColor: "green",
+      // border: "1px solid green",
+      fontSize: "42px"
+    }, 800);
+
+    $("#main").text("공유").css({border: "10px dotted #000"}).delay(1000).animate({
+      backgroundColor: "blue",
+      color: "#fff",
+      borderWidth: "3px",
+      borderColor: "yellow",
+      // border: "3px solid yellow",
+      fontSize: "52px"
+    }, 800);
+
+    $("#total").text("싸랑해요~!").css({border: "10px dotted #000"}).delay(2000).animate({
+      backgroundColor: "black",
+      color: "red",
+      borderWidth: "10px",
+      borderColor: "purple",
+      // border: "2px solid purple",
+      fontSize: "152px"
+    }, 800);
+  });
 		
-	});////////// click //////////////////////
 	
-	
-	
+  /* [ 제이쿼리 애니메이션 메서드 : animate() ] */
+  /* -> animate({css설정}, 시간, 이징, 함수) */
+  /* 1) CSS설정: CSS요소 변경 */
+  /* 2) 시간: 1/1000초(단위안씀) */
+  /* 3) 이징: 제이쿼리 이징 (https://easings.net/ko) -> 반드시 제이쿼리 UI가 있어야함*/
+  /* 4) 함수: 콜백함수(애니메이션 후 실행함수)*/
 	
 	
 	

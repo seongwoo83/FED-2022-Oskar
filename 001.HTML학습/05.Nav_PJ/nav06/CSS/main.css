@@ -17,7 +17,7 @@
     padding: 100px 0;
 }
 
-.banbx::before{
+.banbx.ban1::before{
     content: '';
     position: absolute;
     top: 0;
@@ -39,9 +39,7 @@
     /* border: 2px solid red; */
     box-sizing: border-box;
     
-    outline: 5px dotted blue;
 }
-
 .slide {
     display: flex;
     /* 플렉스박스!!! */
@@ -78,7 +76,7 @@
     transition: .4s;
 }
 /* 3번째가 주인공이므로 원래밝기로 조금 크게변경! */
-.slide li:nth-child(3){
+.ban1 .slide li:nth-child(3){
     filter: brightness(100%);
     transform: scale(1.2);
 }
@@ -120,4 +118,32 @@
     width: 0;
     height: 0;
     overflow: hidden;
+}
+
+
+/* 2번 배너 */ 
+/*컨텐츠 박스 */
+/* .ban2{
+    width: 280px;
+    height: 280px;
+} */
+.ban2{
+    width: 50%;
+    margin: 100px auto;
+    padding: 0;
+}
+.ban2 .bancont{
+    width: 100%;
+    aspect-ratio: 1 /1;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+.ban2 .abtn{
+    background-color: #00000060;
+}
+.ban2 .ab1{
+    left: -70px;
+}
+.ban2 .ab2{
+    right: -85px;
 }

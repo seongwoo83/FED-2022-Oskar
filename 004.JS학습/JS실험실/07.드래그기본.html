@@ -19,6 +19,79 @@
             background: url(https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202107/08/JTBC/20210708153002482ktbd.jpg) no-repeat center top/cover;
         }
     </style>
+    <script>
+        window.addEventListener("DOMContentLoaded", ()=>{
+            const tg = document.querySelector(".tg");
+
+            /*************************************
+                [ 드래그 기능 구현을 위한 이벤트 ]
+                1. 딸 -> 마우스 포인터 누름 -> mousedown
+
+                2. 각 -> 마우스 포인터 올라옴 -> mouseup
+
+                3. 질질 -> 마우스 움직일 때 -> mousemove
+                    -> 드래그 상태는 "딸" 상태에서 "질질" 하는것
+
+                mousedown 할때 드래그 상태변수값을 1로 변경
+                mouseup 할때 드래그 상태변수값을 0으로 변경
+
+            *************************************/
+
+            /* 변수만들기 */
+            /* 1. 드래그 상태변수 */
+            let drag = false; // 1 - 드래그 중 / 0 - 드래그중 아님
+            /* 2. 첫번째 위치포인트 first x, first y */
+            let fx, fy;
+            /* 3. 마지막 위치포인트 last x, last y */
+            let lx = 0, ly = 0;
+            /* 4. 움직일 때 위치포인트 move x, move y */
+            let mvx, mvy;
+            /* 5. 위치이동 차이결과 변수 result x, ruseulexx*/
+            let rx, ry;
+
+
+            /* 함수 만들기 */
+            /* 1. 드래그 상태 true */
+            const dTrue = () => drag = true;
+            /* 2. 드래그 상태 false */
+            const dFalse = () => drag = false;
+            /* 3. 드래그 움직일 때 작동함수 */
+            const dMove = () =>{
+                // console.log("드래그 상태", drag);
+                if(drag){
+                    /* 드래그 상태에서 움직일 때 위치값 : mvx, mvy */
+                    mvx = event.pageX;
+                    mvy = event.pageY;
+                    /* 움직일 때 위치값 - 처음 위치값 */
+                    /* x축값은 left값, y축값은 top값 */
+                    rx = mvx - fx;
+                    ry = mvy - fy;
+                    
+                    tg.style.left = (rx+lx)+"px";
+                    tg.style.top = (ry+ly)+"px";
+                    /* 한번 드래그 후 다시 드래그 시 움직인 위치값이 필요함 */
+                    /* 마지막 위치값 저장 필요 -> lx, ly */
+                    /* 항상 최종위치에서 움직인 위치를 더한다 */
+                }
+            };
+            /* 4. 첫번째 위치 포인트 세팅함수 */
+            const firstPoint = ()=>{fx = event.pageX; fy = event.pageY};
+            /* 5. 마지막 위치 포인트 세팅함수 */
+            const lastPoint = ()=>{lx += rx; ly += ry};
+            /* 최종 이동결과 값인 rx, ry을 대입 연산하여 값을 업데이트 함 */
+            /* 이벤트 등록하기 */
+            /* 1. 마우스 내려갈 때 : 드래그  true + 첫번째 위치값*/
+            tg.addEventListener("mousedown", ()=>{dTrue(); firstPoint();});
+            /* 2. 마우스 올라올 때 */
+            tg.addEventListener("mouseup", ()=>{dFalse(); lastPoint();});
+            /* 3. 마우스 움직일 때 */
+            tg.addEventListener("mousemove", dMove);
+            /* 4. 마우스가 벗어날 때 */
+            tg.addEventListener("mouseleave", dFalse);
+
+
+        })
+    </script>
 </head>
 <body>
     <div class="tg"></div>

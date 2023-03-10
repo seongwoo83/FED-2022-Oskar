@@ -4,13 +4,40 @@
 <meta charset="utf-8">
 <title> append()활용  </title>
 <!-- jQuery library -->
-<script src="jquery-1.7.2.min.js"></script>
+<script src="../jquery-3.6.3.min.js"></script>
 	<script>
 	$(function(){// jQB //////////////////////////
 		// 미션: 추가버튼을 클릭하면 이미지가 랜덤하게 #container에 추가되게하시오.
-	
-	
 		
+		const tg = $("#container");
+
+	$("#append").click(function(){
+		let rdm = Math.ceil(Math.random()*5);
+		tg.append(`<img src="./th_pic${rdm}.jpg" alt="이미지">`);
+	})
+		/* 추가미션: 자동버튼 클릭시 인터벌함수로 랜덤수 이미지 계속 추가하기 기능 만들기 + 멈춤버튼 클릭시 랜덤 멈추기 */
+
+		let autoI;
+		
+		$("#auto").click(()=>{
+
+			/* 인터벌 중복시행 방지 */
+			if(autoI) return;
+
+			autoI = setInterval(()=>{
+				$("#append").trigger("click");
+				/* trigger("이멘트명") 메서드 - 선택요소 이벤트를 강제 발생 시키는 메서드*/
+			}, 200);
+			
+		});
+		$("#stop").click(()=>{
+			/* 인터벌 멈추기 */
+			clearInterval(autoI);
+			/* 다시 인터벌 처리하도록 autoI값 설정 */
+			autoI = false;
+		});
+
+
 		
 	});/// jQB ////////////////////////////////////
 	//////////////////////////////////////////////

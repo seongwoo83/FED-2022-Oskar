@@ -4,12 +4,41 @@
 <meta charset="utf-8">
 <title> Sibling(+) 선택자 </title>
 <!-- jQuery library -->
-<script src="jquery-1.7.2.min.js"></script>
+<script src="../jquery-3.6.3.min.js"></script>
 <script>
 $(document).ready(function(e) {
-    // 미션: #first를 클릭하면 다음에 있는 형제요소인 li의 글자가 42px로 커지면서 margin-left값이 50px로 변경되게 하시오. 트랜지션 설정도 하시오.
+    // 미션: .first를 클릭하면 다음에 있는 형제요소인 li의 글자가 42px로 커지면서 margin-left값이 50px로 변경되게 하시오. 트랜지션 설정도 하시오.
 	
-	
+	// $(".first").click(function(){})
+   
+   $(".first").on("click", function(){
+      
+      $(this).next().css({
+         /* next()  다음형제요소 선택 트래버싱 메서드 */
+         /* 참고) prev() 는 이전 형제 요소 서ㅐㄱ */
+         fontSize: "42px",
+         marginLeft: "50px",
+         color: "red",
+         transition: "font-size .7s, margin-left .4s .7s, color 1s 1.1s"
+      });
+      
+      // $(this).siblings(".second").css({
+      //    fontSize: "42px",
+      //    marginLeft: "50px",
+      //    color: "red",
+      //    transition: "font-size .7s, margin-left .4s .7s, color 1s 1.1s"
+      // });
+      // $("+li", this).css({
+      //    fontSize: "42px",
+      //    marginLeft: "50px",
+      //    transition: ".7s"
+      // });
+
+
+
+   });
+
+
 	
 });//jQuery실행구역
 </script>

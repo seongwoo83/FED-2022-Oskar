@@ -4,12 +4,37 @@
 <meta charset="utf-8">
 <title> Siblings(~) 틸드 선택자 </title>
 <!-- jQuery library -->
-<script src="jquery-1.7.2.min.js"></script>
+<script src="../jquery-3.6.3.min.js"></script>
 <script>
 $(document).ready(function(e) {
+	/* 트랜지션 적용하려면 초기값이 필요함 */
+	$("li").css({
+		width: "100px",
+		height: "20px"
+	})
+
+
     //미션: li중 하나를 클릭하면  그 뒤의 형제요소의 li들이 모두 width: 500px, height: 300px로 변경되고 배경이미지를 넣으시오.(배경이미지는 웹경로로 넣고 트랜지션 설정도 하시오.)
+
+	//li중 클릭된 요소 다음 형제요소 특정 순번까지만
+	// $("~li:nth-child(-n+5)", this)}
+
+	// $(this).nextUntil("선택자")
+	/* 다음 형제들 중 특정 순번까지만 선택 -> 선택자 순번은 빠진다 그 앞까지만 선택됨*/
 	
 	
+	
+	$("li").click(function(){
+		// $("~li", this)
+		$(this).nextAll()
+		/* nextAll() - 다음 형제들 선택 트래버싱 메서드 */
+		.css({
+			width: "500px",
+			height: "300px",
+			background: "url(https://cdn.corporate.walmart.com/dims4/WMT/572511c/2147483647/strip/true/crop/1920x1066+0+7/resize/980x544!/quality/90/?url=https%3A%2F%2Fcdn.corporate.walmart.com%2F7b%2F66%2F142c151b4cd3a19c13e1ca65f193%2Fbusinessfornature-banner.png) no-repeat center/cover",
+			transition: "1s"
+		})
+	});
 	
 });//jQuery실행구역
 </script>

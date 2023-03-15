@@ -76,12 +76,9 @@ function loadFn() {
         else if(snum === scnt) snum = 0;
         /* 3) 이동하기 해당순번 슬라이드 li애 클래스 "on" 넣기*/
         /* 이동대상: slide */
-        slide.forEach(ele=>ele.classList.remove("on"));
-        slide[snum].classList.add("on")
+        chgSlide(slide)
 
-
-        indic.forEach(ele=>ele.classList.remove("on"));
-        indic[snum].classList.add("on")
+        chgSlide(indic)
 
     };
     /* 3. 대상에 이벤트 설정하기 */
@@ -119,6 +116,24 @@ function loadFn() {
         /* 2. 잠시 후 다시 작동하도록 타임아웃 */
         autoT = setTimeout(autoSlide, 5000);
     }
+    /* 불릿 클릭시 슬라이드이동하기 */
+    indic.forEach((ele, idx)=>{
+        ele.onclick = ()=>{
+            /* 전역변수 snum 업데이트하기 -> 불릿순번===슬라이드 순번 */
+            snum = idx;
+            chgSlide(indic);
+            chgSlide(slide);
+            clearAuto();
+        };
+    });
+
+    function chgSlide(obj){
+        obj.forEach(ele=>ele.classList.remove("on"));
+        obj[snum].classList.add("on");
+    }
+
+
+
 }
 
  /////////////// loadFn 함수 //////////////

@@ -26,4 +26,99 @@ window.addEventListener("DOMContentLoaded", loadFn);
     함수명: loadFn
     기능: 로딩후 이벤트설정 및 슬라이드 기능
 ******************************************/
+function loadFn() {
+    console.log("로딩완료");
+
+    /* 슬라이드 번호변수 */
+    let snum = 0;
+    
+    /* 1. 대상선정 */
+    /* 1-1 이벤트 대상: .abtn */
+    const abtn = document.querySelectorAll(".abtn");
+    // console.log('abtn: ', abtn);
+    /* 1-2 변경 대상: #slide */
+    const slide = document.querySelectorAll("#slide>li");
+    /* 1-3 불릿: .indic li */
+    const indic = document.querySelectorAll(".indic li");
+    
+    /* 슬라이드 갯수 */
+    let scnt = slide.length;
+    console.log("슬개수: ", scnt);
+    
+    let prot = 0;
+    /* 2. 슬라이드 변경함수 만들기 */
+    const goSlide = (seq) => {
+
+        if(prot) return;
+        prot = 1;
+        // console.log("나는 들어왔어");
+        setTimeout(() => {
+            prot = 0;
+        }, 400);/* //////////////// */
+
+        console.log("슬고우", seq);
+        /* 1) 방향에 따른 분기 */
+        /* 1-1) 오른쪽 버튼 클릭시: seq===1일때 */
+        if(seq){
+            /* 슬라이드 번호 증가 */
+            snum++;
+            console.log("오른", snum);
+        }else{
+            /* 슬라이드 번호 감소 */
+            snum--;
+            console.log("왼", snum);
+        }
+
+        /* 2) 한계값 체크 */
+        //처음이전 -> 끝
+        if(snum === -1) snum = scnt-1;
+        //끝다음 -> 처음
+        else if(snum === scnt) snum = 0;
+        /* 3) 이동하기 해당순번 슬라이드 li애 클래스 "on" 넣기*/
+        /* 이동대상: slide */
+        slide.forEach(ele=>ele.classList.remove("on"));
+        slide[snum].classList.add("on")
+
+
+        indic.forEach(ele=>ele.classList.remove("on"));
+        indic[snum].classList.add("on")
+
+    };
+    /* 3. 대상에 이벤트 설정하기 */
+    abtn.forEach((ele, idx) => {
+        ele.onclick = () => {
+            goSlide(idx);
+            clearAuto();
+        };
+    });
+    /* 인터벌 함수 멈추기위한 변수 */
+    let autoI;
+    /* 타임아웃 함수 지우기위한 변수 */
+    let autoT; 
+    
+    /** 
+     * 함수명: autoSlide
+     * 기능: 인터벌 함수로 슬라이드 함수 호출
+     */
+    function autoSlide(){
+        autoI = setInterval(() => goSlide(1), 3000);
+    }
+
+    /* 자동넘김 최초호출 */
+    autoSlide();
+
+    /** 
+     * 함수명: clearAuto
+     * 기능: 인터벌함수 지우고 다시세팅
+     */
+    function clearAuto(){
+        /* 1. 인터벌 지우기 */
+        clearInterval(autoI);
+        /* 2. 타임아웃도 지우지 않으면 쌓여서 타임아웃 쓰나미 실행*/
+        clearTimeout(autoT);
+        /* 2. 잠시 후 다시 작동하도록 타임아웃 */
+        autoT = setTimeout(autoSlide, 5000);
+    }
+}
+
  /////////////// loadFn 함수 //////////////

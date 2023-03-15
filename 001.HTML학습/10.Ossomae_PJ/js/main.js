@@ -23,27 +23,29 @@ window.addEventListener("DOMContentLoaded", () => {
         console.log(dir);
         /* 2. 대상선정 */
         /* 이동대상: .gbx>div */
-        let tg = gbx.querySelectorAll("div");
+        let tg = gbx === null || gbx === void 0 ? void 0 : gbx.querySelectorAll("div");
         /* 3. 분기하기 */
         if (dir) {
             /* 3-1 오른쪽 버튼 클릭시 */
-            gbx.appendChild(tg[0]);
+            gbx === null || gbx === void 0 ? void 0 : gbx.appendChild(tg[0]);
         }
         else {
             /* 3-2 왼쪽 버튼 클릭시 */
-            gbx.insertBefore(tg[tg.length - 1], tg[0]);
+            gbx === null || gbx === void 0 ? void 0 : gbx.insertBefore(tg[tg.length - 1], tg[0]);
         }
     };
     /*  오른쪽 버튼 클릭시 */
-    document.querySelector(".rb").onclick = () => {
+    const rbtn = document.querySelector(".rb");
+    rbtn === null || rbtn === void 0 ? void 0 : rbtn.addEventListener("click", () => {
         goSlide(1);
         clearAuto();
-    };
+    });
     /*  왼쪽 버튼 클릭시 */
-    document.querySelector(".lb").onclick = () => {
+    const lbtn = document.querySelector(".lb");
+    lbtn === null || lbtn === void 0 ? void 0 : lbtn.addEventListener("click", () => {
         goSlide(0);
         clearAuto();
-    };
+    });
     /* 인터벌 함수 멈추기위한 변수 */
     let autoI;
     /* 타임아웃 함수 지우기위한 변수 */
@@ -67,7 +69,7 @@ window.addEventListener("DOMContentLoaded", () => {
         /* 2. 타임아웃도 지우지 않으면 쌓여서 타임아웃 쓰나미 실행*/
         clearTimeout(autoT);
         /* 2. 잠시 후 다시 작동하도록 타임아웃 */
-        setTimeout(autoSlide, 5000);
+        autoT = setTimeout(autoSlide, 5000);
     }
 }); ///////////// 로딩구역 //////////////////////
 /////////////////////////////////////////////////

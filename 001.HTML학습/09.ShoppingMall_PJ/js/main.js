@@ -101,6 +101,8 @@ function loadFn() {
                     slide.style.left = "0";
                     slide.style.transition = "left .3s ease-in-out";
                 }, 0);/* //////////////// */
+
+                
         }/* //////////////// */
 
         /* 2) 불릿 설정하기 */
@@ -117,6 +119,8 @@ function loadFn() {
         /* 2-4) 읽어온 슬라이드 순번의 불릿에 클래스 "on"넣기 */
         indic[cseq].classList.add("on");
 
+        /* 3. 불릿 클릭시 이동 현재순번 변수 (iseq)에 순번 일치하기 */
+        iseq = Number(cseq);
 
     };/* //////////////////// */
     
@@ -124,7 +128,7 @@ function loadFn() {
     abtn.forEach((ele, idx) => {
         ele.onclick = () => {
             /* 1) 인터벌지우기 함수 호출 */
-            clearAuto(); 
+            // clearAuto(); 
             /* 2) 슬라이드함수 호출 */
             goSlide(idx);
         };
@@ -157,7 +161,7 @@ function loadFn() {
     }
 
     /* 자동넘김 최초호출 */
-    autoSlide();
+    // autoSlide();
 
     /** 
      * 함수명: clearAuto
@@ -171,6 +175,104 @@ function loadFn() {
         /* 2. 잠시 후 다시 작동하도록 타임아웃 */
         autoT = setTimeout(autoSlide, 5000);
     }
+
+    /**************************************
+        [ 불릿 클릭 이동 구현하기 ]
+        1. 오른쪽 이동시: 현재 불릿보다 오른쪽 클릭시
+            1) 기본형 : 오른쪽 버튼 클릭 구현
+            2) 유형 : 먼저이동후 맨 앞 요소 맨 뒤로 이동
+            3) 원리: 차이 수  만큼 % 이동후 for문으로 순서대로 맨 뒤로 이동
+
+        2. 왼쪽 이동시: 현재 불릿보다 왼쪽 클릭시
+            1) 기본형 : 왼쪽 버튼 클릭 구현
+            2) 유형 : 먼저 맨 뒤 요소 맨 앞으로 이동 후 들어옴
+            3) 원리: 차이 수  만큼 앞에 for문으로 쌓은 후 이동함
+
+        3. 방향구문의 기준: 클릭된 불릿 순번 - 현재 불릿 순번
+            1) 양수면 오른쪽 이동
+            2) 음수면 왼쪽 이동
+    **************************************/
+
+    /* 대상: .indic li */
+    /* 이벤트: click */
+    /* 순번변수 : iseq */
+    let iseq = 0;
+    indic.forEach((ele, idx)=>{
+        ele.onclick = ()=>{
+            console.log("클릭된 불릿 순번", idx);
+            /* 1. 클릭된 순번 */
+            let cseq = idx;
+            /* 2. 현재 순번 - iseq*/
+            /* 3. 순번 차 */
+            let diff = cseq - iseq;
+            /* 순수값 차이 - 절대값 (Math.abs())*/
+            let pure = Math.abs(diff);
+            /* 4. 방향별 슬라이드 이동하기 */
+            if(diff>0){
+                /* 4-1 양수면 오른쪽 이동 */
+                
+            // console.log("오른");
+            /* 오른쪽 불릿 클릭시 다음 슬라이드가 나타나도록 슬라이드 박스의 left값을 (-100% * 순수차) 로 변경시킴 */
+            slide.style.left = (-100 * pure)+"%";
+            slide.style.transition = "left .4s ease-in-out";
+            
+            /* 슬라이드 이동후 */
+            setTimeout(() => {
+                /* for문으로 자른수(순수값)만큼 순서대로 처리 */
+                /* 계산되는 차이수(1씩 감소하여 left값에 계산시킴) */
+                let temp = pure;
+                for(let i = 0; i< pure; i++){
+                    temp--;
+                    slide.appendChild(slide.querySelectorAll("li")[0]);
+                    slide.style.left = (-100*temp)+"%";
+                    slide.style.transition = "none";
+                }
+            }, 400);/* //////////////// */
+            
+            }else if(diff<0){
+                /* 4-2 음수면 왼쪽 이동 */
+
+                // console.log("왼");
+                /* 이동할 리스트 */
+                
+                for(let i =0; i<pure; i++){
+                    let clist  = slide.querySelectorAll("li");
+                    slide.insertBefore(clist[clist.length-1], clist[0]);
+                    slide.style.left = ((i+1)*-100)+"%";
+                    slide.style.transition = "none";
+                }
+
+                /* 동일속성인 left가 같은 코딩처리공간에 있기 때문에 동시에 일어나는 것처럼 보임
+                이것을 분리해야 효과가 있음 */
+                setTimeout(() => {
+                    slide.style.left = "0";
+                    slide.style.transition = "left .3s ease-in-out";
+                }, 0);/* //////////////// */
+        
+            }else{
+                /* 4-5 0이면 나가기 */
+                return;
+            }
+
+            /* 5. 현재변경 불릿 클래스 초기화 */
+            indic[iseq].classList.remove("on")
+            ;
+            /* 6. 클릭된 순번으로 현재 순번 변경 */
+            iseq = cseq;
+            /* 7. 클릭된 불릿에 클래스 on 넣기 */
+            indic[iseq].classList.add("on")
+        }
+    });
+
+
+
+
+
+
+
+
+
+
 }
 
 //////////////// loadFn 함수 ///////////////

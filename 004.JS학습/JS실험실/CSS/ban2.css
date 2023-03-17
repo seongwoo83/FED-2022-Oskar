@@ -94,7 +94,6 @@ ol {
 #slide li.on{
     opacity: 1;
     transform: scale(1.2)
-    rotate(360deg);
 }
 
 

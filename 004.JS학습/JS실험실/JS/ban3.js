@@ -392,8 +392,10 @@ function goWhere(obj) {
         goSlide(0);
     } else {
         /* 3-3 제자리로 돌아옴 */
-        console.log("제자리");
+        console.log("제자리!");
+        // 기준값 left로 다시 보냄!
         obj.style.left = -tgPoint + "px";
+        obj.style.transition = "left .2s ease-in-out";
     }
 
     

@@ -47,7 +47,6 @@ window.addEventListener("DOMContentLoaded", loadFn);
 /* 슬라이드 이동함수 전역화 */
 let goSlide;
 
-
 /****************************************** 
     함수명: loadFn
     기능: 로딩 후 버튼 이벤트 및 기능구현
@@ -70,8 +69,7 @@ function loadFn() {
     let slist = document.querySelectorAll("#slide>li");
 
     /* 적용대상(#slide)에 드래그 적용함수 호출하기 */
-    goDrag(slide)
-
+    goDrag(slide);
 
     // [ 초기화1 - 순번붙이기 ] ///////////////////
     // 잘라내기로 li순번이 뒤섞이므로 블릿변경 매칭을 위한
@@ -179,7 +177,7 @@ function loadFn() {
             // setTimeout을 사용한다!
             setTimeout(() => {
                 slide.style.left = "-220%";
-                slide.style.transition = "left .4s ease-in-out";
+                slide.style.transition = "left .4s ease-out";
             }, 0); ////// 타임아웃 /////////
         } //////////// else : 왼쪽클릭시 //////
 
@@ -248,74 +246,83 @@ function loadFn() {
     } ////////////// autoSlide함수 //////////
 
     // 자동넘김 최초호출!
-    // autoSlide();
+    autoSlide();
 
     /************************************ 
         함수명: clearAuto
         기능: 인터발함수를 지우고 다시셋팅
    ************************************/
-    // function clearAuto() {
-    //     console.log("인터발멈춤!");
-    //     // 1. 인터발 지우기
-    //     clearInterval(autoI);
+    function clearAuto() {
+        console.log("인터발멈춤!");
+        // 1. 인터발 지우기
+        clearInterval(autoI);
 
-    //     // 2. 타임아웃도 지우지 않으면
-    //     // 쌓여서 타임아웃 쓰나미실행이 발생한다!
-    //     clearTimeout(autoT);
+        // 2. 타임아웃도 지우지 않으면
+        // 쌓여서 타임아웃 쓰나미실행이 발생한다!
+        clearTimeout(autoT);
 
-    //     // 3. 잠시후 다시 작동하도록 타임아웃으로
-    //     // 인터발함수를 호출한다!
-    //     // 5초후(인터발은 3초후, 토탈 8초후 작동시작)
-    //     autoT = setTimeout(autoSlide, 5000);
-    // } ///////// clearAuto 함수 /////////////
-    
-
-
+        // 3. 잠시후 다시 작동하도록 타임아웃으로
+        // 인터발함수를 호출한다!
+        // 5초후(인터발은 3초후, 토탈 8초후 작동시작)
+        autoT = setTimeout(autoSlide, 5000);
+    } ///////// clearAuto 함수 /////////////
 } /////////// loadFn 함수 ///////////////
 /////////////////////////////////////////////
+
+
+
+
+
+
+
 
 /*****************************************
     [ 슬라이드에 드래그 적용시 체크사항 ]
     1. 드래그 적용시 한쪽 방향만 적용시킨다.
         (가로 슬라이드인 경우 x축만 적용 활성화함)
+
     2. 드래그 대상 슬라이드의 모든 하위요소는 선택이 안되도록 아래와 같이 CSS속성을 세팅함
         ->  user-select: none;
             -webkit-user-drag: none;
             예) #slide *{ 선택 / 드래그  금지 속성 세팅}
+
     3. 마지막포인트값(lx)을 초기값과 같은 값으로 세팅한다
+
     4. 이동함수를 호출할 수 있게 전역화 함 ->  함수 바깥에 goSlide 선언
+
     5. 드래그시 이동할 때 적용된 transition 지워줌 -> transition: none;
         -> 드래그 함수 내에 mousemove 이벤트 구역에 설정
+
+    6. 드래그 마지막(mouseup)처리시 마지막 위치 업데이트는 할 필요 없음
+        -> lastPoint() 함수 필요 없음
+
+    7. 슬라이드 이동시 트랜지션에 이징설정이 ease-in관련 설정 지워야 자연스러움
 *****************************************/
 
-
-
-function goDrag(obj){
-            
-        /* 변수만들기 */
+function goDrag(obj) {
+    /* 변수만들기 */
     /* 1. 드래그 상태변수 */
     let drag = false; // 1 - 드래그 중 / 0 - 드래그중 아님
     /* 2. 첫번째 위치포인트 first x, first y */
     let fx, fy;
     /* 3. 마지막 위치포인트 last x, last y */
-    let lx = obj.offsetLeft,  //-> 슬라이드 처음 left값 세팅
-    ly = 0; // 마지막 위치는 처음에 0 할당
+    let lx = obj.offsetLeft, //-> 슬라이드 처음 left값 세팅
+        ly = 0; // 마지막 위치는 처음에 0 할당
     /* 4. 움직일 때 위치포인트 move x, move y */
     let mvx, mvy;
     /* 5. 위치이동 차이결과 변수 result x, ruseulexx*/
     let rx, ry;
 
-
     /* 함수 만들기 */
     /* 1. 드래그 상태 true */
-    const dTrue = () => drag = true;
+    const dTrue = () => (drag = true);
     /* 2. 드래그 상태 false */
-    const dFalse = () => drag = false;
+    const dFalse = () => (drag = false);
     /* 3. 드래그 움직일 때 작동함수 */
-    const dMove = () =>{
+    const dMove = () => {
         // console.log("드래그 상태", drag);
-        if(drag){
-        obj.style.transition  = "none";
+        if (drag) {
+            obj.style.transition = "none";
             /* 드래그 상태에서 움직일 때 위치값 : mvx, mvy */
             mvx = event.pageX;
             mvy = event.pageY;
@@ -323,8 +330,8 @@ function goDrag(obj){
             /* x축값은 left값, y축값은 top값 */
             rx = mvx - fx;
             ry = mvy - fy;
-            
-            obj.style.left = (rx+lx)+"px";
+
+            obj.style.left = rx + lx + "px";
             // obj.style.top = (ry+ly)+"px";
             /* 한번 드래그 후 다시 드래그 시 움직인 위치값이 필요함 */
             /* 마지막 위치값 저장 필요 -> lx, ly */
@@ -332,47 +339,71 @@ function goDrag(obj){
         }
     };
     /* 4. 첫번째 위치 포인트 세팅함수 */
-    const firstPoint = ()=>{fx = event.pageX; fy = event.pageY};
+    const firstPoint = () => {
+        fx = event.pageX;
+        fy = event.pageY;
+    };
     /* 5. 마지막 위치 포인트 세팅함수 */
-    const lastPoint = ()=>{lx += rx; ly += ry};
+    const lastPoint = () => {
+        lx += rx;
+        ly += ry;
+    };
     /* 최종 이동결과 값인 rx, ry을 대입 연산하여 값을 업데이트 함 */
     /* 이벤트 등록하기 */
     /* 1. 마우스 내려갈 때 : 드래그  true + 첫번째 위치값*/
-    obj.addEventListener("mousedown", ()=>{dTrue(); firstPoint();});
+    obj.addEventListener("mousedown", () => {
+        dTrue();
+        firstPoint();
+    });
     /* 2. 마우스 올라올 때 */
-    obj.addEventListener("mouseup", ()=>{dFalse(); lastPoint(); goWhere(obj)});
+    obj.addEventListener("mouseup", () => {
+        dFalse();
+        // lastPoint();  슬라이문 드래그에서는 마지막 위치 업데이트 불 필요 -> 슬라이드 마지막 위치는 항상 일정하기 때문
+        goWhere(obj);
+    });
     /* 3. 마우스 움직일 때 */
     obj.addEventListener("mousemove", dMove);
     /* 4. 마우스가 벗어날 때 */
     obj.addEventListener("mouseleave", dFalse);
-    }
+}
 
-
-
-    /******************************************
+/******************************************
         함수명: goWhere
         기능: 드래그시 왼쪽/오른쪽 이동 판별
         호출: 드래그시 mouseup 이벤트 함수에서 호출
     ******************************************/
-   function goWhere(obj ){
-        /* 1. 현재 드래그 대상 left 위치값 */
-        let tgLeft = obj.offsetLeft;
-        console.log("현재 left",tgLeft);    
-        /* 2. 부모박스를 기준한 -220% left 위치값 구하기 */
-        let tgPoint = obj.parentElement.clientWidth*2.2
-        console.log("기준  left", tgPoint );
-        /* 3. 방향 판별하기 */
-        if(tgLeft < -tgPoint -50){
+function goWhere(obj) {
+    /* 1. 현재 드래그 대상 left 위치값 */
+    let tgLeft = obj.offsetLeft;
+    console.log("현재 left", tgLeft);
+    /* 2. 부모박스를 기준한 -220% left 위치값 구하기 */
+    let tgPoint = obj.parentElement.clientWidth * 2.2;
+    console.log("기준  left", tgPoint);
+    /* 3. 방향 판별하기 */
+    if (tgLeft < -tgPoint - 50) {
         /* 3-1 왼쪽 방향 이동(오른쪽 방향 클릭과 동일) */
-            console.log("왼쪽으로");
-            goSlide(1)
-        }else if(tgLeft > -tgPoint + 50){
-            /* 3-2 오른쪽 방향 이동(왼쪽 방향 클릭과 동일) */
-            console.log("오른쪽으로");
-            goSlide(0)
-        }else{
-            /* 3-3 제자리로 돌아옴 */
-            console.log("제자리");
-            obj.style.left = -tgPoint+"px";
-        }
-   }
+        console.log("왼쪽으로");
+        goSlide(1);
+    } else if (tgLeft > -tgPoint + 50) {
+        /* 3-2 오른쪽 방향 이동(왼쪽 방향 클릭과 동일) */
+        console.log("오른쪽으로");
+        goSlide(0);
+    } else {
+        /* 3-3 제자리로 돌아옴 */
+        console.log("제자리");
+        obj.style.left = -tgPoint + "px";
+    }
+
+    
+    /*******************************************
+        화면크기를 변경할 경우 발생하는 이벤트 -> resize
+        이 이벤트를 이용하여 필요한 경우 이벤트를 발생시킴
+    *******************************************/
+    window.addEventListener("resize",()=>{
+            /* 화면크기 변경시 lx값 업데이트 하기 */
+            lx = obj.parentElement.clientWidth*(-2.2);
+            /* 마지막 위치값이 슬라이드 부모박스의 220%이므로 이것을 업데이트 해줌*/
+            console.log("업데이트 lx", lx);
+    })
+
+}

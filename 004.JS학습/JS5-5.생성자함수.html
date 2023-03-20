@@ -51,6 +51,7 @@
             2. 함수1가지-실행함수
 
             {
+                포스터:"",
                 제목:"",
                 개요:"",
                 감독:"",
@@ -63,9 +64,10 @@
 
         //생성자 함수 만들기
         //함수명: MovieInfo
-        //전달변수: tit, sum, dir, act, des
-        function MovieInfo(tit, sum, dir, act, des){
-            //속성 5가지 세팅
+        //전달변수: pos, tit, sum, dir, act, des
+        function MovieInfo(pos, tit, sum, dir, act, des){
+            //속성 6가지 세팅
+            this.포스터 = pos;
             this.제목 = tit;
             this.개요 = sum;
             this.감독 = dir;
@@ -77,7 +79,43 @@
                 return `영화 ${this.제목}의 감독님 이름은 ${this.감독}입니다.`;
             };
 
+            
         }/* MovieInfo 생성자 함수 */
+
+        document.write("<h1>JS5-5. 생성자함수</h1>");
+
+       //영화정보 배열
+       const mi = [];
+       
+        //1. 생성자 함수로 객체 만들기
+        mi[0] = new MovieInfo("https://movie-phinf.pstatic.net/20230216_8/16765083584990ol68_JPEG/movie_image.jpg?type=m203_290_2", "앤트맨과 와스프: 퀀텀매니아", "액션" ,"페이튼 리드", "폴 러드(스캇), 에반젤린 릴리(호프)", "사랑해 땅콩");
+        mi[1] = new MovieInfo("https://movie-phinf.pstatic.net/20221215_185/1671091761840XXpCR_JPEG/movie_image.jpg?type=m203_290_2","아바타: 물의 길","액션, 모험, SF, 스릴러","제임스 카메론","조 샐다나(네이티리), 샘 워싱턴(제이크 설리),","아들엔 아들이야");
+        
+        // 2. 생성자 함수로 만든 객체 확인하기
+        console.log("mi[0] 할당객체: ", mi[0]);
+        console.log("mi[1] 할당객체: ", mi[1]);
+
+        //3.  만들어진 객체 화면에 출력 : 객체는 for in 문 사용
+        // 객체가 담긴 mi 배열은 for of문 사용
+        // html 변수
+        let hcode = "";
+
+        for(let x of mi){
+            hcode += `<ul>`;
+            for(let y in x){ // y는 속성명, x는 객체
+                if(y==='제목'){
+                    hcode += `
+                        <li><h2>제목: ${x[y]}</h2></li>`;
+                }else if(y==='포스터'){
+                    hcode += `
+                    <li><img src = "${x[y]}" alt="${x.제목}포스터"></li>
+                    `;
+                }
+            }
+            hcode += "</ul>";
+            
+        }
+        document.write(hcode)
 
 </script>
 </head>

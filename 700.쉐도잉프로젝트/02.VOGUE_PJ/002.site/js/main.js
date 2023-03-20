@@ -83,6 +83,18 @@ window.addEventListener('DOMContentLoaded', ()=>{
         // }
     };
 
+    /* 상단이동버튼(.tbtn) 클릭시 상단이동하기 */
+    /* 부드러운 스크롤 pos스크롤 위치값 업데이트 필요 */
+    tbtn.onclick=(e)=>{
+        e.preventDefault();
+        /* 부드러운 스크롤 전역변수를 0으로 설정하여 최상단으로 이동 */
+        pos = 0;
+
+        /* 위치 이동하기 */        
+        window.scrollTo(0, 0);
+
+    }
+
 
 
 })

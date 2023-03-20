@@ -100,15 +100,15 @@
         // html 변수
         let hcode = "";
 
-        hcode += `<ul>`;
         for(let x of mi){
+            hcode += `<ul>`;
             
                 hcode += `
                     <li><h2>제목: ${x.제목}</h2></li>
                     <li><img src="${x.포스터}" alt="${x.제목}포스터"></li>
                 `
+                hcode += "</ul>";
             }
-            hcode += "</ul>";
         
         document.write(hcode)
 

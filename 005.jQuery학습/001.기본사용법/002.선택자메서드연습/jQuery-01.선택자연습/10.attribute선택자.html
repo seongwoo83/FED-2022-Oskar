@@ -24,18 +24,38 @@ $(document).ready(function(e) {
 		
 		
 		// 3. li>a의 href 속성값 중 ".com"으로 끝나는 것을 모두 찾아 점선 테두리 5px blue로 설정하시오.
+		/* hint: 끝날때는 돈받으면서 끝나라 "$=" */
 		$("li>a[href$='.com']").css({
 			border: "5px dotted blue"
 		})
 		
+		// 참고: |= 속성선택자는 시작하는문자를 찾는데 단어가 하나만
+		// 있거나 하이픈으로 연결된 단어 문자에서 첫단어를 찾는다!
+		// 예) class="top" 또는 class="top-text"
+		//      li>a[class|='top']
+		
 		
 		// 4. li>a 의 href속성중 "2" 라는 값이 있기만 하면 선택하여 배경색을 "skyblue"로 변경하시오.
-	
+		/* hint: 있기만 하면 모두 고를때 "*=" */
+		$("li>a[href*='2']").css({
+			backgroundColor: "skyblue"
+		})
+
+		/* 참고: *=과 유샇나 속성선택자는 ~= -> 단, 차이점은 ~= 단어단위로만 찾아줌(붙어있는 문자) */
+		
 		
 		// 5. img 태그 중 src값이 "sample2.jpg"가 아닌것을 선택하여 테두리를 5px solid green 으로 변경하시오.
-	
+		/* hint: 아닌것은 깜놀하므로 "!="(이것은 제이쿼리용) */
+		$("img[src!='sample2.jpg']").css({
+			border: "5px solid green"
+		})
+		
 		// 6. a태그 중 class 속성이 있기만 하면 선택하여 글자크기를 28px로 변경하시오.
-	
+		/* hint: ㅇ대괄호에 속성명만 쓰면 속성이 있는 값만 찾음 */
+		$("a[class]").css({
+			fontSize: "28px"
+		})
+		
 		// 7. 모든 태그 중에서 src속성과 alt속성을 동시에 가지고 있는것을 선택하여 border값을 10px ridge purple 로 설정하시오.
 		
 		

@@ -1,4 +1,3 @@
-"use strict";
 /* 보그 PJ 카테고리 페이지 JS - category.js */
 /* 넘어온 url받기 pm -> parameter*/
 let pm = location.href;
@@ -67,3 +66,4 @@ function loadFn() {
     /* 기존값을 앞에 "제목"속성값을 넣음 */
     titag.innerText = mdata["제목"] + titag.innerText;
 }
+export {};

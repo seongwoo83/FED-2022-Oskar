@@ -1,4 +1,3 @@
-"use strict";
 //CGV PJ 메인페이지 JS - main.js
 /* 요소 선택 함수 */
 const qs = x => document.querySelector(x);
@@ -73,3 +72,4 @@ window.addEventListener("DOMContentLoaded", () => {
         };
     });
 }); /*################## 로드구역 ##################*/
+export {};

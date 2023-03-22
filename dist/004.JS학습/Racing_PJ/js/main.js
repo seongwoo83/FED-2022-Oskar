@@ -1,4 +1,3 @@
-"use strict";
 // Racing PJ 메인 JS - main.js
 /* 요소 선택함수 */
 const qs = x => document.querySelector(x);
@@ -123,3 +122,4 @@ window.addEventListener("DOMContentLoaded", () => {
     };
     const rnum = Math.floor(Math.random() * msgtxt.토끼.length);
 }); /////////// 로드구역 ///////////////////////////
+export {};

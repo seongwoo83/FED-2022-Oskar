@@ -1,13 +1,8 @@
-"use strict";
 // 데이터 처리하기 위한 JS
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.mvData = exports.personInfo = exports.sTitle = exports.mTitle = void 0;
 // 1. 중제목 데이터
 const mTitle = "모듈을 이용한 구현";
-exports.mTitle = mTitle;
 // 2. 소제목 데이터
 const sTitle = "이것은 리액트의 기초입니다.";
-exports.sTitle = sTitle;
 // 3. 사람데이터
 const personInfo = [
     ["준현", 23],
@@ -15,7 +10,6 @@ const personInfo = [
     ["성락", 45],
     ["진경", 22]
 ];
-exports.personInfo = personInfo;
 // 4. 영화정보 데이터
 const mvData = [
     [
@@ -54,7 +48,8 @@ const mvData = [
         "재개봉 흥해라!!!",
     ],
 ];
-exports.mvData = mvData;
+// 다중변수 전송 -> 중괄호사용, 콤마로 구분
+export { mTitle, sTitle, personInfo, mvData };
 /*****************************************
     export 형식:
     1. export{변수, 변수, 변수}

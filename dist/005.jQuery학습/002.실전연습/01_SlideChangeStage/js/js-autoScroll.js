@@ -1,4 +1,3 @@
-"use strict";
 /* JS로 구현한 자동페이지 휠  - js-autoScroll.js */
 /* 새로고침시 스크롤 위치 캐싱 무시하고 맨위로 이동 */
 /* scrollTo(가로, 세로) -> 위치 이동 메서드 */
@@ -242,3 +241,4 @@ function loadFn() {
         pageAction(0);
     }, 1000);
 }
+export {};

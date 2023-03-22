@@ -1,4 +1,3 @@
-"use strict";
 /* 메뉴관련 데이터 JS - mdata.js */
 /*
     [ 데이터 구조 ]
@@ -64,6 +63,7 @@ const mdata = {
         "잡화": ["잡화", "마스크"]
     }
 };
+export {};
 // window.addEventListener("DOMContentLoaded", ()=>{
 //     /* 최상위 배너박스 선정 : .banbx*/
 //     const banbx = document.querySelectorAll(".banbx")

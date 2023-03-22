@@ -1,4 +1,3 @@
-"use strict";
 /* 도꺠비 PJ 공통 JS - common.js */
 console.log("커몬~~!");
 var ham = document.querySelector(".ham");
@@ -19,6 +18,7 @@ function chgMenu() {
     /* 3. 변경내용: .top요소에 클래스 .on 넣었다 빼기 */
     tg.classList.toggle("on");
 } //###############chgMenu함수###############
+export {};
 /*********************************************
     [ JS 클래스 컨트롤 내장객체 ]
     classList 객체

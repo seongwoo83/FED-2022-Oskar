@@ -1,4 +1,3 @@
-"use strict";
 window.addEventListener("DOMContentLoaded", () => {
     console.log("로딩완료");
     /*
@@ -32,3 +31,4 @@ window.addEventListener("DOMContentLoaded", () => {
         };
     }
 });
+export {};

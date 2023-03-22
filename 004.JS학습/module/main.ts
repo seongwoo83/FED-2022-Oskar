@@ -7,8 +7,8 @@
 // import { mTitle, sTitle } from "./textData.js";
 
 //별칭 사용하기
-import { mTitle as mTit, sTitle as sTit, personInfo as pInfo, mvData as msg} from "./textData.js";
-
+import { mTitle as mTit, sTitle as sTit, personInfo as pInfo, mvData as mv} from "./textData.js";
+import { message as msg } from "./msgFormat.js";
 /*******************************************************
     [ import 형식 ]
     import 전달변수 from 파일경로;

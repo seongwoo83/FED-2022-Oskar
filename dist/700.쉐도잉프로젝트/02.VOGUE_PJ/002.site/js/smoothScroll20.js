@@ -1,4 +1,3 @@
-"use strict";
 // Smooth Scroll JS Verson 2020.12
 // 부드러운 스크롤 2020.12 버전
 // arranged by Tom Brace Parker
@@ -69,3 +68,4 @@ function SmoothScroll(target, speed, smooth) {
             });
     }();
 }
+export {};

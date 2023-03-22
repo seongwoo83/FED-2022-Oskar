@@ -1,4 +1,3 @@
-"use strict";
 // 네비게이션 유형6 : 공통 JS - common.js ///
 /////// 로드구역 /////////////////////
 window.addEventListener("DOMContentLoaded", loadFn);
@@ -65,3 +64,4 @@ function loadFn() {
     // 4. GNB 박스에 출력하기
     gnb.innerHTML = hcode;
 } ///////////// loadFn 함수 ////////////////
+export {};

@@ -7,7 +7,7 @@
 // import { mTitle, sTitle } from "./textData.js";
 
 //별칭 사용하기
-import { mTitle as mTit, sTitle as sTit, personInfo as pInfo} from "./textData.js";
+import { mTitle as mTit, sTitle as sTit, personInfo as pInfo, mvData as msg} from "./textData.js";
 
 /*******************************************************
     [ import 형식 ]
@@ -32,16 +32,29 @@ _________________________________________________
     2. 구체적인 데이터 구성 처리를 위한 JS
     -> msgFormat.js
 *******************************************************/
-
-// 1. 타이틀 출력박스
+// 1. 출력박스
+// 1-1 타이틀 출력박스
 const tpart : any= document.querySelector(".tpart");
-// 2. 내용 츌력박스
+// 1-2 내용 츌력박스
 const demo : any= document.querySelector("#demo");
+// 1-3 영화 정보 출력박스
+const mvpart : any = document.querySelector(".mvpart");
 
-console.log(tpart, demo);
 
-// 3. 제목넣기
+// 2. 제목넣기
 tpart.innerHTML =  `
     <h2>${mTit}</h2>
     <h3>${sTit}</h3>
 `;
+// 3. 내용넣기
+demo.innerHTML = msg("공유", 43);
+demo.innerHTML += msg("톰행크스", 55);
+demo.innerHTML += msg("졸리", 48);
+
+pInfo.forEach((val) => {
+    demo.innerHTML += msg(val[0], val[1]);
+});
+
+
+// 4. 영화정보 출력하기
+//  ol>li 형식으로 .mvpart 박스에 영화정보로 JS클래스를 생성하여 화면에 출력함

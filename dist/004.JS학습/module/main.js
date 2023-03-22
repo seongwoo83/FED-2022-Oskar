@@ -30,13 +30,24 @@ _________________________________________________
     2. 구체적인 데이터 구성 처리를 위한 JS
     -> msgFormat.js
 *******************************************************/
-// 1. 타이틀 출력박스
+// 1. 출력박스
+// 1-1 타이틀 출력박스
 const tpart = document.querySelector(".tpart");
-// 2. 내용 츌력박스
+// 1-2 내용 츌력박스
 const demo = document.querySelector("#demo");
-console.log(tpart, demo);
-// 3. 제목넣기
+// 1-3 영화 정보 출력박스
+const mvpart = document.querySelector(".mvpart");
+// 2. 제목넣기
 tpart.innerHTML = `
     <h2>${textData_js_1.mTitle}</h2>
     <h3>${textData_js_1.sTitle}</h3>
 `;
+// 3. 내용넣기
+demo.innerHTML = (0, textData_js_1.mvData)("공유", 43);
+demo.innerHTML += (0, textData_js_1.mvData)("톰행크스", 55);
+demo.innerHTML += (0, textData_js_1.mvData)("졸리", 48);
+textData_js_1.personInfo.forEach((val) => {
+    demo.innerHTML += (0, textData_js_1.mvData)(val[0], val[1]);
+});
+// 4. 영화정보 출력하기
+//  ol>li 형식으로 .mvpart 박스에 영화정보로 JS클래스를 생성하여 화면에 출력함

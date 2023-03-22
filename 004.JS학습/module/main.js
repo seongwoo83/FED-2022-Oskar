@@ -1,11 +1,18 @@
-"use strict";
 // 모듈 연습 메인 JS
 //로딩구역 없이..=> script 태그에 defer속성 사용하거나
 // type="module" 사용할 경우 로딩구역 없어도 요소등 가져올 수 있음
 // 모듈화 JS파일 import하기
 // import { mTitle, sTitle } from "./textData.js";
 //별칭 사용하기
-import { mTitle as mTit, sTitle as sTit, personInfo as pInfo } from "./textData.js";
+import { 
+    mTitle as mTit, 
+    sTitle as sTit, 
+    personInfo as pInfo, 
+    mvData as mv 
+} from "./textData.js";
+
+// 메시지 내용 구성함수 import
+import { message as msg } from "./msgFormat.js";
 /*******************************************************
     [ import 형식 ]
     import 전달변수 from 파일경로;
@@ -29,15 +36,30 @@ _________________________________________________
     2. 구체적인 데이터 구성 처리를 위한 JS
     -> msgFormat.js
 *******************************************************/
-// 1. 타이틀 출력박스
+// 1. 출력박스
+// 1-1 타이틀 출력박스
 const tpart = document.querySelector(".tpart");
-// 2. 내용 츌력박스
+// 1-2 내용 츌력박스
 const demo = document.querySelector("#demo");
-console.log(tpart, demo);
-// 3. 제목넣기
+// 1-3 영화 정보 출력박스
+const mvpart = document.querySelector(".mvpart");
+console.log('tpart: ', tpart);
+console.log('demo: ', demo);
+console.log('mvpart: ', mvpart);
+
+// 2. 제목넣기
 tpart.innerHTML = `
     <h2>${mTit}</h2>
     <h3>${sTit}</h3>
 `;
-//4. 내용넣기
-pInfo.forEach(val => demo.innerHTML += val);
+//3. 내용넣기
+demo.innerHTML = msg("공유", 43);
+demo.innerHTML += msg("톰행크스", 55);
+demo.innerHTML += msg("졸리", 48);
+
+pInfo.forEach((val) => {
+    demo.innerHTML += msg(val[0], val[1]);
+});
+
+// 4. 영화정보 출력하기
+//  ol>li 형식으로 .mvpart 박스에 영화정보로 JS클래스를 생성하여 화면에 출력함

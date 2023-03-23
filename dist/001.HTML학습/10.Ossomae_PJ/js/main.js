@@ -1,3 +1,4 @@
+"use strict";
 // 옷소매 갤러리 JS - main.js
 ///////////////// 로딩구역 ///////////////////////
 window.addEventListener("DOMContentLoaded", () => {
@@ -71,5 +72,4 @@ window.addEventListener("DOMContentLoaded", () => {
         autoT = setTimeout(autoSlide, 5000);
     }
 }); ///////////// 로딩구역 //////////////////////
-export {};
 /////////////////////////////////////////////////

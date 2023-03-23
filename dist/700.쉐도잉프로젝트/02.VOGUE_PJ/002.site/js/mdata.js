@@ -1,3 +1,4 @@
+"use strict";
 ///// 각 서브별 데이터 셋팅하기 /////
 /* sinfo -> sub page information */
 const sinfo = {
@@ -106,4 +107,3 @@ const sinfo = {
         ]
     }
 }; ////////// sinfo ////////////////
-export {};

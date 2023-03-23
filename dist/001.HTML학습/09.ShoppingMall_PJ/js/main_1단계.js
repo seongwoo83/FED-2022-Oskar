@@ -1,3 +1,4 @@
+"use strict";
 // 쇼핑몰 배너 JS - 01.가로방향 배너 슬라이드 //
 // HTML태그 로딩후 loadFn함수 호출! ///
 window.addEventListener("DOMContentLoaded", loadFn);
@@ -80,6 +81,5 @@ function loadFn() {
         };
     });
 }
-export {};
 //////////////// loadFn 함수 ///////////////
 /////////////////////////////////////////////

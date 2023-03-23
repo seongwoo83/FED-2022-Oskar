@@ -1,3 +1,4 @@
+"use strict";
 window.addEventListener("DOMContentLoaded", setBan);
 /*****************************************************
     [ 슬라이드 이동 기능정의 ]
@@ -223,5 +224,4 @@ function setBan() {
         autoT = setTimeout(autoSlide, 5000);
     } ///////// clearAuto 함수 /////////////
 } //////////////// loadFn 함수 ///////////////
-export {};
 /////////////////////////////////////////////

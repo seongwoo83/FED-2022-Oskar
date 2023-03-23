@@ -1,3 +1,4 @@
+"use strict";
 window.addEventListener("DOMContentLoaded", () => {
     /* 구현내용: 내부링크 클릭하여 index페이지 이동시 */
     /* 파라미터로구문하여 메인페이지 애니메이션 중지 */
@@ -16,4 +17,3 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
-export {};

@@ -1,3 +1,4 @@
+"use strict";
 /** 도깨비 PJ 링크 시스템 JS - linksys.js */
 /* 로딩구역 */
 window.addEventListener("DOMContentLoaded", () => {
@@ -92,4 +93,3 @@ window.addEventListener("DOMContentLoaded", () => {
         }; //######## click 이벤트함수 ##########
     } //############ for of 문 ###########
 }); //################ 로딩구역 #######################
-export {};

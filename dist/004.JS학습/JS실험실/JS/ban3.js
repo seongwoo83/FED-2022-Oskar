@@ -1,3 +1,4 @@
+"use strict";
 // JS실험실: 03.배너스타일 JS -  ban.js
 // HTML태그 로딩후 loadFn함수 호출! ///
 window.addEventListener("DOMContentLoaded", loadFn);
@@ -359,4 +360,3 @@ function goWhere(obj) {
         console.log("업데이트 lx", lx);
     });
 }
-export {};

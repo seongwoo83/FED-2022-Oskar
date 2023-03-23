@@ -1,3 +1,4 @@
+"use strict";
 // 쇼핑몰 배너 JS - 03.페이드효과 //
 // 로딩후 loadFn함수 호출 //////////
 window.addEventListener("DOMContentLoaded", loadFn);
@@ -120,5 +121,4 @@ function loadFn() {
         obj[snum].classList.add("on");
     }
 }
-export {};
 /////////////// loadFn 함수 //////////////

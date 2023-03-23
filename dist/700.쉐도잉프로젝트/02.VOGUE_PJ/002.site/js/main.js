@@ -1,3 +1,4 @@
+"use strict";
 window.addEventListener('DOMContentLoaded', () => {
     /*****************************
      * 리턴함수세팅구역
@@ -83,4 +84,3 @@ window.addEventListener('DOMContentLoaded', () => {
         window.scrollTo(0, 0);
     };
 });
-export {};

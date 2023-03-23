@@ -1,3 +1,4 @@
+"use strict";
 // JS 실험실: 03.배너스타일 JS - ban.js
 window.addEventListener("DOMContentLoaded", loadFn);
 function loadFn() {
@@ -66,4 +67,3 @@ function loadFn() {
         autoT = setTimeout(autoSlide, 5000);
     }
 }
-export {};

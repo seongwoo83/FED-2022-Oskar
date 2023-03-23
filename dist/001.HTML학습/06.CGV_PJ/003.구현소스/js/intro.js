@@ -1,3 +1,4 @@
+"use strict";
 // 인트로 페이지 JS - intro.js
 window.addEventListener("DOMContentLoaded", loadFn);
 function loadFn() {
@@ -26,4 +27,3 @@ function loadFn() {
         }
     }
 }
-export {};

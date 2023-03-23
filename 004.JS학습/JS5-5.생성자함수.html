@@ -75,9 +75,10 @@
             this.문구 = des;
 
             //메서드 1가지 세팅
-            this.함수 = ()=>{
-                return `영화 ${this.제목}의 감독님 이름은 ${this.감독}입니다.`;
-            };
+            this.함수 = ()=> `영화 ${this.제목}의 감독님 이름은 ${this.감독}입니다.`;
+            // this.함수 = ()=>{
+            //     return `영화 ${this.제목}의 감독님 이름은 ${this.감독}입니다.`;
+            // };
 
             
         }/* MovieInfo 생성자 함수 */
@@ -108,10 +109,13 @@
                     <li><img src="${x.포스터}" alt="${x.제목}포스터"></li>
                 `
                 hcode += "</ul>";
+ 
             }
         
         document.write(hcode)
 
+    // 생성자 함수의 데이터형?
+    console.log(typeof MovieInfo);
 </script>
 </head>
 <body>

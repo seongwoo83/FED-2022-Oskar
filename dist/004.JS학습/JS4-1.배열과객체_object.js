@@ -1,3 +1,4 @@
+"use strict";
 /** 영화정보객체 JS : JS4-1.배열과객체_object.js */
 /* 정찬님 객체 */
 var jcObj = {
@@ -99,4 +100,3 @@ var myV = {
         playMv("d2VN6NNa9BE");
     } ////// 예고편 메서드 //////
 }; /////////// myV 객체 /////////////
-export {};

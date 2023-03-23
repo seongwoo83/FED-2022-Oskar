@@ -1,39 +1,105 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title> html() / html(String)  </title>
-<script src="jquery-1.7.2.min.js"></script>
-	<script>
-	$(document).ready(function(){
-		
-		//미션: #main 을 클릭하면 두번째 p태그 내부에 img태그를 5개 만들고 css설정을 absolute로 하여 차례대로 left이동 애니메이션을 하시오.
-		
-	
-		
-	});/////////// jQB ///////////////////////
-	
-	
-	
-	
-	
-	</script>
-</head>
-<body>
+    <head>
+        <meta charset="utf-8" />
+        <title>html() / html(String)</title>
+        <script src="../jquery-3.6.3.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                /*************************************
+			html() 메서드
+			- html 선택요소 내부에 자손요소를 삽입하거나 읽어올때 사용함
+			-> $(선택자).html(요소) : 요소삽입
+			-> 변수 = $(선택자).html() : 태그 읽어옴
+			-> JS의 innerHTML과 유사함
+		*************************************/
 
- <div id = "intro">
-   <p> intro 입니다.</p>
- </div>
- 
- <div id = "main">
-   <p>여기를 클릭하시면 이미지가 나와요!</p>
-   <p><img src="pic1.jpg" alt="이미지"/></p>
- </div>
+                //미션: #main>p  중 첫 번째 p를 클릭하면 두번째 p태그 내부에 img태그를 5개 만들고 css설정을 absolute로 하여 차례대로 left이동 애니메이션을 하시오.
+                $("#main")
+                    .find("p")
+                    .first() //첫 번째 p요소
+                    .click(function () {
+                        console.log("호출확인");
 
-<script>
+                        $(this) //출발
+                            .next() // 두 번째 p요소
+                            .html(
+                                `
+				<img src="pic1.jpg" alt="이미지">
+				<img src="pic2.jpg" alt="이미지">
+				<img src="pic3.jpg" alt="이미지">
+				<img src="pic4.jpg" alt="이미지">
+				<img src="pic5.jpg" alt="이미지">
+			`
+                            )
+                            .find("img") // 다섯 개의 이미지로 주인공 변경
+                            .css({
+                                position: "absolute",
+                                left: "0",
+                            })
+                            .first() //이미지중 첫 번째 선택
+                            .css({ width: "300px" })
+                            .next() // 두 번째 이미지 선택
+                            .css({ width: "250px" })
+                            .next() // 세 번째 이미지 선택
+                            .css({ width: "200px" })
+                            .next() // 네 번째 이미지 선택
+                            .css({ width: "150px" })
+                            .next() // 다섯 번째 이미지 선택
+                            .css({ width: "100px" })
+                            ///////애니메이션 주기
+                            // 마지막 이미지에서 부모로 이동
+                            .parent() // 부모인 두 번째 p태그로 이동
+                            .find("img")
+                            .eq(1) //두 번째 이미지
+                            .delay(1000) //1초 후
+                            .animate({ left: "300px" }, 400) // 두번째 이미지 액션
+                            .next() //세 번째 이미지
+                            .delay(1400) //1.4초 후
+                            .animate({ left: "550px" }, 300) // 세번째 이미지 액션
+                            .next() //네 번째 이미지
+                            .delay(1700) //1.7초 후
+                            .animate({ left: "750px" }, 200) // 네번째 이미지 액션
+                            .next() //다섯 번째 이미지
+                            .delay(1900) //1.9초 후
+                            .animate({ left: "900px" }, 100) // 다섯번째 이미지 액션
+                            /// 추가 짝 이동 애니메이션
+                            // 다시 부모로 이동
+                            .parent()
+                            .find("img:even") // 짝수 이미지(0부터)
+                            .delay(2000) //위의 총 액션시간 + 2초 기다림
+                            .animate({ top: "200px" }, 500) // 아래로 이동 액션
+                            //추가 홀수 이동 애니메이션
+                            //다시 부모로 이동
+                            .parent()
+                            .find("img:odd") // 홀수 이미지(1부터)
+                            .first()
+                            .delay(2000) //위의 총 액션시간 + 2초 기다림
+                            .animate({ top: "-50px" }, 500) // 위로 이동 액션
+                            .parent()
+                            .find("img:odd")
+                            .last()
+                            .delay(2000)
+                            .animate({ top: "50px" }, 500);
 
-</script>
+							/* html 태그 찍기 */
+							console.log("현재 html: ", $("#main").html());
 
-</body>
+
+                    });
+            }); /////////// jQB ///////////////////////
+        </script>
+    </head>
+    <body>
+        <div id="intro">
+            <p>intro 입니다.</p>
+        </div>
+
+        <div id="main">
+            <p>여기를 클릭하시면 이미지가 나와요!</p>
+            <p><img src="pic1.jpg" alt="이미지" /></p>
+        </div>
+
+        <script></script>
+    </body>
 </html>
-

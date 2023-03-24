@@ -276,10 +276,14 @@ function goDrag(obj) {
     const dMove = () => {
         // console.log("드래그 상태", drag);
         if (drag) {
+            console.log("드래그 중");
             obj.style.transition = "none";
             /* 드래그 상태에서 움직일 때 위치값 : mvx, mvy */
-            mvx = event.pageX;
-            mvy = event.pageY;
+            mvx = event.pageX || event.changedTouches[0].pageX;
+            // 모바일에서는 위치값을 changedTouches 컬렉션에 수집한다
+            //changedTouches[0] -> 첫 번째 컬렉션에 pageX값이 존재함
+            //changedTouches[0].pageX
+            // mvy = event.pageY;
             /* 움직일 때 위치값 - 처음 위치값 */
             /* x축값은 left값, y축값은 top값 */
             rx = mvx - fx;
@@ -293,7 +297,10 @@ function goDrag(obj) {
     };
     /* 4. 첫번째 위치 포인트 세팅함수 */
     const firstPoint = () => {
-        fx = event.pageX;
+        fx = event.pageX || event.changedTouches[0].pageX;
+        // 변수 = 할당값1 || 할당값2;
+        //-> undefined / null  값이 아닌 값으로 할당됨
+        // -> 우선순위로 DT쪽을 먼저 써준다
         fy = event.pageY;
     };
     /* 5. 마지막 위치 포인트 세팅함수 */
@@ -303,8 +310,15 @@ function goDrag(obj) {
     };
     /* 최종 이동결과 값인 rx, ry을 대입 연산하여 값을 업데이트 함 */
     /* 이벤트 등록하기 */
+    /* DT용 이벤트와  Mobile 이벤트를 모두 등록해줘야 모바일에도 작동함 */
+    // mousedown -> touchstart / mouseup -> touchend / mousemove -> touchmove
     /* 1. 마우스 내려갈 때 : 드래그  true + 첫번째 위치값*/
     obj.addEventListener("mousedown", () => {
+        dTrue();
+        firstPoint();
+    });
+    // 모바일 : touchstart
+    obj.addEventListener("touchstart", () => {
         dTrue();
         firstPoint();
     });
@@ -314,8 +328,16 @@ function goDrag(obj) {
         // lastPoint();  슬라이문 드래그에서는 마지막 위치 업데이트 불 필요 -> 슬라이드 마지막 위치는 항상 일정하기 때문
         goWhere(obj);
     });
+    // 모바일 : touchend
+    obj.addEventListener("touchend", () => {
+        dFalse();
+        // lastPoint();  슬라이문 드래그에서는 마지막 위치 업데이트 불 필요 -> 슬라이드 마지막 위치는 항상 일정하기 때문
+        goWhere(obj);
+    });
     /* 3. 마우스 움직일 때 */
     obj.addEventListener("mousemove", dMove);
+    //모바일 : touchmove
+    obj.addEventListener("touchmove", dMove);
     /* 4. 마우스가 벗어날 때 */
     obj.addEventListener("mouseleave", dFalse);
 }

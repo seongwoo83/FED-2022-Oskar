@@ -55,7 +55,23 @@ function MakeDallyeok(){
         for(let i:number=1; i<=thisLast.getDate(); i++){
             dset.push(`${i}`);
         }
-        console.log(dset);
+        
+        // 2-3 다음달 나머지칸 삽입하기
+        for(let i = 1; i< 14 ; i++){
+            dset.push(`${i}`);
+        }
+
+        // 화면에 출력할 html변수
+        let hcode : string = "";
+
+        // 2-4 날짜만큼 배열 정보로 세팅하기
+        // 7일 X 6주 = 42일
+        for(let i =0; i< 42 ; i++){
+            hcode += `${dset[i]}`;
+        }
+        console.log(hcode);
+    
+
     };
 
     initDallyeok();

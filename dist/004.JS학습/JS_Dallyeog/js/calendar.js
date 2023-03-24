@@ -1,4 +1,6 @@
 "use strict";
+//호출
+MakeDallyeok();
 function MakeDallyeok() {
     const qs = (x) => document.querySelector(x);
     const qsa = (x) => document.querySelectorAll(x);
@@ -13,4 +15,42 @@ function MakeDallyeok() {
     const monthTit = qs(".monthTit");
     // 1-5 날짜 요소 .dates
     const dates = qs(".dates");
+    console.log(dates);
+    // 2. 함수 만들기
+    // 2-1 달력 초기화 구성 함수
+    const initDallyeok = () => {
+        // getMonth() 정보는 항상 현재달 숫자보다 1작음
+        // 1) 전달 마지막 날짜 (옵션 : 0) - 달력 전달 끝 날짜표시
+        const prevLast = new Date(curr_date.getFullYear(), curr_date.getMonth(), 0);
+        console.log(prevLast);
+        // 2) 현재 달 첫번째 날짜 (옵션 : 1 -> 전 달로 세팅) 
+        const thisFirst = new Date(curr_date.getFullYear(), curr_date.getMonth(), 1);
+        console.log(thisFirst);
+        // 3) 현재 달 마지막 날짜 (옵션 : 0 -> 현재 달로 세팅) 
+        const thisLast = new Date(curr_date.getFullYear(), curr_date.getMonth() + 1, 0);
+        console.log(thisLast);
+        // 4) 년도 표시하기
+        yearTit.innerHTML = curr_date.getFullYear();
+        // 5) 월 표시하기
+        monthTit.innerHTML += curr_date.getMonth();
+        // 6) 날짜 넣을 배열 변수 만들기
+        const dset = [];
+        // 7) 전달 날짜 앞쪽 채우기
+        // 조건 : 현재 달 첫번째 날짜 요일이 0이 아닌 경우
+        if (thisFirst.getDay() !== 0) {
+            // for문 세팅 -> 요일 순번 보다 작을때 까지 ++ 
+            for (let i = 0; i < thisFirst.getDay(); i++) {
+                // 반복횟수만큼 배열 앞쪽에 추가
+                // 전달 마지막 날짜부터 -> prevLast.getDate()
+                dset.unshift(`${prevLast.getDate() - i}`);
+            }
+        }
+        // 2-2 현재월 삽입하기
+        // 반복문 구성: 현재월 1일부터 마지막 날짜까지 반복 배열추가
+        for (let i = 1; i <= thisLast.getDate(); i++) {
+            dset.push(`${i}`);
+        }
+        console.log(dset);
+    };
+    initDallyeok();
 }

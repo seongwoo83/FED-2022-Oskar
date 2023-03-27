@@ -134,14 +134,14 @@ this.initDallyeok();//최초 호출
         // 이전 월로 initDallyeok() 호출
         //getMonth() 월 가져오기 / setMonth() 월 세팅하기
         this.curr_date.setMonth(this.curr_date.getMonth()-1);
-  this.initDallyeok();
+        this.initDallyeok();
     }
     // 2-3 다음 달력 출력하기 함수
     this.nextCal = ()=>{
         // 이전 월로this.initDallyeok() 호출
         //getMonth() 월 가져오기 / setMonth() 월 세팅하기
         this.curr_date.setMonth(this.curr_date.getMonth()+1);
-  this.initDallyeok();
+        this.initDallyeok();
     }
     
     // 2-4 달력 html 코드 넣기 함수

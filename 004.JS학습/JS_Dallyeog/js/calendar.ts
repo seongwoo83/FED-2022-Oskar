@@ -42,8 +42,9 @@ function MakeDallyeok(){
             // for문 세팅 -> 요일 순번 보다 작을때 까지 ++ 
             for(let i =0; i<thisFirst.getDay(); i++){
                 // 반복횟수만큼 배열 앞쪽에 추가
+                // 전달은 클래스 "bm"으로 구분
                 // 전달 마지막 날짜부터 -> prevLast.getDate()
-            dset.unshift(`<span style="color:#ccc" class="bdt">${prevLast.getDate()-i}</span>`);
+            dset.unshift(`<span style="color:#ccc" class="bm">${prevLast.getDate()-i}</span>`);
             }
         }
         // 2-2 현재월 삽입하기
@@ -53,8 +54,9 @@ function MakeDallyeok(){
         }
         
         // 2-3 다음달 나머지칸 삽입하기
+        // 다음달 클래스는 "am"으로 구분
         for(let i = 1; i< 14 ; i++){
-            dset.push(`<span style="color:#ccc" class="adt">${i}</span>`);
+            dset.push(`<span style="color:#ccc" class="am">${i}</span>`);
         }
 
         // 화면에 출력할 html변수
@@ -85,6 +87,17 @@ function MakeDallyeok(){
                 let cmonth = addZero(monthTit.innerText);
                 //일
                 let cdate = addZero(ele.innerText);
+
+                // 전달/다음달은 span태그가 있으므로 구분함
+                let isSpan = ele.querySelector("span");
+                console.log(isSpan);
+                // 없을 경우 null값이 나옴 -  if문에서 false처리됨
+
+                if(isSpan){
+                    let cls = isSpan.classList.contains("bm");
+                    console.log(cls);
+                }
+
 
                 // 최종 날짜 데이터
                 let comp = cyear + "-" + cmonth + "-" + cdate;

@@ -5,31 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/main.css">
-  <script src="../../dist/004.JS학습/JS_Dallyeog/js/calendar.js" defer></script>
+  <link rel="stylesheet" href="./css/cal.css">
+  <!-- 제이쿼리 라이브러리 CDN -> 모듈의 import로 불러올 수 없다 (서버측 파일 합치기 대상 아님) -->
+  <!-- node.js를 사용하는 리액트에서는 가능함 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="../../dist/004.JS학습/JS_Dallyeog_module/js/main.js" type="module"></script>
   <title>우리달력2023</title>
 </head>
 <body>
-  <div class="calender">
-    <header class="header">
-      <button class="mbtn btnL">〈</button>
-      <div class="title">
-        <div class="yearTit"></div>
-        <div class="monthTit"></div>
+  <h1 class="mtit">[달력 날짜 넣기]</h1>
+    <div class="wrap">
+      <div class="mybx">
+        <label for="myinput">시작일:</label>
+        <input type="text" id="myinput" class="myipt">
+        <!-- 달력 넣을 박스1 -->
+        <div class="calbx"></div>
       </div>
-      <button class="mbtn btnR">〉</button>
-    </header>
-    <section class="main">
-      <div class="week">
-        <div class="day">Sun</div>
-        <div class="day">Mon</div>
-        <div class="day">Tue</div>
-        <div class="day">Wed</div>
-        <div class="day">Thu</div>
-        <div class="day">Fri</div>
-        <div class="day">Sat</div>
+      <div class="mybx">
+        <label for="myinput2">종료일</label>
+        <input type="text" id="myinput2" class="myipt">
+        <!-- 달력 넣을 박스2 -->
+        <div class="calbx2"></div>
       </div>
-      <div class="dates"></div>
-    </section>
-  </div>
+    </div>
 </body>
 </html>

@@ -20,5 +20,7 @@ $(".myipt").on("click", function () {
     $(this).next().find(".calender").show();
 });
 $(".calender").on("click", function () {
-    $(this).hide();
+    let val = $(this).find(".dinfo").val();
+    $(this).parent().prev().val(val);
+    // $(this).hide();
 });

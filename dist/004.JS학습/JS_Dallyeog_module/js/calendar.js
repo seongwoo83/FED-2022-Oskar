@@ -70,8 +70,8 @@ function MakeDallyeok(sel) {
         // 대상 : .dates
         this.dates.innerHTML = hcode;
         // 각 날짜 .date 요소에 링크 설정하기
-        qsa(".date").forEach(ele => {
-            ele.onclick = () => {
+        qsa(sel + " .date").forEach((ele) => {
+            (ele.onclick = () => {
                 //년
                 let cyear = addZero(this.yearTit.innerText);
                 //월
@@ -106,7 +106,9 @@ function MakeDallyeok(sel) {
                 // 최종 날짜 데이터
                 let comp = cyear + "-" + cmonth + "-" + cdate;
                 console.log(comp);
-            };
+                // 달력의 히든 필드에 저장
+                qs(sel + " .dinfo").value = comp;
+            });
         });
     };
     //0자릿수 만들기 함수
@@ -152,6 +154,8 @@ function MakeDallyeok(sel) {
           </div>
           <div class="dates"></div>
         </section>
+        <!-- 달력날짜 저장용 히든 필드 -->
+        <input type="hidden" class="dinfo">
       </div>
         `;
     }

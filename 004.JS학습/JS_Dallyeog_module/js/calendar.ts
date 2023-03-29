@@ -178,6 +178,15 @@ this.initDallyeok();//최초 호출
       </div>
         `
     }
+    // 2-5 날짜 기간 계산하기 함수
+    this.getDateDiff = (dt1, dt2) => {
+        const date1 = new Date(dt1);
+        const date2 = new Date(dt2);
+        
+        const diffDate = date1.getTime() - date2.getTime();
+        return Math.abs(diffDate / (1000 * 60 * 60 * 24)); 
+        // 밀리세컨 * 초 * 분 * 시 = 일
+      }
 
 
     // 버튼에 클릭 설정 하기

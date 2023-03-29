@@ -1,7 +1,7 @@
 // 2023캘린더
 
 // 모듈 불러오기 : import
-import MakeDallyeok from "./calendar";
+import MakeDallyeok from "./calendar.js";
 
 //  생성자 함수를 인스턴스로 호출하기
 // 인스턴스 생성이란 특정 메모리 구역에 모듈을 로딩시켜서 개별화 기능을 적용되게 함

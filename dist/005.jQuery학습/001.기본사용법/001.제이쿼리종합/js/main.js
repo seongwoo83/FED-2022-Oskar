@@ -109,8 +109,8 @@ $(() => {
         .next().on("click", function () {
         let fn = () => {
             //  좀비 나타나기
-            bd.eq(9).find("mz").delay(2000).fadeIn(400, () => {
-                msg.html("악! 좀비!<br> 어서 피하자").fadeIn(300);
+            bd.eq(9).find(".mz").delay(2000).fadeIn(400, () => {
+                msg.html("악! 좀비!<br> 어서 피하자").css({ left: "-144%" }).fadeIn(300);
                 // 다음버튼 보이기
                 $(this).next().delay(500).slideDown(300);
             });

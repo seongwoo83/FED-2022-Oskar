@@ -1,0 +1,100 @@
+"use strict";
+// 미니언즈 좀비 탈출 애니 구현 JS - main.js
+$(() => {
+    /////////// jQB ///////////////////
+    // 로딩확인
+    console.log("로딩완료!");
+    /***********************************
+        [ 요구사항정리 ]
+        1. 버튼을 클릭하여 미니언즈가
+        순서대로 특정위치로 이동하며
+        메시지를 보여준다
+        2. 각 위치별 좀비를 등장시킨다
+        3. 맨윗층에서 탈출할때 헬기를 사용한다
+
+        [ 변경대상 ]
+        1. 주인공 미니언즈
+        2. 좀비 미니언즈들
+        3. 주사기
+        4. 헬기
+
+        [ 이벤트와 이벤트대상  ]
+        1. 이벤트 : 클릭이벤트
+        2. 이벤트대상 : 버튼들
+        3. 기능구분 : 버튼글자(지시사항)
+
+    ***********************************/
+    // 0. 주인공들 변수에 할당
+    // 1) 미니언즈
+    const mi = $(".mi");
+    //2) 건물 li
+    const bd = $(".building li");
+    //3) 버튼들
+    const btns = $(".btns button");
+    //4) 메시지 박스
+    const msg = $(".msg");
+    //5) 좀비, 주사기 요소 변수처리
+    let mz1 = `<img src="./images/mz1.png" alt="좀비1" class="mz">`;
+    let mz2 = `<img src="./images/mz2.png" alt="좀비2" class="mz">`;
+    let zom = `<img src="./images/zom.png" alt="좀비들" class="mz">`;
+    let inj = `<img src="./images/inj.png" alt="주사기" class="inj">`;
+    //1. 건물 각 방에 번호 넣기 + 좀비/주사기 넣기
+    // 대상: .building li -> bd변수
+    // 사용 제이쿼리 메서드: 
+    //  1) each((순서, 요소)=>{}) : 요소의 갯수만큼 순서대로 돌아줌
+    //  2) append(요소) : 요소내부에 자식요소 추가(또는 이동)
+    bd.each((idx, ele) => {
+        // (1) 각 방에 숫자로  순번 넣기
+        $(ele).text(idx);
+        // (2) 좀비/주사기 넣기
+        switch (idx) {
+            case 9:
+                $(ele).append(mz1);
+                break;
+            case 7:
+                $(ele).append(mz2);
+                break;
+            case 1:
+                $(ele).append(zom);
+                break;
+            case 2:
+                $(ele).append(inj);
+                break;
+        }
+    });
+    //  좀비는 모두 숨김
+    $(".mz").hide();
+    //  시간 없는 hide()는 display: none; 됨
+    //2.  버튼세팅하기
+    // 대상: .btns button -> btns변수
+    btns.hide().first().show();
+    // 3. 공통함수: actMini()
+    const actMini = () => { };
+    // 4. "들어가기" 버튼 클릭시 
+    btns.first().on("click", function () {
+        var _a, _b;
+        // 1) 클릭된 버튼 사라지기
+        $(this).slideUp(300);
+        // 2) 메시지 없애기 : msg변수
+        msg.fadeOut(300);
+        // 3) 이동하기
+        // 위치 : li 8번방 -> bd변수에 있는 모든 li중 8번
+        let room = bd.eq(8);
+        // 위치값 배열변수
+        let pos = [];
+        //  top 위치값
+        pos[0] = (_a = room.offset()) === null || _a === void 0 ? void 0 : _a.top;
+        // left 위치값 : 방에서 중앙이동(+li 가로크기 절반 - 미니언즈 가로크기 절반)
+        pos[1] = ((_b = room.offset()) === null || _b === void 0 ? void 0 : _b.left) + room.width() / 2 - mi.width() / 2;
+        //  4) 미니언 이동하기
+        // 대상: mi변수
+        mi.animate({
+            top: pos[0] + "px",
+            left: pos[1] + "px"
+        }, 800, "easeOutElastic", () => {
+            msg.html("와! 아늑하다! <br> 옆방으로 가보자!").fadeIn(300);
+            // 다음버튼 보이기
+            $(this).next().delay(500).slideDown(300);
+        });
+    });
+}); /////////////// jQB ////////////////////

@@ -69,17 +69,19 @@ $(() => {
     // 대상: .btns button -> btns변수
     btns.hide().first().show();
     // 3. 공통함수: actMini()
-    const actMini = () => { };
-    // 4. "들어가기" 버튼 클릭시 
-    btns.first().on("click", function () {
+    const actMini = (ele, seq, fn) => {
+        //전달변수 세개
+        //  - ele -> 클릭된 버튼 요소
+        //  - seq ->  이동할 li방 순번
+        //  - fn -> 이동후 실행할 코드(콜백함수)
         var _a, _b;
         // 1) 클릭된 버튼 사라지기
-        $(this).slideUp(300);
+        $(ele).slideUp(300);
         // 2) 메시지 없애기 : msg변수
         msg.fadeOut(300);
         // 3) 이동하기
-        // 위치 : li 8번방 -> bd변수에 있는 모든 li중 8번
-        let room = bd.eq(8);
+        // 위치 : li 8번방 -> bd변수에 있는 모든 li중 몇번
+        let room = bd.eq(seq);
         // 위치값 배열변수
         let pos = [];
         //  top 위치값
@@ -91,10 +93,28 @@ $(() => {
         mi.animate({
             top: pos[0] + "px",
             left: pos[1] + "px"
-        }, 800, "easeOutElastic", () => {
+        }, 800, "easeOutElastic", fn);
+    };
+    // 4. "들어가기" 버튼 클릭시 
+    btns.first().on("click", function () {
+        let fn = () => {
             msg.html("와! 아늑하다! <br> 옆방으로 가보자!").fadeIn(300);
             // 다음버튼 보이기
             $(this).next().delay(500).slideDown(300);
-        });
+        };
+        //  공통함수 호출
+        actMini(this, 8, fn);
+    })
+        // 5.  "옆방으로" 버튼 클릭시
+        .next().on("click", function () {
+        let fn = () => {
+            //  좀비 나타나기
+            bd.eq(9).find("mz").delay(2000).fadeIn(400, () => {
+                msg.html("악! 좀비!<br> 어서 피하자").fadeIn(300);
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            });
+        };
+        actMini(this, 9, fn);
     });
 }); /////////////// jQB ////////////////////

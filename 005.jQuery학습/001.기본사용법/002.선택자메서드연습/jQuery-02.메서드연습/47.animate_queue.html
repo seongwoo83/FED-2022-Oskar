@@ -34,7 +34,10 @@
 				})
 				// 6. 2초후에 0.5초간 slideUp하여 사라짐.
 				.delay(2000)
-				.slideUp(500)
+				.slideUp(500, function(){
+					// slideUp이 끝난 후 모든 값 지워서 초기화
+					$(this).attr("style","")
+				})
 			})
 			
 

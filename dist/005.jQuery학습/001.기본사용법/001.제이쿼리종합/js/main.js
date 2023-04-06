@@ -116,5 +116,89 @@ $(() => {
             });
         };
         actMini(this, 9, fn);
+    })
+        // 6.윗층으로 도망가! 버튼
+        .next().on("click", function () {
+        let fn = () => {
+            //  좀비 나타나기
+            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
+                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            });
+        };
+        actMini(this, 7, fn);
+    })
+        // 7. 다시옆방으로 버튼
+        .next().on("click", function () {
+        let fn = () => {
+            //  좀비 나타나기
+            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
+                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            });
+        };
+        actMini(this, 6, fn);
+    })
+        // 8. 무서우니 윗층으로! 버튼
+        .next().on("click", function () {
+        let fn = () => {
+            //  좀비 나타나기
+            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
+                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            });
+        };
+        actMini(this, 4, fn);
+    })
+        // 9. 치료주사방으로 버튼
+        .next().on("click", function () {
+        let fn = () => {
+            //  좀비 나타나기
+            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
+                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            });
+        };
+        actMini(this, 2, fn);
+    })
+        // 10. 3번방으로 버튼
+        .next().on("click", function () {
+        let fn = () => {
+            //  좀비 나타나기
+            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
+                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            });
+        };
+        actMini(this, 3, fn);
+    })
+        // 11. 1번방으로 버튼
+        .next().on("click", function () {
+        let fn = () => {
+            //  좀비 나타나기
+            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
+                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            });
+        };
+        actMini(this, 1, fn);
+    })
+        // 12. 헬기를 호출! 버튼
+        .next().on("click", function () {
+        let fn = () => {
+            //  좀비 나타나기
+            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
+                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            });
+        };
+        actMini(this, 0, fn);
     });
 }); /////////////// jQB ////////////////////

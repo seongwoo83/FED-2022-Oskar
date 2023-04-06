@@ -41,6 +41,7 @@ function wheelFn() {
     chkCrazy(0);
     console.log("휠 이벤트");
     // 1. 휠 방향 알아내기
+    //@ts-expect-error
     let delta = event === null || event === void 0 ? void 0 : event.wheelDelta;
     if (delta < 0) {
         pno++;

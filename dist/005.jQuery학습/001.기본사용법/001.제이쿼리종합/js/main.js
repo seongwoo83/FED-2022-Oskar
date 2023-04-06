@@ -40,7 +40,7 @@ $(() => {
     let inj = `<img src="./images/inj.png" alt="주사기" class="inj">`;
     //1. 건물 각 방에 번호 넣기 + 좀비/주사기 넣기
     // 대상: .building li -> bd변수
-    // 사용 제이쿼리 메서드: 
+    // 사용 제이쿼리 메서드:
     //  1) each((순서, 요소)=>{}) : 요소의 갯수만큼 순서대로 돌아줌
     //  2) append(요소) : 요소내부에 자식요소 추가(또는 이동)
     bd.each((idx, ele) => {
@@ -92,11 +92,12 @@ $(() => {
         // 대상: mi변수
         mi.animate({
             top: pos[0] + "px",
-            left: pos[1] + "px"
+            left: pos[1] + "px",
         }, 800, "easeOutElastic", fn);
     };
-    // 4. "들어가기" 버튼 클릭시 
-    btns.first().on("click", function () {
+    // 4. "들어가기" 버튼 클릭시
+    btns.first()
+        .on("click", function () {
         let fn = () => {
             msg.html("와! 아늑하다! <br> 옆방으로 가보자!").fadeIn(300);
             // 다음버튼 보이기
@@ -106,10 +107,14 @@ $(() => {
         actMini(this, 8, fn);
     })
         // 5.  "옆방으로" 버튼 클릭시
-        .next().on("click", function () {
+        .next()
+        .on("click", function () {
         let fn = () => {
             //  좀비 나타나기
-            bd.eq(9).find(".mz").delay(2000).fadeIn(400, () => {
+            bd.eq(9)
+                .find(".mz")
+                .delay(2000)
+                .fadeIn(400, () => {
                 msg.html("악! 좀비!<br> 어서 피하자").css({ left: "-144%" }).fadeIn(300);
                 // 다음버튼 보이기
                 $(this).next().delay(500).slideDown(300);
@@ -118,58 +123,126 @@ $(() => {
         actMini(this, 9, fn);
     })
         // 6.윗층으로 도망가! 버튼
-        .next().on("click", function () {
+        .next()
+        .on("click", function () {
         let fn = () => {
-            //  좀비 나타나기
-            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
-                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+            msg.html(`여긴 없겠지?`).fadeIn(300);
+            bd.eq(7)
+                .find(".mz")
+                .delay(1000)
+                .fadeIn(400, () => {
+                // 좀비 등장 후 메시지와 버튼
+                // 메시지 변경
+                msg.html(`악 여기도!!`);
                 // 다음버튼 보이기
                 $(this).next().delay(500).slideDown(300);
             });
         };
         actMini(this, 7, fn);
     })
-        // 7. 다시옆방으로 버튼
-        .next().on("click", function () {
+        // 7. 7번방으로 버튼
+        .next()
+        .on("click", function () {
         let fn = () => {
-            //  좀비 나타나기
-            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
-                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+            msg.html("여긴 없겠지?")
+                .fadeIn(200)
+                .delay(1000)
+                .fadeIn(200, () => {
+                //  두번째 메시지
+                msg.html(`그래도 무서우니 <br> 윗층으로 가자`);
                 // 다음버튼 보이기
                 $(this).next().delay(500).slideDown(300);
             });
         };
         actMini(this, 6, fn);
     })
-        // 8. 무서우니 윗층으로! 버튼
-        .next().on("click", function () {
+        // 8. 무서우니 윗층으로 버튼
+        .next()
+        .on("click", function () {
         let fn = () => {
-            //  좀비 나타나기
-            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
-                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
-                // 다음버튼 보이기
-                $(this).next().delay(500).slideDown(300);
+            //  무....서...워..  메세지 보이기
+            msg.html(`무`)
+                .fadeIn(200)
+                .delay(500)
+                .fadeIn(200, () => {
+                msg.html(`무.`);
+            })
+                .delay(500)
+                .fadeIn(200, () => {
+                msg.html(`무.서`);
+            })
+                .delay(500)
+                .fadeIn(200, () => {
+                msg.html(`무.서.워`);
+            })
+                .delay(500)
+                .fadeIn(200, () => {
+                msg.html(`무.서.워.`);
+            })
+                .delay(500)
+                .fadeIn(200, () => {
+                msg.html(`무.서.워..`);
+            })
+                .delay(500)
+                .fadeIn(200, () => {
+                msg.html(`무.서.워...`);
+            })
+                .delay(500)
+                .fadeIn(200, () => {
+                // 7번방 좀비가 달려듦
+                bd.eq(7).find(".mz").animate({
+                    bottom: bd.eq(7).height() + "px"
+                    // li높이 만큼 올라옴
+                }, 500, "easeOutElastic").delay(500).animate({
+                    right: bd.eq(7).width() * 1.2 + "px"
+                }, 300, "easeOutBounce", () => {
+                    // 물린 후 대사
+                    msg.css({ left: "106%" }).html(`악! 물렸다!<br>어서 치료주사방으로!`);
+                    //  미니언즈 좀비 이미지 변경 
+                    setTimeout(() => {
+                        mi.find("img").attr("src", "images/mz1.png").css({ filter: "grayscale(100%)" });
+                        // 다음버튼 보이기
+                        $(this).next().delay(500).slideDown(300);
+                    }, 1000);
+                });
             });
         };
         actMini(this, 4, fn);
     })
         // 9. 치료주사방으로 버튼
-        .next().on("click", function () {
+        .next()
+        .on("click", function () {
         let fn = () => {
-            //  좀비 나타나기
-            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
-                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+            // 주사기 돌기 (animate는 transform 적용 안됨)
+            $(".inj").css({
+                transform: "rotate(-150deg)",
+                transition: ".5s .5s",
+                zIndex: "999"
+            });
+            setTimeout(() => {
+                // 이미지 변경
+                mi.find(".img").attr("src", "images/m2.png").css({
+                    filter: "grayscale(0)"
+                });
+                // 대사
+                msg.html(`이제 조금만 더<br> 가면 탈출이다!`).fadeIn(200);
+                // 주사기 없애기
+                $("inj").hide();
                 // 다음버튼 보이기
                 $(this).next().delay(500).slideDown(300);
-            });
+            }, 1000);
         };
         actMini(this, 2, fn);
     })
         // 10. 3번방으로 버튼
-        .next().on("click", function () {
+        .next()
+        .on("click", function () {
         let fn = () => {
             //  좀비 나타나기
-            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
+            bd.eq(7)
+                .find(".mz")
+                .delay(2000)
+                .fadeIn(400, () => {
                 msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
                 // 다음버튼 보이기
                 $(this).next().delay(500).slideDown(300);
@@ -178,10 +251,14 @@ $(() => {
         actMini(this, 3, fn);
     })
         // 11. 1번방으로 버튼
-        .next().on("click", function () {
+        .next()
+        .on("click", function () {
         let fn = () => {
             //  좀비 나타나기
-            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
+            bd.eq(7)
+                .find(".mz")
+                .delay(2000)
+                .fadeIn(400, () => {
                 msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
                 // 다음버튼 보이기
                 $(this).next().delay(500).slideDown(300);
@@ -190,10 +267,14 @@ $(() => {
         actMini(this, 1, fn);
     })
         // 12. 헬기를 호출! 버튼
-        .next().on("click", function () {
+        .next()
+        .on("click", function () {
         let fn = () => {
             //  좀비 나타나기
-            bd.eq(7).find(".mz").delay(2000).fadeIn(400, () => {
+            bd.eq(7)
+                .find(".mz")
+                .delay(2000)
+                .fadeIn(400, () => {
                 msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
                 // 다음버튼 보이기
                 $(this).next().delay(500).slideDown(300);

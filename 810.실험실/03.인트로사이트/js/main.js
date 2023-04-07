@@ -8,12 +8,8 @@ const autoSc = new AutoScroll();
 
 
 // 스크롤 속도변경
-
-console.log('기존 속도', autoSc.sc_speed);
 autoSc.sc_speed = 500;
-console.log('변경 속도', autoSc.sc_speed);
+
 // 이징변경
-console.log("기존 이징", autoSc.easing);
 autoSc.easing = "easeOutExpo";
-console.log("변경 이징", autoSc.easing);
 

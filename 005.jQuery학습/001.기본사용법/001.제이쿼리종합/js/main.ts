@@ -72,8 +72,8 @@ $(() => {
 
     //2.  버튼세팅하기
     // 대상: .btns button -> btns변수
-    btns.hide().eq(5).show();
-    // btns.hide().first().show();
+    // btns.hide().eq(5).show();
+    btns.hide().first().show();
 
     // 3. 공통함수: actMini()
     const actMini = (ele: HTMLElement, seq: number, fn: ((this: HTMLElement) => void) | undefined) => {
@@ -248,7 +248,7 @@ $(() => {
                 });
                 setTimeout(() => {
                     // 이미지 변경
-                    mi.find(".img").attr("src", "images/m2.png").css({
+                    mi.find("img").attr("src", "images/m2.png").css({
                         filter: "grayscale(0)"
                     });
                     // 대사
@@ -310,7 +310,35 @@ $(() => {
                 }).delay(300).animate({
                     left: "100%"
                 },10000, "linear",()=>{ //헬기 나간후 간판 떨어트리기, 건물 무너뜨리기
-                    
+                    let tit = $(".tit");
+                    // 1단계: 중간까지 떨어짐
+                    // -> 간판에 클래스 on주기
+                    tit.addClass("on");
+                    // 2단계: 맨 아래까지 떨어짐
+                    // -> 3초후 간판에 클래스 on2 주기;
+                    setTimeout(() => {
+                        tit.addClass("on2");
+                    }, 3000);
+
+                    // 간판 떨어진 후 건물 무너뜨리기
+                    setTimeout(() => {
+                        bd.parent().addClass("on");
+                    }, 6000);
+
+                    // 추가구현
+                    // 건물 무너진후 좀비하나 올라와 오른쪽으로 사라지기
+                    setTimeout(() => {
+                        // 건물 기울기 원복
+                        bd.parent().css({
+                            transform: "rotate(0deg) !important"
+                        })
+                        bd.eq(9).find(".mz").animate({
+                            bottom: "586%"
+                        }, 5000).delay(3000).animate({
+                            right: "-244%"
+                        },5000)
+                    }, 15000);
+
                 })
 
                 
@@ -318,4 +346,19 @@ $(() => {
 
             actMini(this, 0, fn);
         });
+        // 간판에 마우스 오버시/아웃시 색상변경하기
+         $(".tit").hover(
+        function(){
+            $(this).css({
+                backgroundColor : "blue",
+                color: "lime"
+            })
+         }, 
+         function(){
+            $(this).css({
+                backgroundColor: "pink",
+                color:"yellow"
+            })
+         })
+
 }); /////////////// jQB ////////////////////

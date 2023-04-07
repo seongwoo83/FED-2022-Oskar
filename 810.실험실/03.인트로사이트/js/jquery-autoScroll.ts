@@ -2,6 +2,21 @@
 // 로딩구역 없이 함수로 구현함
 /*****************************************
     [ 생성자함수로 묶어서 export해준다 ]
+    < 생성자함수로 변경할 때 체크할 점>
+
+    1. 일반함수(function)는 할당형 함수로 변경
+    -> 함수명은 this키워드로 등록
+    예) function my(){} 
+        -> this.my = () => {} 로 변경
+
+    2. 변수는 외부에 공개할 것만 this 키워드로 등록함
+    -> 일반적으로 let, const를 모두 변경할 필요는 없고 
+    내가 인스턴스 생성시 접근해야할 변수만 this로 등록함 
+    
+    3. 할당형 변수는 호출 호이스팅이 불가하므로 상단에서 바로
+    함수를 호출하거나 이벤트 등록한 경우 이를 생성자함수 하단으로
+    이동시킴
+    
 *****************************************/
 function AutoScroll() {
     /*****************************************
@@ -15,7 +30,7 @@ function AutoScroll() {
     const pgcnt = $(".page").length;
     // console.log('pgcnt: ', pgcnt);
     // 광실행 금지 변수
-    let prot = [];
+    let prot : any = [];
     //  gnb메뉴 li
     const gnb = $(".gnb li");
     // indic메뉴 li
@@ -62,7 +77,7 @@ function AutoScroll() {
     함수명: chgMenu
     기능: 메뉴 클릭시 메뉴 변경과 페이지 이동
 *******************************************/
-    function chgMenu(e) {
+    function chgMenu(this: any, e) {
         e.preventDefault();
         //  0. 광클금지
         if (prot[1]) return;
@@ -91,7 +106,7 @@ function AutoScroll() {
     function movePg() {
         $("html, body").animate(
             {
-                scrollTop: $(window).height() * pno + "px",
+                scrollTop: ($(window).height() as number) * pno + "px",
             },
             800,
             "easeInOutQuint",
@@ -131,3 +146,5 @@ function AutoScroll() {
     // 최초호출
     setTimeout(showEle, 1000);
 } // AutoScroll 생성자 함수
+
+export default AutoScroll;

@@ -2,6 +2,21 @@
 // 로딩구역 없이 함수로 구현함
 /*****************************************
     [ 생성자함수로 묶어서 export해준다 ]
+    < 생성자함수로 변경할 때 체크할 점>
+
+    1. 일반함수(function)는 할당형 함수로 변경
+    -> 함수명은 this키워드로 등록
+    예) function my(){}
+        -> this.my = () => {} 로 변경
+
+    2. 변수는 외부에 공개할 것만 this 키워드로 등록함
+    -> 일반적으로 let, const를 모두 변경할 필요는 없고
+    내가 인스턴스 생성시 접근해야할 변수만 this로 등록함
+    
+    3. 할당형 변수는 호출 호이스팅이 불가하므로 상단에서 바로
+    함수를 호출하거나 이벤트 등록한 경우 이를 생성자함수 하단으로
+    이동시킴
+    
 *****************************************/
 function AutoScroll() {
     /*****************************************
@@ -40,7 +55,8 @@ function AutoScroll() {
 *****************************************/
     function wheelFn() {
         // 광휠 금지
-        if (prot[0]) return;
+        if (prot[0])
+            return;
         chkCrazy(0);
         console.log("휠 이벤트");
         // 1. 휠 방향 알아내기
@@ -48,10 +64,13 @@ function AutoScroll() {
         let delta = event === null || event === void 0 ? void 0 : event.wheelDelta;
         if (delta < 0) {
             pno++;
-            if (pno === pgcnt) pno = pgcnt - 1;
-        } else {
+            if (pno === pgcnt)
+                pno = pgcnt - 1;
+        }
+        else {
             pno--;
-            if (pno === -1) pno = 0;
+            if (pno === -1)
+                pno = 0;
         }
         console.log(pno);
         // 3. 스크롤 이동하기
@@ -65,7 +84,8 @@ function AutoScroll() {
     function chgMenu(e) {
         e.preventDefault();
         //  0. 광클금지
-        if (prot[1]) return;
+        if (prot[1])
+            return;
         chkCrazy(1);
         // 1. 클릭된 a 요소의 부모 li 순번을 구함  === pno
         let idx = $(this).parent().index();
@@ -89,14 +109,9 @@ function AutoScroll() {
     기능: 페이지 이동 애니메이션
 *******************************************/
     function movePg() {
-        $("html, body").animate(
-            {
-                scrollTop: $(window).height() * pno + "px",
-            },
-            800,
-            "easeInOutQuint",
-            showEle
-        );
+        $("html, body").animate({
+            scrollTop: $(window).height() * pno + "px",
+        }, 800, "easeInOutQuint", showEle);
         // 대상: gnb메뉴, 인디케이터
         gnb.eq(pno).addClass("on").siblings().removeClass("on");
         indic.eq(pno).addClass("on").siblings().removeClass("on");
@@ -116,18 +131,19 @@ function AutoScroll() {
         pg.eq(pno)
             .find(".minfo")
             .css({
-                opacity: "1",
-                transform: "translate(-50%, -50%)",
-            })
+            opacity: "1",
+            transform: "translate(-50%, -50%)",
+        })
             .parents(".page")
             .siblings()
             .find(".minfo")
             .css({
-                opacity: "0",
-                transform: "translate(-50%, 50%)",
-                transition: ".6s ease-out",
-            });
+            opacity: "0",
+            transform: "translate(-50%, 50%)",
+            transition: ".6s ease-out",
+        });
     }
     // 최초호출
     setTimeout(showEle, 1000);
 } // AutoScroll 생성자 함수
+export default AutoScroll;

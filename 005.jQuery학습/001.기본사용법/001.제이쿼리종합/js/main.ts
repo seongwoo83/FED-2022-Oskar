@@ -328,12 +328,9 @@ $(() => {
                     // 추가구현
                     // 건물 무너진후 좀비하나 올라와 오른쪽으로 사라지기
                     setTimeout(() => {
-                        // 건물 기울기 원복
-                        bd.parent().css({
-                            transform: "rotate(0deg) !important"
-                        })
+                        bd.parent().attr("style", "transform:rotate(0deg) !important")
                         bd.eq(9).find(".mz").animate({
-                            bottom: "586%"
+                            bottom: "594%"
                         }, 5000).delay(3000).animate({
                             right: "-244%"
                         },5000)

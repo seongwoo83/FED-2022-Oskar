@@ -3,7 +3,6 @@
 window.addEventListener("DOMContentLoaded", linkFn);
 
 function linkFn(){
-    console.log("링크 로딩완료");
 
     /* 1. 링크대상 설정 */
     /* 1) GNB : .gnb a */

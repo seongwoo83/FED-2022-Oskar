@@ -72,7 +72,8 @@ $(() => {
 
     //2.  버튼세팅하기
     // 대상: .btns button -> btns변수
-    btns.hide().first().show();
+    btns.hide().eq(5).show();
+    // btns.hide().first().show();
 
     // 3. 공통함수: actMini()
     const actMini = (ele: HTMLElement, seq: number, fn: ((this: HTMLElement) => void) | undefined) => {
@@ -111,7 +112,7 @@ $(() => {
 
     // 4. "들어가기" 버튼 클릭시
     btns.first()
-        .on("click", function () {
+        .on("click", function (this:HTMLElement) {
             let fn = () => {
                 msg.html("와! 아늑하다! <br> 옆방으로 가보자!").fadeIn(300);
 
@@ -125,7 +126,7 @@ $(() => {
 
         // 5.  "옆방으로" 버튼 클릭시
         .next()
-        .on("click", function () {
+        .on("click", function (this:HTMLElement) {
             let fn = () => {
                 //  좀비 나타나기
                 bd.eq(9)
@@ -143,7 +144,7 @@ $(() => {
         })
         // 6.윗층으로 도망가! 버튼
         .next()
-        .on("click", function () {
+        .on("click", function (this:HTMLElement) {
             let fn = () => {
                 msg.html(`여긴 없겠지?`).fadeIn(300);
 
@@ -164,7 +165,7 @@ $(() => {
         })
         // 7. 7번방으로 버튼
         .next()
-        .on("click", function () {
+        .on("click", function (this:HTMLElement) {
             let fn = () => {
                 msg.html("여긴 없겠지?")
                     .fadeIn(200)
@@ -181,7 +182,7 @@ $(() => {
         })
         // 8. 무서우니 윗층으로 버튼
         .next()
-        .on("click", function () {
+        .on("click", function (this:HTMLElement) {
             let fn = () => {
                 //  무....서...워..  메세지 보이기
                 msg.html(`무`)
@@ -237,7 +238,7 @@ $(() => {
         })
         // 9. 치료주사방으로 버튼
         .next()
-        .on("click", function () {
+        .on("click", function (this:HTMLElement) {
             let fn = () => {
                 // 주사기 돌기 (animate는 transform 적용 안됨)
                 $(".inj").css({
@@ -265,54 +266,54 @@ $(() => {
         })
         // 10. 3번방으로 버튼
         .next()
-        .on("click", function () {
+        .on("click", function (this:HTMLElement) {
             let fn = () => {
-                //  좀비 나타나기
-                bd.eq(7)
-                    .find(".mz")
-                    .delay(2000)
-                    .fadeIn(400, () => {
-                        msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+                msg.html(`어서 윗층으로 가자`).fadeIn(300);
 
-                        // 다음버튼 보이기
-                        $(this).next().delay(500).slideDown(300);
-                    });
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
             };
 
             actMini(this, 3, fn);
         })
         // 11. 1번방으로 버튼
         .next()
-        .on("click", function () {
+        .on("click", function (this:HTMLElement) {
             let fn = () => {
-                //  좀비 나타나기
-                bd.eq(7)
-                    .find(".mz")
-                    .delay(2000)
-                    .fadeIn(400, () => {
-                        msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
-
+                msg.html(`이제 곧 탈출이닷!`).fadeIn(300);
                         // 다음버튼 보이기
                         $(this).next().delay(500).slideDown(300);
-                    });
             };
 
             actMini(this, 1, fn);
         })
         // 12. 헬기를 호출! 버튼
         .next()
-        .on("click", function () {
+        .on("click", function (this:HTMLElement) {
             let fn = () => {
-                //  좀비 나타나기
-                bd.eq(7)
-                    .find(".mz")
-                    .delay(2000)
-                    .fadeIn(400, () => {
-                        msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
+                msg.html(`도와줘요!`).fadeIn(300);
 
-                        // 다음버튼 보이기
-                        $(this).next().delay(500).slideDown(300);
-                    });
+                // 1번방 단체좀비들 달려들기
+                bd.eq(1).find(".mz").fadeIn(300).animate({
+                    right: bd.eq(1).width()+"px"
+                }, 3000,"easeInExpo");
+
+                $(".heli").animate({
+                    left: "20%"
+                },4000, "easeOutBack", function(this:HTMLElement){
+                    $(this).attr("src", "images/heli2.png");
+                    mi.hide();
+                }).delay(500).animate({
+                    left: "70%"
+                },4000,"easeInOutCirc",function(this:HTMLElement){
+                    $(this).attr("src", "images/heli3.png")
+                }).delay(300).animate({
+                    left: "100%"
+                },10000, "linear",()=>{ //헬기 나간후 간판 떨어트리기, 건물 무너뜨리기
+                    
+                })
+
+                
             };
 
             actMini(this, 0, fn);

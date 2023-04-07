@@ -67,7 +67,8 @@ $(() => {
     //  시간 없는 hide()는 display: none; 됨
     //2.  버튼세팅하기
     // 대상: .btns button -> btns변수
-    btns.hide().first().show();
+    btns.hide().eq(5).show();
+    // btns.hide().first().show();
     // 3. 공통함수: actMini()
     const actMini = (ele, seq, fn) => {
         //전달변수 세개
@@ -238,15 +239,9 @@ $(() => {
         .next()
         .on("click", function () {
         let fn = () => {
-            //  좀비 나타나기
-            bd.eq(7)
-                .find(".mz")
-                .delay(2000)
-                .fadeIn(400, () => {
-                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
-                // 다음버튼 보이기
-                $(this).next().delay(500).slideDown(300);
-            });
+            msg.html(`어서 윗층으로 가자`).fadeIn(300);
+            // 다음버튼 보이기
+            $(this).next().delay(500).slideDown(300);
         };
         actMini(this, 3, fn);
     })
@@ -254,15 +249,9 @@ $(() => {
         .next()
         .on("click", function () {
         let fn = () => {
-            //  좀비 나타나기
-            bd.eq(7)
-                .find(".mz")
-                .delay(2000)
-                .fadeIn(400, () => {
-                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
-                // 다음버튼 보이기
-                $(this).next().delay(500).slideDown(300);
-            });
+            msg.html(`이제 곧 탈출이닷!`).fadeIn(300);
+            // 다음버튼 보이기
+            $(this).next().delay(500).slideDown(300);
         };
         actMini(this, 1, fn);
     })
@@ -270,14 +259,23 @@ $(() => {
         .next()
         .on("click", function () {
         let fn = () => {
-            //  좀비 나타나기
-            bd.eq(7)
-                .find(".mz")
-                .delay(2000)
-                .fadeIn(400, () => {
-                msg.html("악! 여기도!").css({ left: "-144%" }).fadeIn(300);
-                // 다음버튼 보이기
-                $(this).next().delay(500).slideDown(300);
+            msg.html(`도와줘요!`).fadeIn(300);
+            // 1번방 단체좀비들 달려들기
+            bd.eq(1).find(".mz").fadeIn(300).animate({
+                right: bd.eq(1).width() + "px"
+            }, 3000, "easeInExpo");
+            $(".heli").animate({
+                left: "20%"
+            }, 4000, "easeOutBack", function () {
+                $(this).attr("src", "images/heli2.png");
+                mi.hide();
+            }).delay(500).animate({
+                left: "70%"
+            }, 4000, "easeInOutCirc", function () {
+                $(this).attr("src", "images/heli3.png");
+            }).delay(300).animate({
+                left: "100%"
+            }, 10000, "linear", () => {
             });
         };
         actMini(this, 0, fn);

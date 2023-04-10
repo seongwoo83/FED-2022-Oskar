@@ -96,13 +96,85 @@ else if(cid === "mpw2"){ // 비밀번호확인 검사
 }
 
 
-
-
     else{ //모두 통과했을 경우
         $(this).siblings(".msg").empty(); //내용지우기 메서드 empty()
     }
     
    })
+
+   
+    // 이메일 관련 대상설정
+    // 이메일 앞주소
+   const eml1= $("#email1");
+    // 이메일 뒷주소
+   const eml2 = $("#email2");
+   // 이메일 선택 박스
+   const seleml = $("#seleml");
+
+   /***************************************
+        선택박스 변경시 이메일 검사하기
+        _________________________
+
+        검사시점: 선택박스 변경할 때
+        이벤트: change -> 제이쿼리 change()메서드
+        이벤트 대상: #seleml -> seleml 할당
+   ***************************************/
+   seleml.on("change",function(){
+        // 1. 선택박스 변경된 값 읽어오기
+        let cv = $(this).val();
+        console.log(cv);
+
+        // 2. 선택옵션별 분기문
+        if(cv === "init"){
+            // 선택해 주세요
+            // 1. 메시지 출력
+            eml1.siblings(".msg").text("이메일 옵션 선택필수").removeClass("on");
+            // 2. 직접 입력창 숨기기
+            eml2.fadeOut(300);
+        }else if(cv === "free"){
+            // 직접 입력
+            // 1. 직접입력창 보이기
+            eml2.fadeIn(300).val("").focus();
+            //  val(값) -> 입력창에 값넣기(빈문자값은 기존값을 지워준다)
+            // focus() -> 입력창에 포커스 가게 하기
+            
+            // 2. 기존 메시지 지우기
+            eml1.siblings(".msg").empty();
+
+        }else{
+            // 이메일 주소일 경우
+            // 1. 직접 입력창 숨기기
+            eml2.fadeOut(300);
+
+            // 2. 이메일 전체주소 조합하기
+            let comp = eml1.val() + "@"+ cv;
+
+            // 3. 이메일 유효성 검사 함수 호출
+            resEml(comp)
+        }
+   })
+
+    /********************************************
+        함수명: resEml
+        기능: 이메일 검사 결과 처리
+    ********************************************/
+const resEml = (comp : string) => {
+    // comp 완성된 이메일 주소
+    console.log("이메일 주소", comp);
+    console.log("검사결과", vReg(comp, "eml"));
+
+
+    // 이메일 정규식 검사에 따른 메시지
+    if(vReg(comp, "eml")){ //통과시
+        eml1.siblings(".msg")
+        .text("적합한 이메일 형식 입니다.").addClass("on");
+    }else{ //통과 못했을 시
+        eml1.siblings(".msg")
+        .text("맞지 않는 이메일 형식 입니다.").removeClass("on");
+    }
+
+}
+
 
 });
 /*////////////////////////////////////////////////////////

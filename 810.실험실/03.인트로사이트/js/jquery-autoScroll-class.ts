@@ -30,7 +30,6 @@ class AutoScroll {
     minfo: JQuery<HTMLElement>;
     sc_speed: number;
     easing: string;
-    moveThis: any;
     constructor() {
         /******************************************
             대상 변수할당하기
@@ -132,7 +131,7 @@ class AutoScroll {
             // 2. 전역페이지번호에 순번 업데이트
             this.pno = idx;
             // 3. 페이지이동 + 메뉴에 클래스"on"넣기
-            this.moveThis.pg();
+            this.movePg();
         } ////////// chgMenu 메서드 ///////////////////
 
 

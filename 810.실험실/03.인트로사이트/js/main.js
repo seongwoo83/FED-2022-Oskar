@@ -13,4 +13,3 @@ autoSc.sc_speed = 500;
 
 // 이징변경
 autoSc.easing = "easeOutExpo";
-

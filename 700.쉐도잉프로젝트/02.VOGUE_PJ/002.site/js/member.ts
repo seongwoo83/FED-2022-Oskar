@@ -51,6 +51,8 @@ $(()=>{
     if(cv === ""){
         // 메시지 출력
         $(this).siblings(".msg").text("값이 비어있습니다.");
+
+        // 불통과
         pass = false;
     }
     /*********************************************
@@ -61,6 +63,8 @@ else if(cid === "mid"){ // 아이디 검사
     console.log("아이디 검사 결과" ,vReg(cv, cid));
     if(!vReg(cv,cid)){ //false일때
         $(this).siblings(".msg").text("영문자로 시작하는 6~20글자 영문자/숫자").removeClass("on");
+
+        // 불통과
         pass = false;
     }else{ // true일때 통과시
         // 1. DB에 아이디가 있는지 조회후 결과로 처리해야함 -> 보류중
@@ -79,6 +83,8 @@ else if(cid === "mpw"){ // 비밀번호 검사
     console.log("비밀번호 검사 결과" ,vReg(cv, cid));
     if(!vReg(cv,cid)){ //false일때
         $(this).siblings(".msg").text("특수문자,문자,숫자포함 형태의 5~15자리");
+
+        // 불통과
         pass = false;
     }else{ // true일때 통과시
         //  메시지 지우기
@@ -92,13 +98,24 @@ else if(cid === "mpw"){ // 비밀번호 검사
 else if(cid === "mpw2"){ // 비밀번호확인 검사
     if(cv !== ($("#mpw").val() as string)){ //비밀번호와 같지 않을때
         $(this).siblings(".msg").text("비밀번호가 일치하지 않습니다.");
+
+        // 불통과
         pass = false;
     }else{ // 비밀번호와 같을때
         //  메시지 지우기
         $(this).siblings(".msg").empty();
     }
 }
-
+/*********************************************
+        7. 이메일 유효성 검사
+        - 검사기준: 이메일 형식에 맞는지 검사
+    *********************************************/
+else if(cid === "email1"){
+    // 1. 이메일 주소 만들기 : 앞주소 @ 뒷주소
+    let comp :string = eml1.val() + "@" + (seleml.val() === "free" ? eml2.val() : seleml.val());
+    // 2. 이메일 검사함수 호출하기
+    resEml(comp);
+}
 
     else{ //모두 통과했을 경우
         $(this).siblings(".msg").empty(); //내용지우기 메서드 empty()
@@ -203,6 +220,9 @@ const resEml = (comp : string) => {
     }else{ //통과 못했을 시
         eml1.siblings(".msg")
         .text("맞지 않는 이메일 형식 입니다.").removeClass("on");
+
+        // 불통과
+        pass = false;
     }
 }
 
@@ -240,6 +260,21 @@ $("#btnj").on("click", function(e:any){
 
     // 최종 통과여부
     console.log("통과여부", pass);
+
+    // 4. 검사결과에 따라 메시지 보이기
+    if(pass){
+        // 원래는  post방식으로 DBV에 회원가입정보를 전송하여 입력후 DB처리 완료시 성공메시지나
+        // 로그인 페이지로 넘겨준다
+        alert("회원가입을 축하드립니다~!");
+        // 로그인페이지로 리디렉션
+        // location.href = "/700.쉐도잉프로젝트/02.VOGUE_PJ/002.site/login.html"
+        location.replace("/700.쉐도잉프로젝트/02.VOGUE_PJ/002.site/login.html")
+        // 브라우저 캐싱 히스토리를 지우려면
+        // location.replace(url)을 사용함
+        
+    }else{
+        alert("입력을 수정하세요");
+    }
 })
 
 });

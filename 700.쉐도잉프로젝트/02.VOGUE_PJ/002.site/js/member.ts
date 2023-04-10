@@ -50,7 +50,8 @@ $(()=>{
     *********************************************/
     if(cv === ""){
         // 메시지 출력
-        $(this).siblings(".msg").text("값이 비어있습니다.")
+        $(this).siblings(".msg").text("값이 비어있습니다.");
+        pass = false;
     }
     /*********************************************
         4. 아이디일 경우 유효성 검사
@@ -60,6 +61,7 @@ else if(cid === "mid"){ // 아이디 검사
     console.log("아이디 검사 결과" ,vReg(cv, cid));
     if(!vReg(cv,cid)){ //false일때
         $(this).siblings(".msg").text("영문자로 시작하는 6~20글자 영문자/숫자").removeClass("on");
+        pass = false;
     }else{ // true일때 통과시
         // 1. DB에 아이디가 있는지 조회후 결과로 처리해야함 -> 보류중
             // 만약 아이디가 이미 있으면 "이미 사용중이거나 탈퇴한 아이디입니다."
@@ -77,6 +79,7 @@ else if(cid === "mpw"){ // 비밀번호 검사
     console.log("비밀번호 검사 결과" ,vReg(cv, cid));
     if(!vReg(cv,cid)){ //false일때
         $(this).siblings(".msg").text("특수문자,문자,숫자포함 형태의 5~15자리");
+        pass = false;
     }else{ // true일때 통과시
         //  메시지 지우기
         $(this).siblings(".msg").empty();
@@ -89,6 +92,7 @@ else if(cid === "mpw"){ // 비밀번호 검사
 else if(cid === "mpw2"){ // 비밀번호확인 검사
     if(cv !== ($("#mpw").val() as string)){ //비밀번호와 같지 않을때
         $(this).siblings(".msg").text("비밀번호가 일치하지 않습니다.");
+        pass = false;
     }else{ // 비밀번호와 같을때
         //  메시지 지우기
         $(this).siblings(".msg").empty();
@@ -154,16 +158,44 @@ else if(cid === "mpw2"){ // 비밀번호확인 검사
         }
    })
 
+   /********************************************
+        키보드 입력시 이메일 체크하기
+        _______________________________
+        - 키보드 관련 이벤트 : keypress, keyup, keydown
+        1. keypress : 키가 눌려졌을 때
+        2. keyup : 키가 눌렸다가 올라올 때
+        3. keydown :  키가 눌려져서 내려가 있을 때
+        -> 과연 글자가 입력되는 순간은 어떤 키보드 이벤트를 적용해야 할까? -> keyup 이벤트
+
+        이벤트 대상: #email1, #email2
+        -> 모든 이벤트를 함수와 연결하는 제이쿼리 메서드는?
+        on(이벤트명, 함수)
+   ********************************************/
+$("#email1, #email2").on("keyup", function(){
+    // 1. 현재 이벤트 대상 아이디 읽어오기
+    let cid = $(this).attr("id");
+    // 2. 현재 입력된 값 읽어오기
+    let cv = $(this).val();
+    console.log("입력아이디", cid, "\n입력값", cv);
+    //  3. 이메일 뒷주소 세팅하기
+    let backeml = cid ==="email1" ? seleml.val() : eml2.val();
+    //  현재 아이디가 "email1"인가? 맞으면 선택박스 : 아니면 두번째 이메일 뒷주소를 입력하는
+    //  중이므로 그것을 선택
+    // 4. 만약 선택박스 값이 "free"(직접입력)이면 이메일 뒷주소로 변경함
+    if(seleml.val() === "free") backeml = eml2.val();  
+    // 5. 이메일 전체주소 조합하기
+    let comp = eml1.val() + "@" + backeml;
+    // 6. 이메일 유효성 검사함수 호출
+    resEml(comp);
+
+})
+
+
     /********************************************
         함수명: resEml
         기능: 이메일 검사 결과 처리
     ********************************************/
 const resEml = (comp : string) => {
-    // comp 완성된 이메일 주소
-    console.log("이메일 주소", comp);
-    console.log("검사결과", vReg(comp, "eml"));
-
-
     // 이메일 정규식 검사에 따른 메시지
     if(vReg(comp, "eml")){ //통과시
         eml1.siblings(".msg")
@@ -172,9 +204,43 @@ const resEml = (comp : string) => {
         eml1.siblings(".msg")
         .text("맞지 않는 이메일 형식 입니다.").removeClass("on");
     }
-
 }
 
+/***********************************************
+    가입하기(submit) 버튼 클릭시 처리하기
+    _______________________________
+
+    전체검사의 원리:
+    전역변수 pass를 설정하여  true를 할당하고 검사중간에
+    불통과 사유발생시 false로 변경하여
+    유효성 검사 통과여부를 판단함
+
+    검사방법:
+    기존 이벤트 blur이벤트를 강제로 발생시킨다
+    이벤트를 강제로 발생시키는 메서드는? trigger(이벤트명)
+***********************************************/
+//  검사용 변수
+let pass : boolean = true;
+// 이벤트 대상: #btnj
+// 원래 서브밋버튼은 클릭시 싸고있는 form태그의 action 설정 페이지로
+// 모든 입력창의 값을 전송하도록 설계되어있다.
+// 기본 서브밋 이동을 막고 우리가 검사한 후 전송한다
+$("#btnj").on("click", function(e:any){
+    // 1. 기본이동 막기
+    e.preventDefault();
+    
+    // 2. pass 통과 여부 변수에 true를 할당
+    //  처음에 true로 시작하여 검사 중간에 한번이라도 false로 할당되면 결과는 false로 리턴
+    pass = true;
+
+    // 3. 입력창  blur 이벤트 강제 발생
+    //  대상: blur  이벤트 발생했던 요소들
+    $(`input[type=text][id!=email2][class!=search],
+   input[type=password]`).trigger("blur");
+
+    // 최종 통과여부
+    console.log("통과여부", pass);
+})
 
 });
 /*////////////////////////////////////////////////////////

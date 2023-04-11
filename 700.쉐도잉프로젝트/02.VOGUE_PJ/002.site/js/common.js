@@ -1,38 +1,67 @@
-window.addEventListener("DOMContentLoaded", ()=>{
+// 보그 PJ - 공통 JS : common.js
+
+// 모바일 구분코드(1-모바일,0-DT)
+let mobsts = 0;
+
+// 화면크기에 따른 모바일 코드 변경함수
+const chkW = () =>{
+    if($(window).width()<=500) mobsts = 1;
+    else mobsts = 0;
+
+    console.log("모바일여부:",mobsts);
+
+}; ///////// chkW 함수 ////////////
+
+// 화면체크함수 처음호출
+chkW();
+
+// 화면리사이즈시 화면체크함수 호출
+$(window).resize(chkW);
+// "resize" 화면크기변경시 발생 이벤트
+
+// 로드구역 //////////
+window.addEventListener("DOMContentLoaded",()=>{
+    console.log("공통JS 로딩완료!");
+
+    // 부드러운 스크롤 JS호출!
     startSS();
 
-        /* 만약 스크롤바를 직접 드래그할 경우 mouseup(즉, 스크롤바를 놓는경우)이벤트 발생시 Y축 스크로위치를 pos 전역변수에 업데이트 한다 */
-        window.addEventListener("mouseup", ()=>{
-            pos = window.scrollY;
-        })
-
-        // 모바일 메뉴 초기 세팅하기
-        // 대상 : .top/ #top
-        $(".top").append(mobcode.mobtn);
-        $("#top").append(mobcode.mobx);
+    // 만약 스크롤바를 직접 드래그할 경우
+    // mouseup (즉, 스크롤바를 놓는경우)
+    // 이벤트 발생시 Y축 스크롤바 위치를
+    // pos전역변수에 업데이트 한다!
+    window.addEventListener("mouseup",()=>{
+        pos = window.scrollY;
+    }); //////////// mouseup //////////////
 
 
-        // 모바일 버튼기능 구현하기
-        // 대상: 
-        // 1. 메뉴바 버튼 클릭시 전체 메뉴 보이기
-        //  이벤트 대상: .hbtn / 변경대상  #mobx
-        $(".hbtn").on("click", ()=>{
-            $("#mobx").slideToggle(400);
-        })
-        // 2. 검색버튼 클릭시 검색 박스 보이기
-        //  이벤트 대상: . sbtn / 변경대상  .mos
-        $(".sbtn").on("click", ()=>{
-            $(".mos").slideToggle(200);
-        })
+    /// 모바일 메뉴 초기셋팅하기 /////
+    // 대상: .top / #top
+    $(".top").append(mobcode.mobtn);
+    $("#top").append(mobcode.mobx);
 
-        // slideToggle(시간) 은 slideUp()/slideDown()을 자동 전환한다.
+    /// 모바일 버튼 기능 구현하기 ////
+    // 1. 햄버거버튼 클릭시 전체메뉴 보이기
+    // 이벤트대상: .hbtn / 변경대상 #mobx
+    $(".hbtn").click(()=>$("#mobx").slideToggle(400));
 
-})
+    // 2. 검색버튼 클릭시 검색박스 보이기
+    // 이벤트대상: .sbtn / 변경대상 .mos
+    $(".sbtn").click(()=>$(".mos").slideToggle(200));
 
-// 모바일 관련 html코드 객체
+    // slideToggle(시간) 은 slideUp()/slideDown()을 자동전환한다!
+
+
+
+
+}); ///////////////// load ///////////////////
+
+
+
+/////// 모바일 관련 html코드 객체 /////
 const mobcode = {
-    // 모바일 버튼 코드 : header.top 안에 넣기
-    mobtn: `
+    // 모바일버튼코드 : header.top 안에 넣기
+    mobtn:`
         <!-- 모바일용 햄버거버튼 -->
         <a href="#" class="mobtn hbtn fi fi-nav-icon">
             <span class="ir">GNB button</span>
@@ -42,8 +71,8 @@ const mobcode = {
             <span class="ir">search</span>
         </a>
     `,
-    // 모바일 메뉴박스 코드 : header.top 바깥에 넣기(#top안에)
-    mobx: `
+    // 모바일메뉴박스코드 : header.top 바깥에 넣기(#top안에)
+    mobx:`
         <!-- 1.4.모바일 검색박스 -->
         <div class="mos">
             <div class="mwrap">
@@ -134,5 +163,6 @@ const mobcode = {
                 </li>
             </ul>
         </div>
-    `
-};
+    `,
+
+}; //////////// mobcode //////////////

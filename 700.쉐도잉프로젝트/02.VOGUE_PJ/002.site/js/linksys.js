@@ -6,7 +6,7 @@ function linkFn(){
 
     /* 1. 링크대상 설정 */
     /* 1) GNB : .gnb a */
-    const gnb = document.querySelectorAll(".gnb a");
+    const gnb = document.querySelectorAll(".gnb a, .mognb a");
     /* 2) 로고 : .logo a */
     const logo = document.querySelector(".logo a");
 

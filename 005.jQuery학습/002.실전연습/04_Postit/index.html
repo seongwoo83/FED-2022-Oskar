@@ -78,6 +78,41 @@
                     opacity: "0.7", //이동중 투명도
                 });
 
+                // [ 커스터마이징 요구사항 반영하기]
+                // 1. 드래그 시 포스트잍 이미지 변경하기
+
+                // 1) 드래그 시작이벤트 발생시 이미지 변경위해 클래스 .invert넣기
+                //  드래그 시작이벤트 : dragstarg
+                // 제이쿼리 메서드: on("dragstart")
+                dg.on("dragstart", function(){
+                    $(this).addClass("invert");
+                })
+                    
+                // 2) 드래그 종료이벤트 발생시클래스 .invert빼기
+                //  드래그 종료이벤트 : dragstop
+                // 제이쿼리 메서드: on("dragstop")
+                dg.on("dragstop", function(){
+                    $(this).removeClass("invert");
+                })
+
+                // 2. 드롭대상박스에 드롭될 때 동용상 보여주기
+                // droppable() 메서드: 드롭되는 요소 처리
+                // 이벤트 대상: .dropshow
+                $(".dropshow").droppable({
+                    drop:function(evt, ele){
+                        // evt - 이벤트 전달변수, ele-드롭관련 객체
+                        // (1) 드롭영역의 배경이미지 변경하기
+                        // 드롭된 요소 -> ele.draggable
+                        let isrc = ele.draggable.find("img").attr("src");
+                        console.log(isrc);
+
+                        $(this).css({
+                            backgroundImage: `url(${isrc})`
+                        })
+                    }
+                })
+
+
 
             });
         </script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -27,10 +27,96 @@
                 function(변수) { 성공시코드 },
                 function(변수) { 실패시코드 }
                 );
+                ________________________________________
+                
+                [ AJAX 비동기 파일 처리 전송객체 ]
+                AJAX(asynchronous Javascript and XML)
+                -> XMLHttpRequest
+
+                1. 특징:
+                    1) 웹서버의 데이터를 읽기(페이지 로드 후)
+                    2) 페이지를 리로드하지 않고 웹페이지 부분업데이트함
+                    3) 백그라운드 웹서버로 데이터 전송가능
+                
+                2. 사용법:
+                    1) 인스턴스를 생성하여 변수에 할당하여 사용
+                        예) let ajax = new XMLHttpRequest();
+                    2) 인스턴스를 열어서 전송준비를 함
+                        -> open(방식, 요청url, 아이디, 비밀번호, 비동기옵션)
+                        -> 핵심: open(방식, 요청url)
+                            (1) 방식 : GET/POST -> GET방식을 더 선호함 : 이유- 가볍고 빠르게 처리함 / POST는 민감한 데이터 전송에 사용
+                            (2) 요청url : 웹서버의 페이지나 파일경로 주소
+                            (3) 아이디 / 비밀번호 : 웹서버 접근시 인증이 필요한 경우 사용함
+                            (4) 비동기옵션 : 기본값은 true - 비동기 처리하겠음 / false - 동기적 처리하겠음 의미
+                                -> 비동기적으로 처리해야 페이지가 멈추지 않고 요청파일만 별도로 처리한다.
+                                예) ajax.open("GET", "https://my.com/my.pdf")
+                    3) 비동기전송 후 처리를 위한 로드함수 구역 만들기
+                        -> 인스턴스변수.onload = function (){ 처리소스 구역 };
+                        -> 여기서 onload라는 것은 서버에서 결과를 로드한다는 의미임
+                        -> 결과처리 상태값은 : 인스턴스변수.status 값으로 처리함.
+                            [ status 결과값종류 ]
+                            
 
 
          *******************************************************************/
-            
+         function 화면뿌려(이거){
+            document.getElementById("show").innerHTML += 이거 + "<br/>";
+        }
+
+        window.addEventListener("load",function(){
+            // 1. 기본 약속 객체 만들기
+            let 처음약속 = new Promise(
+                function(성공함수, 실패함수){
+                    let 통과 = 1;
+                    
+                    // 이 자리에는 시간이 걸리는 실행코드가 위치함
+                    if(통과){
+                        성공함수("성공");
+                    }else{
+                        실패함수("에러남");
+                    }
+            })///////////////Promise 객체
+
+            // Promise에서 호출되는 처리후 실행 메서드: then(함수1(){}, 함수2(){})
+            // 함수1 - 성공시 실행구역
+            // 함수2 - 실패시 실행구역
+            처음약속.then(
+                // 성공시 실행함수
+                function(전달변수){
+                    화면뿌려(전달변수);
+                }, 
+                // 실패시 실행함수
+                function(전달변수){
+                    화면뿌려(전달변수);
+                })////////////////then() 메서드
+
+
+                // 2. 시간이 걸리는 코도를 약속객체에 넣고 처리하기
+                // new Promise(function(변수){}) -> 하나의 변수는 성공처리 함수
+                let 약속기다림 = new Promise(
+                    function(성공){
+                        // 처리시간이 걸리는 코드
+                        setTimeout(function(){
+                            // 성공함수 호출
+                            성공("오마이갓김치");
+                        }, 3000);
+                    })//////////////Promise 객체
+
+                    // 약속객체로부터 처리후 then 메서드에 실행코드 넣기
+                    // then(함수) -> 하나의 함수만 쓰면 성공처리 함수를 받음
+                    약속기다림.then(
+                        function(값){
+                            화면뿌려("와우~"+값);
+                            화면뿌려('<img src="https://ojsfile.ohmynews.com/STD_IMG_FILE/2014/0103/IE001663873_STD.jpg" style="height:70vh" alt="약속">')
+                        })///////////////////then()메서드
+
+
+                // 3. 파일을 전송받은 후 실행하는 약속객체 생성하기
+                
+
+
+        })
+
         </script>
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap");

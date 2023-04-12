@@ -15,7 +15,7 @@
             }
 
             /* 일반 선택 / 드래그 막기 */
-            .draggable *{
+            .draggable * {
                 user-select: none;
                 -webkit-user-drag: none;
             }
@@ -54,9 +54,9 @@
 
         <script src="jquery-3.6.0.min.js"></script>
         <script src="jquery-ui.min.js"></script>
-		<!-- 기본적으로 드래그 기능은 모바일에서는 안됨!
+        <!-- 기본적으로 드래그 기능은 모바일에서는 안됨!
 		모바일이벤트로 변환해주는 제이쿼리 플러그인을 추가해준다! 아래! -->
-		<script src="jquery-touch-punch.min.js"></script>
+        <script src="jquery-touch-punch.min.js"></script>
         <!-- 
 		미리보기:
 		https://tombap8.github.io/FED211/004.jQuery학습/jQuery-02.실전연습/04.jQuery_utility/01_Postit/ready.html
@@ -65,7 +65,7 @@
         https://api.jqueryui.com/draggable/
 	 -->
         <script>
-            $(()=>{
+            $(() => {
                 // 1. 드래그 대상
                 const dg = $(".draggable");
 
@@ -84,22 +84,22 @@
                 // 1) 드래그 시작이벤트 발생시 이미지 변경위해 클래스 .invert넣기
                 //  드래그 시작이벤트 : dragstarg
                 // 제이쿼리 메서드: on("dragstart")
-                dg.on("dragstart", function(){
+                dg.on("dragstart", function () {
                     $(this).addClass("invert");
-                })
-                    
+                });
+
                 // 2) 드래그 종료이벤트 발생시클래스 .invert빼기
                 //  드래그 종료이벤트 : dragstop
                 // 제이쿼리 메서드: on("dragstop")
-                dg.on("dragstop", function(){
+                dg.on("dragstop", function () {
                     $(this).removeClass("invert");
-                })
+                });
 
                 // 2. 드롭대상박스에 드롭될 때 동용상 보여주기
                 // droppable() 메서드: 드롭되는 요소 처리
                 // 이벤트 대상: .dropshow
                 $(".dropshow").droppable({
-                    drop:function(evt, ele){
+                    drop: function (evt, ele) {
                         // evt - 이벤트 전달변수, ele-드롭관련 객체
                         // (1) 드롭영역의 배경이미지 변경하기
                         // 드롭된 요소 -> ele.draggable
@@ -107,54 +107,91 @@
                         console.log(isrc);
 
                         $(this).css({
-                            backgroundImage: `url(${isrc})`
-                        })
+                            backgroundImage: `url(${isrc})`,
+                        });
 
                         // 3. 드롭된 요소 사라지기
                         // ele.draggable -> 드롭된요소
                         ele.draggable.hide();
 
                         // 4. 드롭된 요소의 자식 p태그의 글자 읽어오기
-                        let dtxt =  ele.draggable.find("p").text();
+                        let dtxt = ele.draggable.find("p").text();
                         console.log(dtxt);
 
                         // 5. 드롭영역에 글자 넣기
-                        $(this).text(dtxt+" 당첨");
+                        $(this).text(dtxt + " 당첨");
 
                         // 6. 유튜브 동영상 박스 넣기
                         $("body").append(`
                             <div id="mbox">
                                     <a href="#">×</a>
                             </div>
-                        `)
+                        `);
                         // 동영상 박스 요소를 변수에 할당
                         let mbox = $("#mbox");
 
                         // 7. 동영상  박스 CSS 세팅하기
                         mbox.css({
                             position: "fixed",
-                            top:"0",
-                            left:"0",
-                            bottom:"0",
-                            right:"0",
+                            top: "0",
+                            left: "0",
                             width: "100%",
-                            heigth:"100%",
+                            height: "100%",
                             zIndex: "999",
-                            backgroundColor: "#00000077"
-                        })
+                            backgroundColor: "#00000077",
+                        });
 
                         // 8. 동영상박스에 유튜브 iframe넣기
-                        mbox.append(`
-                            <iframe src="https://www.youtube.com/embed/JDKhD-QNcvM" style="width: 100%; height: 100%; border:none;"></iframe>
-                        `)
-                    }
-                })
+                        // 드롭된 요소의 여영상 아이디 정보(data-mv)읽어오기
+                        let mv = ele.draggable.attr("data-mv");
+                        console.log(mv);
+                        mbox.append(
+                            `
+                            <iframe src="https://www.youtube.com/embed/${mv}?autoplay=true&mute=true" allow="autoplay" style="width: 100%; height: 100%; border:none;"></iframe>
+                        `
+                        )
+                            // 9. 동영상 박스 숨기고 1초후  slideDown으로 보이기
+                            .hide()
+                            .delay(1000)
+                            .slideDown(2000);
 
+                        // 10.  닫기버튼 세팅 및 클릭시 동영상 닫기
+                        mbox.find("a")
+                            .css({
+                                position: "absolute",
+                                top: "50px",
+                                right: "50px",
+                                width: "50px",
+                                height: "50px",
+                                textDecoration: "none",
+                                font: "bold 48px Verdana",
+                                color: "#fff",
+                                textShadow: "0px 0px 5px #777",
+                            })
+                            .on("click", function () {
+                                //  닫기 버튼 클릭시
+                                // 1. #mbox닫기
+                                mbox.slideUp(1000, function () {
+                                    // 2. 자기 자신 없애기(this === mbox)
+                                    $(this).remove(); //태그 제거
 
+                                    // 3. 드롭된 요소 다시 보이기
+                                    // 동시에 자기 원래 위치로 돌아가기
+                                    ele.draggable.show().css({
+                                        top: "0",
+                                        left: "0",
+                                    });
 
+                                    // 4. 드롭박스 초기화
+                                    $(".dropshow").text("여기에 드롭하세요~~!").css({
+                                        backgroundImage: "url('addimg/effect2.jpg')",
+                                    });
+                                });
+                            });
+                    },
+                });
             });
         </script>
-        
     </head>
 
     <body>
@@ -172,7 +209,7 @@
         <!-- 드래그 박스 -->
         <div class="dbox">
             <!-- data-mv속성은 동영상코드 셋업 -->
-            <div class="draggable" data-mv="67O-LdK3kFA">
+            <div class="draggable" data-mv="uWOt_OejMFg">
                 <p>쇼핑몰 자유이용권</p>
                 <img src="addimg/gm.jpg" alt="쥐마켓" />
             </div>

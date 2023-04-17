@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Promise 적용연습1</title>
+        <script>
+         function 화면뿌려(이거){
+            document.getElementById("show").innerHTML += 이거 + "<br/>";
+        }
+
+        window.addEventListener("load",function(){
+        // JSON 데이터를 로딩하여 읽은 후 데이터를 활용하도록 Promise를 적용함
+
+        // 1. 변수 = new Promise((성공함수)=>{코드})
+        // Promise 코드에 XMLHttpRequest 객체로 JSON 로딩함
+            const myProm = new Promise((prFn)=>{
+                // 1) XMLHttpRequest() 인스턴스 생성
+                let ajax  = new XMLHttpRequest();
+
+                // 2) 비동기 파일 요청(JSON파일)
+                ajax.open("GET", "./mdata.json");
+                //  -> JSON파일은 응답형식(reponseType)을 "json"으로 설정 필수                
+                ajax.responseType = "json";
+
+                // 3) 결과 리턴 onload이벤트 함수구역
+                ajax.onload = function(){
+                    console.log(ajax.status);
+                    if(ajax.status == 200){
+                        // Promise 성공함수를 통하여 JSON 데이터 전달하기
+                        prFn(ajax.response);
+                        // responseType을 "json"으로 설정했으므로 결과값은 JSON으로 전달됨
+                    }else{
+                        console.log(ajax.statusText);
+                    }
+                }/////////// onload 함수구역
+
+                // 4) 비동기 요청 보내기: send()
+                ajax.send();
+
+            })//////////// myProm 인스턴스
+
+
+        // 2. Promise변수.then((성공전달변수)=>{코드})
+        // 성공한 JSON 로딩파일을 전달받아 활용함
+            myProm.then((success)=>{  //success -> 성공시 전달 변수
+                console.log("전달파일 찍기: ", success);
+            })///////// Promise.then() 메서드
+
+
+        })
+
+        </script>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap");
+            body {
+                background-image: linear-gradient(to bottom, #494949, gray);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                text-align: center;
+            }
+            #show {
+                font-family: "Gamja Flower", cursive;
+                font-size: 4vw;
+                background-image: linear-gradient(to bottom, lightgreen, pink, orangered, aquamarine);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-repeat: no-repeat;
+                font-weight: bold;
+            }
+            #doc{
+                width: 50%;
+                height: 50vh;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="show"></div>
+        <div id="doc"></div>
+    </body>
+</html>

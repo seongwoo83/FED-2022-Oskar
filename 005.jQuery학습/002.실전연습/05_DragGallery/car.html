@@ -84,6 +84,12 @@
                 // 1) 드래그 중 이벤트 함수
                 // -이벤트 종류: mousemove
                 cbx.on("mousemove", (e)=>{
+                    // 0. 이벤트 발생 횟수 조절
+                    if(prot) return;
+                    prot =1;
+                    setTimeout(()=>{
+                        prot = 0
+                    }, 50)
                     // 1. x축 위치값
                     let pos  = e.pageX;
                     // 2. 방향 알아내기
@@ -94,6 +100,9 @@
                         let dir  =  point - pos < 0?  0 :  1;
 
                         console.log("현재 방향은?: ", dir);
+                        // 오른쪽 0, 왼쪽 1
+                        // 이미지변경함수 호출
+                        rotCar(dir);
                     }
                 })
                 // 2) 드래그상태 시작 이벤트 함수
@@ -118,8 +127,27 @@
                         cursor: "grab"
                     })
                 })
+
+                // 이미지 순번 변수
+                let fnum = 0;
+
                 // 4) 이미지 순번 변경함수
-                const rotCar = () => {
+                const rotCar = (dir) => {
+                    // dir -  방향(0-오른쪽, 1-왼쪽)
+                    
+                    if(dir){
+                        // 1. 왼쪽 방향처리
+                        fnum++;
+                        if(fnum === 50) fnum = 0;
+                    }else{
+                        // 2. 오른쪽 방향처리
+                        fnum--;
+                        if(fnum === -1) fnum = 49;
+                    }
+                    // 이미지를 순서대로 보이기
+                    cbx.find("img:visible").hide();
+                    // 보이는 이미지는 숨기고
+                    cbx.find("img").eq(fnum).show();
 
                 }
 

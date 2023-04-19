@@ -7,9 +7,14 @@
 @import url(./core.css);
 @import url(./common.css);
 
+/* 가로스크롤설정변경 - 부드러운 스크롤시 문제발생했음 */
+html, body{
+    overflow-x: visible;
+}
+
 /* 컨텐츠 영역 속박스 */
 .cont{
-    min-height: 600px;
+    min-height: 700px;
     padding: 15px;    
     padding-bottom: 100px;
 }
@@ -161,6 +166,38 @@ select:focus {
     font-weight: bold;
     font-size: 16px;
     /* 손가락모양 */
+    cursor: pointer;
+}
+/* 약관동의박스 */
+#conf {
+    position: absolute;
+    /* 부모는? #cont */
+    top: 334px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 600px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+/* 동의/비동의 버튼박스 */
+.YNbox {
+    text-align: center;
+}
+/* 버튼공통 */
+.YNbox button {
+    width: 113px;
+    height: 40px;
+    border: 1px solid #737373;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+    background-image: linear-gradient(to bottom, #ddd, #555);
+    margin: 0 20px;
     cursor: pointer;
 }
 

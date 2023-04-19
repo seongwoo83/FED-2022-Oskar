@@ -40,6 +40,7 @@ html, body{
     box-sizing: border-box;
     padding: 30px 50px;
     background-color: #fff;
+    display: none;
 }
 
 /* 포커스 아웃라인 제거
@@ -170,17 +171,15 @@ select:focus {
 }
 /* 약관동의박스 */
 #conf {
-    position: absolute;
-    /* 부모는? #cont */
-    top: 334px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 700px;
-    height: 600px;
+    max-width: 700px;
+    padding: 15px;
+    min-height: 600px;
     border: 2px solid #ccc;
     border-radius: 10px;
     box-sizing: border-box;
     background-color: #fff;
+    margin: 0 auto;
+    display: block;
 }
 
 /* 동의/비동의 버튼박스 */

@@ -8,9 +8,9 @@
 @import url(./common.css);
 
 /* 가로스크롤설정변경 - 부드러운 스크롤시 문제발생했음 */
-html, body{
+/* html, body{
     overflow-x: visible;
-}
+} */
 
 /* 컨텐츠 영역 속박스 */
 .cont{

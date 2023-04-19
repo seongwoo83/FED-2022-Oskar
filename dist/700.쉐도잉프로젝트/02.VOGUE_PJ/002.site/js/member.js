@@ -38,7 +38,7 @@ $(() => {
      /**************************
         개별 체크박스 체크시 전체 체크박스 변경하기
      **************************/
-    // 원리 : 개별 체크박스가 모두 체크되면 전체 체크
+    // 원리 : 개별 체크박스가 모두 체chkeach.eq(0).prop("checked")크되면 전체 체크
     chkeach.on("change",function(){
         console.log("개별 체크");
         // 1. 체크개수 알아오기
@@ -53,6 +53,32 @@ $(() => {
         //     chkall.prop("checked",false);
         // }
         
+    })
+
+    /*********************************
+        동의 / 비동의 버튼 클릭시 처리하기
+    *********************************/
+    // 대상: .YNbox button
+    // 통과조건: #termsService 와 #termsPrivacy 모두 체크
+    $(".YNbox button").on("click",function(){
+        // 1. 버튼 종류 구분하기: is("#btnY") 
+        let isB  = $(this).is("#btnY");
+        // console.log("버튼", isB);
+
+        if(isB){  // 2. 동의버튼 클릭일 경우: 필수체크확인 후 회원가입허가
+            // 1) 필수 항목이 모두 체크된 경우
+            if($("#termsService").prop("checked") && $("#termsPrivacy").prop("checked")){
+                //  동의/비동의 박스 숨기기
+                $("#conf").fadeOut(300,()=>{
+                    $(".scont").fadeIn(300);
+                });
+            }else{
+                alert("모든 필수 항목에 체크해야 합니다!")
+            }
+        }else{  //비동의 버튼 클릭시
+            alert("비동의 하였으므로 메인페이지로 이동합니다.");
+            location.href = "index.html";
+        }
     })
 
 

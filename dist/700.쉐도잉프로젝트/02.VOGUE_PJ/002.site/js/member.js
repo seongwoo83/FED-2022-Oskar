@@ -7,6 +7,55 @@ $(() => {
 
     $("#conf").html(mcode.conf);
 
+    /*********************************
+        약관동의 전체 체크시 모든 체크박스 변경하기
+    *********************************/
+    //  대상 : 모두 동의 체크박스 -> #chk_all
+    const chkall = $("#chk_all");
+    //  대상: 개별 체크박스 -> .chk
+    const chkeach = $(".chk");
+
+    // 체크박스 변경이벤트 함수만들기
+     chkall.on("change",function(){
+         // 1. 체크박스 체크 여부 확인하기
+         let chk = $(this).prop("checked");
+        //  console.log("체크", chk);
+
+        //  2. 전체 체크박스가 체크상태(true)이면
+        // 개별체크 박스도 모두 true로 변경
+        //  미체크 상태(false)면 개별체크박스도 모두 false 로 변경
+        chkeach.prop("checked", chk);
+
+
+
+        // 속성값을 읽어오는 메서드는 2가지가 있음
+        // attribute단어의 메서드 : attr();
+        // property단어의 메서드 : prop();
+        // -> 둘의 차이는 일반속성값을 읽어올때는 차이가 없음
+        // 체크박스의 checked속성인경우, true/false를 리턴하는 것은 prop() 메서드임
+     })/////////change
+
+     /**************************
+        개별 체크박스 체크시 전체 체크박스 변경하기
+     **************************/
+    // 원리 : 개별 체크박스가 모두 체크되면 전체 체크
+    chkeach.on("change",function(){
+        console.log("개별 체크");
+        // 1. 체크개수 알아오기
+        let num = $(".chk:checked").length;
+        // 2. 체크개수가 3개이면 전체 체크박스 체크하기
+        num === 3? chkall.prop("checked", true) : chkall.prop("checked", false);
+
+
+        // if(chkeach.eq(0).prop("checked") && chkeach.eq(1).prop("checked") && chkeach.eq(2).prop("checked")){
+        //     chkall.prop("checked",true);
+        // }else{
+        //     chkall.prop("checked",false);
+        // }
+        
+    })
+
+
     /*********************************************
         [ 사용자 입력폼 유효성 검사 ]
         - 이벤트종류 : blur(포커스가 빠질때 발생)

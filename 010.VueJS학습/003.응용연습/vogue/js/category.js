@@ -13,13 +13,13 @@ if(pm.indexOf("?") === -1){
 pm = pm.split("?")[1].split("=")[1];
 /* pm값 특수문자 복원하기 */
 pm = decodeURIComponent(pm);
-console.log(pm);
+// console.log(pm);
 
 $(()=>{
     console.log("로딩완료");
 
     // Vue JS 데어터 바인딩
-    new Vue({
+    const vmCont = new Vue({
         // 대상은 메인 컨텐츠 영역
         el:"#cont",
         data:{
@@ -43,8 +43,19 @@ $(()=>{
         },
         methods:{
             // 메뉴변경하기
-            chgMenu(){
-                console.log("나야나");
+            chgMenu(e){
+                // 컨텐츠영역의 Vue에 설정된 변수 catName에 접근하여 변수의 값을 변경함
+                // vmCont변수가 인스턴스가 담겼으므로 vmCont.catName으로 접근하여 클릭된 요소의 글자를 읽고 이를 소문자로 변경
+                // " & "를 "-"로 치환해주면 된다
+
+                // a요소 문자열 변경하기
+                let txt = e.target.innerText.replace(" & ", "-").toLowerCase();
+
+                // 뷰 데이터에 반영하기 -> 가상DOM의 변경 -> 실제DOM에 반영
+                vmCont.catName = txt;
+                console.log(txt);
+
+                $("title").text(vmCont.catName + " | 2023 보그 코리아 (Vogue Korea)")
             }
         }
     });

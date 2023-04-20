@@ -125,7 +125,6 @@ function linkFn(){
             /* 2) 서브페이지 이동하기 */
             if(atxt !== "search") location.href = "category.html?cat="+encodeURIComponent(atxt);
             
-            
         };
     }
     /* (2) 로고 클릭설정 */

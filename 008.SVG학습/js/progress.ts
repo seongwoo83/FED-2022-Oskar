@@ -7,22 +7,44 @@ $(()=>{
     const abtn = $(".act button");
     // 1-2. 퍼센트원: .btns
      const btns = $(".btns");
+    //  1-2. 진행바: .lbar
+    const bar = $(".lbar");
 
     // 2. 이벤트 설정
     // 2-1. 첫번째 버튼(팽수1) - 퍼센트 원
-    abtn.first().on("click", ()=>{
+    // .one(이벤트명, 함수) -> 이벤트를 한 번 만 적용함
+    abtn.first().one("click", ()=>{
         progFn(0,49);
         progFn(1,63);
         progFn(2,98);
         progFn(3,77);
+    });
+
+    // 2-2 두번째 버튼(팽수2) - 진행 바
+    abtn.last().one("click",()=>{
+        // 바 텍스트
+        const btxt =  bar.prev().find("b");
+        // 숫자 변수
+        let num :number = 0;
+
+        const progBar = ()=>{
+            num++;
+            btxt.text(num);
+            // 바 width 증가
+            bar.css({width:num+"%"})
+            if(num<100){
+                setTimeout(() => {
+                    progBar();
+                }, 30);
+            }
+        }
+        progBar();
     })
-    
+     
     /***********************************************
      함수명: progFn
      기능: 퍼센트 증가에 따른 숫자, 그래프변경
      ***********************************************/
-
-    
     function progFn(seq:number, perc:number){
         
         

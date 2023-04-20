@@ -79,9 +79,9 @@
                     </a>
                 </h1>
                 <!-- 1-3 gnb박스 -->
-                <nav class="gnb">
+                <nav class="gnb" id="gnb">
                     <ul>
-                        <li><a href="#">FASHION</a></li>
+                        <li><a href="#" @click="chgMenu">FASHION</a></li>
                         <li><a href="#">BEAUTY</a></li>
                         <li><a href="#">LIVING</a></li>
                         <li><a href="#">PEOPLE</a></li>
@@ -122,24 +122,25 @@
                 <div class="icont">
                     <section class="pt2">
                         <div class="cbx bgi bg1-1">
-                            <h2></h2>
+                            <!-- v-html은 html코드 디렉티브 -->
+                            <h2 v-html="value1.타이틀[0]"></h2>
                         </div>
                         <div class="cbx bgi bg1-2">
-                            <h2></h2>
+                            <h2 v-html="value1.타이틀[1]"></h2>
                         </div>
                         <div class="cbx bgi bg1-3">
-                            <h2></h2>
+                            <h2 v-html="value1.타이틀[2]"></h2>
                         </div>
                     </section>
                     <section class="pt2">
                         <div class="cbx bgi bg2-1">
-                            <h2></h2>
+                            <h2 v-html="value1.타이틀[3]"></h2>
                         </div>
                         <div class="cbx bgi bg2-2">
-                            <h2></h2>
+                            <h2 v-html="value1.타이틀[4]"></h2>
                         </div>
                         <div class="cbx bgi bg2-3">
-                            <h2></h2>
+                            <h2 v-html="value1.타이틀[5]"></h2>
                         </div>
                     </section>
                 </div>

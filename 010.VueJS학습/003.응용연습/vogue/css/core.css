@@ -123,6 +123,9 @@ font-family: 'Roboto Condensed', sans-serif;
     text-align: center;
     color: #fff;
 }
+.cbx h2 small {
+    font-size: 14px;
+}
 
 .scAct.on{
     transform: translateY(0);

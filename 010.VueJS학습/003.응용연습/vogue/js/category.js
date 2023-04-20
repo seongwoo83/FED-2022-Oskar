@@ -29,6 +29,23 @@ $(()=>{
         },
         mounted:function(){
             axios.get("./js/mdata.json").then(x => this.items = x);
+            $("title").prepend(pm + " ");
+        }
+    });////////////Vue
+
+    // gnb메뉴 SPA를 위한 재정의하기 
+    // -> Vue JS  인스턴스를 생성하면 대상요소가 기존 JS의 모든 기능이 초기화하여 작동되지 않음
+    new Vue({
+        // 대상선정
+        el: "#gnb",
+        data:{
+
+        },
+        methods:{
+            // 메뉴변경하기
+            chgMenu(){
+                console.log("나야나");
+            }
         }
     });
 

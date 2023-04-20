@@ -110,22 +110,10 @@
                     <!-- 2-1-1 서브타이틀 -->
                     <h2 class="stit">{{value1.제목}}</h2>
                     <!-- 2-1-2 서브메뉴(LNB: Local Navigation) -->
-                    <nav class="lnb">
+                    <nav class="lnb" v-if="value1.메뉴!=='없음'">
                         <ul>
-                            <li>
-                                <a href="#"></a>
-                            </li>
-                            <li>
-                                <a href="#"></a>
-                            </li>
-                            <li>
-                                <a href="#"></a>
-                            </li>
-                            <li>
-                                <a href="#"></a>
-                            </li>
-                            <li>
-                                <a href="#"></a>
+                            <li v-for="(value2, idx) in value1.메뉴">
+                                <a href="#">{{value2}}</a>
                             </li>
                         </ul>
                     </nav>

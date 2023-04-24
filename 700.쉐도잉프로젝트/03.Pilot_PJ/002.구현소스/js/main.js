@@ -81,14 +81,14 @@ const reWin = () => $(window).width();
 // 리사이즈 업데이트
 $(window).on("resize", function(){
     winW = reWin();
-    console.log("winW", winW);
+    // console.log("winW", winW);
 })
 
 // 윈도우 가로크기 - left 기준위치 px변환
 let winW = reWin();
-console.log("winW * 0.9: ", winW * 0.9);
-console.log("winW: ", winW);
-console.log("winW * 1.1: ", winW * 1.1);
+// console.log("winW * 0.9: ", winW * 0.9);
+// console.log("winW: ", winW);
+// console.log("winW * 1.1: ", winW * 1.1);
 
 // 광드래그 방지위해 커버세팅 (show(), hide())
 const cover = $(".cover");
@@ -100,7 +100,7 @@ slide.on("dragstop",function(){
     cover.show()
     // slide left위치값
     let sleft = $(this).offset().left;
-    console.log(sleft);
+    // console.log(sleft);
 
     // 1. 왼쪽으로 이동 : -110% 미만일때
     if(sleft < -winW*1.1){
@@ -110,6 +110,9 @@ slide.on("dragstop",function(){
             // 이동후 맨앞 li 맨뒤로 이동
             slide.append(slide.find("li").first()).css({left:"-100%"});
             cover.hide();
+
+            // 배너 타이틀 함수
+            showTit();
         })
         // 불릿 변경함수 호출
         addOn(2);
@@ -124,6 +127,9 @@ slide.on("dragstop",function(){
             // 이동후 맨앞 li 맨뒤로 이동
             slide.prepend(slide.find("li").last()).css({left:"-100%"});
             cover.hide();
+
+            // 배너 타이틀 함수
+            showTit();
         })
         // 불릿 변경함수 호출
         addOn(0);
@@ -153,14 +159,12 @@ const blist = slide.find("li");
 const bcnt = blist.length;
 
 blist.each((idx, ele)=>{
-    console.log(idx, blist.length);
     // 처음것을 마지막 순번으로 넣기
     if(idx === 0){
         $(ele).attr("data-seq", bcnt-1);
     }else{
         $(ele).attr("data-seq", idx-1)
     }
-    console.log(ele);
 })
 
 // 불릿 on넣기 함수
@@ -179,7 +183,64 @@ function addOn(seq){ //seq - 읽을 슬라이드 순번
 
     // 1. 해당 슬라이드 data-seq 값 읽기
     let dseq = slide.find("li").eq(seq).attr("data-seq");
-    console.log(dseq);
+    // console.log(dseq);
     // 2. 해당 슬라이드와 동일한 순번불릿에 on클래스 넣고 다른 형제 불릿에 on클래스 제거
     bindic.eq(dseq).addClass("on").siblings().removeClass("on");
 }
+///////////////////////////////////////
+////// 각 배너 등장 타이틀 셋팅 /////
+///////////////////////////////////////
+let bantxt = {
+    "ban1": "Men's Season<br>Collection",
+    "ban2": "2023 Special<br>Collection",
+    "ban3": "GongYoo<br>Collection",
+    "ban4": "T-Shirt<br>Collection",
+    "ban5": "Shoes<br>Collection",
+    "ban6": "Wind Jacket<br>Collection"
+}; ///////////// bantxt객체 //////////////
+
+/********************************
+    함수명: showTit
+    기능: 각 배너 타이틀 보이기
+    호출: 배너 이동 후 콜백함수에서 호출함
+********************************/
+function showTit(){
+    // 요구사항: 배너 이동 후 호출하여 해당 배너의 순번에 맞는 타이틀 동적으로 생성하여 애니메이션
+
+    // 1. 항상 도착 후엔 두 번째 슬라이드가 주인공
+    // 슬라이드 순번은 1번임
+    // 슬라이드 클래스명 읽어오기(타이틀이 클래스명과 연관됨)
+    let mainban = slide.find("li").eq(1);
+    let clsnm = mainban.attr("class");
+
+    // 2. 호출확인
+    let bantit = bantxt[clsnm];
+    console.log("배너 타이틀", clsnm, bantit);
+
+    // 모든 추가 타이틀 지우기
+    $(".btit").remove();
+
+    // 3. 타이틀 넣을 요소를 배너에 추가
+    mainban.append(`<h2 class="btit"></h2>`)
+    $(".btit").html(bantit).css({
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translateX(-50%, -50%)",
+        font: "bold 4.5vmax Verdana",
+        color: "#fff",
+        textShadow: "1px 1px 4px #777",
+        whiteSpace: "nowrap",
+        opacity: "1"
+    })
+}
+showTit();
+
+// bindic.on("click",function(){
+//     let bidx = $(this).index();
+//     $(this).addClass("on").siblings().removeClass("on");
+//     console.log(bidx);
+//     slide.animate({
+//         left: bidx*-100+"%"
+//     })
+// })

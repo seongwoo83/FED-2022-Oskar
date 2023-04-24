@@ -111,6 +111,10 @@ slide.on("dragstop",function(){
             slide.append(slide.find("li").first()).css({left:"-100%"});
             cover.hide();
         })
+        // 불릿 변경함수 호출
+        addOn(2);
+        // 오른쪽에서 왼쪽으로 이동이므로 2번째 슬라이드
+
     }
     // 2. 오른쪽으로 이동 : -90% 초과일때
     else if(sleft > -winW*0.9){
@@ -121,6 +125,9 @@ slide.on("dragstop",function(){
             slide.prepend(slide.find("li").last()).css({left:"-100%"});
             cover.hide();
         })
+        // 불릿 변경함수 호출
+        addOn(0);
+        // 왼쪽에서 오른쪽 이동이므로 0번째 슬라이드
     }
     // 3. 제자리로 이동 : -110% ~ -90%
     else{
@@ -157,6 +164,22 @@ blist.each((idx, ele)=>{
 })
 
 // 불릿 on넣기 함수
-function addOn(){
+// 1. 왼쪽에서 오른쪽으로 슬라이드
+//  - 0번째 슬라이드의 data-seq값
+// 2. 오른쪽에서 왼쪽으로 슬라이드
+//  - 2번째 슬라이드의 data-seq값
+// 위의 선택값으로 불릿의 li 순번에 on클래스 부여하고 나머지 불릿은 on클래스 제거
 
-}.
+// 대상 선정 : .bindic li
+const bindic = $(".bindic li");
+function addOn(seq){ //seq - 읽을 슬라이드 순번
+    // 방향 -> 파라미터 seq 값으로 판단
+    // 0은 왼쪽에서 오른쪽
+    // 2는 오른쪽에서 왼쪽
+
+    // 1. 해당 슬라이드 data-seq 값 읽기
+    let dseq = slide.find("li").eq(seq).attr("data-seq");
+    console.log(dseq);
+    // 2. 해당 슬라이드와 동일한 순번불릿에 on클래스 넣고 다른 형제 불릿에 on클래스 제거
+    bindic.eq(dseq).addClass("on").siblings().removeClass("on");
+}

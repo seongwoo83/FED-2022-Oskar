@@ -215,26 +215,77 @@ function showTit(){
 
     // 2. 호출확인
     let bantit = bantxt[clsnm];
-    console.log("배너 타이틀", clsnm, bantit);
+    // console.log("배너 타이틀", clsnm, bantit);
 
     // 모든 추가 타이틀 지우기
     $(".btit").remove();
+
+    // 타이틀 left위치 변수 처리
+    // ban2, ban3만 오른쪽 위치
+    let lval = "20%"
+    if(clsnm === "ban2" || clsnm === "ban3") lval="60%"
 
     // 3. 타이틀 넣을 요소를 배너에 추가
     mainban.append(`<h2 class="btit"></h2>`)
     $(".btit").html(bantit).css({
         position: "absolute",
-        top: "50%",
-        left: "50%",
+        top: "33%",
+        left: lval,
         transform: "translateX(-50%, -50%)",
         font: "bold 4.5vmax Verdana",
         color: "#fff",
         textShadow: "1px 1px 4px #777",
         whiteSpace: "nowrap",
-        opacity: "1"
-    })
+        opacity: "0" //처음에 투명
+    }).animate({
+        top:"50%",
+        opacity:"1"
+    }, 1000, "easeInOutQuart");
 }
-showTit();
+// showTit()
+setTimeout(showTit, 1000);
+
+// 타임아웃 변수
+let banAgain;
+
+
+// 자동 넘김 지우기 함수
+const clearAuto = ()=>{
+    clearInterval(banAuto);
+    clearInterval(banAgain);
+    banAgain = setTimeout(banAutoSlide, 5000);
+}
+
+// 배너 이동시 자동넘김 지우기 세팅
+slide.on("mousemove dragstart dragstop", clearAuto);
+
+
+// 자동넘김 인터벌 세팅하기
+let banAuto;
+
+const banAutoSlide = ()=>{
+    banAuto= setInterval(() => {
+        slide.animate({
+            left: -winW*2+"px"
+        }, 600, "easeOutQuint", ()=>{
+            // 이동후 맨앞 li 맨뒤로 이동
+            slide.append(slide.find("li").first()).css({left:"-100%"});
+            cover.hide();
+    
+            // 배너 타이틀 함수
+            showTit();
+        })
+        // 불릿 변경함수 호출
+        addOn(2);
+        // 오른쪽에서 왼쪽으로 이동이므로 2번째 슬라이드
+    }, 3000);
+};
+
+// 자동넘김 최초호출
+banAutoSlide();
+
+
+
 
 // bindic.on("click",function(){
 //     let bidx = $(this).index();

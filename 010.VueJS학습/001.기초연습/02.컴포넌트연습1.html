@@ -125,34 +125,137 @@
 
                 4. 전역 컴포넌트 등록하기
                     ->> Vue.component() 메서드 사용
+                    형식)
+                    Vue.component(
+                        사용자 정의 태그명, {
+                            template: html 구성요소
+                        })
+
                     1) 사용자 정의 태그를 html 요소로 삽입
-                    -> 새로운 태그명을 지어서 컴포넌트가 들어갈 자리를 지정
+                        -> 새로운 태그명을 지어서 컴포넌트가 들어갈 자리를 지정
                     예)
                     <div id="vapp">
                         <hi-ok></hi-ok>
                     </div>
                         -> 사용자 정의 태그의 이름은 케밥케이스로 만듦 : 단어 중간에 대쉬(-)를 사용한 이름
+                    2) 컴포넌트 구성 요소는 반드시 root가 하나여야 함.
+                        -> 하나의 태그로 쌀 것
+                    예)
+                     <div> ===> 이 태그로 쌈
+                        <h1>제목</h1>
+                        <p>내용</p>    
+                    </div>
+                    3) 컴포넌트는 Vue객체 생성 전에 코딩해야 적용됨
+                    4) 전역 컴포넌트 세팅메서드에서 템플릿 코드에 전달할 데이터는 반드시 return되는
+                        익명함수 형태로 사용함
+                        형식)
+                        data: function(){
+                            return{
+                                변수: 값,
+                                변수: 값,
+                                .
+                                .
+                                .
+                            }
+                        }
+                        -> 이렇게 작성해야하는 이유는 템플릿 데이터를 처음에 실행해줄 때 함수의 리턴값으로 템플릿 코드의 변수값을 전달해야만 사용할 수 있는  Vue JS 내부 구현구조를 가지고 있음.
             ******************************************/
 
+            //  Vue JS  인스턴스 생성용 함수
+             const makeVue = x =>{
+                new Vue({
+                    el: x
+                })
+             }
+
+            // 1. 제목에 넣을 전역 컴포넌트 만들기
+            Vue.component("tit-comp", {
+                template : `
+                    <strong>
+                        <span>Vue JS 컴포넌트 : </span>
+                         쇼핑몰 갤러리 리스트
+                    </strong>
+                `
+            }); ///////전역 컴포넌트 1
+
+            // Vue Instance 생성하기 : 반드시 컴포넌트 아래에서 생성
+            makeVue(".tit");
+            makeVue(".tit2");
 
 
+
+            //  숫자 증감 변수
+            let num = 0;
+            // 2. 갤러리 리스트에 넣을 전역 컴포넌트 만들기
+                Vue.component("list-comp",{
+                    template:`
+                    <div>
+                        <img v-bind:src="gsrc" alt="dress">
+                        <aside>
+                            <h2 v-text="gname"></h2>
+                            <h3>{{gprice}}</h3>
+                        </aside>
+                    </div>
+                    `,
+                    // 컴포넌트 내부의 data 속성
+                    data: function(){
+                        return{
+                            gsrc:`img_gallery/${this.setNum()}.jpg`,
+                            gname:`상품명`,
+                            gprice:`상품가격`
+                        }
+                    },
+                    //  컴포넌트 내부 메서드 세팅
+                    methods:{
+                        setNum(){
+                            num++;
+                            console.log("num: ", num);
+                            return num;
+                        }
+                    }
+                });//////////// 전역 컴포넌트 2
+
+                makeVue(".grid");
+                 /* 
+                    [ 뷰JS 출력 ]
+                    mustache : 
+                    {{ expression }}문법을 사용해서 특정 변수를 그대로 렌더링한다.
+
+                    v-text : 
+                    특정 태그내에서 사용할 수 있으며 v-text속성을 사용해서 "텍스트"로 렌더링한다. 
+                    이 때 렌더링된 텍스트는 해당 태그의 자식 노드로 들어간다.
+
+                    v-html : 
+                    특정 태그내에서 사용할 수 있으며 v-html속성을 사용해서 "html"로 렌더링한다. 
+                    이 때 렌더링된 텍스트는 해당 태그의 자식 노드로 들어간다.
+
+                    v-bind : 
+                    특정 태그내에서 사용할 수 있으며 v-bind문법을 사용해서 vue내부의 값
+                    (data, props, computed, methods)들의 값을 해당 속성의 값으로 렌더링한다.
+                 */
             
             
             
-            //     <div>
-            //     <img src="img_gallery/1.jpg" alt="dress">
-            //     <aside>
-            //         <h2>상품명1</h2>
-            //         <h3>상품가격1</h3>
-            //     </aside>
-            // </div>
+                
         })
     </script>
 </head>
 
 <body>
-    <h1 class="tit">컴포넌트 연습1</h1>
-    <div class="grid"></div>
+    <h1 class="tit">
+        <tit-comp></tit-comp>
+    </h1>
+    <div class="grid">
+        <list-comp v-for="n in 50" v-bind:data-num="n">
+            <!-- 
+                v-for 디렉티브에 in 뒤에 숫자를 작성하면 그 개수만큼 실행함 
+                - 개별숫자 데이터는 1부터 개수만큼 하나씩 할당됨
+            -->
+        </list-comp>
+    </div>
+    <h2 class="tit2">
+        <tit-comp></tit-comp>
+    </h2>
 </body>
 
 </html>

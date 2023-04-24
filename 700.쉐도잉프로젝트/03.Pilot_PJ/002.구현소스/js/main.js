@@ -130,6 +130,33 @@ slide.on("dragstop",function(){
             cover.hide();
         })
     }
-
-
 });
+
+/*****************************************
+    [ 터치 배너 이동시 불릿 변경하기 ]
+    - 방법: 잘라서 이동되는 li에 고유한 순번을 
+        사용자 정의 속성으로 처음에 부여하고, 슬라이드
+        이동하면 속성값을 읽어서 불릿 순번에 반영함
+*****************************************/
+// 사용자 정의 속성으로 순번 부여대상: .slide li
+// 제이쿼리 : for문 순회 메서드 each(순번, 요소)
+// 배너  li
+const blist = slide.find("li");
+// 배너 갯수
+const bcnt = blist.length;
+
+blist.each((idx, ele)=>{
+    console.log(idx, blist.length);
+    // 처음것을 마지막 순번으로 넣기
+    if(idx === 0){
+        $(ele).attr("data-seq", bcnt-1);
+    }else{
+        $(ele).attr("data-seq", idx-1)
+    }
+    console.log(ele);
+})
+
+// 불릿 on넣기 함수
+function addOn(){
+
+}.

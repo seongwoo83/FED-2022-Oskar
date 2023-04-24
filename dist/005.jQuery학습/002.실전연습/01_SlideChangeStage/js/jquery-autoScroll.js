@@ -27,6 +27,25 @@ $(window).on("wheel", wheelFn);
 $(".gnb a").on("click", chgMenu);
 // 인디케이터 클릭시: 대상 - .gnb a
 $(".indic a").on("click", chgMenu);
+// 키보드 이벤트발생시 업데이트
+// 1. Page Up(33) / Up Arrow (38) 
+// 2. Page Down(34) / Down Arrow (40) 
+$(document).keydown((e) => {
+    // 이전페이지이동
+    if (e.keyCode === 33 || e.keyCode === 38) {
+        pno--;
+        if (pno === -1)
+            pno = 0;
+        movePg();
+    }
+    // 다음페이지이동
+    else if (e.keyCode === 34 || e.keyCode === 40) {
+        pno++;
+        if (pno === pgcnt)
+            pno = pgcnt - 1;
+        movePg();
+    }
+}); ///////////// keydown ////////////////
 // 새로고침시 스크롤 위치 캐싱 변경하기
 $("html, body").animate({ scrollTop: "0px" });
 /*****************************************
@@ -88,7 +107,7 @@ function chkCrazy(seq) {
     기능: 페이지 이동 애니메이션
 *******************************************/
 function movePg() {
-    $("html, body").animate({
+    $("html, body").stop().animate({
         scrollTop: ($(window).height() * pno) + "px"
     }, 800, "easeInOutQuint", showEle);
     // 대상: gnb메뉴, 인디케이터

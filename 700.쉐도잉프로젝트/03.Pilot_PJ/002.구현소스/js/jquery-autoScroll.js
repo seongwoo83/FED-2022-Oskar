@@ -95,34 +95,53 @@ function autoScroll(){
     function movePg() {
         $("html, body").animate({
             scrollTop: ($(window).height() * pno) + "px"
-        }, 800, "easeInOutQuint", showEle);
+        }, 800, "easeInOutQuint", actPage);
         // 대상: gnb메뉴, 인디케이터
         gnb.eq(pno).addClass("on").siblings().removeClass("on");
         indic.eq(pno).addClass("on").siblings().removeClass("on");
     }
-    // 등장할 요소 초기화
-    minfo.css({
+
+    /******************************
+        [ 페이지 등장액션 요소적용하기 ]
+        1. 이벤트 적용시점: 페이지 도착후(애니메이션 후 콜백)
+        2 .이벤트 대상: 각페이지 동일
+            1) .page .imgc - 이미지 파트 
+            2) .page .txtc h2 a - 타이틀파트
+        3. 변경내용:
+            스타일 시트 아래 항목변경
+            (변경값)
+            transform: rotate(45deg);
+            transform-origin: left top;
+            opacity: 0;
+            transition: 1s 1s; -> 타이틀만 지역시간
+            (고정값)
+            transition: 1s;
+            display: inline-block; -> a요소만 
+    ******************************/
+    $(".imgc").css({
+        transform: "rotate(45deg)",
+        transformOrigin: "left top",
         opacity: "0",
-        transform: "translate(-50%, 50%)",
-        transition: ".6s ease-out"
-    });
-    /*******************************************
-        함수명: showEle
-        기능: 페이지 이동후 요소 등장하기
-    *******************************************/
-    function showEle() {
-        // .minfo 페이지별 등장하기
-        pg.eq(pno).find(".minfo").css({
-            opacity: "1",
-            transform: "translate(-50%, -50%)"
-        }).parents(".page").siblings().find(".minfo").css({
-            opacity: "0",
-            transform: "translate(-50%, 50%)",
-            transition: ".6s ease-out"
-        });
+        transition: "1s"
+    })
+    $("txtc a").css({
+        transform: "rotate(45deg)",
+        transformOrigin: "left top",
+        opacity: "0",
+        transition: "1s 5s",
+        display: "inline-block"
+    })
+
+    /*******************************
+        함수명: actPage
+        기능: 페이지 도착 후 등장 애니메이션
+    *******************************/
+    function actPage(){
+        // 이동 후 확인
+        console.log("action!", pno);
     }
-    // 최초호출
-    setTimeout(showEle, 1000);
+
+
 }
 
 export default autoScroll;

@@ -287,6 +287,7 @@ banAutoSlide();
 
 
 
+
 // bindic.on("click",function(){
 //     let bidx = $(this).index();
 //     $(this).addClass("on").siblings().removeClass("on");

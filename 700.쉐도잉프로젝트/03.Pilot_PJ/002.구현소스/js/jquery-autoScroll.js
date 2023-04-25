@@ -3,8 +3,7 @@
 // 전체를 함수로 묶어줌
 // 이유: export하기 위해
 
-function autoScroll(){
-
+function autoScroll() {
     /*****************************************
         대상 변수 할당하기
     *****************************************/
@@ -41,8 +40,7 @@ function autoScroll(){
     *****************************************/
     function wheelFn() {
         // 광휠 금지
-        if (prot[0])
-            return;
+        if (prot[0]) return;
         chkCrazy(0);
         console.log("휠 이벤트");
         // 1. 휠 방향 알아내기
@@ -50,13 +48,10 @@ function autoScroll(){
         let delta = event === null || event === void 0 ? void 0 : event.wheelDelta;
         if (delta < 0) {
             pno++;
-            if (pno === pgcnt)
-                pno = pgcnt - 1;
-        }
-        else {
+            if (pno === pgcnt) pno = pgcnt - 1;
+        } else {
             pno--;
-            if (pno === -1)
-                pno = 0;
+            if (pno === -1) pno = 0;
         }
         console.log(pno);
         // 3. 스크롤 이동하기
@@ -70,12 +65,11 @@ function autoScroll(){
     function chgMenu(e) {
         e.preventDefault();
         //  0. 광클금지
-        if (prot[1])
-            return;
+        if (prot[1]) return;
         chkCrazy(1);
         // 1. 클릭된 a 요소의 부모 li 순번을 구함  === pno
         let idx = $(this).parent().index();
-        // 2. 전역 페이지 번호에 순번 업데이트 
+        // 2. 전역 페이지 번호에 순번 업데이트
         pno = idx;
         // 3. 페이지 이동, 메뉴에 클래스 "on" 넣기
         movePg();
@@ -86,62 +80,93 @@ function autoScroll(){
     *******************************************/
     function chkCrazy(seq) {
         prot[seq] = 1;
-        setTimeout(() => { prot[seq] = 0; }, 800);
+        setTimeout(() => {
+            prot[seq] = 0;
+        }, 800);
     }
     /*******************************************
         함수명: movePg
         기능: 페이지 이동 애니메이션
     *******************************************/
     function movePg() {
-        $("html, body").animate({
-            scrollTop: ($(window).height() * pno) + "px"
-        }, 800, "easeInOutQuint", actPage);
+        $("html, body").animate(
+            {
+                scrollTop: $(window).height() * pno + "px",
+            },
+            800,
+            "easeInOutQuint",
+            actPage
+        );
         // 대상: gnb메뉴, 인디케이터
         gnb.eq(pno).addClass("on").siblings().removeClass("on");
         indic.eq(pno).addClass("on").siblings().removeClass("on");
     }
 
-    /******************************
-        [ 페이지 등장액션 요소적용하기 ]
-        1. 이벤트 적용시점: 페이지 도착후(애니메이션 후 콜백)
-        2 .이벤트 대상: 각페이지 동일
-            1) .page .imgc - 이미지 파트 
-            2) .page .txtc h2 a - 타이틀파트
-        3. 변경내용:
-            스타일 시트 아래 항목변경
-            (변경값)
-            transform: rotate(45deg);
-            transform-origin: left top;
-            opacity: 0;
-            transition: 1s 1s; -> 타이틀만 지역시간
-            (고정값)
-            transition: 1s;
-            display: inline-block; -> a요소만 
-    ******************************/
-    $(".imgc").css({
-        transform: "rotate(45deg)",
-        transformOrigin: "left top",
-        opacity: "0",
-        transition: "1s"
-    })
-    $("txtc a").css({
-        transform: "rotate(45deg)",
-        transformOrigin: "left top",
-        opacity: "0",
-        transition: "1s 5s",
-        display: "inline-block"
-    })
+    /******************************************** 
+    [ 페이지 등장액션 요소 적용하기 ]
+    1. 이벤트 적용시점 : 페이지도착후(애니후콜백) 
+    2. 이벤트 대상 : 각 페이지 동일
+        (1) .page .imgc - 이미지파트
+        (2) .page .txtc h2 a - 타이틀파트
+    3. 변경내용 :
+        [스타일시트 아래 항목 변경]
+        ((변경값))
+        transform: rotate(45deg);
+        opacity: 0;
+        transition: 1s 1s; -> 타이틀만 지연시간
+        ((고정값))
+        transform-origin: left top;
+        display: inline-block; -> a요소만
+********************************************/
 
-    /*******************************
-        함수명: actPage
-        기능: 페이지 도착 후 등장 애니메이션
-    *******************************/
-    function actPage(){
-        // 이동 후 확인
-        console.log("action!", pno);
-    }
+    /******************************************* 
+    함수명: initSet
+    기능: 등장요소 처음상태 셋팅
+*******************************************/
+    function initSet() {
+        // 1. 초기화하기 ///////////
+        // 대상: .imgc
+        $(".imgc").css({
+            transform: "rotate(45deg)",
+            transformOrigin: "-10% -10%",
+            opacity: "0",
+            transition: "1s ease-in-out",
+        }); /////////// css ///////////
 
+        // 대상: .txtc a
+        $(".txtc a").css({
+            transform: "rotate(45deg)",
+            transformOrigin: "-100% -100%",
+            opacity: "0",
+            transition: "1s ease-in-out .5s",
+            display: "inline-block",
+        }); /////////// css ///////////
+    } ////////////// initSet 함수 //////////////
 
+    // 초기화함수 호출
+    initSet();
+
+    /**************************************** 
+    함수명: actPage
+    기능 : 페이지 도착후 등장애니메이션
+****************************************/
+    function actPage() {
+        // 이동후 확인
+        console.log("액숀~!!", pno);
+
+        // pno가 0 또는 4가 아니면 액션작동!
+        if (pno !== 0 || pno !== 4) {
+            // 대상: 해당순번의 .page 아래 .imgc 와 .txtc a
+            $(`.page:eq(${pno}) .imgc,
+        .page:eq(${pno}) .txtc a`).css({
+                transform: "rotate(0deg)",
+                opacity: "1",
+            }); /////////// css ///////////
+        } ////////// if ///////////////////
+
+        // 첫페이지 일때 초기화!
+        if (pno === 0) initSet();
+    } ///////////// actPage 함수 ////////////
 }
 
 export default autoScroll;

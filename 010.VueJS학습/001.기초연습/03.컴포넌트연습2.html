@@ -131,6 +131,18 @@
                         -> 주의사항: 부모로부터 받은 데이터변수는 값을 새로 할당하여
                                             변경할 수 없다.
 
+                3. 자식 컴포넌트에서 부모의 이벤트 호출하기
+                    1)  $emit 으로 전달하고 2-1~2-3
+                    on이벤트 설정으로 받음 2-4~2-5
+                    2) 구현방법:
+                        (1) 자식 컴포넌트 템플릿에서 
+                            v-on:이벤트명=자식메서드 형태로 쓴 후
+                        (2) 자식 컴포넌트 methods에 이벤트에 쓴 자식
+                            메서드를 만들고
+                        (3) this.$emit(부모가 만든 이벤트명)으로 전달
+                        (4) 부모 태그에서 v-on:부모가만든이벤트명=부모메서드 형태로 쓴후
+                        (5) 부모의 Vue 인스턴스 methods에 같은 이름의 메서드를 만들고
+                            기능을 구현함
             ******************************************/
 
             //  Vue JS  인스턴스 생성용 함수
@@ -161,9 +173,10 @@
             // 2. 갤러리 리스트에 넣을 전역 컴포넌트 만들기
             // 여기가 '자식' 요소 임
                 Vue.component("list-comp",{
+                    // v-on:click="goPapa"로 부모이벤트 호출
                     template:`
                     <div>
-                        <img v-bind:src="gsrc" alt="dress">
+                        <img v-bind:src="gsrc" v-on:click="goPapa" alt="dress">
                         <aside>
                             <h2 v-text="gname"></h2>
                             <h3>{{gprice}}</h3>
@@ -171,23 +184,28 @@
                     </div>
                     `,
                     // 부모에서 v-bind:속성명=값 으로 전달한 속성변수를  props:[]/{}로 받음
-                    props:["haha"],
+                    props:["haha", "myseq", "endlet"],
                     // props:{"haha" : Number}, -> 자료형이 맞음
                     // props:{"haha" : String}, -> 자료형 오류 메시지 나옴
                     // 컴포넌트 내부의 data 속성
                     data: function(){
                         return{
                             gsrc:`img_gallery/${this.haha}.jpg`,
-                            gname: `Sofia23` + this.haha,
-                            gprice: (123000*this.haha/4)+`원`
+                            gname: `Sofia23` + this.haha+ this.endlet+"-" + (this.myseq%2),
+                            gprice: this.insComma(123000*this.haha/4)+`원`
                         }
                     },
                     //  컴포넌트 내부 메서드 세팅
                     methods:{
-                        setNum(){
-                            num++;
-                            // console.log("num: ", num);
-                            return num;
+                        //  부모 이벤트 호출하기 : $emit() 메서드 사용
+                        goPapa(){
+                            // $emit(부모가 만든 이벤트명)
+                            this.$emit("hull")
+                        },
+
+                        //정규식함수(숫자 세자리마다 콤마해주는 기능)
+                        insComma(x) {
+                            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         }
                     }
                 });//////////// 전역 컴포넌트 2
@@ -197,7 +215,13 @@
                 // 여기가 '부모' 요소임
                 new Vue({
                     el:".grid",
-
+                    // 부모 Vue인스턴스 메서드 생성
+                    methods:{
+                        // 자식이벤트 전달후 실행 메서드
+                        goMsg(){
+                            alert("자식이 부모이벤트 전달 성공")
+                        }
+                    }
                 })
                  /* 
                     [ 뷰JS 출력 ]
@@ -230,32 +254,45 @@
     </h1>
     <div class="grid">
         <!-- 여기가 '부모'요소 위치 -->
-        <list-comp v-for="n in 50" v-bind:key="n" v-bind:haha="n"></list-comp>
-            <!-- 
-                v-bind:haha="n"
-                -> haha라는 내가 지은 이름의 속성에 값으로 for문 순회시 생성된 n변수를 할당해 준다
-                -> 이것을 이용하여 자식 컴포넌트 인스턴스에 옵션으로 props:[내가만든변수]를 써서
-                    사용할 수 있음
-                -> 이것이 부모 데이터를 자식 컴포넌트에 전달하는 방법
-             -->
+        <list-comp v-for="(n,idx) in 50" v-bind:key="n" v-bind:haha="n" v-bind:myseq="idx" v-bind:endlet = "'WD'" v-on:hull="goMsg"></list-comp>
+        <!-- 
+            v-on:hull="goMsg"
+            해석) 세상에 없는 이벤트인 hull 이벤트에 자기자신의 메서드인 goMsg를 호출함
+            -> 자식 컴포넌트의 $emit(hull)로 연결됨
+         -->
+        <!-- 
+            v-bind:haha="n"
+            -> haha라는 내가 지은 이름의 속성에 값으로 for문 순회시 생성된 n변수를 할당해 준다
+            -> 이것을 이용하여 자식 컴포넌트 인스턴스에 옵션으로 props:[내가만든변수]를 써서
+                사용할 수 있음
+            -> 이것이 부모 데이터를 자식 컴포넌트에 전달하는 방법
 
+            -> 만약 props로 내부 데이터 전달하지 않으면 일반적으로 사용하는 사용자정의속성으로 태그에 표시됨
+                이렇게 사용하는 속성이라면 "data-이름" 형식을 지켜야함. 하지만 props로 사용하는 변수명은 지킬 필요 없음
 
-            <!-- 
-                v-for 디렉티브에 in 뒤에 숫자를 작성하면 그 개수만큼 실행함 
-                - 개별숫자 데이터는 1부터 개수만큼 하나씩 할당됨
+            -> props로 사용할 속성변수는 요소의 속성이므로 소문자로 작성하고 호출시 props 내부에서 소문자로 세팅한다
+                (대문자를 섞어써도 결과적으로 소문자로 읽혀진다)
 
-                주의: 반복문 속성을 사용할 경우 삭제, 추가, 변경사항을 Vue JS에서 구분하기 위하여
-                        하나하나의 항목을 DB레코드 구분하듯이 구분 키를 넣어줄것을 강력하게 요청함
-                        제이슨 데이터 등을 가져왔다면 유일키에 해당하는 항목을 아래와 같이 설정하여
-                        속성바인딩 처리 한다.
-                        예)
-                        <div v-bind:key="값">
-                        참고) v-bind를 사용할 경우 일반적으로 생략 가능함
-                            예)
-                            <div :key="값">
-
-                        -> 여기서는 제이슨 데이터, 객체데이터가 아니므로  for 문 돌릴때 숫자로 할당된 n을 primary key로 사용한다.
+            -> 속성변수의 내용을 문자형으로 쓰려면 쌍따옴표 내부에 홑따옴표로 사용해야 함.
             -->
+
+
+        <!-- 
+            v-for 디렉티브에 in 뒤에 숫자를 작성하면 그 개수만큼 실행함 
+            - 개별숫자 데이터는 1부터 개수만큼 하나씩 할당됨
+
+            주의: 반복문 속성을 사용할 경우 삭제, 추가, 변경사항을 Vue JS에서 구분하기 위하여
+                    하나하나의 항목을 DB레코드 구분하듯이 구분 키를 넣어줄것을 강력하게 요청함
+                    제이슨 데이터 등을 가져왔다면 유일키에 해당하는 항목을 아래와 같이 설정하여
+                    속성바인딩 처리 한다.
+                    예)
+                    <div v-bind:key="값">
+                    참고) v-bind를 사용할 경우 일반적으로 생략 가능함
+                        예)
+                        <div :key="값">
+
+                    -> 여기서는 제이슨 데이터, 객체데이터가 아니므로  for 문 돌릴때 숫자로 할당된 n을 primary key로 사용한다.
+        -->
     </div>
     <h2 class="tit2">
         <tit-comp></tit-comp>

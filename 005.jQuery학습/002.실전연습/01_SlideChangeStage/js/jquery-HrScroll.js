@@ -4,13 +4,16 @@
     대상 변수 할당하기
 *****************************************/
 // 전체 페이지 번호
-// let pno = 0;
+// let cnt_sc = 0;
 
-// 페이지번호 대신 이동 단위
+// 1. 페이지번호 대신 스크롤횟수
+let cnt_sc = 0;
+
+// 2. 이동단위
 const unit_sc = 200;
 
-// 스크롤 횟수 한계값 - 화면 가로폭 * 요소 갯수
-let limit_st = $("body").width()*7
+// 3. 스크롤 횟수 한계값 - 화면 가로폭 * 페이지수
+let limit_sc = $("body").width()*7
 
 // 페이지 요소
 const pg = $(".page");
@@ -40,16 +43,16 @@ $(".indic a").on("click", chgMenu);
 $(document).keydown((e) => {
     // 이전페이지이동
     if (e.keyCode === 33 || e.keyCode === 38) {
-        pno--;
-        if (pno === -1)
-            pno = 0;
+        cnt_sc--;
+        if (cnt_sc === -1)
+            cnt_sc = 0;
         movePg();
     }
     // 다음페이지이동
     else if (e.keyCode === 34 || e.keyCode === 40) {
-        pno++;
-        if (pno === pgcnt)
-            pno = pgcnt - 1;
+        cnt_sc++;
+        if (cnt_sc === pgcnt)
+            cnt_sc = pgcnt - 1;
         movePg();
     }
 }); ///////////// keydown ////////////////
@@ -62,24 +65,26 @@ $("html, body").animate({ scrollLeft: "0px" });
 *****************************************/
 function wheelFn() {
     // 광휠 금지
-    if (prot[0])
-        return;
-    chkCrazy(0);
+    // if (prot[0])
+    //     return;
+    // chkCrazy(0);
     console.log("휠 이벤트");
     // 1. 휠 방향 알아내기
     //@ts-expect-error
     let delta = event === null || event === void 0 ? void 0 : event.wheelDelta;
     if (delta < 0) {
-        pno++;
-        if (pno === pgcnt)
-            pno = pgcnt - 1;
+        //  스크롤 횟수 * 단위이동값 크기가 전체 크기보다 작을 때만 ++ 처리함
+        if (cnt_sc*unit_sc < limit_sc){
+            cnt_sc++;
+        }
     }
     else {
-        pno--;
-        if (pno === -1)
-            pno = 0;
+        //  스크롤 횟수 * 단위이동값 크기가 0보다 클때만 -- 처리함
+        if (cnt_sc*unit_sc > 0){
+            cnt_sc--;
+        }
     }
-    console.log(pno);
+    console.log(cnt_sc);
     // 3. 스크롤 이동하기
     // 대상:  html, body -> 두 개를 모두 잡아야 공통적으로 적용됨
     movePg();
@@ -94,10 +99,10 @@ function chgMenu(e) {
     if (prot[1])
         return;
     chkCrazy(1);
-    // 1. 클릭된 a 요소의 부모 li 순번을 구함  === pno
+    // 1. 클릭된 a 요소의 부모 li 순번을 구함  === cnt_sc
     let idx = $(this).parent().index();
     // 2. 전역 페이지 번호에 순번 업데이트 
-    pno = idx;
+    cnt_sc = idx;
     // 3. 페이지 이동, 메뉴에 클래스 "on" 넣기
     movePg();
 }
@@ -114,12 +119,15 @@ function chkCrazy(seq) {
     기능: 페이지 이동 애니메이션
 *******************************************/
 function movePg() {
+    // 이동할 위치 -> 이동단위 * 스크롤 횟수
+    let mpos = unit_sc * cnt_sc;
+
     $("html, body").stop().animate({
-        scrollLeft: ($(window).width() * pno) + "px"
-    }, 800, "easeInOutQuint", showEle);
+        scrollLeft: mpos + "px"
+    }, 2000, "easeOutQuint"/* , showEle */);
     // 대상: gnb메뉴, 인디케이터
-    gnb.eq(pno).addClass("on").siblings().removeClass("on");
-    indic.eq(pno).addClass("on").siblings().removeClass("on");
+    gnb.eq(cnt_sc).addClass("on").siblings().removeClass("on");
+    indic.eq(cnt_sc).addClass("on").siblings().removeClass("on");
 }
 // 등장할 요소 초기화
 minfo.css({
@@ -133,7 +141,7 @@ minfo.css({
 *******************************************/
 function showEle() {
     // .minfo 페이지별 등장하기
-    pg.eq(pno).find(".minfo").css({
+    pg.eq(cnt_sc).find(".minfo").css({
         opacity: "1",
         transform: "translate(-50%, -50%)"
     }).parents(".page").siblings().find(".minfo").css({
@@ -143,4 +151,4 @@ function showEle() {
     });
 }
 // 최초호출
-setTimeout(showEle, 1000);
+// setTimeout(showEle, 1000);

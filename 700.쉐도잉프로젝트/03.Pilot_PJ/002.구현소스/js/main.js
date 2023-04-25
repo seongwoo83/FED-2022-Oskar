@@ -227,7 +227,7 @@ function showTit(){
 
     // 3. 타이틀 넣을 요소를 배너에 추가
     mainban.append(`<h2 class="btit"></h2>`)
-    $(".btit").html(bantit).css({
+    .find(".btit").html(bantit).css({
         position: "absolute",
         top: "33%",
         left: lval,
@@ -257,7 +257,7 @@ const clearAuto = ()=>{
 }
 
 // 배너 이동시 자동넘김 지우기 세팅
-slide.on("mousemove dragstart dragstop", clearAuto);
+slide.on("drag dragstart dragstop", clearAuto);
 
 
 // 자동넘김 인터벌 세팅하기

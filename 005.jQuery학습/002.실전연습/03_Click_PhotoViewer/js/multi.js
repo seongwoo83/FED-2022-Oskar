@@ -1,7 +1,9 @@
 // 무한이동 드래그&클릭형&멀티 배너 JS - multi.js
 
+import MySlider from "./myslider.js";
 
-// 제이쿼리 코드 블록 /////////////////////
-$(() => {
-    
-}); //////////////// jQB ////////////////////
+const slideBx = $(".slider");
+
+slideBx.each((idx, ele)=>{
+    MySlider(ele)
+})

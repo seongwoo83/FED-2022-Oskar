@@ -1,40 +1,5 @@
 // 쇼핑몰 갤러리 JS - small.js
 
-/******************************************
-                [컴포넌트 데이터 전달 / 이벤트 호출]
-                1. 부모자식 구분하기
-                    1) 부모: 뷰 인스턴스 및 html 뷰대상요소
-                        -> 뷰 대상요소 내부의 사용자 정의 태그
-                    2) 자식: 뷰 컴포넌트 인스턴스
-                    
-                2. 부모의 변수를 자식에게 전달하기
-                    1) props down: 속성으로 전달하고 props로 받기
-                    2) 구현방법:
-                        (1) 부모 사용자 정의 태그에 v-bind:내속성=값
-                            설정한 후
-                        (2) 자식 컴포넌트 인스턴스 옵션에 
-                            props: [속성변수명, ..]
-                            또는
-                            props: {속성변수명: 자료형, ...}
-                            -> 배열로 값을 세팅하면 자료형 무관, 객체로 값을 세팅하면
-                                자료형 필터링
-                            
-                        -> 주의사항: 부모로부터 받은 데이터변수는 값을 새로 할당하여
-                                            변경할 수 없다.
-
-                3. 자식 컴포넌트에서 부모의 이벤트 호출하기
-                    1)  $emit 으로 전달하고 2-1~2-3
-                    on이벤트 설정으로 받음 2-4~2-5
-                    2) 구현방법:
-                        (1) 자식 컴포넌트 템플릿에서 
-                            v-on:이벤트명=자식메서드 형태로 쓴 후
-                        (2) 자식 컴포넌트 methods에 이벤트에 쓴 자식
-                            메서드를 만들고
-                        (3) this.$emit(부모가 만든 이벤트명)으로 전달
-                        (4) 부모 태그에서 v-on:부모가만든이벤트명=부모메서드 형태로 쓴후
-                        (5) 부모의 Vue 인스턴스 methods에 같은 이름의 메서드를 만들고
-                            기능을 구현함
-            ******************************************/
 
 //  Vue JS  인스턴스 생성용 함수
 const makeVue = (x) => {
@@ -47,15 +12,13 @@ const makeVue = (x) => {
 Vue.component("tit-comp", {
     template: `
                     <strong>
-                        <span>Vue JS 컴포넌트 : </span>
-                         쇼핑몰 갤러리 리스트
+                        <span> EFGH 쇼핑몰 </span><br/>Shopping Mall
                     </strong>
                 `,
 }); ///////전역 컴포넌트 1
 
 // Vue Instance 생성하기 : 반드시 컴포넌트 아래에서 생성
 makeVue(".tit");
-makeVue(".tit2");
 
 //  숫자 증감 변수
 let num = 0;
@@ -81,7 +44,7 @@ Vue.component("list-comp", {
         return {
             gsrc: `img_gallery/${this.haha}.jpg`,
             gname: `Sofia23` + this.haha + this.endlet + "-" + (this.myseq % 2),
-            gprice: this.insComma((123000 * this.haha) / 4) + `원`,
+            gprice: this.insComma((Math.ceil(Math.random()*12300) * this.haha)) + `원`,
         };
     },
     //  컴포넌트 내부 메서드 세팅
@@ -110,27 +73,75 @@ new Vue({
     methods: {
         // 자식이벤트 전달후 실행 메서드
         goMsg() {
-            alert("자식이 부모이벤트 전달 성공");
+            // alert("자식이 부모이벤트 전달 성공");
         },
         ovMsg() {
-            console.log("오버! 오케이");
+            // console.log("오버! 오케이");
         },
     },
 });
-/* 
-    [ 뷰JS 출력 ]
-    mustache : 
-    {{ expression }}문법을 사용해서 특정 변수를 그대로 렌더링한다.
 
-    v-text : 
-    특정 태그내에서 사용할 수 있으며 v-text속성을 사용해서 "텍스트"로 렌더링한다. 
-    이 때 렌더링된 텍스트는 해당 태그의 자식 노드로 들어간다.
-
-    v-html : 
-    특정 태그내에서 사용할 수 있으며 v-html속성을 사용해서 "html"로 렌더링한다. 
-    이 때 렌더링된 텍스트는 해당 태그의 자식 노드로 들어간다.
-
-    v-bind : 
-    특정 태그내에서 사용할 수 있으며 v-bind문법을 사용해서 vue내부의 값
-    (data, props, computed, methods)들의 값을 해당 속성의 값으로 렌더링한다.
-*/
+// 큰 이미지 보기 배경박스 컴포넌트
+Vue.component("win-comp",{
+    template:`
+        <!-- 큰이미지 배경박스 -->
+        <div id="bgbx">
+            <!-- 오른쪽버튼 -->
+            <a href="#" class="abtn rb">
+                <span class="ir">오른쪽버튼</span>
+            </a>
+            <!-- 왼쪽버튼 -->
+            <a href="#" class="abtn lb">
+                <span class="ir">왼쪽버튼</span>
+            </a>
+            <!-- 닫기버튼 -->
+            <a href="#" class="cbtn">
+                <span class="ir">닫기버튼</span>
+            </a>
+            
+            <!-- 큰이미지 박스 -->
+            <div id="imbx">
+                <!-- 큰 이미지 -->
+                <img src="img_gallery/50.jpg" alt="큰 이미지">
+                <!-- 이미지 설명 -->
+                <h4></h4>
+            </div>
+        </div>
+    `
+});
+// win-comp Vue 인스턴스 생성하기
+new Vue({
+    el:"#pbg",
+    // DOM이 모두 로딩된 후 실행 구역
+    mounted:function(){
+        const regex = /[^0-9]/g;
+        // 제이쿼리 기능구현
+        // 1. 갤러리 리스트 클릭시 큰 이미지 박스 보이기
+        // 대상: .grid>div
+        $(".grid>div").on("click",function(e){
+            e.preventDefault();
+            let isrc = $(this).find("img").attr("src");
+            let isrcNum = parseInt($(this).find("img").attr("src").replace(regex, ""));
+            // 1) 클릭된 이미지 경로 읽어오기
+            // 2) 클릭된 이미지 경로를 큰 이미지에 src로 넣기
+            $("#imbx img").attr("src", isrc)
+            $("#bgbx").fadeIn();
+            $(".abtn").on("click",function(e){
+                e.preventDefault();
+                if($(this).index()===0){
+                    isrcNum++;
+                    if(isrcNum === 51) isrcNum=1;
+                }else{
+                    isrcNum--;
+                    if(isrcNum === 0) isrcNum = 50;
+                }
+                $("#imbx img").attr("src",`img_gallery/${isrcNum}.jpg`);
+                
+            })
+        })
+        $(".cbtn").on("click",function(e){
+            e.preventDefault();
+            $("#bgbx").fadeOut();
+        })
+    }
+})

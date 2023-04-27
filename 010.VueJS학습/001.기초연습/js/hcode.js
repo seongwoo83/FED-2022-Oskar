@@ -13,10 +13,30 @@ const hcode = {
             <img v-bind:src="gsrc" v-on:click="goPapa" v-on:mouseover="ovNow" alt="dress">
             <aside>
                 <h2 v-text="gname"></h2>
-                <h3>{{gprice}}</h3>
+                <h3>
+                    <span v-bind:class="{del: haha%3 ==0}">{{gprice}}</span>
+                    <span v-if="haha%3==0">{{sale}}</span>
+                </h3>
             </aside>
         </div>
     `,
+    /*************************************
+        [ Vue JS 에서 클래스 바인드하기 ]
+        1. 일반적인 클래스 바인드
+        <요소 v-bind:class="'클래스명'">
+        클래스명이 변수라면 그냥 쓰고 문자로 넣으려면 따옴표를 넣음
+        예) <span v-bind:class="'del'">{{gprice}}</span>
+
+        2. 조건에 의한 클래스 바인드
+        <요소 v-bind:class={클래스명: 조건}>
+        예) <span v-bind:class="{del: haha ==3}">{{gprice}}</span>
+        - 클래스의 값으로 객체를 설정하고 객체속성명에 클래스명을 작성, 
+        객체의 값에 조건식을 쓰면 해당 조건에서만 클래스가 적용됨
+    *************************************/
+
+
+
+    
     // 3. 큰 리스트
     big: `
     <!-- 큰이미지 배경박스 -->

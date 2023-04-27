@@ -17,7 +17,7 @@ Vue.component("tit-comp", {
 makeVue(".tit");
 
 //  숫자 증감 변수
-let num = 0;
+let num = Math.random() * 52000;
 // 2. 갤러리 리스트에 넣을 전역 컴포넌트 만들기
 // 여기가 '자식' 요소 임
 Vue.component("list-comp", {
@@ -30,9 +30,14 @@ Vue.component("list-comp", {
     // 컴포넌트 내부의 data 속성
     data: function () {
         return {
+            // 1.상품 이미지 경로
             gsrc: `img_gallery/${this.haha}.jpg`,
+            // 2. 상품명
             gname: `Sofia23` + this.haha + this.endlet + "-" + (this.myseq % 2),
-            gprice: this.insComma(Math.ceil(Math.random() * 12300) * this.haha) + `원`,
+            // 3. 단위가격(원가격)
+            gprice: this.insComma(Math.ceil(num) * this.haha) + `원`,
+            // 4. 할인가격: 30% 할인된가격(0.7)
+            sale: this.insComma(Math.round(Math.ceil(num) * this.haha * 0.7)) + `원`,
         };
     },
     //  컴포넌트 내부 메서드 세팅
@@ -144,7 +149,7 @@ new Vue({
             $(".gimg img").attr("src", `img_gallery/${nowNum}.jpg`);
         }); ////////// click ////////////
 
-        
+
         // const regex = /[^0-9]/g;
         // // 제이쿼리 기능구현
         // // 1. 갤러리 리스트 클릭시 큰 이미지 박스 보이기

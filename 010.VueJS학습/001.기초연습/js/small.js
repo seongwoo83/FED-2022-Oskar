@@ -17,7 +17,7 @@ Vue.component("tit-comp", {
 makeVue(".tit");
 
 //  숫자 증감 변수
-let num = Math.random() * 52000;
+let num = Math.random()*38000;
 // 2. 갤러리 리스트에 넣을 전역 컴포넌트 만들기
 // 여기가 '자식' 요소 임
 Vue.component("list-comp", {
@@ -49,6 +49,10 @@ Vue.component("list-comp", {
         },
         ovNow() {
             this.$emit("gotkimchi");
+        },
+        // 세일표시 리턴 메서드
+        condiRet(){
+            return this.haha%3 == 0;
         },
 
         //정규식함수(숫자 세자리마다 콤마해주는 기능)
@@ -88,7 +92,7 @@ new Vue({
         let nowNum = 1;
         
         // 1. 갤러리 리스트 클릭시 큰이미지박스 보이기
-        $(".grid>div").click(function (e) {
+        $(".grid>div").on("click", function (e) {
             console.log(this);
             // 1. 클릭된 이미지 경로 읽어오기
             let isrc = $(this).find("img").attr("src");
@@ -110,21 +114,27 @@ new Vue({
         // 상품명/가격 등 데이터 읽어오기 세팅 함수
         function setVal(){
             const tg = $(`.grid>div[data-num=${nowNum}]`);
-            // 5-1 상품명/가격 큰 박스에 넣기
+            // 5-1 상품명 큰 박스에 넣기
             $("#gtit, #gcode").text(tg.find("h2").text());
-            $("#gprice,  #total").text(tg.find("h3").text());
+            // 5-2 상품가격 큰 박스에 넣기
+            // 세일인 경우와 아닌경우 나누기
+            if(tg.find("h3 span").hasClass("del")){
+                $("#gprice,  #total").html(`<small>30% 세일! =></small>`+tg.find(".sale").text());
+            }else{
+                $("#gprice,  #total").text(tg.find("h3").text());
+            }
         }
         
         
         // 2. 닫기버튼 클릭시 큰이미지박스 숨기기
-        $(".cbtn").click(function (e) {
+        $(".cbtn").on("click", function (e) {
             e.preventDefault();
             // 큰이미지박스 숨기기
             $("#bgbx").hide();
         }); /////////// click /////////
         
         // 3. 이전/다음버튼 클릭시 이미지변경하기
-        $(".abtn").click(function (e) {
+        $(".abtn").on("click", function (e) {
             // 1. 기본이동막기
             e.preventDefault();
             // 2. 오른쪽버튼 여부

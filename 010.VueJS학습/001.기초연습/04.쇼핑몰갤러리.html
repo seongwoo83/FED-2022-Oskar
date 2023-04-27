@@ -17,7 +17,7 @@
     </h1>
     <div class="grid">
         <!-- 여기가 '부모'요소 위치 -->
-        <list-comp v-for="(n,idx) in 50" v-bind:key="n" v-bind:haha="n" v-bind:myseq="idx" v-bind:endlet = "'WD'" v-on:hull="goMsg" v-on:gotkimchi="ovMsg"></list-comp>
+        <list-comp v-for="(n,idx) in 50" v-bind:key="n" v-bind:haha="n" v-bind:myseq="idx" v-bind:endlet = "'WD'" v-on:hull="goMsg" v-on:gotkimchi="ovMsg" v-bind:data-num="n"  ></list-comp>
     </div>
     <!-- 큰이미지 보기 박스 -->
     <div id="pbg">

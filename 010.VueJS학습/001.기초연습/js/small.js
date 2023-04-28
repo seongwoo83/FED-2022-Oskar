@@ -241,8 +241,8 @@ new Vue({
             }
             // 3. 숫자인 경우  tot 업데이트 + setVal()호출
             else{
-                ele.val(Number(txt))
-                tot = txt;
+                // ele.val(Number(txt))
+                tot =Number(txt);
             }
             setVal();
             console.log("직접입력: ", txt);

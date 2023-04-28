@@ -14,7 +14,8 @@ const hcode = {
             <aside>
                 <h2 v-text="gname"></h2>
                 <h3>
-                    <span v-bind:class="{del: condiRet()}">{{gprice}}</span>
+                    <span v-bind:class="{del: condiRet()}" v-bind:data-price="orgprice">{{gprice}}</span>
+                    <!-- <input type="hidden" v-bind:value="orgprice"> -->
                     <span class="sale" v-if="condiRet()">{{sale}}</span>
                 </h3>
             </aside>

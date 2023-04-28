@@ -17,7 +17,7 @@ Vue.component("tit-comp", {
 makeVue(".tit");
 
 //  숫자 증감 변수
-let num = Math.random()*38000;
+let num = Math.ceil(Math.random()*38000);
 // 2. 갤러리 리스트에 넣을 전역 컴포넌트 만들기
 // 여기가 '자식' 요소 임
 Vue.component("list-comp", {
@@ -34,10 +34,12 @@ Vue.component("list-comp", {
             gsrc: `img_gallery/${this.haha}.jpg`,
             // 2. 상품명
             gname: `Sofia23` + this.haha + this.endlet + "-" + (this.myseq % 2),
-            // 3. 단위가격(원가격)
-            gprice: this.insComma(Math.ceil(num) * this.haha) + `원`,
+            // 3. 단위가격(원가격 화면 표시용)
+            gprice: this.insComma(num * this.haha) + `원`,
+            // 4. 단위가격(숫자만: data-price 속성에 넣음)
+            orgprice: num * this.haha,
             // 4. 할인가격: 30% 할인된가격(0.7)
-            sale: this.insComma(Math.round(Math.ceil(num) * this.haha * 0.7)) + `원`,
+            sale: this.insComma(Math.round(num * this.haha * 0.7)) + `원`,
         };
     },
     //  컴포넌트 내부 메서드 세팅
@@ -159,6 +161,27 @@ new Vue({
             $(".gimg img").attr("src", `img_gallery/${nowNum}.jpg`);
         }); ////////// click ////////////
 
+        // [수량 증감 버튼 클릭시 데이터 반영하기]
+        // 대상: .chg_num img
+        // 변경대상: input#sum
+        const sum = $("input#sum");
+        $(".chg_num img").on("click", function(){
+            // 1. 클릭된 버튼 구분하기
+            let isB  = $(this).attr("alt");
+            console.log("버튼 구분: ", isB);
+            // 2. 현재값 읽어오기
+            let isV = Number(sum.val());
+            console.log("현재값: ", isV);
+            // 3. 분기하기
+            if(isB === "증가"){
+                isV++;
+                sum.val(isV);
+            }
+
+        })
+
+
+
 
         // const regex = /[^0-9]/g;
         // // 제이쿼리 기능구현
@@ -188,6 +211,5 @@ new Vue({
         //     e.preventDefault();
         //     $("#bgbx").fadeOut();
         // });
-        // [ 제이쿼리 기능구현 ]
     },
 });

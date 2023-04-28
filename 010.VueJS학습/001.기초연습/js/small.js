@@ -200,8 +200,14 @@ new Vue({
             // 3. 분기하기
             if (isB === "증가") {
                 isV++;
-                tot = isV;
-                sum.val(isV);
+                if(isV>100){
+                    initTot();
+                    alert("구매 수량이 100개 초과인 경우 \n 쇼핑몰에 직접 전화주세요");
+                    return;
+                }else{
+                    tot = isV;
+                    sum.val(isV);
+                }
             } else {
                 isV--;
                 if (isV === 0) isV = 1;
@@ -226,12 +232,17 @@ new Vue({
             // 1. 입력된값 :input요소는 val() 메서드사용
             let txt = ele.val();
             // 2. 숫자가 아닌경우 : isNaN() 숫자가 아닌경우 true값 리턴
-            if(isNaN(txt)){
+            // 조건: 숫자가 아니거나 1미만이거나 빈값이거나 소수점이 있으면
+            if(isNaN(txt) || txt < 1 || txt === "" || txt.indexOf(".") !== -1 /* txt%1 !== 0 */){
+                initTot();
+            }else if(txt > 100){
+                alert("구매 수량이 100개 초과인 경우 \n 쇼핑몰에 직접 전화주세요");
                 initTot();
             }
             // 3. 숫자인 경우  tot 업데이트 + setVal()호출
             else{
-                tot = Number(txt);
+                ele.val(Number(txt))
+                tot = txt;
             }
             setVal();
             console.log("직접입력: ", txt);

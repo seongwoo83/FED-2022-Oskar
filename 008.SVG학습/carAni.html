@@ -151,7 +151,7 @@
             }
             /* 3. 자동차 이미지 */
             body.on #car {
-                animation: showCar 2s ease-in-out 10s fowards;
+                animation: showCar 2s ease-in-out 10s forwards;
             }
             /* 4. 바퀴박스 */
             body.on .ba {
@@ -160,7 +160,7 @@
             }
             /* 5. 로고박스 */
             body.on #logo {
-                animation: comeLogo 4s ease-in-out 15s linear fowards;
+                animation: comeLogo 4s ease-in-out 15s linear forwards;
             }
 
             /* 로고 */
@@ -227,9 +227,20 @@
                 5. 자동차가 나갈 떄 오른쪽 바깥에 있는 로고가 스테이지 중앙으로
                 들어온다
             *********************************/
-
-            
-
+                // 위의 순서로 body에 클래스on을 주면 미리 세팅된 애니메이션이 작동됨
+                // Start 버튼 클릭시
+                // 1. body에 on넣기
+                // 2. audio 재생하기
+                $(".sbtn").on("click", function () {
+                    // 1) 자기자신 없애기
+                    $(this).fadeOut(200);
+                    // 2) body에 클래스 on 넣기
+                    setTimeout(() => {
+                        $("body").addClass("on");
+                    }, 1000);
+                    // 3) 오디오 재생하기
+                    $("#myaud").get(0).play();
+                });
             }); ///////////////// jQB ///////////////////
         </script>
     </head>

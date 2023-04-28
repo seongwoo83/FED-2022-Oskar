@@ -17,7 +17,7 @@ Vue.component("tit-comp", {
 makeVue(".tit");
 
 //  숫자 증감 변수
-let num = Math.ceil(Math.random()*38000);
+let num = Math.ceil(Math.random() * 38000);
 // 2. 갤러리 리스트에 넣을 전역 컴포넌트 만들기
 // 여기가 '자식' 요소 임
 Vue.component("list-comp", {
@@ -53,8 +53,8 @@ Vue.component("list-comp", {
             this.$emit("gotkimchi");
         },
         // 세일표시 리턴 메서드
-        condiRet(){
-            return this.haha%3 == 0;
+        condiRet() {
+            return this.haha % 3 == 0;
         },
 
         //정규식함수(숫자 세자리마다 콤마해주는 기능)
@@ -89,24 +89,32 @@ new Vue({
     el: "#pbg",
     // DOM이 모두 로딩된 후 실행 구역
     mounted: function () {
-        
         // 공유번호변수
         let nowNum = 1;
         // 공유가격변수
         let orgprice = 0;
-        
+        // 공유 전체수량변수
+        let tot = 1;
+        // 공유 전체수/입력창 초기화
+        const initTot = ()=>{
+            tot = 1;
+            $("#sum").val(1);
+        }
+
         // 1. 갤러리 리스트 클릭시 큰이미지박스 보이기
         $(".grid>div").on("click", function (e) {
+            // 0. 전체수량 초기화
+            initTot();
             console.log(this);
             // 1. 클릭된 이미지 경로 읽어오기
             let isrc = $(this).find("img").attr("src");
 
             // 2. 클릭된 이미지 경로를 큰 이미지에 src로 넣기
             $(".gimg img").attr("src", isrc);
-            
+
             // 3. 큰이미지박스 보이기
             $("#bgbx").show();
-            
+
             // 4. 다음/이전 이미지 변경을 위한 data-num속성읽기
             nowNum = $(this).attr("data-num");
             console.log("현재이미지번호:", nowNum);
@@ -114,30 +122,29 @@ new Vue({
             // 5. 상품명 읽어오기
             setVal();
         }); /////////// click ////////
-        
+
         // 상품명/가격 등 데이터 읽어오기 세팅 함수
-        function setVal(){
+        function setVal() {
+            // 5. 상품명 큰 박스에 넣기
             const tg = $(`.grid>div[data-num=${nowNum}]`);
-            // 5-1 상품명 큰 박스에 넣기
-            // 6.가격변경 세팅을 위한 원가격 세팅
+            // 5-1.가격변경 세팅을 위한 원가격 세팅
             orgprice = tg.find("h3>span:first").attr("data-price");
-            
-            // 세일 적용일 경우 세일가격으로 업데이트
-            if(tg.find("h3>span:first").is(".del")){
+
+            // 5-2세일 적용일 경우 세일가격으로 업데이트
+            let isSale = tg.find("h3>span:first").is(".del");
+            if (isSale) {
                 orgprice = Math.round(orgprice * 0.7);
             }
             console.log(orgprice);
             $("#gtit, #gcode").text(tg.find("h2").text());
-            // 5-2 상품가격 큰 박스에 넣기
-            // 세일인 경우와 아닌경우 나누기
-            if(tg.find("h3 span").hasClass("del")){
-                $("#gprice,  #total").html(`<small>30% 세일! =></small>`+ insComma(orgprice) + "원"
-                // tg.find(".sale").text()
-                );
-            }else{
-                $("#gprice,  #total").text(insComma(orgprice) + "원"
-                    // tg.find("h3").text()
-                    );
+            // 5-3 상품가격 큰 박스에 넣기
+            //  원가격에 표시
+            $("#gprice").html(insComma(orgprice) + "원");
+            //  토탈가격에 표시 : 원가 * 갯수
+            $("#total").html(insComma(orgprice * tot) + "원");
+            // 6. 세일인 경우 추가 문구 넣기
+            if (isSale) {
+                $("#gprice").prepend("<small>30% 세일! =></small>");
             }
         }
 
@@ -145,37 +152,36 @@ new Vue({
         function insComma(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        
-        
+
         // 2. 닫기버튼 클릭시 큰이미지박스 숨기기
         $(".cbtn").on("click", function (e) {
             e.preventDefault();
             // 큰이미지박스 숨기기
             $("#bgbx").hide();
         }); /////////// click /////////
-        
+
         // 3. 이전/다음버튼 클릭시 이미지변경하기
         $(".abtn").on("click", function (e) {
             // 1. 기본이동막기
-            e.preventDefault();
-            // 2. 오른쪽버튼 여부
+            e.preventDefault();// 0. 전체수량 초기화
+            initTot();
             let isB = $(this).is(".rb");
 
             // 3. 분기하기
             if (isB) {
                 // 오른쪽버튼
                 nowNum++;
-                setVal();
                 if (nowNum === 51) nowNum = 1;
+                setVal();
             } else {
                 // 왼쪽버튼
                 nowNum--;
-                setVal();
                 if (nowNum === 0) nowNum = 50;
+                setVal();
             }
-            
+
             console.log("변경된nowNum:", nowNum);
-            
+
             // 4. 큰 이미지 변경하기
             $(".gimg img").attr("src", `img_gallery/${nowNum}.jpg`);
         }); ////////// click ////////////
@@ -184,26 +190,52 @@ new Vue({
         // 대상: .chg_num img
         // 변경대상: input#sum
         const sum = $("input#sum");
-        $(".chg_num img").on("click", function(){
+        $(".chg_num img").on("click", function () {
             // 1. 클릭된 버튼 구분하기
-            let isB  = $(this).attr("alt");
+            let isB = $(this).attr("alt");
             console.log("버튼 구분: ", isB);
             // 2. 현재값 읽어오기
             let isV = Number(sum.val());
             console.log("현재값: ", isV);
             // 3. 분기하기
-            if(isB === "증가"){
+            if (isB === "증가") {
                 isV++;
+                tot = isV;
                 sum.val(isV);
-            }else{
+            } else {
                 isV--;
-                if(isV === 0) isV = 1;
+                if (isV === 0) isV = 1;
+                tot = isV;
                 sum.val(isV);
             }
+            // 4. 가격표시하기
+            // 수량을 전역변수에 할당하여 setVal에 반영함
+            setVal();
+        });
 
+        /* 
+        수량 직접입력 기능구현
+        1. 숫자만 입력
+        2. 입력즉시 합계 출력
+        */
+        // 대상: #sum
+        // 이벤트: keyup(입력 즉시 반응)
+        $("#sum").on("keyup",function(){
+            // 0. 요소 자신
+            let ele = $(this)
+            // 1. 입력된값 :input요소는 val() 메서드사용
+            let txt = ele.val();
+            // 2. 숫자가 아닌경우 : isNaN() 숫자가 아닌경우 true값 리턴
+            if(isNaN(txt)){
+                initTot();
+            }
+            // 3. 숫자인 경우  tot 업데이트 + setVal()호출
+            else{
+                tot = Number(txt);
+            }
+            setVal();
+            console.log("직접입력: ", txt);
         })
-
-
 
 
         // const regex = /[^0-9]/g;

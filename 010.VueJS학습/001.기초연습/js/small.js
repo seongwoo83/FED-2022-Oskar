@@ -92,6 +92,8 @@ new Vue({
         
         // 공유번호변수
         let nowNum = 1;
+        // 공유가격변수
+        let orgprice = 0;
         
         // 1. 갤러리 리스트 클릭시 큰이미지박스 보이기
         $(".grid>div").on("click", function (e) {
@@ -117,14 +119,31 @@ new Vue({
         function setVal(){
             const tg = $(`.grid>div[data-num=${nowNum}]`);
             // 5-1 상품명 큰 박스에 넣기
+            // 6.가격변경 세팅을 위한 원가격 세팅
+            orgprice = tg.find("h3>span:first").attr("data-price");
+            
+            // 세일 적용일 경우 세일가격으로 업데이트
+            if(tg.find("h3>span:first").is(".del")){
+                orgprice = Math.round(orgprice * 0.7);
+            }
+            console.log(orgprice);
             $("#gtit, #gcode").text(tg.find("h2").text());
             // 5-2 상품가격 큰 박스에 넣기
             // 세일인 경우와 아닌경우 나누기
             if(tg.find("h3 span").hasClass("del")){
-                $("#gprice,  #total").html(`<small>30% 세일! =></small>`+tg.find(".sale").text());
+                $("#gprice,  #total").html(`<small>30% 세일! =></small>`+ insComma(orgprice) + "원"
+                // tg.find(".sale").text()
+                );
             }else{
-                $("#gprice,  #total").text(tg.find("h3").text());
+                $("#gprice,  #total").text(insComma(orgprice) + "원"
+                    // tg.find("h3").text()
+                    );
             }
+        }
+
+        //정규식함수(숫자 세자리마다 콤마해주는 기능)
+        function insComma(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
         
         
@@ -175,6 +194,10 @@ new Vue({
             // 3. 분기하기
             if(isB === "증가"){
                 isV++;
+                sum.val(isV);
+            }else{
+                isV--;
+                if(isV === 0) isV = 1;
                 sum.val(isV);
             }
 

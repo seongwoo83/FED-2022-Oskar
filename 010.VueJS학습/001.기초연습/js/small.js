@@ -233,6 +233,8 @@ new Vue({
             let txt = ele.val();
             // 2. 숫자가 아닌경우 : isNaN() 숫자가 아닌경우 true값 리턴
             // 조건: 숫자가 아니거나 1미만이거나 빈값이거나 소수점이 있으면
+            if(txt === "") return;
+
             if(isNaN(txt) || txt < 1 || txt === "" || txt.indexOf(".") !== -1 /* txt%1 !== 0 */){
                 initTot();
             }else if(txt > 100){
@@ -246,6 +248,11 @@ new Vue({
             }
             setVal();
             console.log("직접입력: ", txt);
+        }).on("blur",function(){
+            if($(this).val().trim() === ""){
+                initTot();
+                setVal();
+            }
         })
 
 

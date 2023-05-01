@@ -4,6 +4,31 @@
 // 이유: export하기 위해
 
 function autoScroll() {
+
+    // 현재 페이지 가로크기기준 800px 이하일 때 모바일로 변경
+    // 모바일 상태 변수
+    let mob = 0; // 0이면 데스크탑 / 1이면 모바일
+    const updateW = ()=>{
+        if($(window).width()<=800) mob=1;
+        else mob = 0;
+        console.log("mob", mob);
+    }
+    // 로딩시 실행
+    updateW();
+    // 배너초기화 적용함수
+    const callInit = ()=>{
+        if(!mob) {
+            initSet();
+        }else{
+            $(".imgc, .txtc a").attr("style", "");
+        }
+    }
+    // 화면 window resize이벤트 등록
+    $(window).on("resize",function(){
+        updateW();
+        callInit();
+    })
+
     /*****************************************
         대상 변수 할당하기
     *****************************************/
@@ -39,6 +64,10 @@ function autoScroll() {
         -> 한페이지씩 자동 스크롤 기능
     *****************************************/
     function wheelFn() {
+
+        // 모바일일때 작동 정지
+        if(mob) return;
+
         // 광휠 금지
         if (prot[0]) return;
         chkCrazy(0);
@@ -143,8 +172,8 @@ function autoScroll() {
         }); /////////// css ///////////
     } ////////////// initSet 함수 //////////////
 
-    // 초기화함수 호출
-    initSet();
+    // 초기화함수 호출 -> 모바일이 아닐때만 호출
+    if(!mob) initSet();
 
     /**************************************** 
     함수명: actPage

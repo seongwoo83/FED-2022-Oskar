@@ -52,3 +52,21 @@ new Vue({
         menuFn();
     },
 });
+
+Vue.component("foot-comp",{
+    template:comData.barea
+})
+
+new Vue({
+    el:"#info",
+    data:{},
+    created: function () {
+        // DOM연결 전 데이터 가공 작업
+        console.log("created구역");
+    }, //______________________________
+    // mounted 실행구역: DOM연결 후
+    mounted: function () {
+        //제이쿼리 코드 함수 호출!
+        console.log("mounted구역");
+    },
+})

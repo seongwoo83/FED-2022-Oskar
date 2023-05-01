@@ -20,6 +20,12 @@ autoScroll();
 
 ****************************************/
 
+// 공통 전역변수
+// 1. 애니메이션 시간 / 광클금지 시간
+const ani_time = 600;
+// 2. 이징 타이밍
+const ani_ease = "easeOutQuint"
+
 // 메인페이지
 // 메뉴바 버튼 클릭시 전체메뉴 보이기
 $(".ham").on("click", function () {
@@ -109,8 +115,8 @@ slide.on("dragstop", function () {
             {
                 left: -winW + "px",
             },
-            600,
-            "easeOutQuint",
+            ani_time,
+            ani_ease,
             () => {
                 cover.hide();
             }
@@ -131,8 +137,8 @@ function goSlide(dir){
             {
                 left: "0px",
             },
-            600,
-            "easeOutQuint",
+            ani_time,
+            ani_ease,
             () => {
                 // 이동후 맨앞 li 맨뒤로 이동
                 slide.prepend(slide.find("li").last()).css({ left: "-100%" });
@@ -150,8 +156,8 @@ function goSlide(dir){
             {
                 left: -winW * 2 + "px",
             },
-            600,
-            "easeOutQuint",
+            ani_time,
+            ani_ease,
             () => {
                 // 이동후 맨앞 li 맨뒤로 이동
                 slide.append(slide.find("li").first()).css({ left: "-100%" });
@@ -351,15 +357,26 @@ $(".btna").hover(
     }
 ); ///// hover ///////////
 
+// 광클 금지 변수
+let prot = 0;
 /**********************
     배너이동 버튼 클릭시 배너 이동하기
 **********************/
 // 대상: .btntit
 $(".btntit").on("click",function(){
+    if(prot) return;
+    prot = 1;
+    setTimeout(() => {
+        prot  = 0;
+    }, ani_time);
     // 자동 넘김 지우기 함수 호출
     clearAuto();
 
     let isB = $(this).parent().is(".ar1");
-    
+    if(isB){
+        goSlide(1);
+    }else{
+        goSlide(0); 
+    }
 })
 

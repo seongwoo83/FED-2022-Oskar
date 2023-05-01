@@ -85,7 +85,7 @@ let winW = reWin();
 // 광드래그 방지위해 커버세팅 (show(), hide())
 const cover = $(".cover");
 
-// 드래그 끝난 후 이벤트 함수 만들기
+// ⁡⁢⁣⁣드래그 끝난 후 이벤트 함수 만들기⁡
 slide.on("dragstop", function () {
     // 광드래그 방지 커버
     cover.show();
@@ -95,6 +95,57 @@ slide.on("dragstop", function () {
 
     // 1. 왼쪽으로 이동 : -110% 미만일때
     if (sleft < -winW * 1.1) {
+        // 배너이동함수 호출
+        goSlide(0);
+    }
+    // 2. 오른쪽으로 이동 : -90% 초과일때
+    else if (sleft > -winW * 0.9) {
+        // 배너이동함수 호출
+        goSlide(1);
+    }
+    // 3. 제자리로 이동 : -110% ~ -90%
+    else {
+        slide.animate(
+            {
+                left: -winW + "px",
+            },
+            600,
+            "easeOutQuint",
+            () => {
+                cover.hide();
+            }
+        );
+    }
+});
+
+/***************************************
+    함수명: goSlide
+    기능: 왼쪽 오른쪽 배너 이동하기
+    구분: 0은 왼쪽, 1은 오른쪽 (dir parameter)
+***************************************/
+function goSlide(dir){
+    console.log("방향", dir);
+    // 분기하기
+    if(dir){// 오른쪽 이동
+        slide.animate(
+            {
+                left: "0px",
+            },
+            600,
+            "easeOutQuint",
+            () => {
+                // 이동후 맨앞 li 맨뒤로 이동
+                slide.prepend(slide.find("li").last()).css({ left: "-100%" });
+                cover.hide();
+
+                // 배너 타이틀 함수
+                showTit();
+            }
+        );
+        // 불릿 변경함수 호출
+        addOn(0);
+        // 왼쪽에서 오른쪽 이동이므로 0번째 슬라이드
+    }else{// 왼쪽 이동
         slide.animate(
             {
                 left: -winW * 2 + "px",
@@ -114,41 +165,8 @@ slide.on("dragstop", function () {
         addOn(2);
         // 오른쪽에서 왼쪽으로 이동이므로 2번째 슬라이드
     }
-    // 2. 오른쪽으로 이동 : -90% 초과일때
-    else if (sleft > -winW * 0.9) {
-        slide.animate(
-            {
-                left: "0px",
-            },
-            600,
-            "easeOutQuint",
-            () => {
-                // 이동후 맨앞 li 맨뒤로 이동
-                slide.prepend(slide.find("li").last()).css({ left: "-100%" });
-                cover.hide();
-
-                // 배너 타이틀 함수
-                showTit();
-            }
-        );
-        // 불릿 변경함수 호출
-        addOn(0);
-        // 왼쪽에서 오른쪽 이동이므로 0번째 슬라이드
-    }
-    // 3. 제자리로 이동 : -110% ~ -90%
-    else {
-        slide.animate(
-            {
-                left: -winW + "px",
-            },
-            600,
-            "easeOutQuint",
-            () => {
-                cover.hide();
-            }
-        );
-    }
-});
+    
+}
 
 /*****************************************
     [ 터치 배너 이동시 불릿 변경하기 ]
@@ -277,24 +295,7 @@ let banAuto;
 
 const banAutoSlide = () => {
     banAuto = setInterval(() => {
-        slide.animate(
-            {
-                left: -winW * 2 + "px",
-            },
-            600,
-            "easeOutQuint",
-            () => {
-                // 이동후 맨앞 li 맨뒤로 이동
-                slide.append(slide.find("li").first()).css({ left: "-100%" });
-                cover.hide();
-
-                // 배너 타이틀 함수
-                showTit();
-            }
-        );
-        // 불릿 변경함수 호출
-        addOn(2);
-        // 오른쪽에서 왼쪽으로 이동이므로 2번째 슬라이드
+        goSlide(0);
     }, 3000);
 };
 
@@ -310,8 +311,7 @@ const banAutoSlide = () => {
 // 자동넘김 최초호출
 banAutoSlide();
 
-////////////////////////////////////
-// 마우스 팔로워 플러그인 적용하기 ///
+// 마우스 팔로워 플러그인 적용하기
 // 움직일 대상: .btna
 // 설정범위는 움직일 대상이 포함된 부모요소
 
@@ -322,7 +322,6 @@ $(".btna").mousefollower();
 // 그 안에 .badge 라는 것이 실제로 따라다닌다!
 // 클래스명 badge를 이 플러그인의 설정에 따라
 // 반드시 사용해야 한다!
-
 $(".btna").hover(
     function () {
         // over
@@ -352,20 +351,15 @@ $(".btna").hover(
     }
 ); ///// hover ///////////
 
-/***************************************** 
-    배너이동 버튼 클릭시 배너이동하기 
-*****************************************/
+/**********************
+    배너이동 버튼 클릭시 배너 이동하기
+**********************/
 // 대상: .btntit
-$(".btntit").click(function(){
-
-    // 1. 자동넘김 지우기 함수 호출!
+$(".btntit").on("click",function(){
+    // 자동 넘김 지우기 함수 호출
     clearAuto();
 
-    // 2. 버튼 구분하기
     let isB = $(this).parent().is(".ar1");
-    console.log("왼쪽버튼?",isB);
-
-
-
-}); //////////////// click ///////////////
+    
+})
 

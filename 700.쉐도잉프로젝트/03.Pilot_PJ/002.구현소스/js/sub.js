@@ -28,6 +28,12 @@ new Vue({
         console.log("mounted구역");
         // 메뉴함수 호출
         menuFn();
+
+        // 스와이퍼 생성함수 호출
+        makeSwiper();
+
+        // 부드러운 스크롤
+        startSS();
     },
 });
 
@@ -36,15 +42,27 @@ Vue.component("foot-comp",{
 })
 
 new Vue({
-    el:"#info",
-    data:{},
-    created: function () {
-        // DOM연결 전 데이터 가공 작업
-        console.log("created구역");
-    }, //______________________________
-    // mounted 실행구역: DOM연결 후
-    mounted: function () {
-        //제이쿼리 코드 함수 호출!
-        console.log("mounted구역");
-    },
+    el:"#info"
 })
+
+function makeSwiper(){
+    // Swiper 플러그인 인스턴스 생성
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,  //페이지 넘기거나 클릭한 후 활성화 X
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true, //불릿 클릭이동 여부
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+}
+
+

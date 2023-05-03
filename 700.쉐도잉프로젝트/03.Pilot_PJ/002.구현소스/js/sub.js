@@ -81,7 +81,7 @@ function sinsangFn() {
     // 위치값 변수
     let lpos = 0;
     // 재귀호출 상태값 변수 -> 1이면 호출가능 0이면 호출불가
-    let call_sts = 1;
+    let call_sts = 0;
 
     function moveList() {
         // 1. 이동위치값 감소하기
@@ -116,4 +116,66 @@ function sinsangFn() {
             moveList(); // 함수재호출
         }
     )
+
+    
+    /*************************************************
+        신상품 리스트 li에 마우스 오버시 정보보이기
+        1. 대상: .flist li
+        2. 정보구분법: li의 클래스명으로 신상품 정보와 
+                            매칭하여 상품정보박스를 동적으로
+                            생성하여 애니메이션을 주어 보이게 함
+    *************************************************/
+    
+    flist.find("li")
+    .on("mouseenter",function(){ //hover
+        // 1. 클래스 정보 알아내기
+        let clsnm = $(this).attr("class");
+        // 2. 클래스 이름으로 세팅된 신상정보 객체 데이터 가져오기
+        let gd_info = sinsang[clsnm];
+        console.log(clsnm, gd_info);
+        // 3. 상품 정보박스 만들고 보이게 하기
+        // 마우스 오버된 li자신 $(this)에 넣어준다
+        $(this).append(`<div class="ibox"></div>`);
+        // .ibox에 상품정보 넣기
+        // ^는 특수문자이므로 정규식에 넣을때 역슬래쉬와 함께 씀
+        //  -> \^
+        // $(".ibox").html(gd_info.replaceAll("^","<br>")).fadeTo(200,1)
+        $(".ibox").html(gd_info.replace(/\^/g,"<br>")).animate({
+            top:"110%",
+            opacity:1
+        }, 300, "easeOutCirc")
+    })
+    .on("mouseleave",function(){ //out  
+        // ibox나갈때 지우기
+        $(".ibox").remove();
+    })
+
+    /******************************************
+        스크롤 위치가 신상품 박스가 보일때만 움직이기
+    ******************************************/
+    // JS의 getBoundingClientRect()의 값과 같은것은?
+    // 적용박스 offset().top위치값 - scroll바 위치값
+    let scTop = 0;
+    let tgpos = flist.offset().top;
+    // 화면 높이값
+    let winH = $(window).height();
+    // 스크롤 이벤트함수
+    $(window).on("scroll",function(){
+        // 1. 스크롤 위치값
+        scTop = $(this).scrollTop();
+        // 2. gBCR값 구하기
+        let gBCR = tgpos - scTop;
+        console.log('gBCR: ', gBCR);
+
+        // 3. 신상품 리스트 이동/멈춤 분기하기
+        // 이동기준 gBCR값이 화면 높이보다 작고 0보다 클때 이동
+        if(gBCR < winH && gBCR > 0 && call_sts===0){
+            call_sts = 1; // 콜백 재개 (한번만 실행)
+            moveList(); // 함수재호출
+        }else{ // 그 외의 경우 멈춤
+            call_sts = 0; //콜백 중단
+        }
+
+
+    })
 }

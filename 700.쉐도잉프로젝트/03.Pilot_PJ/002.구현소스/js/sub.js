@@ -7,6 +7,10 @@ import comData from "./tempData/data-common.js";
 /* 신상품 정보 */
 import sinsang from "./gdsData/sinsang.js";
 
+// 스와이퍼 변수
+let swiper;
+
+
 // ########## 상단영역 메뉴 Vue  템플릿 세팅하기 #######
 
 // Vue.component(내가지은요소명,{옵션})
@@ -52,7 +56,7 @@ new Vue({
 
 function makeSwiper() {
     // Swiper 플러그인 인스턴스 생성
-    let swiper = new Swiper(".mySwiper", {
+    swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         loop: true,
         autoplay: {
@@ -82,8 +86,11 @@ function sinsangFn() {
     let lpos = 0;
     // 재귀호출 상태값 변수 -> 1이면 호출가능 0이면 호출불가
     let call_sts = 0;
-    // 스크롤 상태값 변수
+    // 스크롤시 상태값변수(1-호출가능/0-호출불가)
     let sc_sts = 0;
+    // 재귀호출 타임아웃용변수
+    let callT;
+
 
     function moveList() {
         // 1. 이동위치값 감소하기
@@ -99,8 +106,12 @@ function sinsangFn() {
         flist.css({
             left: lpos + "px",
         });
-        //재귀호출하기(비동기함수- setTimeout)
-        if(call_sts) setTimeout(moveList, 30);
+        // 타임아웃비우기
+        clearTimeout(callT);
+
+        // 재귀호출하기(비동기호출-setTimeout)
+        // 조건: call_sts 상태값이 1일때만 호출함!
+        if (call_sts) callT = setTimeout(moveList, 40);
     }
 
     // 신상품 이동함수 최초호출
@@ -182,10 +193,20 @@ function sinsangFn() {
             call_sts = 0; //콜백 중단
         }
 
-        // if(scTop > winH){
-        //     swiper.autoplay.stop();
-        // }else{
-        //     swiper.autoplay.start();
-        // }
+        ////////////////////////////
+        // 서브 배너 스와이퍼 API를 //
+        // 이용한 작동멈춤셋팅하기! //
+        ////////////////////////////
+        // 기준: 화면높이값 보다 
+        //      스크롤위치가 크면 멈춤
+        // 스와이퍼API : swiper.autoplay.stop()
+        //      스크롤위치가 작으면 자동넘김
+        // 스와이퍼API : swiper.autoplay.start()
+        if(scTop > winH){
+            swiper.autoplay.stop()
+          } /////////// if ////////
+            else{
+            swiper.autoplay.start()
+          } //////// else ///////////
     })
 }

@@ -52,7 +52,7 @@ new Vue({
 
 function makeSwiper() {
     // Swiper 플러그인 인스턴스 생성
-    var swiper = new Swiper(".mySwiper", {
+    let swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         loop: true,
         autoplay: {
@@ -82,6 +82,8 @@ function sinsangFn() {
     let lpos = 0;
     // 재귀호출 상태값 변수 -> 1이면 호출가능 0이면 호출불가
     let call_sts = 0;
+    // 스크롤 상태값 변수
+    let sc_sts = 0;
 
     function moveList() {
         // 1. 이동위치값 감소하기
@@ -159,23 +161,31 @@ function sinsangFn() {
     let tgpos = flist.offset().top;
     // 화면 높이값
     let winH = $(window).height();
+    // console.log('winH: ', winH);
     // 스크롤 이벤트함수
     $(window).on("scroll",function(){
         // 1. 스크롤 위치값
         scTop = $(this).scrollTop();
         // 2. gBCR값 구하기
         let gBCR = tgpos - scTop;
-        console.log('gBCR: ', gBCR);
+        // console.log('gBCR: ', gBCR);
 
         // 3. 신상품 리스트 이동/멈춤 분기하기
         // 이동기준 gBCR값이 화면 높이보다 작고 0보다 클때 이동
         if(gBCR < winH && gBCR > 0 && call_sts===0){
+            sc_sts = 1;
             call_sts = 1; // 콜백 재개 (한번만 실행)
             moveList(); // 함수재호출
-        }else{ // 그 외의 경우 멈춤
+        }else if((gBCR > winH || gBCR < -300) && call_sts===1){ 
+            sc_sts = 0
+            // 기타 경우 멈춤(조건: 윈도우 높이보다 크거나 0보다 작고 call_sts가 1일때)
             call_sts = 0; //콜백 중단
         }
 
-
+        // if(scTop > winH){
+        //     swiper.autoplay.stop();
+        // }else{
+        //     swiper.autoplay.start();
+        // }
     })
 }

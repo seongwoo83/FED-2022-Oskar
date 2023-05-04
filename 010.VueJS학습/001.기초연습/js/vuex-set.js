@@ -1,8 +1,30 @@
 // 뷰ex 스토어 구현 JS
 
+import store from "./store.js"
+
+// 중요!!!뷰 인스턴스에서 스토어를 사용할 수 있게 등록해줘야 함
+// 등록 방법: new Vue({el:"", store, methods:{}})
+//  -> 스토어 변수를 인스턴스 내부에 작성해주면 됨
+
+
+/* [1] 컴포넌트 세팅하기 */
 // 1. 상단영역 컴포넌트 세팅
 Vue.component("top-area",{
-    template:``,
+    template:`
+        <header>
+            <ul class="gnb">
+                <li>
+                    <a href="#">서울</a>
+                </li>
+                <li>
+                    <a href="#">부산</a>
+                </li>
+                <li>
+                    <a href="#">제주</a>
+                </li>
+            </ul>
+        </header>
+    `,
     data(){
         return{}
     },
@@ -12,7 +34,16 @@ Vue.component("top-area",{
 })
 // 2. 메인영역 컴포넌트 세팅
 Vue.component("main-area",{
-    template:``,
+    // 뷰 인스턴스 내부 속성에서 전역변수를 부를때는 $ 를 붙임
+    // 예) 뷰엑스 스토어 전역변수는 $store
+    // 스토어 변수 내부접근은 영역까지 모두 써준다
+    // 예) store.state.imgsrc
+        template:`
+        <main>
+            <img v-bind:src="$store.state.imgsrc" alt="지역이미지">
+            <p v-text="$store.state.desc"></p>
+        </main>
+    `,
     data(){
         return{}
     },
@@ -22,11 +53,46 @@ Vue.component("main-area",{
 })
 // 3.하단영역 컴포넌트 세팅
 Vue.component("info-area",{
-    template:``,
+    template:`
+        <footer>
+            <address>
+                서울시 강남구 역삼동 119
+            </address>
+        </footer>
+    `,
     data(){
         return{}
     },
     methods:{
 
     }
+})
+
+
+/* [2] 뷰 인스턴스 생성하기 */
+new Vue({
+    el:"#app",
+    store,
+    data:{
+        // 변수:값
+    },
+    methods:{
+        // 메서드(){}
+    },
+    created(){
+        // 스토어에 있는 initSet  메서드는 어떻게 호출 하나?
+        // 스토어 호출 메서드
+        // store.commit("메서드명", 파라미터 값)
+        // 1. 메서드명은 반드시 문자형으로 입력함
+        // 2. 파라미터는 단일값 또는 객체형식으로 입력함
+        // 인스턴스 내부 부를 때 $ 표시 없음
+        store.commit("initSet", "https://img.freepik.com/premium-vector/city-illustration_23-2147514701.jpg");
+        store.commit("initSet", {
+            url:"https://img.freepik.com/premium-vector/city-illustration_23-2147514701.jpg",
+            txt:"도시소개에 오신 것을 환영합니다."
+        });
+    }
+    // 데이터 세팅은 언제 하면 좋을까?
+    // created? mounted?
+    // DOM에 직접 관여하는 데이터가 아니고 순수 데이터일 때는 처음 뷰 인스턴스가 생성된 후인 created 메서드 구역에 세팅하자
 })

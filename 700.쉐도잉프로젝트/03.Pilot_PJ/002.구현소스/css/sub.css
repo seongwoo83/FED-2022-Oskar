@@ -10,6 +10,9 @@ html,
 body {
     overflow: visible;
 }
+body{
+    overflow: hidden;
+}
 
 /* 스와이퍼 디자인설정 */
 .swiper {
@@ -117,4 +120,17 @@ body {
     border-bottom: 20px solid #101629;
     /* 삼각형 */
     /* border-top: 20px solid #101629;역삼각형 */
+}
+
+/* 2. 스페셜 컨텐츠 영역 */
+.c2{
+    height: 50vh;
+    background: url(../images/gong.jpg)  no-repeat fixed center top/cover;
+    text-align: center;
+}
+.c2tit{
+    font: bold 5rem/50vh UB;
+    letter-spacing: 5px;
+    color: #fff;
+    text-shadow: 3px 3px 3px #000;
 }

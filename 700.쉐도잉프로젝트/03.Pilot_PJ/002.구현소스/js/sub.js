@@ -43,6 +43,9 @@ new Vue({
 
         // 신상 기능함수 호출
         sinsangFn();
+
+        // 패럴렉스 적용함수 호출
+        setParallax(".c2", 0.6);
     },
 });
 
@@ -210,3 +213,9 @@ function sinsangFn() {
           } //////// else ///////////
     })
 }
+
+function setParallax(ele,speed){
+    // 대상: .c2
+    $(ele).parallax("50%",speed);
+    // parallax(배경위치,속도)
+} ///////////// setParallax 함수 ///////////

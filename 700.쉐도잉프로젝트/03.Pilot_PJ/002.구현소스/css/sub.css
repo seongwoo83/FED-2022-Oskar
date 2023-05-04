@@ -172,3 +172,19 @@ body{
     left: 5%;
     transform: none;
 }
+
+/* 등장액션 플러그인용 클래스 */
+.js-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity .7s ease-in, transform 1s ease-in-out;
+}
+
+.js-reveal--hidden {
+    transform: translateY(300px);
+    opacity: 0;
+}
+/* a요소는 트랜스폼이 적용되도록 display:inline-block으로 변경 */
+a.js-reveal{
+    display: inline-block;
+}

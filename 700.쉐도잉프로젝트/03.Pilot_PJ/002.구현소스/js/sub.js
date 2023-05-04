@@ -46,6 +46,9 @@ new Vue({
 
         // 패럴렉스 적용함수 호출
         setParallax(".c2", 0.6);
+
+        // 스크롤리빌 플러그인 함수 호출
+        $.fn.scrollReveal();
     },
 });
 

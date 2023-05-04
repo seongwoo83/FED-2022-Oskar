@@ -94,13 +94,24 @@ new Vue({
         // 1. 메서드명은 반드시 문자형으로 입력함
         // 2. 파라미터는 단일값 또는 객체형식으로 입력함
         // 인스턴스 내부 부를 때 $ 표시 없음
-        store.commit("initSet", "https://img.freepik.com/premium-vector/city-illustration_23-2147514701.jpg");
+        // store.commit("initSet", "https://img.freepik.com/premium-vector/city-illustration_23-2147514701.jpg");
         store.commit("initSet", {
             url:"https://img.freepik.com/premium-vector/city-illustration_23-2147514701.jpg",
             txt:"도시소개에 오신 것을 환영합니다."
         });
-    }
+    },
     // 데이터 세팅은 언제 하면 좋을까?
     // created? mounted?
     // DOM에 직접 관여하는 데이터가 아니고 순수 데이터일 때는 처음 뷰 인스턴스가 생성된 후인 created 메서드 구역에 세팅하자
+    mounted(){
+        // 제이쿼리는 DOM에 직접 사용하므로 mounted구역에 작성함
+        // 링크 클릭시 a에 클래스 on 주기
+        $(".gnb a").on("click", function(){
+            $(this).addClass("on").parent().siblings().find("a").removeClass("on")
+            showBx();
+        });
+        function showBx(){
+            $("main img").css({opacity:0}).stop().delay(500).fadeTo(500,1).siblings().css({opacity:0}).stop().delay(1000).fadeTo(500,1);
+        }
+    }
 })

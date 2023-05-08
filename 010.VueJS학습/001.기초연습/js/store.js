@@ -19,6 +19,9 @@
             - 흐름 : 먼저 비동기 메서드 처리 후, 일반 메서드 처리결과를 state변수에 반영함
         (참고: 뷰엑스 관리흐름도 https://docs.google.com/document/d/1xT3IMlWO_kY7pJqNJSDpI4IPe6BtpfoYq9r5M5_YiRE/edit)
 
+        [ 뷰엑스 스토어 메서드 호출방법 ]
+        1. actions 내부 메서드 호출: dispatch("메서드명", 전달변수)
+        2. mutations 내부 메서드 호출:  commit("메서드명", 전달변수)
 
             예)
                 new Vuex.Store({

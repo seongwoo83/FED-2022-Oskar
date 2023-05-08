@@ -1,27 +1,38 @@
 // 뷰엑스 스토어 - 전역 뷰 데이터 저장소
 
 /*****************************************
-    [ Vuex  Store -뷰엑스 스토어란? ]
+    ⁡⁢⁣⁣[ Vuex  Store -뷰엑스 스토어란? ]⁡
     1. 데이터와 데이터상태를 한번에 관리하는 확장 라이브러리이다.
     2. 스토어에서 관리되는 데이터는 리액티브 데이터이다
         (reacitve data - 양방향 동기화 데이터)
     3. 컴포넌트 구조 상태와 상관없이 사용하는 곳에서 변경한 내용이
         동기화 되어 자연스러운 업데이트가 이루어짐
     
-        [ 뷰엑스 스토어 기본구조 ]
+        ⁡⁢⁣⁣[ 뷰엑스 스토어 기본구조 ]⁡
         1. state(상태): 변수선언 및 할당구역(인스턴스에서 data구역과 비슷)
         2. mutations(돌연변이): 변수의 데이터를 변경하는 메서드구역
             => 뷰 인스턴스에서 methods와 유사
         3. actions(활동): 비동기 처리 메서드 구역
 
-        [ 뷰엑스 스토어 처리순서 ]
+        ⁡⁢⁣⁣[ 뷰엑스 스토어 처리순서 ]⁡
         1. actions -> 2. mutations -> state
             - 흐름 : 먼저 비동기 메서드 처리 후, 일반 메서드 처리결과를 state변수에 반영함
         (참고: 뷰엑스 관리흐름도 https://docs.google.com/document/d/1xT3IMlWO_kY7pJqNJSDpI4IPe6BtpfoYq9r5M5_YiRE/edit)
 
-        [ 뷰엑스 스토어 메서드 호출방법 ]
+        ⁡⁢⁣⁣[ 뷰엑스 스토어 메서드 호출방법 ]⁡
         1. actions 내부 메서드 호출: dispatch("메서드명", 전달변수)
         2. mutations 내부 메서드 호출:  commit("메서드명", 전달변수)
+
+        => actions와  mutations 내부의 메서드는 다음과 같은 형태로 구성된다
+        actions/mutations:{
+            메서드명(첫변수, 둘째변수){
+
+            }
+            -> 첫변수는
+                mutations은 뷰엑스 스토어의 state 변수가 자동으로 삽입됨.
+                actions는 뷰엑스 스토어의 전체 객체가 삽입됨.
+            -> 둘째변수는 호출시 전달한 값이 삽입됨.
+        }
 
             예)
                 new Vuex.Store({
@@ -74,18 +85,24 @@ const store = new Vuex.Store({
         // 도시설명정보 셋업변수
         desc:"",
     },
-    // (2) 데이터 변경 메서드 구역
+    // (2) 데이터 변경 메서드 구역 : 호출시 commit()사용
     mutations:{
         // 초기 데이터 셋업 메서드
-        initSet(state, param){
-            console.log("데이터변경! 초기화");
+        initSet(헐, param){
+            console.log("데이터변경! 초기화", 헐, param);
             // 파라미터가 객체일 경우(데이터가 다수일때)
             
             // 이미지 데이터 셋업
-            state.imgsrc = param.url;
+            헐.imgsrc = param.url;
             // 이미지 설명 셋업
-            state.desc = param.txt;
+            헐.desc = param.txt;
         },
+    },
+    // (3) 백엔드 관련 코딩 비동기처리 메서드 구역 : 호출시 dispatch()사용
+    actions:{
+        myAct(헝, 벙){
+            console.log("나의 액션", 헝, 벙);
+        }
     }
 })
 export default store;

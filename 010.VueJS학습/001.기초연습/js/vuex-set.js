@@ -99,6 +99,8 @@ new Vue({
             url:"https://img.freepik.com/premium-vector/city-illustration_23-2147514701.jpg",
             txt:"도시소개에 오신 것을 환영합니다."
         });
+        // actions메서드 호출하기: dispatch("메서드명", 전달변수)
+        store.dispatch("myAct", "나야나");
     },
     // 데이터 세팅은 언제 하면 좋을까?
     // created? mounted?

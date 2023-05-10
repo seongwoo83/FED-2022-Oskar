@@ -4,6 +4,8 @@
 import menuFn from "./mainjs/menu.js";
 // 공통 데이터 가져오기
 import comData from "./tempData/data-common.js";
+// 서브 데이터 가져오기
+import subData from "./tempData/data-sub.js";
 /* 신상품 정보 */
 import sinsang from "./gdsData/sinsang.js";
 
@@ -11,8 +13,20 @@ import sinsang from "./gdsData/sinsang.js";
 let swiper;
 
 
-// ########## 상단영역 메뉴 Vue  템플릿 세팅하기 #######
+// ########## 서브영역 메뉴 Vue  템플릿 세팅하기 #######
+// Vue.component(내가지은요소명,{옵션})
+Vue.component("ban-comp", {
+    template: subData.banner,
+}); /////////////// 서브 영역 Vue component ///////////////
+// ########## 서브영역 메뉴 Vue  인스턴스 생성하기 #######
 
+// Vue.component(내가지은요소명,{옵션})
+new Vue({
+    el: "#cont",
+}); /////////////// 서브 영역 Vue instance ///////////////
+
+
+// ########## 상단영역 메뉴 Vue  인스턴스 생성하기 #######
 // Vue.component(내가지은요소명,{옵션})
 Vue.component("top-comp", {
     template: comData.tareaSub,

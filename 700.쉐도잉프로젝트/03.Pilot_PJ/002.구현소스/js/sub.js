@@ -69,6 +69,15 @@ new Vue({
 
         // 스크롤리빌 플러그인 함수 호출
         $.fn.scrollReveal();
+
+        // 메뉴 클릭시 전체메뉴창 닫기
+        $(".mlist a").on("click",function(){
+            $(".ham").trigger("click");
+            //  $(선택요소).trigger(이벤트명)
+            //  -> 선택요소의 이벤트 강제실행시킴
+            //  참고) JS 클릭이벤트 강제실행
+            //  document.querySelector(선택요소).click();
+        })
     },
 });
 

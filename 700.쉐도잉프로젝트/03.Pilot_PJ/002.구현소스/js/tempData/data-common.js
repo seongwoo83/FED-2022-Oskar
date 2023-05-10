@@ -84,17 +84,8 @@ const comData={
                 <li class="bld">
                     배너순번 li 숨기기
                 </li>
-                <li>
-                    <a href="#men">NEW ARRIVAL</a>
-                </li>
-                <li>
-                    <a href="#women">WINDBREAKER</a>
-                </li>
-                <li>
-                    <a href="#style">BEACH STYLE</a>
-                </li>
-                <li>
-                    <a href="#style">SPORT STYLE</a>
+                <li v-for="(v, i) in $store.state.menu">
+                    <a v-bind:href="'#c' + (i+1)">{{v}}</a>
                 </li>
             </ul>
         </nav>
@@ -118,10 +109,7 @@ const comData={
             <nav class="mlist">
                 <dl>
                     <dt><a href="#" v-on:click="$store.commit('chgData', '남성')">MEN</a></dt>
-                    <dd><a href="#">T-SHIRT</a></dd>
-                    <dd><a href="#">JACKET</a></dd>
-                    <dd><a href="#">TRAINING WARE</a></dd>
-                    <dd><a href="#">BEACH WARE</a></dd>
+                    <dd v-for="(v,i) in $store.state.menu"><a href="#">{{v}}</a></dd>
                 </dl>
                 <dl>
                     <dt><a href="#" v-on:click="$store.commit('chgData', '여성')">WOMEN</a></dt>

@@ -8,6 +8,10 @@ import comData from "./tempData/data-common.js";
 import subData from "./tempData/data-sub.js";
 /* 신상품 정보 */
 import sinsang from "./gdsData/sinsang.js";
+// 뷰엑스 스토어 JS 가져오기
+// 중요! 반드시 중심 JS 한군데에서 불러와서 사용해야 상태 관리됨
+// -> 이 JS파일에 Vue 인스턴스 생성코드가 같이 있어야한다.
+import store from "./store.js";
 
 // 스와이퍼 변수
 let swiper;
@@ -23,6 +27,7 @@ Vue.component("ban-comp", {
 // Vue.component(내가지은요소명,{옵션})
 new Vue({
     el: "#cont",
+    store,  //뷰엑스 스토어 등록 필수!
 }); /////////////// 서브 영역 Vue instance ///////////////
 
 
@@ -36,6 +41,7 @@ Vue.component("top-comp", {
 // new Vue({옵션})
 new Vue({
     el: "#top",
+    store,  // 뷰엑스 스토어 등록 필수
     data: {}, //_______________________
     // created 실행구역 : DOM연결전
     created: function () {

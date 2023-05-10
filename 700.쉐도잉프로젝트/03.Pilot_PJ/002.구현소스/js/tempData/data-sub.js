@@ -6,14 +6,8 @@ const subData = {
         <section id="ban" class="page">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="./images/sub/men/banner/ban1.png" alt="서브배너 이미지" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="./images/sub/men/banner/ban2.png" alt="서브배너 이미지" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="./images/sub/men/banner/ban3.png" alt="서브배너 이미지" />
+                    <div class="swiper-slide" v-for="v in $store.state.cnt" v-bind:key="v">
+                        <img v-bind:src="'./images/sub/' + $store.state.cat + '/banner/ban' + v + '.png'" alt="서브배너 이미지" />
                     </div>
                 </div>
                 <div class="swiper-button-next"></div>

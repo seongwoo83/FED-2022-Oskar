@@ -9,6 +9,7 @@ function menuFn() {
         $(".mbox").fadeToggle(400);
 
         // 햄버거 버튼에 클래스 on 이 있으면 재생/ 없으면 정지
+        let isOn = $(this).is(".on");
         console.log($(this).is(".on"));
         // 메뉴 배경 동영상 재생
         if (isOn) {

@@ -15,7 +15,7 @@ function menuFn() {
         if (isOn) {
             $(".bgm").get(0).play();
         } else {
-            $("bgm").get(0, gses);
+            $("bgm").get(0).pause();
         }
     });
 }

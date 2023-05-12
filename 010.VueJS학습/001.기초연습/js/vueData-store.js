@@ -43,6 +43,7 @@ const store = new Vuex.Store({
             // state의 items변수 변경 메서드 호출
             // mutations의 메서드 호출은 -> commit('메서드명', 전달변수)
             commit('setData', result);
+            // this.commit('setData',result) --> 전달변수로 {commit}을 사용하지 않아도 됨
 
         }
     }

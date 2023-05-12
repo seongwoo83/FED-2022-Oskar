@@ -19,8 +19,6 @@ Vue.component("my-comp",{
         }
     }
 })
-
-
 // 뷰인스턴스 생성하기
 new Vue({
     el:"#app",

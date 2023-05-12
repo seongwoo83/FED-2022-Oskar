@@ -1,0 +1,26 @@
+[
+    {
+        "idx":1,
+        "gname":"나는야옷이야!1",
+        "category":"men",
+        "gprice":"230000"
+    },
+    {
+        "idx":2,
+        "gname":"나는야옷이야!2",
+        "category":"men",
+        "gprice":"450000"
+    },
+    {
+        "idx":3,
+        "gname":"나는야옷이야!3",
+        "category":"men",
+        "gprice":"123300"
+    },
+    {
+        "idx":4,
+        "gname":"나는야옷이야!4",
+        "category":"men",
+        "gprice":"723000"
+    }
+]      

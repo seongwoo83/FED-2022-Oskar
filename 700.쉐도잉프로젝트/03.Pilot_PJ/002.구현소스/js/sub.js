@@ -109,6 +109,7 @@ function makeSwiper() {
             el: ".swiper-pagination",
             clickable: true, //불릿 클릭이동 여부
         },
+
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
@@ -185,9 +186,11 @@ function sinsangFn() {
     .on("mouseenter",function(){ //hover
         // 1. 클래스 정보 알아내기
         let clsnm = $(this).attr("class");
+        // 중간 객체속성명 상위부모박스 #c1의 data-cat속성값 읽어오기
+        let catnm = $(this).parents("#c1").attr("data-cat");
         // 2. 클래스 이름으로 세팅된 신상정보 객체 데이터 가져오기
-        let gd_info = sinsang[clsnm];
-        console.log(clsnm, gd_info);
+        let gd_info = sinsang[catnm][clsnm];
+        console.log(clsnm,catnm, gd_info);
         // 3. 상품 정보박스 만들고 보이게 하기
         // 마우스 오버된 li자신 $(this)에 넣어준다
         $(this).append(`<div class="ibox"></div>`);
@@ -225,11 +228,11 @@ function sinsangFn() {
 
         // 3. 신상품 리스트 이동/멈춤 분기하기
         // 이동기준 gBCR값이 화면 높이보다 작고 0보다 클때 이동
-        if(gBCR < winH && gBCR > 0 && call_sts===0){
+        if(gBCR < winH && gBCR > -300 && sc_sts===0){
             sc_sts = 1;
             call_sts = 1; // 콜백 재개 (한번만 실행)
             moveList(); // 함수재호출
-        }else if((gBCR > winH || gBCR < -300) && call_sts===1){ 
+        }else if((gBCR > winH || gBCR < -300) && sc_sts===1){ 
             sc_sts = 0
             // 기타 경우 멈춤(조건: 윈도우 높이보다 크거나 0보다 작고 call_sts가 1일때)
             call_sts = 0; //콜백 중단

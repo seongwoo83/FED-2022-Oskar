@@ -30,6 +30,19 @@ Vue.component("ban-comp", {
 Vue.component("cont1-comp", {
     template: subData.cont1,
 }); /////////////// 서브 영역 Vue component ///////////////
+// 2. 컨텐츠2 영역 컴포넌트
+// Vue.component(내가지은요소명,{옵션})
+Vue.component("cont2-comp", {
+    template: subData.cont2,
+}); /////////////// 서브 영역 Vue component ///////////////
+// Vue.component(내가지은요소명,{옵션})
+Vue.component("cont3-comp", {
+    template: subData.cont3,
+}); /////////////// 서브 영역 Vue component ///////////////
+// Vue.component(내가지은요소명,{옵션})
+Vue.component("cont4-comp", {
+    template: subData.cont4,
+}); /////////////// 서브 영역 Vue component ///////////////
 // ########## 서브영역 메뉴 Vue  인스턴스 생성하기 #######
 
 new Vue({
@@ -72,19 +85,54 @@ new Vue({
         sinsangFn();
 
         // 패럴렉스 적용함수 호출
-        setParallax(".c2", 0.6);
+        setParallax(".c2", 0.4);
 
         // 스크롤리빌 플러그인 함수 호출
         $.fn.scrollReveal();
 
         // 메뉴 클릭시 전체메뉴창 닫기
         $(".mlist a").on("click",function(){
+            // 1. 전체 메뉴창 닫기
             $(".ham").trigger("click");
+            // 2. 부드러운 스크롤 위치값 업데이트
+            sc_pos = 0;
             //  $(선택요소).trigger(이벤트명)
             //  -> 선택요소의 이벤트 강제실행시킴
             //  참고) JS 클릭이벤트 강제실행
             //  document.querySelector(선택요소).click();
+
+            // 3. swiper 첫번재 슬라이드로 이동
+            swiper.slideTo(0);
+            // 4. 등장액션 스크롤 리빌 다시 호출
+            $.fn.scrollReveal();
+        });
+
+        // gnb메뉴 클릭시 해당위치로 스크롤 이동 애니메이션
+        // 각 .gnb a에는 href="#c1"으로  id속성이 적혀있음
+        // a요소의 id명으로 기본위치이동은 되지만 스크롤 애니메이션은 안됨
+        // 이것을 jquery로 만듦
+        $(".gnb a").on("click",function(e){
+            e.preventDefault();
+
+            // 클릭된 a요소의 href값 읽어오기
+            let aid = $(this).attr("href");
+
+            // id요소박스 위치값 구하기
+            let newpos = $(aid).offset().top;
+            // console.log('newpos: ', newpos);
+
+            // 이동하기
+            $("html, body").animate({
+                scrollTop: newpos+"px"
+            },600, "easeOutQuint");
+
+            // 부드러운 스크롤 변수에 현재위치값 업데이트
+            sc_pos = newpos;
         })
+
+
+
+
     },
 });
 
@@ -258,6 +306,6 @@ function sinsangFn() {
 
 function setParallax(ele,speed){
     // 대상: .c2
-    $(ele).parallax("50%",speed);
+    $(ele).parallax("100%",speed);
     // parallax(배경위치,속도)
 } ///////////// setParallax 함수 ///////////

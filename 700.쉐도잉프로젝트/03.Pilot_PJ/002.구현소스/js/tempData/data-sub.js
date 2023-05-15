@@ -31,11 +31,47 @@ const subData = {
     </section>
     `,
     // 컨텐츠2 영역 : special
-    cont2: ``,
+    cont2: `
+    <section :class="'cont c2 '+ $store.state.cat" id="c2">
+        <h2 class="c2tit js-reveal">{{$store.state.menu[1]}}</h2>
+    </section>
+    `,
     // 컨텐츠3 영역 : 일반소개1
-    cont3: ``,
+    cont3: `
+    <section class="cont c3" id="c3">
+        <ul class="pgc">
+            <li class="txtc">
+                <h2>
+                    <a href="#" class=" js-reveal"> {{$store.state.cat.toUpperCase()}}'S<br />{{$store.state.menu[2]}} </a>
+                </h2>
+            </li>
+            <li class="imgc">
+                <img :src="'./images/sub/'+$store.state.cat+'/03.disc.png'" alt="남자" />
+            </li>
+        </ul>
+    </section>
+    `,
     // 컨텐츠4 영역 : 일반소개2
-    cont4: ``,
+    cont4: `
+    <section class="cont c4" id="c4">
+        <ul class="pgc">
+            <li class="imgc">
+                <img :src="'./images/sub/'+$store.state.cat+'/04.disc.png/'" alt="공유 가방" />
+            </li>
+            <li class="txtc">
+                <h2 class="tm">
+                    <a href="#" class=" js-reveal"> {{$store.state.cat.toUpperCase()}}'S<br />SPORT STYLE </a>
+                </h2>
+                <h2 class="tw">
+                    <a href="#" class=" js-reveal"> {{$store.state.cat.toUpperCase()}}'S<br />LIFE STYLE </a>
+                </h2>
+            </li>
+            <li class="imgc">
+                <img :src="'./images/sub/'+$store.state.cat+'/05.disc.png/'" alt="공유 의자" />
+            </li>
+        </ul>
+    </section>
+    `,
 };
 
 export default subData;

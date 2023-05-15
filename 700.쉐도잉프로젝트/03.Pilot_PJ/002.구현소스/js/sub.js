@@ -16,6 +16,26 @@ import store from "./store.js";
 // 스와이퍼 변수
 let swiper;
 
+// 바로실행구역
+// 사용하는 이유 -> 변수나 명령어를 다른 영역과 구붆여 코딩할 때 사용
+// GET방식 데이터를 store에서 초기값으로 세팅하는 것을 인스턴스 생성전에 해야 에러를 막을 수 있다.
+(()=>{
+    let pm;
+    // GET방식으로 넘어온 데이터 처리하여 분류별 서브페이지 구성하기
+    // location.href -> 상단 url 읽어오기
+    if (location.href.indexOf("?") !== -1) {
+        pm = location.href.split("?")[1].split("=")[1];
+        // pm에 값이 할당이 되어있다면 undefined가 아니므로 true
+        if (pm) {
+            store.commit("chgData", decodeURI(pm));
+            // decodeURI() -> 변경할 문자열만 있어야 디코딩됨
+            // decodeURIComponent() -> url전체에 섞여있어도 모두 디코딩
+        } else {
+            store.commit("chgData", "남성");
+        }
+    }
+})()
+// 파라미터 변수
 
 // ########## 서브영역 메뉴 Vue  템플릿 세팅하기 #######
 
@@ -47,9 +67,8 @@ Vue.component("cont4-comp", {
 
 new Vue({
     el: "#cont",
-    store,  //뷰엑스 스토어 등록 필수!
+    store, //뷰엑스 스토어 등록 필수!
 }); /////////////// 서브 영역 Vue instance ///////////////
-
 
 // ########## 상단영역 메뉴 Vue  인스턴스 생성하기 #######
 // Vue.component(내가지은요소명,{옵션})
@@ -61,7 +80,7 @@ Vue.component("top-comp", {
 // new Vue({옵션})
 new Vue({
     el: "#top",
-    store,  // 뷰엑스 스토어 등록 필수
+    store, // 뷰엑스 스토어 등록 필수
     data: {}, //_______________________
     // created 실행구역 : DOM연결전
     created: function () {
@@ -91,7 +110,7 @@ new Vue({
         $.fn.scrollReveal();
 
         // 메뉴 클릭시 전체메뉴창 닫기
-        $(".mlist a").on("click",function(){
+        $(".mlist a").on("click", function () {
             // 1. 전체 메뉴창 닫기
             $(".ham").trigger("click");
             // 2. 부드러운 스크롤 위치값 업데이트
@@ -111,7 +130,7 @@ new Vue({
         // 각 .gnb a에는 href="#c1"으로  id속성이 적혀있음
         // a요소의 id명으로 기본위치이동은 되지만 스크롤 애니메이션은 안됨
         // 이것을 jquery로 만듦
-        $(".gnb a").on("click",function(e){
+        $(".gnb a").on("click", function (e) {
             e.preventDefault();
 
             // 클릭된 a요소의 href값 읽어오기
@@ -122,17 +141,22 @@ new Vue({
             // console.log('newpos: ', newpos);
 
             // 이동하기
-            $("html, body").animate({
-                scrollTop: newpos+"px"
-            },600, "easeOutQuint");
+            $("html, body").animate(
+                {
+                    scrollTop: newpos + "px",
+                },
+                600,
+                "easeOutQuint"
+            );
 
             // 부드러운 스크롤 변수에 현재위치값 업데이트
             sc_pos = newpos;
-        })
+        });
 
-
-
-
+        // 로고  클릭시 첫페이지 이동
+        $("#logo").on("click", function () {
+            location.href = "./index.html";
+        });
     },
 });
 
@@ -182,7 +206,6 @@ function sinsangFn() {
     // 재귀호출 타임아웃용변수
     let callT;
 
-
     function moveList() {
         // 1. 이동위치값 감소하기
         lpos--;
@@ -212,16 +235,17 @@ function sinsangFn() {
     // 신싱품 리스트에 마우스 아웃시 이동
     // hover(함수1, 함수2)
     flist.hover(
-        function(){ // over
+        function () {
+            // over
             call_sts = 0; //콜백 중단
         },
-        function(){ // out
+        function () {
+            // out
             call_sts = 1; // 콜백 재개
             moveList(); // 함수재호출
         }
-    )
+    );
 
-    
     /*************************************************
         신상품 리스트 li에 마우스 오버시 정보보이기
         1. 대상: .flist li
@@ -229,32 +253,39 @@ function sinsangFn() {
                             매칭하여 상품정보박스를 동적으로
                             생성하여 애니메이션을 주어 보이게 함
     *************************************************/
-    
-    flist.find("li")
-    .on("mouseenter",function(){ //hover
-        // 1. 클래스 정보 알아내기
-        let clsnm = $(this).attr("class");
-        // 중간 객체속성명 상위부모박스 #c1의 data-cat속성값 읽어오기
-        let catnm = $(this).parents("#c1").attr("data-cat");
-        // 2. 클래스 이름으로 세팅된 신상정보 객체 데이터 가져오기
-        let gd_info = sinsang[catnm][clsnm];
-        console.log(clsnm,catnm, gd_info);
-        // 3. 상품 정보박스 만들고 보이게 하기
-        // 마우스 오버된 li자신 $(this)에 넣어준다
-        $(this).append(`<div class="ibox"></div>`);
-        // .ibox에 상품정보 넣기
-        // ^는 특수문자이므로 정규식에 넣을때 역슬래쉬와 함께 씀
-        //  -> \^
-        // $(".ibox").html(gd_info.replaceAll("^","<br>")).fadeTo(200,1)
-        $(".ibox").html(gd_info.replace(/\^/g,"<br>")).animate({
-            top:"110%",
-            opacity:1
-        }, 300, "easeOutCirc")
-    })
-    .on("mouseleave",function(){ //out  
-        // ibox나갈때 지우기
-        $(".ibox").remove();
-    })
+
+    flist
+        .find("li")
+        .on("mouseenter", function () {
+            //hover
+            // 1. 클래스 정보 알아내기
+            let clsnm = $(this).attr("class");
+            // 중간 객체속성명 상위부모박스 #c1의 data-cat속성값 읽어오기
+            let catnm = $(this).parents("#c1").attr("data-cat");
+            // 2. 클래스 이름으로 세팅된 신상정보 객체 데이터 가져오기
+            let gd_info = sinsang[catnm][clsnm];
+            console.log(clsnm, catnm, gd_info);
+            // 3. 상품 정보박스 만들고 보이게 하기
+            // 마우스 오버된 li자신 $(this)에 넣어준다
+            $(this).append(`<div class="ibox"></div>`);
+            // .ibox에 상품정보 넣기
+            // ^는 특수문자이므로 정규식에 넣을때 역슬래쉬와 함께 씀
+            //  -> \^
+            // $(".ibox").html(gd_info.replaceAll("^","<br>")).fadeTo(200,1)
+            $(".ibox").html(gd_info.replace(/\^/g, "<br>")).animate(
+                {
+                    top: "110%",
+                    opacity: 1,
+                },
+                300,
+                "easeOutCirc"
+            );
+        })
+        .on("mouseleave", function () {
+            //out
+            // ibox나갈때 지우기
+            $(".ibox").remove();
+        });
 
     /******************************************
         스크롤 위치가 신상품 박스가 보일때만 움직이기
@@ -267,7 +298,7 @@ function sinsangFn() {
     let winH = $(window).height();
     // console.log('winH: ', winH);
     // 스크롤 이벤트함수
-    $(window).on("scroll",function(){
+    $(window).on("scroll", function () {
         // 1. 스크롤 위치값
         scTop = $(this).scrollTop();
         // 2. gBCR값 구하기
@@ -276,12 +307,12 @@ function sinsangFn() {
 
         // 3. 신상품 리스트 이동/멈춤 분기하기
         // 이동기준 gBCR값이 화면 높이보다 작고 0보다 클때 이동
-        if(gBCR < winH && gBCR > -300 && sc_sts===0){
+        if (gBCR < winH && gBCR > -300 && sc_sts === 0) {
             sc_sts = 1;
             call_sts = 1; // 콜백 재개 (한번만 실행)
             moveList(); // 함수재호출
-        }else if((gBCR > winH || gBCR < -300) && sc_sts===1){ 
-            sc_sts = 0
+        } else if ((gBCR > winH || gBCR < -300) && sc_sts === 1) {
+            sc_sts = 0;
             // 기타 경우 멈춤(조건: 윈도우 높이보다 크거나 0보다 작고 call_sts가 1일때)
             call_sts = 0; //콜백 중단
         }
@@ -290,22 +321,22 @@ function sinsangFn() {
         // 서브 배너 스와이퍼 API를 //
         // 이용한 작동멈춤셋팅하기! //
         ////////////////////////////
-        // 기준: 화면높이값 보다 
+        // 기준: 화면높이값 보다
         //      스크롤위치가 크면 멈춤
         // 스와이퍼API : swiper.autoplay.stop()
         //      스크롤위치가 작으면 자동넘김
         // 스와이퍼API : swiper.autoplay.start()
-        if(scTop > winH){
-            swiper.autoplay.stop()
-          } /////////// if ////////
-            else{
-            swiper.autoplay.start()
-          } //////// else ///////////
-    })
+        if (scTop > winH) {
+            swiper.autoplay.stop();
+        } /////////// if ////////
+        else {
+            swiper.autoplay.start();
+        } //////// else ///////////
+    });
 }
 
-function setParallax(ele,speed){
+function setParallax(ele, speed) {
     // 대상: .c2
-    $(ele).parallax("100%",speed);
+    $(ele).parallax("100%", speed);
     // parallax(배경위치,속도)
 } ///////////// setParallax 함수 ///////////

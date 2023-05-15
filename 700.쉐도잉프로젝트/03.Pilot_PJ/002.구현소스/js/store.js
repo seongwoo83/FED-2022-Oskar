@@ -28,11 +28,11 @@ const store = new Vuex.Store({
             },
         },
         // 공통처리 메뉴 변수
-        menu: ["NEW MEN'S ARRIVAL", "WINDBREAKER", "BEACH STYLE", "SPORT STYLE"],
-        // 공통처리 배너갯수변수
-        cnt: 3,
+        menu: [],
+        // 공통처리 배너갯  수변수
+        cnt: 0,
         // 공통처리 카테고리명 변수
-        cat: "men",
+        cat: "",
     },
     // state 데이터 변경 메서드 구역
     mutations: {

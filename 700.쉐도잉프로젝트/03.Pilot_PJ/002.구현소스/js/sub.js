@@ -62,6 +62,10 @@ Vue.component("cont3-comp", {
 // Vue.component(내가지은요소명,{옵션})
 Vue.component("cont4-comp", {
     template: subData.cont4,
+}); /////////////// 상세보기 영역 Vue component ///////////////
+// Vue.component(내가지은요소명,{옵션})
+Vue.component("detail-comp", {
+    template: subData.detail,
 }); /////////////// 서브 영역 Vue component ///////////////
 // ########## 서브영역 메뉴 Vue  인스턴스 생성하기 #######
 
@@ -184,6 +188,28 @@ new Vue({
         $("#logo").on("click", function () {
             location.href = "./index.html";
         });
+
+        // 상품 클릭시 상세보기 정보 세팅하여 보이기
+        $(".flist a").on("click",function(e){
+            e.preventDefault();
+            // 1. 클릭된 요소의 부모(li)의 클래스 읽어오기
+            let cls = $(this).parent().attr("class");
+            // 2. 클릭된 요소의 다음 형제요소의 정보값 읽어오기
+            // split("<br>") br태그로 잘라서 배열에 담음
+            let ginfo = $(this).next(".ibox").html().split("<br>")
+            // 3. 뷰엑스 스토어 업데이트 (리액티브 데이터 반영)
+            store.state.cls = cls;
+            store.state.gname = ginfo[0];
+            store.state.gcode = ginfo[1];
+            store.state.gprice = ginfo[2];
+
+        })
+
+
+
+
+
+
     },
 });
 

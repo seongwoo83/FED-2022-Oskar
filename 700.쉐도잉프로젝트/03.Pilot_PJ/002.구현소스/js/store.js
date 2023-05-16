@@ -34,7 +34,15 @@ const store = new Vuex.Store({
         // 공통처리 카테고리명 변수
         cat: "",
         // 공통처리 분류명
-        name:""
+        name:"",
+        // 상품 속성코드(클래스명)
+        cls:"m1",
+        // 상품 이름
+        gname:"",
+        // 상품코드
+        gcode:"",
+        // 상품가격
+        gprice:"",
     },
     // state 데이터 변경 메서드 구역
     mutations: {

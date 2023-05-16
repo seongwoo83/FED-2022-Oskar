@@ -110,11 +110,15 @@ new Vue({
         $.fn.scrollReveal();
 
         // 메뉴 클릭시 전체메뉴창 닫기
-        $(".mlist a").on("click", function () {
+        $(".mlist a").on("click", function (e) {
+            e.preventDefault();
             // 1. 전체 메뉴창 닫기
             $(".ham").trigger("click");
             // 2. 부드러운 스크롤 위치값 업데이트
             sc_pos = 0;
+            $("html,body").animate({
+                scrollTop:  "0"
+            },1)
             //  $(선택요소).trigger(이벤트명)
             //  -> 선택요소의 이벤트 강제실행시킴
             //  참고) JS 클릭이벤트 강제실행
@@ -124,6 +128,29 @@ new Vue({
             swiper.slideTo(0);
             // 4. 등장액션 스크롤 리빌 다시 호출
             $.fn.scrollReveal();
+
+            // 5. url 강제 변경하기-> 변경이유: SPA변경시 전달변수 내용 일치
+            // 새로고침시 현재 변경 로딩 되어야함
+            history.pushState(null,null,"sub.html?cat=" + store.state.name);
+            /***************************************************** 
+            [ history.pushState() 메서드 ]
+
+            1. 브라우저 세션 기록 스택항목 추가메서드
+            2. 비동기식으로 작동함(주소이동없이 주소만 업데이트됨!)
+            3. 전달값 :
+                history.pushState(상태,사용안됨,URL)
+
+                (1) 상태 : 새로운 페이지 이동시 popstate가 됨
+                (2) 사용안됨 : 전부터 사용되던 전달값.지금사용안됨
+                    보통 (1),(2)는 null로 셋팅함
+                (3) URL : 이 주소는 현재 페이지가 포함된
+                    주소 카테고리(폴더)를 기준으로 작성됨
+
+            4. 사용기본폼 : 
+                history.pushState(null,null,"my.html?hi=bye") 
+            *****************************************************/
+
+
         });
 
         // gnb메뉴 클릭시 해당위치로 스크롤 이동 애니메이션

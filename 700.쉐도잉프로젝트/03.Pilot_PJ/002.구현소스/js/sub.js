@@ -153,7 +153,8 @@ new Vue({
             4. 사용기본폼 : 
                 history.pushState(null,null,"my.html?hi=bye") 
             *****************************************************/
-
+            // 6. 상세보기 박스가 열려있을 수 있으므로 닫기
+            $("#bgbx").hide();
 
         });
 
@@ -203,6 +204,18 @@ new Vue({
             store.state.gcode = ginfo[1];
             store.state.gprice = ginfo[2];
 
+            // 4. 슬라이드 애니메이션 하여 나타나기
+            $("#bgbx").slideDown(400);
+        });
+        
+        // 상세보기 박스 닫기버튼 클릭시 닫기
+        $(".cbtn").on("click",function(e){
+            e.preventDefault();
+            $("#bgbx").slideUp(400);
+        });
+        // 상세보기 박스 썸네일 클릭시 
+        $(".small a").on("click",function(e){
+            e.preventDefault();
         })
 
 

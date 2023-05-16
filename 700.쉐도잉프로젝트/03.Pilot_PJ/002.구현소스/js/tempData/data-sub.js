@@ -95,7 +95,12 @@ const subData = {
                 <!-- 큰 이미지 -->
                 <section class="gimg">
                     <img :src="'./images/goods/' + $store.state.cat + '/' + $store.state.cls +'.png'" alt="큰 이미지">
-                    
+                    <!-- 썸네일 이미지 -->
+                    <div class="small">
+                        <a href="#">
+                            <img v-for="v in 6" :src="'./images/goods/' + $store.state.cat + '/m' + v +'.png'" alt="썸네일 이미지">
+                        </a>
+                    </div>
                 </section>
                 <!-- 이미지 설명 -->
                 <section class="gdesc scbar">

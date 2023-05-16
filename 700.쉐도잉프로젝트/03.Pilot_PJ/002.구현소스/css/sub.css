@@ -199,7 +199,7 @@ body {
 /* 큰 이미지 배경박스 */
 #bgbx {
     position: relative;
-    /* display: none; */
+    display: none;
 }
 
 /* 닫기버튼 */

@@ -58,7 +58,24 @@ let Paging = {
     `,
 };
 let More = {
-    template: `<div class="trip router">더보기</div>`,
+    template: `
+    <section>
+        <!-- 상품 리스트 박스 -->
+        <div class="grid">
+            <div v-for="(v, i) in $store.state.gdata" v-if="v.idx>=1+$store.state.pnum && v.idx<= 10+$store.state.mnum">
+                [{{v.idx}}]<img v-bind:src="'./images/goods/'+v.cat+'/'+v.ginfo[0]+'.png'">
+                <aside>
+                    <h2>{{v.ginfo[1]}}</h2>
+                    <h3>{{v.ginfo[3]}}</h3>
+                </aside>
+            </div>
+        </div>
+        <!-- 더보기 버튼 표시구역 -->
+        <div id="more" v-if="$store.state.mbtn">
+            <button class="more" @click.prevent="$store.commit('updateMore', 10)" >MORE</button>
+        </div>
+    </section>
+    `,
 };
 // this.$route.params.cls
 // this는 현재 라우터를 사용하는 뷰 인스턴스 자신

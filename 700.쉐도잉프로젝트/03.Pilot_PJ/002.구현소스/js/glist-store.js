@@ -15,6 +15,11 @@ const store = new Vuex.Store({
 
         // 페이징용 변수
         pnum :0,
+
+        // 더보기용 변수
+        mnum:0,
+        // 더보기 버튼 상태값 변수
+        mbtn:true
     },
     // state 데이터 변경 메서드 구역
     mutations: {
@@ -35,6 +40,15 @@ const store = new Vuex.Store({
         // 페이징 변수 업데이트 메서드
         updatePaging(dt, pm){
             dt.pnum = pm;
+        },
+
+        // 더보기 변수 업데이트 메서드
+        updateMore(dt, pm){
+            dt.mnum += pm;
+            // 업데이트 후 더보기 버튼 없애기
+            if(dt.mnum+10 > gdata.length){
+                dt.mbtn = false
+            }
         }
     },
 });

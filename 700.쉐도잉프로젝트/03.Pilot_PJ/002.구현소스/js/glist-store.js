@@ -12,12 +12,15 @@ const store = new Vuex.Store({
         chkarr: [true, true, true],
         // 필터 데이터용 배열 입력값 변수
         selnm:["","",""],
+
+        // 페이징용 변수
+        pnum :0,
     },
     // state 데이터 변경 메서드 구역
     mutations: {
         // 체크박스 체크시 처리 메서드
         resCheck(dt){
-            console.log(dt.chkarr);
+            // console.log(dt.chkarr);
             // 3개의 체크박스 상태배열 변수값에 따라 실제 조건에 들어갈 cat명을 넣어줌
             dt.chkarr.forEach((v, i) => {
                 if(v){
@@ -27,6 +30,11 @@ const store = new Vuex.Store({
                     dt.selnm[i] = "";
                 }
             });
+        },
+
+        // 페이징 변수 업데이트 메서드
+        updatePaging(dt, pm){
+            dt.pnum = pm;
         }
     },
 });

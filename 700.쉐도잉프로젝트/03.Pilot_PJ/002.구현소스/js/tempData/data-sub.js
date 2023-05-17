@@ -20,7 +20,12 @@ const subData = {
     cont1: `
     <section v-bind:class="'cont c1 '+ $store.state.cat" id="c1" :data-cat="$store.state.cat">
         <!-- 2-2-1. 신상품 타이틀 -->
-        <h2 class="c1tit js-reveal">{{$store.state.menu[0]}}</h2>
+        <h2 class="c1tit js-reveal">
+            {{$store.state.menu[0]}}
+            <button onclick="location.href = 'glist.html'">
+                전체리스트
+            </button>
+        </h2>
         <!-- 2-2-2. 신상품 박스 -->
         <div class="flowbx">
             <!-- 리스트박스 -->

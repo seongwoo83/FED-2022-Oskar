@@ -32,6 +32,8 @@ new Vue({
         // 라우터 강제 실행하기
         this.$router.push('/glist');
         // push(실행할 vue router 경로)
+        
+        // 최초 체크박스 메서드 실행해야 리스트 나옴!
         store.commit('resCheck');
         menuFn();
         $("#logo").click(() => (location.href = "index.html"));

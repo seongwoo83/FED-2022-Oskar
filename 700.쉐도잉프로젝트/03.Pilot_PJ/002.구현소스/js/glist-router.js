@@ -27,8 +27,35 @@ let Glist = {
     </section>
     `,
 };
+
+// v-for에 기술된 v-if 조건에 사이범위를 넣고 스토어 변수로 컨트롤 한다.
 let Paging = {
-    template: `<div class="trip router">페이징</div>`,
+    template: `
+    <section>
+        <!-- 상품 리스트 박스 -->
+        <div class="grid">
+            <div v-for="(v, i) in $store.state.gdata" v-if="v.idx>=1+$store.state.pnum && v.idx<= 10+$store.state.pnum">
+                [{{v.idx}}]<img v-bind:src="'./images/goods/'+v.cat+'/'+v.ginfo[0]+'.png'">
+                <aside>
+                    <h2>{{v.ginfo[1]}}</h2>
+                    <h3>{{v.ginfo[3]}}</h3>
+                </aside>
+            </div>
+        </div>
+        <!-- 페이징 표시구역 -->
+        <div id="paging">
+        <a href="#" @click.prevent="$store.commit('updatePaging', 0)">
+            1
+        </a> | 
+        <a href="#" @click.prevent="$store.commit('updatePaging', 10)">
+            2
+        </a> | 
+        <a href="#" @click.prevent="$store.commit('updatePaging', 20)">
+            3
+        </a>
+        </div>
+    </section>
+    `,
 };
 let More = {
     template: `<div class="trip router">더보기</div>`,

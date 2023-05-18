@@ -19,7 +19,7 @@ let Glist = {
             <div 
             v-for="(v, i) in $store.state.gdata" v-if="v.cat==$store.state.selnm[0] || v.cat==$store.state.selnm[1] || v.cat ==$store.state.selnm[2] ">
                 <!-- 파라미터가 있는 뷰 라우터는 이름으로 호출 -->
-                <router-link v-bind:to="{name: 'det', params: {id:v.idx}}">
+                <router-link v-bind:to="{name: 'det', params: {id:v.idx, list:$route.path}}">
                 [{{v.idx}}]
                     <img v-bind:src="'./images/goods/'+v.cat+'/'+v.ginfo[0]+'.png'">
                     <aside>
@@ -40,7 +40,7 @@ let Paging = {
         <!-- 상품 리스트 박스 -->
         <div class="grid">
             <div v-for="(v, i) in $store.state.gdata" v-if="v.idx>=1+$store.state.pnum && v.idx<= 10+$store.state.pnum">
-            <router-link v-bind:to="{name: 'det', params: {id:v.idx}}">
+            <router-link v-bind:to="{name: 'det', params: {id:v.idx, list:$route.path}}">
                 [{{v.idx}}]
                 <img v-bind:src="'./images/goods/'+v.cat+'/'+v.ginfo[0]+'.png'">
                 <aside>
@@ -71,7 +71,7 @@ let More = {
         <!-- 상품 리스트 박스 -->
         <div class="grid">
             <div v-for="(v, i) in $store.state.gdata" v-if="v.idx>=1+$store.state.pnum && v.idx<= 10+$store.state.mnum">
-            <router-link v-bind:to="{name: 'det', params: {id:v.idx}}">
+            <router-link v-bind:to="{name: 'det', params: {id:v.idx, list:$route.path}}">
                 [{{v.idx}}]
                 <img v-bind:src="'./images/goods/'+v.cat+'/'+v.ginfo[0]+'.png'">
                 <aside>
@@ -96,7 +96,7 @@ const Detail = {
     <!-- 큰이미지 배경박스 -->
     <div id="bgbx">
         <!-- 닫기버튼 -->
-        <a href="#" class="cbtn" @click="$router.push('/glist')">
+        <a href="#" class="cbtn" @click="$router.push($route.params.list)">
             <span class="ir">닫기버튼</span>
         </a>
         

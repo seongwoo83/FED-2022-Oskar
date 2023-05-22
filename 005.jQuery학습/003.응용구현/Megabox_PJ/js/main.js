@@ -260,7 +260,44 @@ $(function () { //// jQB2 //////////////////////////
     ////////// video태그 기능 컨트롤 ////////////////
     ////////////////////////////////////////////////
 
-    
+    // 2. 동영상 컨트롤 기능 구현하기
+    // 2-1.  재생/멈춤 기능
+    // 2-1-1. 마우스 오버/아웃시 이미지 변경하기
+    $(".btnpp img").hover(
+        function(){ //over - 진한 이미지
+            let csrc = $(this).attr("src");
+            // 이미지 경로 변경하기
+            csrc.replace(".png", "-1.png");
+            // 실제 이미지 변경하기
+            $(this).attr("src", csrc);
+            
+        }, 
+        function(){ // out  흐린 이미지
+            let csrc = $(this).attr("src");
+            csrc.replace("-1.png", ".png")
+            $(this).attr("src", csrc);
+        });
+
+    // 2-1-2. 재생/멈춤 기능구현
+    // 대상: .btnpp img
+    // 원리: 재생상태이면 멈추고 멈춤상태이면 재생함
+    // 핵심: 동영상의 멈춤상태를 알아낼 수 있다.
+    $(".btnpp img").on("click",function(){
+        // 동영상 멈춤상태 알아내기 - paused  속성으로 알아냄
+        // 결과 true - 멈춤, false - 재생중
+        let paused_sts = mv.get(0).paused;
+        // 1. 멈춤아니면(false상태) 동영상 멈추기
+        if(!paused_sts){
+            // 비디오 멈추기는 pause() 메서드
+            mv.get(0).pause();
+            // 멈춤 상태일 경우 진한 재생 버튼으로 변경
+            $(this).attr("src", "images/vbt2-1.png");
+        }else{
+            // 2. 멈춤상태일경우(true상태) 동영상 재생
+            mv.get(0).play();
+            $(this).attr("src", "images/vbt1-1.png");
+        }
+    });
 
 
     ///// 3. 영화페이지 : 스와이퍼 적용하기 //////

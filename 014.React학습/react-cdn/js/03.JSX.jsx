@@ -80,3 +80,44 @@ const myele4 = (
 );
 
 ReactDOM.render(myele4, document.querySelectorAll("#root>div")[3]);
+
+// 5번에는 내가 원하는 태그를 출력해본다
+const mydata = [
+    { idx: "1", name: "brian", ip: "110.294.45.2" },
+    { idx: "2", name: "paul", ip: "110.294.45.3" },
+    { idx: "3", name: "law", ip: "110.294.45.4" },
+    { idx: "4", name: "nina", ip: "110.294.45.5" },
+    { idx: "5", name: "jin", ip: "110.294.45.6" },
+];
+// map(배열값, 순번, 배열객체전체자신)
+// 파라미터 구성은  forEach() 메서드와 유사함
+// const mylist = mydata.map((val, idx, obj) =>
+
+const mylist = mydata.map((val) => (
+    <ul>
+        <li><span>idx</span> : {val.idx}</li>
+        <li><span>name</span> : {val.name}</li>
+        <li><span>ip</span> : {val.ip}</li>
+    </ul>
+));
+
+console.log(mylist);
+
+const myele5 = 
+    <React.Fragment>
+    <h3>Tekken Character</h3>
+    {mylist}
+    </React.Fragment>;
+
+ReactDOM.render(myele5, document.querySelectorAll("#root>div")[4]);
+
+/******************************  
+    [ JSX는 홀로태그라도 끝에 닫기를 해주어야 한다. ]
+    예) <br> -> <br />
+        <input type="text"> -> <input type="text" />
+ ******************************/
+
+
+/******************************  
+    
+ ******************************/

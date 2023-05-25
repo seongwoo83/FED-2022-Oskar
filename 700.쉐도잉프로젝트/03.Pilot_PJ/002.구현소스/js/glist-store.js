@@ -64,23 +64,33 @@ const store = new Vuex.Store({
             let org = localStorage.getItem("cart");
             org = JSON.parse(org);
             // console.log("변환객체:", org);
-            
-            // 배열뒤에 밀어넣기 메서드 : push(값)
-            org.push(
-                dt.gdata[pm]
-            );
-            // 객체를 문자형으로 변환후 로컬스토리지에 반영
-            localStorage.setItem("cart", JSON.stringify(org));
-            console.log("반영후:", localStorage.getItem("cart"));
 
-            // 카트애니메이션 후 버튼을 등장시켜 카트리스트까지 연동
-            this.commit('cartAni', org.length)
-
+            // 이미 선택한 상품일 경우 거르기
+            let save= true;
+            org.forEach(v=>{
+                // 같은 데이터인지 비교
+                if(v.idx == dt.gdata[pm].idx){
+                    alert("이미 선택한 상품입니다.")
+                    save = false
+                }
+            })
+            if(save == true){
+                // 배열뒤에 밀어넣기 메서드 : push(값)
+                org.push(
+                    dt.gdata[pm]
+                );
+                // 객체를 문자형으로 변환후 로컬스토리지에 반영
+                localStorage.setItem("cart", JSON.stringify(org));
+                console.log("반영후:", localStorage.getItem("cart"));
+    
+                // 카트애니메이션 후 버튼을 등장시켜 카트리스트까지 연동
+                this.commit('cartAni', org.length)
+            }
         },
 
 
         clearData(){
-            localStorage.removeItem ("cart  ")
+            localStorage.removeItem ("cart")
         },
 
         cartAni(dt, pm){
@@ -121,6 +131,24 @@ const store = new Vuex.Store({
                 // map((값, 순번)=>{})
                 // 차이는 map은 리턴값으로 처리할경우
                 // 값을 자동으로 대입연산처리함
+                /* 
+                    [ forEach 메서드는 변수를 선언후 
+                        대입연산처리하여 값을 모아야함]
+
+                    let rec = "";
+                    org.forEach((v,i)=>{
+                        rec += `<li>${v}</li>`;
+                    })
+                    ____________________________
+                    반면...
+                    [ map 메서드는 변수에 직접할당해도
+                        리턴값을 대입연산처리해줌!]
+
+                    let rec = org.map((v,i)=> `<li>${v}</li>`)
+                */
+
+
+
                 let rec = org.map((v, i) => `
                         <tr>
                             <!-- 상품 이미지 -->
@@ -165,7 +193,45 @@ const store = new Vuex.Store({
                         </tr>
                         ${rec}
                     </table>
-                `)
+                `).css({
+                    position:"fixed",
+                    top:0,
+                    right:"-60vw",
+                    width:"60vw",
+                    height:"100vh",
+                    backgroundColor:"rgba(255, 255, 255, .8)",
+                    zIndex: "999999"
+                }).animate({
+                    right:"0"
+                }, 600, "easeOutQuint").find("table").css({
+                    width:"90%",
+                    margin:"50px auto",
+                    fontSize:"14px",
+                    borderTop:"2px solid #222",
+                    borderBottom: "2px solid #222",
+                    borderCollapse: "collapse"
+                }).find("td").css({
+                    padding:"10px 0",
+                    borderTop:"1px solid #555",
+                    textAlign:"center",
+                }).parents("table").find("th").css({
+                    padding:"15px 0",
+                    backgroundColor:"#e5e5e5",
+                    fontSize:"16px"
+                }).parents("table").find("caption").css({
+                    padding:"20px 0",
+                    textDecoration:"underline",
+                    textDecorationStyle:"wavy"
+                })
+            
+
+                $(".cbtn2").on("click",function(){
+                    $("#cartlist").animate({
+                        right:"-60vw"
+                    },600, "easeOutQuint")
+                })
+
+
             })
 
 

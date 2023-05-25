@@ -190,7 +190,7 @@ const Detail = {
                         <!--버튼영역-->
                         <button class="btn btn1">BUY NOW</button>
                         <button class="btn scbtn" @click.prevent="$store.commit('setData', ($route.params.id-1))">SHOPPING CART</button>
-                        <button class="btn">WISH LIST</button>
+                        <button class="btn" @click.prevent = "$store.commit('clearData')">CLEAR CART</button>
 
                     </div>
                 </section>

@@ -78,6 +78,11 @@ const store = new Vuex.Store({
 
         },
 
+
+        clearData(){
+            localStorage.removeItem ("cart  ")
+        },
+
         cartAni(dt, pm){
             console.log('카트애니', pm);
 
@@ -89,7 +94,7 @@ const store = new Vuex.Store({
             `);
 
             $("#mycart").css({
-                position:"absolute",
+                position:"fixed",
                 top:"50%",
                 left:"50%",
                 transform:"translate(-50%, -50%)",
@@ -100,10 +105,47 @@ const store = new Vuex.Store({
                 left:"80%",
                 width:"50px"
             },1000, "easeInExpo").on("click", function(){
-                // body에 카트리스트 요소 넣기
-                $("body").append(`
-                    <section id="cartlist"></section>
-                `);
+                if($("#cartlist").length == 0 ){
+                    // body에 카트리스트 요소 넣기
+                    $("body").append(`
+                        <section id="cartlist"></section>
+                    `);
+                }
+
+                // 로컬 데이터로 텡블 레코드 태그 구성하기
+                let org = localStorage.getItem("cart");
+                org = JSON.parse(org);
+
+                // 데이터를 이용하여 리스트 태그 만들기
+                // forEach((값, 순번)=>{})
+                // map((값, 순번)=>{})
+                // 차이는 map은 리턴값으로 처리할경우
+                // 값을 자동으로 대입연산처리함
+                let rec = org.map((v, i) => `
+                        <tr>
+                            <!-- 상품 이미지 -->
+                            <td>
+                                <img  src="${'images/goods/'+v.cat+'/'+v.ginfo[0]+'.png'}" style="width:50px" alt="item">
+                            </td>
+                            <!-- 번호 -->
+                            <td>${i+1}</td>
+                            <!-- 상품명 -->
+                            <td>${v.ginfo[1]}</td>
+                            <!-- 상품코드 -->
+                            <td>${v.ginfo[2]}</td>
+                            <!-- 단가 -->
+                            <td>${v.ginfo[3]}</td>
+                            <!-- 수량 -->
+                            <td></td>
+                            <!-- 합계 -->
+                            <td>${v.ginfo[3]}</td>
+                            <!-- 삭제 -->
+                            <td>
+                                <button class="cfn" data-idx="${v.idx}">×</button>
+                            </td>
+                        </tr>
+                    `);
+
                 // 생성된 카트리스트에 테이블 넣기
                 $("#cartlist").html(`
                     <a href="#" class="cbtn cbtn2">×</a>
@@ -112,6 +154,7 @@ const store = new Vuex.Store({
                             <h1>카트 리스트</h1>
                         </caption>
                         <tr>
+                            <th>상품</th>
                             <th>번호</th>
                             <th>상품명</th>
                             <th>상품코드</th>
@@ -120,15 +163,7 @@ const store = new Vuex.Store({
                             <th>합계</th>
                             <th>삭제</th>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        ${rec}
                     </table>
                 `)
             })

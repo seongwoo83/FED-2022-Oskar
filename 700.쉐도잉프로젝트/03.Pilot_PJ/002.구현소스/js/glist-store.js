@@ -223,7 +223,7 @@ const store = new Vuex.Store({
             $("#cartlist")
                 .html(
                     `
-                <a href="#" class="cbtn cbtn2"></a>
+                <a href="#" class="cbtn cbtn2"><span class="ir">×</span></a>
                 <table>
                     <caption>
                         <h1>카트 리스트</h1>

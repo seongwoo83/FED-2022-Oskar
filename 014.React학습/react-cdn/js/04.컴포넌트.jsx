@@ -60,6 +60,7 @@ function IronMan() {
     return ( 
         <div>
             <h2>안녕 나는 아이언맨이야</h2>
+            <img src="./images/ab1.jpg" alt="아이언맨" />
         </div> 
     );
 }////////////////////////////// IronMan 컴포넌트
@@ -95,7 +96,7 @@ function Who() {
     return ( 
         <div>
             <h1>김똑팔이가 누구야</h1>
-            {/*  */}
+            {/*   다른 컴포넌트 넣기*/}
             <Ans />
         </div>
     );

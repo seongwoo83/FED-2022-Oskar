@@ -16,16 +16,15 @@ function Car (props){
     // 사용법: props.속성명
 
     return(
-        <React.Fragment Name="fr">
+        <React.Fragment>
             <h2>나의 차는 {props.brand}입니다.</h2>
         </React.Fragment>
     )
 }//////////////////  Car component
 //렌더링하기
-ReactDOM.render(<Car brand="기아레이"/>, document.querySelector("#root1"))
+// ReactDOM.render(<Car brand="기아레이"/>, document.querySelector("#root1"))
 
-// 속성을 객체로 여러개 세팅한다
-const carInfo = {color: "라잇블루", 모델: "2023년형"}
+
 
 
 // 위의 두가지 차소개 컴포넌트를 하위 컴포넌트로 구성하여 새로운 자동차 브랜드 소개 질문 답변형 컴포넌트를 새롭게 구성한다
@@ -33,20 +32,24 @@ const carInfo = {color: "라잇블루", 모델: "2023년형"}
 // 자기차를 소개하는 컴포넌트2
 function Car2(props) {
     return(
-        <React.Fragment Name="fr">
+        <React.Fragment>
             <h2>
                 나의 차는 {props.brand.model}입니다.
                 차 색은 {props.brand.color}입니다.
             </h2>
+            <img src="./images/ray.png" alt="레이" style={props.brand.opt}/>
+            {/* 
+                인라인 스타일시트  넣기 형식:
+                <태그 style={{ 객체형식 css }}
+                -> 값은 문자형으로 함
+            */}
         </React.Fragment>
     )
 }
 
 
-
-
 // 차 종류를 물어보고 답하는 컴포넌트 - Car 컴포넌트 사용
-function Brand(){
+function Brand(props){
     return (
         <React.Fragment>
             <h1>당신의 차는 무슨 차죠?</h1>
@@ -57,8 +60,26 @@ function Brand(){
 }
 
 // 차 정보를 자세히 물어보는 컴포넌트  - Car2  컴포넌트 사용
-function Brand2(){
-    
+function Brand2(props){
+    // 코드를 여러가지고 return 전에 만들어준다
+    // 속성을 객체로 여러개 세팅한다
+    const carInfo = [{
+        color: "라잇블루", 
+        model: "2023년형",
+        opt: {filter: 'hue-rotate(0deg)'}
+    },
+    {
+        color: "녹차그린", 
+        model: "2024년형",
+        opt: {filter: 'hue-rotate(207deg)', transform: "rotateY(180deg)"}
+    }]
+
+    return(
+        <React.Fragment>
+            <h1>더 자세히 말씀해주세요</h1>
+            <Car2 brand={carInfo[props.num]}></Car2>
+        </React.Fragment>
+    )
 }
 
 
@@ -68,7 +89,8 @@ function Brand2(){
 ReactDOM.render(
     <div>
         <Brand />
-        <Car2 brand={carInfo}></Car2>
+        <Brand2 num="0"/>
+        <Brand2 num="1"/>
     </div>,
     document.querySelector("#root1")
 )

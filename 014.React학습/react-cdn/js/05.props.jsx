@@ -21,13 +21,6 @@ function Car (props){
         </React.Fragment>
     )
 }//////////////////  Car component
-//렌더링하기
-// ReactDOM.render(<Car brand="기아레이"/>, document.querySelector("#root1"))
-
-
-
-
-// 위의 두가지 차소개 컴포넌트를 하위 컴포넌트로 구성하여 새로운 자동차 브랜드 소개 질문 답변형 컴포넌트를 새롭게 구성한다
 
 // 자기차를 소개하는 컴포넌트2
 function Car2(props) {
@@ -49,7 +42,7 @@ function Car2(props) {
 
 
 // 차 종류를 물어보고 답하는 컴포넌트 - Car 컴포넌트 사용
-function Brand(props){
+function Brand(){
     return (
         <React.Fragment>
             <h1>당신의 차는 무슨 차죠?</h1>

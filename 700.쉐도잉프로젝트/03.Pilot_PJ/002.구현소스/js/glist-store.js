@@ -126,147 +126,7 @@ const store = new Vuex.Store({
                         <section id="cartlist"></section>
                     `);
                     }
-
-                    // 로컬 데이터로 텡블 레코드 태그 구성하기
-                    let org = localStorage.getItem("cart");
-                    org = JSON.parse(org);
-
-                    // 데이터를 이용하여 리스트 태그 만들기
-                    // forEach((값, 순번)=>{})
-                    // map((값, 순번)=>{})
-                    // 차이는 map은 리턴값으로 처리할경우
-                    // 값을 자동으로 대입연산처리함
-                    /* 
-                    [ forEach 메서드는 변수를 선언후 
-                        대입연산처리하여 값을 모아야함]
-
-                    let rec = "";
-                    org.forEach((v,i)=>{
-                        rec += `<li>${v}</li>`;
-                    })
-                    ____________________________
-                    반면...
-                    [ map 메서드는 변수에 직접할당해도
-                        리턴값을 대입연산처리해줌!]
-
-                    let rec = org.map((v,i)=> `<li>${v}</li>`)
-                */
-
-                    let rec = org.map(
-                        (v, i) => `
-                                    <tr>
-                                        <!-- 상품 이미지 -->
-                                        <td>
-                                            <img  src="${"images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"}" style="width:50px" alt="item">
-                                        </td>
-                                        <!-- 번호 -->
-                                        <td>${i + 1}</td>
-                                        <!-- 상품명 -->
-                                        <td>${v.ginfo[1]}</td>
-                                        <!-- 상품코드 -->
-                                        <td>${v.ginfo[2]}</td>
-                                        <!-- 단가 -->
-                                        <td>${v.ginfo[3]}</td>
-                                        <!-- 수량 -->
-                                        <td></td>
-                                        <!-- 합계 -->
-                                        <td>${v.ginfo[3]}</td>
-                                        <!-- 삭제 -->
-                                        <td>
-                                            <button class="cfn" data-idx="${v.idx}">×</button>
-                                        </td>
-                                    </tr>
-                            `
-                    );
-
-                    let hcode = "";
-                    rec.forEach((v) => {
-                        hcode += v;
-                    });
-
-                    // 생성된 카트리스트에 테이블 넣기
-                    $("#cartlist")
-                        .html(
-                            `
-                    <a href="#" class="cbtn cbtn2"></a>
-                    <table>
-                        <caption>
-                            <h1>카트 리스트</h1>
-                        </caption>
-                        <tr>
-                            <th>상품</th>
-                            <th>번호</th>
-                            <th>상품명</th>
-                            <th>상품코드</th>
-                            <th>단가</th>
-                            <th>수량</th>
-                            <th>합계</th>
-                            <th>삭제</th>
-                        </tr>
-                        ${hcode}
-                    </table>
-                `
-                        )
-                        .css({
-                            position: "fixed",
-                            top: 0,
-                            right: "-60vw",
-                            width: "60vw",
-                            height: "100vh",
-                            backgroundColor: "rgba(255, 255, 255, .8)",
-                            zIndex: "999999",
-                        })
-                        .animate(
-                            {
-                                right: "0",
-                            },
-                            600,
-                            "easeOutQuint"
-                        )
-                        .find("table")
-                        .css({
-                            width: "90%",
-                            margin: "50px auto",
-                            fontSize: "14px",
-                            borderTop: "2px solid #222",
-                            borderBottom: "2px solid #222",
-                            borderCollapse: "collapse",
-                        })
-                        .find("td")
-                        .css({
-                            padding: "10px 0",
-                            borderTop: "1px solid #555",
-                            textAlign: "center",
-                        })
-                        .parents("table")
-                        .find("th")
-                        .css({
-                            padding: "15px 0",
-                            backgroundColor: "#e5e5e5",
-                            fontSize: "16px",
-                        })
-                        .parents("table")
-                        .find("caption")
-                        .css({
-                            padding: "20px 0",
-                            textDecoration: "underline",
-                            textDecorationStyle: "wavy",
-                        });
-
-                    $(".cbtn2").on("click", function () {
-                        $("#cartlist").animate(
-                            {
-                                right: "-60vw",
-                            },
-                            600,
-                            "easeOutQuint"
-                        );
-                    });
-
-                    // 삭제버튼 처리 연결하기
-                    $(".cfn").on("click", function () {
-                        store.commit("delRec", $(this).attr("data-idx"));
-                    });
+                    store.commit("bindData", "-60vw");
                 });
         },
 
@@ -291,7 +151,7 @@ const store = new Vuex.Store({
             localStorage.setItem("cart", JSON.stringify(org));
             console.log("반영후:", localStorage.getItem("cart"));
             // 리스트 갱신하기
-            store.commit("bindData");
+            store.commit("bindData", "0");
 
             if (org.length == 0) {
                 $("#mycart").remove();
@@ -302,7 +162,7 @@ const store = new Vuex.Store({
         },
 
         // 리스트 바인딩 메서드
-        bindData(dt, pm) {
+        bindData(dt, pm) {   //pm - 카트박스 right 값 전달
             // 로컬 데이터로 텡블 레코드 태그 구성하기
             let org = localStorage.getItem("cart");
             org = JSON.parse(org);
@@ -385,7 +245,7 @@ const store = new Vuex.Store({
                 .css({
                     position: "fixed",
                     top: 0,
-                    right: "-60vw",
+                    right: pm, //-"60vw"
                     width: "60vw",
                     height: "100vh",
                     backgroundColor: "rgba(255, 255, 255, .8)",

@@ -75,7 +75,6 @@ const store = new Vuex.Store({
                 }
             });
             if (save) {
-
                 /* 
                     [ 기존 데이터 구조에 컬럼 추가하기 ]
                     dt.gdata의 데이터 구조는
@@ -108,7 +107,7 @@ const store = new Vuex.Store({
                 console.log("반영후:", localStorage.getItem("cart"));
 
                 // 카트애니메이션 후 버튼을 등장시켜 카트리스트까지 연동
-                this.commit("cartAni", {cnt:org.length, opt:1});
+                this.commit("cartAni", { cnt: org.length, opt: 1 });
             }
         },
 
@@ -116,7 +115,8 @@ const store = new Vuex.Store({
             localStorage.removeItem("cart");
         },
 
-        cartAni(dt, pm) {  //pm.cnt / pm.opt
+        cartAni(dt, pm) {
+            //pm.cnt / pm.opt
             // cnt - 카트아이템 개수
             // opt - css값 옵션
             // opt 0 - 오른쪽 위 작게 / opt 1 - 정중앙 크게
@@ -132,29 +132,25 @@ const store = new Vuex.Store({
             // 초기 CSS 세팅 값 배열
             let icss = [
                 {
-                    tv:"5%",
-                    lv:"80%",
-                    wd:"50px"
+                    tv: "5%",
+                    lv: "80%",
+                    wd: "50px",
                 },
                 {
-                    tv:"50%",
-                    lv:"50%",
-                    wd:"370px"
+                    tv: "50%",
+                    lv: "50%",
+                    wd: "370px",
                 },
-            ]
+            ];
 
-            console.log(
-                'top:', icss[pm.opt].tv,
-                "left:", icss[pm.opt].lv,
-                "width:", icss[pm.opt].wd
-            );
+            console.log("top:", icss[pm.opt].tv, "left:", icss[pm.opt].lv, "width:", icss[pm.opt].wd);
 
             $("#mycart")
                 .css({
                     position: "fixed",
                     top: icss[pm.opt].tv,
                     left: icss[pm.opt].lv,
-                    width:icss[pm.opt].wd,
+                    width: icss[pm.opt].wd,
                     transform: "translate(-50%, -50%)",
                     cursor: "pointer",
                     zIndex: "99999",
@@ -163,8 +159,8 @@ const store = new Vuex.Store({
                 .animate(
                     {
                         top: "5%",
-                        left:"80%",
-                        width:"50px",
+                        left: "80%",
+                        width: "50px",
                     },
                     1000,
                     "easeInExpo"
@@ -214,7 +210,8 @@ const store = new Vuex.Store({
         },
 
         // 리스트 바인딩 메서드
-        bindData(dt, pm) {   //pm - 카트박스 right 값 전달
+        bindData(dt, pm) {
+            //pm - 카트박스 right 값 전달
             // 로컬 데이터로 텡블 레코드 태그 구성하기
             let org = localStorage.getItem("cart");
             org = JSON.parse(org);
@@ -239,29 +236,29 @@ const store = new Vuex.Store({
 
                 let rec = org.map((v,i)=> `<li>${v}</li>`)
             */
-            const chx = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            const chx = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             let rec = org.map(
                 (v, i) => `
                             <tr>
                                 <!-- 상품 이미지 -->
-                                <td>
+                                <td style="text-align:center">
                                 <img  src="${"images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"}" style="width:50px" alt="item">
                                 </td>
                                 <!-- 번호 -->
-                                <td>${i + 1}</td>
+                                <td style="text-align:center">${i + 1}</td>
                                 <!-- 상품명 -->
-                                <td>${v.ginfo[1]}</td>
+                                <td style="text-align:center">${v.ginfo[1]}</td>
                                 <!-- 상품코드 -->
-                                <td>${v.ginfo[2]}</td>
+                                <td style="text-align:center">${v.ginfo[2]}</td>
                                 <!-- 단가 -->
-                                <td>${v.ginfo[3]}</td>
+                                <td style="text-align:center">${v.ginfo[3]}</td>
                                 <!-- 수량 -->
-                                <td>${v.num}</td>
+                                <td style="text-align:center">${v.num}</td>
                                 <!-- 합계 -->
-                                <td>${chx(v.ginfo[3].trim().replaceAll(",","").replace("원","")*v.num) + "원"}</td>
+                                <td style="text-align:center">${chx(v.ginfo[3].trim().replaceAll(",", "").replace("원", "") * v.num) + "원"}</td>
                                 <!-- 삭제 -->
-                                <td>
+                                <td style="text-align:center">
                                 <button class="cfn" data-idx="${v.idx}">×</button>
                                 </td>
                             </tr>
@@ -276,6 +273,23 @@ const store = new Vuex.Store({
             // -> 배열을 구분자로 구분해서 한 문자열로 만들어준다.
             // 구분자를 빈 문자열로 넣으면 사이 구분자 없이 합쳐짐.
             // 구분자를 생략하면 기본값(",") 로 구분되어 합쳐짐
+
+            // 총합계 구하기
+            let total = 0;
+            // 단가 숫자만 남기기
+            const pnum = (x) => x.trim().replaceAll(",", "").replace("원", "");
+
+            org.forEach((v, i) => {
+                total += pnum(v.ginfo[3]) * v.num;
+            });
+
+            // 선생님 방법
+            /* 
+                total = org.map(v=> pnum(v.ginfo[3]) * v.num );
+                let temp = 0:
+                total.forEach(v=>temp+=v);
+                total = temp;
+            */
 
             // 생성된 카트리스트에 테이블 넣기
             $("#cartlist")
@@ -297,6 +311,13 @@ const store = new Vuex.Store({
                         <th>삭제</th>
                     </tr>
                     ${rec.join("")}
+                    <tr>
+                        <td colspan="6" style="text-align:right">
+                            총 합계 : 
+                        </td>
+                        <td style="text-align:center">${chx(total)}원</td>
+                        <td></td>
+                    </tr>
                 </table>
             `
                 )
@@ -329,7 +350,6 @@ const store = new Vuex.Store({
                 .css({
                     padding: "10px 0",
                     borderTop: "1px solid #555",
-                    textAlign: "center",
                 })
                 .parents("table")
                 .find("th")
@@ -362,40 +382,37 @@ const store = new Vuex.Store({
             });
         },
 
-        setBtn(dt, pm){
+        setBtn(dt, pm) {
             // DOM모두 로딩보장 후 세팅
             // jQuery 로딩구역에 넣기
-            $(()=>{
+            $(() => {
                 // 세자리 마다 ,넣는 함수
-                const chx = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                const chx = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                $(".chg_num img").on("click",function(){
+                $(".chg_num img").on("click", function () {
                     // 0. 수량표시 요소
                     let sum = $("#sum");
 
                     // 1. 이미지 alt속성겂 얻기
-                    let ialt = $(this).attr("alt")
-                    console.log('ialt: ', ialt);
+                    let ialt = $(this).attr("alt");
+                    console.log("ialt: ", ialt);
                     // 2.  증가 / 감소 처리하기
-                    if(ialt =="증가"){
-                        sum.val(Number(sum.val()) +1);
-                    }else{
-                        sum.val(Number(sum.val()) -1);
+                    if (ialt == "증가") {
+                        sum.val(Number(sum.val()) + 1);
+                    } else {
+                        sum.val(Number(sum.val()) - 1);
                     }
                     // 0이면 1로 고정
-                    if(sum.val() == 0) sum.val(1);
+                    if (sum.val() == 0) sum.val(1);
 
                     // 3. 기본금액 * 개수
-                    let cnum = $("#gprice").text().trim().replaceAll(",", "").replace("원","") * sum.val();
-                    console.log('cnum: ', cnum);
+                    let cnum = $("#gprice").text().trim().replaceAll(",", "").replace("원", "") * sum.val();
+                    console.log("cnum: ", cnum);
 
                     // 4. 출력하기
                     $("#total").text(chx(cnum) + "원");
-
-
-
-                })
-            })
+                });
+            });
         },
     },
 });

@@ -74,8 +74,34 @@ const store = new Vuex.Store({
                     save = false;
                 }
             });
-            if (save == true) {
+            if (save) {
+
+                /* 
+                    [ 기존 데이터 구조에 컬럼 추가하기 ]
+                    dt.gdata의 데이터 구조는
+                    {
+                        idx:"1",
+                    cat:"men",
+                    ginfo:[]
+                    }
+                    ->여기에 num 항목을 추가하여 개수 데이터를 입력함
+                    {
+                        idx:"1",
+                    cat:"men",
+                    ginfo:[],
+                    num: 1
+                    }
+                    -> 기존 객체에 속성 추가
+
+                    객체변수.새항목 = 값
+                    -> dt.gdata[pm].num = 값
+
+                */
+
                 // 배열뒤에 밀어넣기 메서드 : push(값)
+                // 넣기 전에 num 항목 추가하기
+                dt.gdata[pm].num = $("#sum").val();
+                // 추가 후 데이터 넣기
                 org.push(dt.gdata[pm]);
                 // 객체를 문자형으로 변환후 로컬스토리지에 반영
                 localStorage.setItem("cart", JSON.stringify(org));
@@ -136,9 +162,9 @@ const store = new Vuex.Store({
                 .delay(3000)
                 .animate(
                     {
-                        top: icss[pm.opt].tv,
-                        left: icss[pm.opt].lv,
-                        width:icss[pm.opt].wd,
+                        top: "5%",
+                        left:"80%",
+                        width:"50px",
                     },
                     1000,
                     "easeInExpo"
@@ -180,6 +206,8 @@ const store = new Vuex.Store({
             if (org.length == 0) {
                 $("#mycart").remove();
                 $("#cartlist").remove();
+                // 로컬 데이터 지우기
+                localStorage.removeItem("cart");
             } else {
                 $("#mycart").attr("title", org.length + "개의 상품이 있습니다.");
             }
@@ -211,6 +239,7 @@ const store = new Vuex.Store({
 
                 let rec = org.map((v,i)=> `<li>${v}</li>`)
             */
+            const chx = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             let rec = org.map(
                 (v, i) => `
@@ -228,9 +257,9 @@ const store = new Vuex.Store({
                                 <!-- 단가 -->
                                 <td>${v.ginfo[3]}</td>
                                 <!-- 수량 -->
-                                <td></td>
+                                <td>${v.num}</td>
                                 <!-- 합계 -->
-                                <td>${v.ginfo[3]}</td>
+                                <td>${chx(v.ginfo[3].trim().replaceAll(",","").replace("원","")*v.num) + "원"}</td>
                                 <!-- 삭제 -->
                                 <td>
                                 <button class="cfn" data-idx="${v.idx}">×</button>
@@ -331,6 +360,42 @@ const store = new Vuex.Store({
             $(".cfn").on("click", function () {
                 store.commit("delRec", $(this).attr("data-idx"));
             });
+        },
+
+        setBtn(dt, pm){
+            // DOM모두 로딩보장 후 세팅
+            // jQuery 로딩구역에 넣기
+            $(()=>{
+                // 세자리 마다 ,넣는 함수
+                const chx = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                $(".chg_num img").on("click",function(){
+                    // 0. 수량표시 요소
+                    let sum = $("#sum");
+
+                    // 1. 이미지 alt속성겂 얻기
+                    let ialt = $(this).attr("alt")
+                    console.log('ialt: ', ialt);
+                    // 2.  증가 / 감소 처리하기
+                    if(ialt =="증가"){
+                        sum.val(Number(sum.val()) +1);
+                    }else{
+                        sum.val(Number(sum.val()) -1);
+                    }
+                    // 0이면 1로 고정
+                    if(sum.val() == 0) sum.val(1);
+
+                    // 3. 기본금액 * 개수
+                    let cnum = $("#gprice").text().trim().replaceAll(",", "").replace("원","") * sum.val();
+                    console.log('cnum: ', cnum);
+
+                    // 4. 출력하기
+                    $("#total").text(chx(cnum) + "원");
+
+
+
+                })
+            })
         },
     },
 });

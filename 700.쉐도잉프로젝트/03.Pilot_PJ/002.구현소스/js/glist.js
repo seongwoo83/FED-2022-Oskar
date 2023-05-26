@@ -37,5 +37,20 @@ new Vue({
         store.commit('resCheck');
         menuFn();
         $("#logo").click(() => (location.href = "index.html"));
+
+        // 페이지 로딩 시 로컬 데이터 cart에 데이터가 있으면 카트 이미지 버튼 보여주기
+        if(localStorage.getItem("cart") != null){
+            // null이 아닌 경우에 length를 체크 하여 0이 아니면  cart 버튼 출력하기
+            if(localStorage.getItem("cart").length != 0){
+                let org = localStorage.getItem("cart");
+                org = JSON.parse(org);
+    
+                // 카트버튼 애니 메서드 호출
+                store.commit('cartAni', {cnt: org.length, opt: 0});
+                // 애니메서드 파라미터
+                // cnt - 카트아이템 개수
+                // opt - 세팅 옵션번호(초기 css값 선택 옵션) - 0( 오른쪽 위 작게 ) / 1(정중앙 크게)
+            }
+        }
     }
 })

@@ -82,7 +82,7 @@ const store = new Vuex.Store({
                 console.log("반영후:", localStorage.getItem("cart"));
 
                 // 카트애니메이션 후 버튼을 등장시켜 카트리스트까지 연동
-                this.commit("cartAni", org.length);
+                this.commit("cartAni", {cnt:org.length, opt:1});
             }
         },
 
@@ -90,21 +90,45 @@ const store = new Vuex.Store({
             localStorage.removeItem("cart");
         },
 
-        cartAni(dt, pm) {
+        cartAni(dt, pm) {  //pm.cnt / pm.opt
+            // cnt - 카트아이템 개수
+            // opt - css값 옵션
+            // opt 0 - 오른쪽 위 작게 / opt 1 - 정중앙 크게
             console.log("카트애니", pm);
 
             $("#mycart").remove();
 
             $("body").append(`
                 <img id="mycart" src="./images/mycart.gif"
-                title="${pm}개의 상품이 카트에 있습니다">
+                title="${pm.cnt}개의 상품이 카트에 있습니다">
             `);
+
+            // 초기 CSS 세팅 값 배열
+            let icss = [
+                {
+                    tv:"5%",
+                    lv:"80%",
+                    wd:"50px"
+                },
+                {
+                    tv:"50%",
+                    lv:"50%",
+                    wd:"370px"
+                },
+            ]
+
+            console.log(
+                'top:', icss[pm.opt].tv,
+                "left:", icss[pm.opt].lv,
+                "width:", icss[pm.opt].wd
+            );
 
             $("#mycart")
                 .css({
                     position: "fixed",
-                    top: "50%",
-                    left: "50%",
+                    top: icss[pm.opt].tv,
+                    left: icss[pm.opt].lv,
+                    width:icss[pm.opt].wd,
                     transform: "translate(-50%, -50%)",
                     cursor: "pointer",
                     zIndex: "99999",
@@ -112,9 +136,9 @@ const store = new Vuex.Store({
                 .delay(3000)
                 .animate(
                     {
-                        top: "5%",
-                        left: "80%",
-                        width: "50px",
+                        top: icss[pm.opt].tv,
+                        left: icss[pm.opt].lv,
+                        width:icss[pm.opt].wd,
                     },
                     1000,
                     "easeInExpo"
@@ -218,6 +242,11 @@ const store = new Vuex.Store({
             rec.forEach((v) => {
                 hcode += v;
             });
+            // rec.join("")
+            // array.join(구분자)
+            // -> 배열을 구분자로 구분해서 한 문자열로 만들어준다.
+            // 구분자를 빈 문자열로 넣으면 사이 구분자 없이 합쳐짐.
+            // 구분자를 생략하면 기본값(",") 로 구분되어 합쳐짐
 
             // 생성된 카트리스트에 테이블 넣기
             $("#cartlist")
@@ -238,7 +267,7 @@ const store = new Vuex.Store({
                         <th>합계</th>
                         <th>삭제</th>
                     </tr>
-                    ${hcode}
+                    ${rec.join("")}
                 </table>
             `
                 )

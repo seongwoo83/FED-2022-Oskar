@@ -13,12 +13,13 @@
 //  전체 이벤트를 적용할 컴포넌트 구성하기
 function EventShow() {
     // 컴포넌트에서 사용하는 내부용 함수는 할당형 함수로 작성함
-    const aladin = (lamp) => {
+    // 1. 소원이 무엇이냐 실행 함수
+    const aladin = (lamp) => {  //lamp가 알라딘 주인공 이미지
         console.log("알라딘 함수", lamp);
-        // 1. #tbox인 요소의 내부에 h1요소 넣기
+        // 1). #tbox인 요소의 내부에 h1요소 넣기
         document.querySelector("#tbox").innerHTML += `<h1 class="tit">소원이 무엇이냐</h1>`;
 
-        // 2. 소원이 무엇이냐 타이틀박스 CSS 구성하기
+        // 2). 소원이 무엇이냐 타이틀박스 CSS 구성하기
         let tit = document.querySelector(".tit");
         tit.style.cssText = `width: 50%; padding: 50px 0; margin: 0 auto; border: 2px solid lime; transition: all 2s 1s; opacity:0;`;
 
@@ -26,11 +27,40 @@ function EventShow() {
             tit.style.cssText = `width: 50%; padding: 50px 0; margin: 0 auto; border: 2px solid lime; transition: all 2s 1s; opacity: 1; border-radius:50%; transform:translateY(-200px); font-size:40px; color:#fff; background-color: rgba(0,0,0,.5);`;
         }, 500);
 
-        // 3. 램프 가져오기 버튼 3초 뒤에 보이기
+        // 3). 램프 가져오기 버튼 3초 뒤에 보이기
         setTimeout(() => {
-            document.querySelectorAll("button").style.display = "inline-block";
+            document.querySelectorAll("button")[0].style.display = "inline-block";
         }, 3000);
+
+        // 4). 별도의 요소인 #ala에 이미지 생성 컴포넌트 출력하기
+        ReactDOM.render(<AlaLamp isrc={lamp} />, document.querySelector("#ala"))
     };
+
+    // 2. 램프 가져오기 함수 
+    const getIt = () => {
+        // 1) 램프 요소 찾기
+        let lamp = document.querySelector(".lamp");
+        // 2) 램프이미지 넣기
+        lamp.innerHTML = `<img src="https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/3168457870/B.png" alt="램프" />`
+        // 3) 램프 초기세팅
+        lamp.querySelector("img").style.cssText = `position: absolute; top: 0; right: 0; width: 200px; border-radius: 50%; transition: 2s;`;
+
+        setTimeout(()=>{
+            lamp.querySelector("img").style.cssText = `position: absolute; top: 310px; right: calc(50% - 100px); width: 200px; border-radius: 50%; transform: rotate(720deg); transition: 2s ,right 1s 2s; `;
+        },500);
+
+        // 4) 소원빌기 버튼 보이기
+        setTimeout(() => {
+            document.querySelectorAll("button")[1].style.display = "inline-block";
+        }, 3000);
+    }///////////////////////// getIt
+
+    // 3. 소원빌어 페라리 얻기 함수 
+    const getIt2 = (ss) => { // ss - 페라리 이미지 경로
+        const ferrari = ReactDOM.createRoot(document.getElementById("ferrari"));
+        // Ferrari컴포넌트 호출함!
+        ferrari.render(<Ferrari isrc={ss} />);
+    }///////////////////////// getIt2
 
     // 컴포넌트의 리턴은 가장 아래쪽에 위치함
     return (
@@ -49,7 +79,7 @@ function EventShow() {
             <div className="lamp"></div>
             {/* 버튼 */}
             <button onClick={getIt}>램프가져오기~!</button><br />
-            <button onClick={getIt2}>소원빌기~! 페라리 주세요~!!</button>
+            <button onClick={()=>{getIt2("https://www.pngplay.com/wp-content/uploads/13/Ferrari-458-Transparent-PNG.png")}}>소원빌기~! 페라리 주세요~!!</button>
         </React.Fragment>
     );
 } /////////////////EventShow
@@ -62,7 +92,23 @@ function AlaLamp(props) { //이미지 경로를 props로 받음
 }; /////////////////// AlaLamp
 
 // 페라리 이미지 출력 컴포넌트
-function Ferrari() {} //////////////// Ferrari
+function Ferrari(props) {
+    return (
+        <img src={props.isrc} alt="페라리 이미지" id="car" title="클릭하면 시운전 해요" onClick={move} />
+    );
+} //////////////// Ferrari
+
+// 일반 함수로 구현! 페라리 움직이기! ////////////
+let one = 1;
+function move() {
+    console.log(one);
+    let car = document.getElementById("car");
+    car.style.transform = one?"translateX(150%) scale(2)":"translateX(0) scale(1)";
+    car.style.transition = "2s ease-in-out";
+
+    one?one=0:one=1;
+} ///////////// move함수 ///////////////////
+
 
 // 최초 컴포넌트 출력하기/////////
 ReactDOM.render(<EventShow />, document.querySelector("#root"));

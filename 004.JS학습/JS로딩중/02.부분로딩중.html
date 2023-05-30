@@ -63,45 +63,46 @@
                     console.log("body 로딩완료");
                 };
 
-                // 로딩중 이미지 넣기 함수
-                const firstDo = ()=>{
-                    document.querySelector(".mybx").innerHTML += `
+                // 로딩중 이미지 모두 넣기 함수
+                document.querySelectorAll(".mybx").forEach(v=>{
+                    v.innerHTML += `
                         <img class="loading" src="./images/loading_img.gif" alt="로딩중">
                     `;
-                };
+                });
 
                 // 페이지에 많은 양의 이미지 넣기 함수
-                const addimg = ()=>{
-                    for(let i =0; i< 200; i++){
+                const addImg = (num, seq)=>{ //num은 반복횟수 / seq는 순번
+                    // num개수만큼 반복하여 이미지 넣기
+                    for(let i =0; i< num; i++){
                         isrc.forEach(v=>{
-                            document.querySelector(".mybx").innerHTML += `
+                            document.querySelectorAll(".mybx")[seq].innerHTML += `
                                 <img class="timg" src="${v}" alt="test">
                             `;
                         })
                     }
                 }
-                // addimg();
+                // addImg();
 
                 // 이미지 컨텐츠를 로딩하는 함수를 Promise하자
                 // async / await를 사용함
                 // async 함수 안에 promise 세계를 만들어줌
-                async function setIt(fn){ //fn은 실행 코드 함수
+                async function setIt(fn, seq){ //fn은 실행 코드 함수 / seq 적용대상 순번
                     //  재사용성을 위해 실행할 함수를 받는다
                     let doit = new Promise(function(success){
                         // 시간이 걸리는 코드
-                        fn()
-                        // addimg();
+                        fn
+                        // addImg();
                         // 위의 코드가 실행되면 호출
-                        success("다 됐음")
+                        success(seq)
                     })
 
                     // promise가 보장하는 코드 실행 후 실행함수
-                    const thenDoit = (txt)=>{
+                    const thenDoit = (seq)=>{ //seq 적용순번
                         // success에서 전달하는 값 받기
-                        console.log("이게 뭐: ", txt);
+                        console.log("이게 뭐: ", seq);
 
                         // 로딩바를 없앰
-                        document.querySelector(".loading").remove();
+                        document.querySelectorAll(".mybx")[seq].querySelector(".loading").remove();
                     }
 
                     // promise호출하기
@@ -114,10 +115,23 @@
                     // thenDoit은 success가 리턴되는 값을 받을 때까지 기다림
                 }
                 // 먼저 로딩표시 이미지 보이기 함수 호출
-                firstDo();
+                // 상단에서 모두 넣음
+                // firstDo();
+
+
                 // async / await 는 반드시 밖에서 호출해주어야 함
                 // 약간의 시차를 두고 호출
-                setTimeout(()=>setIt(addimg), 100);
+                // setIt(적용함수, 순번)
+                // addImg(반복횟수, 순번)
+                setTimeout(()=>{
+                    setIt(addImg(150,0),0);
+                }, 1);
+                setTimeout(()=>{
+                    setIt(addImg(50,1),1);
+                }, 1);
+                setTimeout(()=>{
+                    setIt(addImg(100,2),2);
+                }, 1);
                 // 로딩와와 실행처리구역을 구분하여 
                 // 로딩바 이미지가 처리이미지와 같이 처리되지 않도록
                 // 비동기적으로 처리해야 로딩바가 별도로 화면에 먼저 나타날 수 있다. 
@@ -134,6 +148,8 @@
         </script>
     </head>
     <body>
+        <div class="mybx"></div>
+        <div class="mybx"></div>
         <div class="mybx"></div>
     </body>
 </html>

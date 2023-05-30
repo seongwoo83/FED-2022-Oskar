@@ -299,6 +299,24 @@ $(function () { //// jQB2 //////////////////////////
         }
     });
 
+    // 2-2. 동영상 소리 재생 여부 기능
+    // 대상: .btnsnd img
+    // 원리: 소리가 나는지 안나는지 속성 -> muted가 boolean 값으로 전달
+    // 핵심: 현재 소리가 안나는지 상태를 확인함
+    $(".btnsnd img").on("click", function(){
+        // 1. 현재 소리가 안나는지 상태 알아오기
+        let sound = mv.get(0).muted;
+        console.log(sound);
+
+        // 2. 만약 소리가 안나면 소리가 나도록, 소리가 나면 소리가 안나도록
+        // muted 속성은 현재 소리가 나는지 상태값을 읽을 수도 있고 설정할 수 도 있음
+        mv.get(0).muted = !sound;
+        // !sound 는 true/false 전환 코드이다
+
+        // 3. 아이콘을 현재 소리 상태로 넣기
+        sound? $(this).attr("src", "./images/speaker_blue.png") : $(this).attr("src","./images/speaker-mute_blue.png");
+    });
+
 
     ///// 3. 영화페이지 : 스와이퍼 적용하기 //////
     // swiper변수를 전역변수로 만들고 페이지액션에서 사용!

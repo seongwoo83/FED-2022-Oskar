@@ -116,9 +116,38 @@ function WishList(props){
 ReactDOM.render(<WishList wlist={foods}/>, document.querySelector("#root3"));
 
 
+// 좀 더 복잡한 리스트를 출력하는 컴포넌트
 
+// 전달할 배열변수
+const movs = [
+    {year: "2021",mtit: "영화1"},
+    {year: "2022",mtit: "영화2"},
+    {year: "2023",mtit: "영화3"},
+];
 
-
-
-
-
+function MovieList(props){
+    return <li>{props.year}년도 {props.mtit}</li>
+}
+function MovieWishList(props){
+    const devMovie = props.mlist;
+    return(
+        <React.Fragment >
+        {
+            devMovie.length > 0 &&
+            <div>
+                <h2>개발자가 좋아하는 영화는 최근 {devMovie.length}년간 아래와 같습니다.</h2>
+                <ul>
+                    {
+                        devMovie.map(x=><MovieList year={x.year} mtit={x.mtit}/>)
+                    }
+                </ul>
+            </div>
+        }
+        {
+            devMovie.length == 0 &&
+            <h2>아직 개발자 영화 리스트가 업데이트 되지 않았습니다.</h2>
+        }
+        </React.Fragment>
+    )
+}
+ReactDOM.render(<MovieWishList mlist={movs}/>, document.querySelector("#root4"));

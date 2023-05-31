@@ -151,3 +151,19 @@ function MovieWishList(props){
     )
 }
 ReactDOM.render(<MovieWishList mlist={movs}/>, document.querySelector("#root4"));
+
+
+/******************************************
+    3. 조건 연산자(삼항연산자)를 사용하여 조건부 렌더링하기
+******************************************/
+// 명화 데이터
+const worksrc = {
+    "피카소":"https://m.theartin.net/web/product/big/201907/30c5a0fdd153bfdfdc8f19b2f4166fa8.jpg",
+    "모네":"https://dimg.donga.com/wps/NEWS/IMAGE/2015/12/11/75316598.3.jpg"
+};
+//개발자가 좋아하는 그림(명화) 출력하기
+
+//3-1 타이틀과 그림 출력하기 컴포넌트
+function MakeWork(props){
+
+}////////////////// MakeWork

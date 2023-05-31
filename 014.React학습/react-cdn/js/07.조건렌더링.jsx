@@ -164,6 +164,76 @@ const worksrc = {
 //개발자가 좋아하는 그림(명화) 출력하기
 
 //3-1 타이틀과 그림 출력하기 컴포넌트
+// 구성: 작가이름 + 작품이미지
+// 데이터: 작가이름(painter), 이미지 경로(작가이름의 객체 worksrc이용), 작품명(wname)
 function MakeWork(props){
-
+    return(
+        <div>
+            <h2>{props.painter}</h2>
+            <img src={worksrc[props.painter]} alt={props.wname} style={{width:"400px"}} title={props.wname} />
+        </div>
+    );
 }////////////////// MakeWork
+
+// 3-2. 전체 출력 컴포넌트
+// 구성: 전체 타이틀(Title컴포넌트) + 변경머튼 + 작가와 그림출력(MakeWork 컴포넌트)
+// 특이사항: 변경버튼 클릭시 MakeWork 컴포넌트의 데이터를 다시 출력하도록한다
+function ExpComp(props){  //isChg  는 true/false값 받는 속성
+    // Hook를 사용한 상태변수
+    const [result, setResult] = React.useState(props.isChg)
+    // let result = props.isChg;
+    // isChg 속성은 true/false 데이터를 전달하여 MakeWork 컴포넌트의 변경여부를 결정함
+
+    // result에 담긴 true/false값을 반대로 전환함
+    const again = ()=>{
+        // Hook상태변수의 업데이트는 set변수명을 사용한다
+        setResult(!result);
+        // result = !result;
+    };
+    return(
+        <React.Fragment>
+            {/* 1. 큰제목 */}
+            <Title tit="명화" />
+            {/* 2. 변경버튼 : 클릭시 again함수를 호출함 */}
+            <button onClick={again}>작가 변경!</button>
+            {/* 3. 작품출력 */}
+            {
+                result? <MakeWork painter="피카소" wname="우는여인" /> : <MakeWork painter="모네"  wname="양산을 쓴 여인" />
+            }
+        </React.Fragment>
+    )
+}///////////////// ExpComp
+
+ReactDOM.render(<ExpComp isChg={true} />, document.querySelector("#root5"));
+
+/************************************************************
+    [ 리액트 Hook ]
+    - 일반적으로 리액트에 사용되는 변수는 처음에 컴포넌트에 전달되어
+    초기 세팅에 활용된다.
+    그런데, 이 변수가 변경될 경우 컴포넌트의 변경이 자동적으로 이루어지지 않는다.
+    이런 종류의 변수 업데이트가 가상DOM과 실제 DOM에 바로 반영되도록 실시간 감시역할을
+    하는 리액트의 기술내용을 담고 있는 것이 Hook이다.
+
+    1. 목적 : 어떤 특정 데이터가 변경될 때 이 데이터를 할당하여 사용하고 있는 컴포넌트의 변경이 반영되도록 하고자 할때 사용함
+    2. 구현방법:
+        1) Node JS SPA 개발환경에서는 상단에 import useState를 한다
+            -> CDN에서는 React.useState 로 사용한다.
+        2) 코딩법: useState()  메서드 사용
+            배열변수 =  useState(초기값)
+            (CDN) -> 배열변수 =  React.useState(초기값)
+
+            ((일반형))
+            const [변수명, set변수명] = useState(초기값)
+            -> set변수명 작성시 변수명 첫글자를 대문자로 작성함
+            -> set변수명(값) : 메서드 형태로 후크변수의 값을 세팅함
+
+        3) 작동원리
+            - useState에 작성한 초기값이 배열변수 첫 번째 변수에 할당됨
+            - 코드에서 set변수명에 값을 할당하면 useState 메서드가 이것을 체크하여
+            다른부분의 업데이트를 실행함
+        4) 사용결과
+            - 별도의 메서드 호출없이 후크 상태변수를 사용한 곳이 자동으로 변경될때마다
+            다시 갱신되는 것을 확인 할 수 있다.
+
+        -> Vue.js의 리액티브 데이터와 매우 유사함
+************************************************************/

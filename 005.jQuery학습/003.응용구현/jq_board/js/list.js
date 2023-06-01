@@ -11,5 +11,52 @@ localStorage.setItem("bdata", jsn);
 
 // 3. 로컬 스토리지 데이터를 파싱하여 게시판 리스트에 넣기
 // 3-1 로컬 스토리지 데이터 파싱하기
-let bdata = JSON.parse(localStorage.getItem("bdata"))
-console.log(bdata); 
+let bdata = JSON.parse(localStorage.getItem("bdata"));
+// console.log(bdata);
+
+// 3-2 게시판 리스트 생성하기
+// 데이터 순서: 번호, 글제목, 글쓴이, 작성일, ㄹ
+let blist = "";
+
+// 페이징 번호
+let pgnum = 1;
+// 페이지 단위
+let pgblock = 10;
+// 시작번호 생성
+// -> (pgnum-1)*pgblock
+// 끝번호 생성
+// -> pgnum*pgblock
+
+/************************************
+    함수명: bindList
+    기능: 페이지별 리스트를 생성하여 바인딩함
+************************************/
+function bindList(num){
+    pgnum = num
+    // 1. 반복문으로 코드 작성
+    for (let i = (pgnum - 1) * pgblock; i < pgnum * pgblock; i++) {
+        blist += `
+            <tr>
+                <td>${bdata[i]["idx"]}</td>
+                <td>${bdata[i]["tit"]}</td>
+                <td>${bdata[i]["writer"]}</td>
+                <td>${bdata[i]["date"]}</td>
+                <td>${bdata[i]["cnt"]}</td>
+            </tr>
+        `;
+    }
+    // 2 반복문으로 작성한 코드 리스트에 넣기
+    $("#board tbody").html(blist);
+
+    // 3. 페이징 블록 만들기
+    // 전체 페이지 번호수 계산하기
+    // 전체 레코드수 / 페이지 단위수 + (나머지 있으면 한페이지 더)
+    let pgtotal= Math.floor(bdata.length / pgblock);
+    let pgadd = bdata.length % pgblock;
+    
+}
+// console.log(blist);
+$(() => {
+    // 최초 리스트 호출
+    bindList(1);
+});

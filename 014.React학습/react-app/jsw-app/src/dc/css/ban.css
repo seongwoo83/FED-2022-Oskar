@@ -11,7 +11,11 @@
     color: #fff;
     text-shadow: 0 0  3px #000;
 }
-.slider{
+/* .slider{
+    position: relative;
+    left: 0;
+} */
+.slider li{
     position: relative;
     left: 0;
 }

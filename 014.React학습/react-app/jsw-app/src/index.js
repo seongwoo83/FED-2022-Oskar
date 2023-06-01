@@ -6,7 +6,7 @@ import Ban from './dc/ban';
 
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
-root.render(<Ban />);
+root.render(<Ban cat="characters"/>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

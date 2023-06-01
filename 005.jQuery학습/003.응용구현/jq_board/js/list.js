@@ -20,7 +20,7 @@ let bdata = JSON.parse(localStorage.getItem("bdata"));
 // 페이징 번호
 // let pgnum = 1;
 // 페이지 단위
-// let pgblock = 10;
+let pgblock = 9;
 // 시작번호 생성
 // -> (pgnum-1)*pgblock
 // 끝번호 생성
@@ -30,12 +30,12 @@ let bdata = JSON.parse(localStorage.getItem("bdata"));
     함수명: bindList
     기능: 페이지별 리스트를 생성하여 바인딩함
 ************************************/
-function bindList(pgnum, pgblock){
+function bindList(pgnum) {
     // 1. 반복문으로 코드 작성
-    let blist ="";
+    let blist = "";
     for (let i = (pgnum - 1) * pgblock; i < pgnum * pgblock; i++) {
         // 마지막 번호 한계값 조건으로 마지막 페이지 데이터 존재하는 데이터까지만 바인딩하기
-        if(i< bdata.length){
+        if (i < bdata.length) {
             blist += `
                 <tr>
                     <td>${bdata[i]["idx"]}</td>
@@ -55,31 +55,31 @@ function bindList(pgnum, pgblock){
     // 3. 페이징 블록 만들기
     // 3-1 전체 페이지 번호수 계산하기
     // 전체 레코드수 / 페이지 단위수 + (나머지 있으면 한페이지 더)
-    let pgtotal= Math.floor(bdata.length / pgblock);
+    let pgtotal = Math.floor(bdata.length / pgblock);
     let pgadd = bdata.length % pgblock;
     // 페이징 코드 변수
     let pgcode = "";
 
     // 3-2 페이징 코드 만들기
-    if(pgadd!=0) pgtotal++;
+    if (pgadd != 0) pgtotal++;
 
-    for(let i =1; i<=pgtotal; i++){
-        pgcode += pgnum == i?  `<b>${i}</b>` : `<a href="#">${i}</a>`
+    for (let i = 1; i <= pgtotal; i++) {
+        pgcode += pgnum == i ? `<b>${i}</b>` : `<a href="#">${i}</a>`;
 
-        if(i != pgtotal) pgcode += ` | `;
-    };
+        if (i != pgtotal) pgcode += ` | `;
+    }
 
     // 3-3 페이징 코드 넣기
-    $(".paging").html(pgcode)
+    $(".paging").html(pgcode);
 
     // 3-5 이벤트 링크 생성하기
-    $(".paging a").on("click",function(e){
+    $(".paging a").on("click", function (e) {
         e.preventDefault();
-        bindList($(this).text(), 9);
-    })
+        bindList($(this).text());
+    });
 }
 // console.log(blist);
 $(() => {
     // 최초 리스트 호출
-    bindList(1,9);
+    bindList(1);
 });

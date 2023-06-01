@@ -11,12 +11,31 @@
 
 객체 구조
 {
-    idx : "",
-    tit: "",
-    cont: "",
-    att: "",
-    date: "",
-    writer: "",
-    pwd: "",
-    cnt: ""
+    "idx"  : "",
+    "tit" : "",
+    "cont" : "",
+    "att" : "",
+    "date" : "",
+    "writer" : "",
+    "pwd" : "",
+    "cnt" : ""
+}
+
+[ raw data 생성하기 ]
+
+let temp = "";
+
+for(let i = 0; i < 50 ; i++){
+    temp +=`
+    {
+        "idx"  : "${i+1}",
+        "tit" : "제목${i+1}",
+        "cont" : "내용${i+1}",
+        "att" : "",
+        "date" : "2023-06-01",
+        "writer" : "관리자",
+        "pwd" : "1111",
+        "cnt" : "1"
+    }
+    `
 }

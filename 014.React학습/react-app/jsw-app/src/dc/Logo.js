@@ -1,6 +1,4 @@
 // DC 로고 컴포넌트
-import React from "react";
-import ReactDOM from "react";
 import isrc from "./Imgsrc";
 
 const Logo = () => {

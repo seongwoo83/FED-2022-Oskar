@@ -64,6 +64,15 @@ const ban_data={
             "cont":`Whether it's as Batgirl or Orphan, Cassandra Cain stands as one of the most compelling and beloved players in the Batman mythos.`,
             "btn":"MEET CASS",
         },
-    ]
+    ],
+    "News":[
+        {
+            "src":"./images/dcm33.jpg",
+            "tit1":"GET TO KNOW",
+            "tit2":"CASSANDRA CAIN",
+            "cont":`Whether it's as Batgirl or Orphan, Cassandra Cain stands as one of the most compelling and beloved players in the Batman mythos.`,
+            "btn":"MEET CASS",
+        },
+    ],
 }
 export default ban_data;

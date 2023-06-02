@@ -3,6 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Layout from './dc/Layout';
+import Characters from './dc/Characters';
+import "./index.css";
+import Main from './dc/Main';
 
 /***********************************************************
     [ 리액트 라우터 ]
@@ -32,6 +35,9 @@ export default function App(){
                 {/* 중요!!! : 레이아웃 컴포넌트를 루트로 잡아줌*/}
                 <Route path="/" element={<Layout />}>
                     {/* 하위 라우트 세팅 */}
+                    {/* path 대신 index만 쓰면 첫 페이지임! */}
+                    <Route index element={<Main />}/>
+                    <Route path='ct' element={<Characters />}/>
                 </Route>
             </Routes>
         </BrowserRouter>
@@ -40,11 +46,7 @@ export default function App(){
 
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
-root.render(
-    <>
-        <App />
-    </>
-);
+root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

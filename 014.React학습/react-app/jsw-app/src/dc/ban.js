@@ -3,12 +3,27 @@ import ban_data from "./data/banner";
 import $ from "jquery";
 
 $(()=>{
+    let prot = 0;
+
+
     // 1. 버튼 클릭시 이동기능 구현
     $(".abtn").on("click",function(){
+        if(prot) return;
+        prot = 1;
+        setTimeout(() => {prot = 0;}, 400);
+
         let isB = $(this).is(".rb");
         // console.log('오른쪽? ', isB);
+
+        // 슬라이드 타겟 설정 : 클릭된 버튼의 형제요소 슬라이더
+        let tg = $(this).siblings(".slider");
+
+        // 2. 분기하여 기능 구현
+        // 2-1 오른쪽 버튼 클릭시: 오른쪽에서 들어옴(left : -100%)
         if(isB){
-            
+            tg.animate({left:"-100%"}, 400, function(){$(this).append($(this).find("li").first()).css({left:"0"});});
+        }else{
+            tg.prepend(tg.find("li").last()).css({left:"-100%"}).animate({left:"0"}, 400);
         }
     });////////click
 });
@@ -44,8 +59,17 @@ function Ban(props) {
                 /* 조건식 && 코드: 조건식이 true 일때 코드 출력 */
                 sel_data.length > 1 &&
                 <>
+                    {/* 양쪽 이동 버튼 */}
                     <button className="abtn lb">＜</button>
                     <button className="abtn rb">＞</button>
+                    {/* 불릿 인디케이터 */}
+                    <ol className="indic">
+                        {
+                            sel_data.map((x,i)=>
+                                <li className={i === 0? 'on' : "" }></li>
+                                )
+                        }
+                    </ol>
                 </>
             }
         </div>

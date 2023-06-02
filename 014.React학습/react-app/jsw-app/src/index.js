@@ -6,6 +6,9 @@ import Layout from './dc/Layout';
 import Characters from './dc/Characters';
 import "./index.css";
 import Main from './dc/Main';
+import Comics from './dc/Comics';
+import Movies from './dc/Movies';
+import Games from './dc/Games';
 
 /***********************************************************
     [ 리액트 라우터 ]
@@ -38,6 +41,9 @@ export default function App(){
                     {/* path 대신 index만 쓰면 첫 페이지임! */}
                     <Route index element={<Main />}/>
                     <Route path='ct' element={<Characters />}/>
+                    <Route path='co' element={<Comics />}/>
+                    <Route path='mv' element={<Movies />}/>
+                    <Route path='gm' element={<Games />}/>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -5,7 +5,7 @@ import Ban from "./ban";
 const Characters = () =>{
     return (
         <>
-            <Ban cat="characters" />
+            <Ban cat="Characters" />
         </>
     );
 }

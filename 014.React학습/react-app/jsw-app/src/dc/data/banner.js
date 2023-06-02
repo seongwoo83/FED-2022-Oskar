@@ -1,5 +1,5 @@
 const ban_data={
-    "main":[
+    "Main":[
         {
             "src":"./images/dcm21.jpg",
             "tit1":"GOTHAM GAZETTE",
@@ -8,7 +8,7 @@ const ban_data={
             "btn":"NEW PLACES FAMILAR FACES"
         },
     ],
-    "characters":[
+    "Characters":[
         {
             "src":"./images/dcm23.jpg",
             "tit1":"GET TO KNOW",
@@ -36,6 +36,33 @@ const ban_data={
             "tit2":"RYAN CHOI",
             "cont":`When the original Atom went missing, he left his student with. size-changing belt -- and Ryan Choi fulfilled his destiny as the All-New Atom!`,
             "btn":"MEET RYAN",
+        },
+    ],
+    "Comics":[
+        {
+            "src":"./images/dcm3.jpg",
+            "tit1":"GET TO KNOW",
+            "tit2":"CASSANDRA CAIN",
+            "cont":`Whether it's as Batgirl or Orphan, Cassandra Cain stands as one of the most compelling and beloved players in the Batman mythos.`,
+            "btn":"MEET CASS",
+        },
+    ],
+    "Movies":[
+        {
+            "src":"./images/dcm34.jpg",
+            "tit1":"GET TO KNOW",
+            "tit2":"CASSANDRA CAIN",
+            "cont":`Whether it's as Batgirl or Orphan, Cassandra Cain stands as one of the most compelling and beloved players in the Batman mythos.`,
+            "btn":"MEET CASS",
+        },
+    ],
+    "Games":[
+        {
+            "src":"./images/dcm37.jpg",
+            "tit1":"GET TO KNOW",
+            "tit2":"CASSANDRA CAIN",
+            "cont":`Whether it's as Batgirl or Orphan, Cassandra Cain stands as one of the most compelling and beloved players in the Batman mythos.`,
+            "btn":"MEET CASS",
         },
     ]
 }

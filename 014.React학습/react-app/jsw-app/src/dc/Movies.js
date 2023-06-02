@@ -2,12 +2,12 @@
 import React from "react";
 import Ban from "./ban";
 
-const Main = () =>{
+const Movies = () =>{
     return(
         <>
-            <Ban cat="Main" />
+            <Ban cat="Movies" />
         </>
     );
 };
 
-export default Main;
+export default Movies;

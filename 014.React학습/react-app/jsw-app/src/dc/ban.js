@@ -25,12 +25,17 @@ $(()=>{
         }else{
             tg.prepend(tg.find("li").last()).css({left:"-100%"}).animate({left:"0"}, 400);
         }
+
+        // 3. 배너와 일치하는 불릿 클래스 "on" 넣기
+        // 대상:  .indic li
+        $(".indic li").eq(tg.find("li").eq(isB).attr("data-seq")).addClass("on").siblings().removeClass("on")
+
     });////////click
 });
 
 function MakeList(props) {
     return (
-        <li>
+        <li data-seq={props.idx}>
             <img src={props.rec["src"]} alt="배너" className="banimg" />
             <section className="bantit">
                 <h3>{props.rec["tit1"]}</h3>
@@ -51,7 +56,7 @@ function Ban(props) {
             {/* 이동 슬라이드 */}
             <ul className="slider">
                 {
-                    sel_data.map((x, i)=><MakeList rec={x} key={i}/>)
+                    sel_data.map((x, i)=><MakeList rec={x} idx={i} key={i}/>)
                 }
             </ul>
             {/* 이동버튼+슬라이드 불릿 : 슬라이드가 두 장 이상일 때 */}
@@ -66,7 +71,7 @@ function Ban(props) {
                     <ol className="indic">
                         {
                             sel_data.map((x,i)=>
-                                <li className={i === 0? 'on' : "" }></li>
+                                <li className={i === 0? 'on' : "" } key={i}></li>
                                 )
                         }
                     </ol>

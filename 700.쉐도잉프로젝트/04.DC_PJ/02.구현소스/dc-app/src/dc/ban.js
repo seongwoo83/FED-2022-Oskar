@@ -2,36 +2,40 @@ import "./css/ban.css";
 import ban_data from "./data/banner";
 import $ from "jquery";
 
-$(()=>{
-    let prot = 0;
 
-
-    // 1. 버튼 클릭시 이동기능 구현
-    $(".abtn").on("click",function(){
-        if(prot) return;
-        prot = 1;
-        setTimeout(() => {prot = 0;}, 400);
-
-        let isB = $(this).is(".rb");
-        // console.log('오른쪽? ', isB);
-
-        // 슬라이드 타겟 설정 : 클릭된 버튼의 형제요소 슬라이더
-        let tg = $(this).siblings(".slider");
-
-        // 2. 분기하여 기능 구현
-        // 2-1 오른쪽 버튼 클릭시: 오른쪽에서 들어옴(left : -100%)
-        if(isB){
-            tg.animate({left:"-100%"}, 400, function(){$(this).append($(this).find("li").first()).css({left:"0"});});
-        }else{
-            tg.prepend(tg.find("li").last()).css({left:"-100%"}).animate({left:"0"}, 400);
-        }
-
-        // 3. 배너와 일치하는 불릿 클래스 "on" 넣기
-        // 대상:  .indic li
-        $(".indic li").eq(tg.find("li").eq(isB).attr("data-seq")).addClass("on").siblings().removeClass("on")
-
-    });////////click
-});
+// 로드구역 함수화 하기
+function jqfn(){
+    $(()=>{
+        let prot = 0;
+    
+    
+        // 1. 버튼 클릭시 이동기능 구현
+        $(".abtn").on("click",function(){
+            if(prot) return;
+            prot = 1;
+            setTimeout(() => {prot = 0;}, 400);
+    
+            let isB = $(this).is(".rb");
+            // console.log('오른쪽? ', isB);
+    
+            // 슬라이드 타겟 설정 : 클릭된 버튼의 형제요소 슬라이더
+            let tg = $(this).siblings(".slider");
+    
+            // 2. 분기하여 기능 구현
+            // 2-1 오른쪽 버튼 클릭시: 오른쪽에서 들어옴(left : -100%)
+            if(isB){
+                tg.animate({left:"-100%"}, 400, function(){$(this).append($(this).find("li").first()).css({left:"0"});});
+            }else{
+                tg.prepend(tg.find("li").last()).css({left:"-100%"}).animate({left:"0"}, 400);
+            }
+    
+            // 3. 배너와 일치하는 불릿 클래스 "on" 넣기
+            // 대상:  .indic li
+            $(".indic li").eq(tg.find("li").eq(isB).attr("data-seq")).addClass("on").siblings().removeClass("on")
+    
+        });////////click
+    });
+}
 
 function MakeList(props) {
     return (
@@ -77,6 +81,8 @@ function Ban(props) {
                     </ol>
                 </>
             }
+            {/* JS / jQuery  로드구역 호출 */}
+            {jqfn()}
         </div>
     );
 } /////////// Ban

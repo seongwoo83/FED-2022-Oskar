@@ -40,7 +40,9 @@ export default function App(){
                 {/* 중요!!! : 레이아웃 컴포넌트를 루트로 잡아줌*/}
                 <Route path="/" element={<Layout />}>
                     {/* 하위 라우트 세팅 */}
-                    {/* path 대신 index만 쓰면 첫 페이지임! */}
+                    {/* path 대신 index만 쓰면 첫 페이지임! 
+                        -> Layout 의 Link to="/"에 해당는는 세팅임. 필수 세팅
+                    */}
                     <Route index element={<Main />}/>
                     <Route path='ct' element={<Characters />}/>
                     <Route path='co' element={<Comics />}/>

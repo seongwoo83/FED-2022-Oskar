@@ -317,6 +317,42 @@ $(function () { //// jQB2 //////////////////////////
         sound? $(this).attr("src", "./images/speaker_blue.png") : $(this).attr("src","./images/speaker-mute_blue.png");
     });
 
+    // 2-3 재생위치 변경기능(클릭/드래그)
+    // 1) 비디오 현재 진행바 기능(시간 경과 표시)
+    // 사용할 이벤트: timeupdate (비디오 요 소의 시간이 변경될 때 발생)
+    // on(이벤트, function(){})
+    mv.on("timeupdate",function(){
+        // 목표: 비디오가 재생중일 때 진행바가 움직임
+        // 원리: 진행바의 진행 비율을  %로 나타냄
+        // 계산법: 현재시간 / 전체시간 * 100 -> 백분율
+
+        // 1. 비디오 현재 시간 가져오기
+        let ctime = $(this)[0].currentTime;
+        // console.log(ctime);
+
+        // 2. 비디오 전체 재생시간 가져오기
+        let ftime = $(this)[0].duration;
+        // console.log(ftime); 
+
+        // 3. 진행바 변경하기
+        // 현재시간이 0 일경유 전체 시간이 안나옴
+        // toFixed(자릿수) -> 소숫점 자리수 표현하기
+        if(!isNaN(ftie)){
+            let percent = (ctime / ftime *100).toFixed(2);
+
+            // 4. 진행바의 width를 percent 값으로 변경
+            $(".tBar").css({
+                width: percent+"%"
+            });
+        }
+
+    })
+
+
+
+
+
+
 
     ///// 3. 영화페이지 : 스와이퍼 적용하기 //////
     // swiper변수를 전역변수로 만들고 페이지액션에서 사용!

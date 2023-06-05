@@ -1,11 +1,7 @@
 import $ from 'jquery';
 import './css/menubtn.css'
 
-function jqfn(){
-    $(()=>{
-
-    });
-}
+function jqfn(){$(()=>{});}
 function MenuBtn(pros){
     return(
         <>
@@ -15,11 +11,11 @@ function MenuBtn(pros){
                         <img src={pros.rec.isrc} alt="cardboard" />
                     </div>
                     <div class="titbx">
-                        <h3>{pros.rec.h3}</h3>
-                        <h2>{pros.rec.h2}</h2>
+                        <h3>{pros.rec.tit.split("^")[0]}</h3>
+                        <h2>{pros.rec.tit.split("^")[1]}</h2>
                     </div>
                     <div class="btnbx">
-                        <button>{pros.rec.btntxt}</button>
+                        <button ><a href={pros.rec.link}>{pros.rec.btn}</a></button>
                     </div>
                 </div>
             </section>

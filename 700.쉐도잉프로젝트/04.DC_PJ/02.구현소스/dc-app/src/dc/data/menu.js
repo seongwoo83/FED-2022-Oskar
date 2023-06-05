@@ -3,13 +3,13 @@ const mdata=[
         "isrc": "./images/dcmmenu1.jpg",
         "tit": "WORLDS COLLIDE^THE FLASH IS ONLY IN THEATERS JUNE 16",
         "btn" : "TICKETS ON SALE NOW",
-        "link" : "/co"
+        "link" : "/mv"
     },
     {
         "isrc": "./images/dcmmenu2.jpg",
         "tit": "DC SHOP^GET NUTS WITH THE 1/6 SCALE BATMAN FIGURE",
         "btn" : "SHOP NEW ARRIVALS",
-        "link" : "/co"
+        "link" : "/gm"
     },
     {
         "isrc": "./images/dcmmenu3.jpg",
@@ -21,7 +21,7 @@ const mdata=[
         "isrc": "./images/dcmmenu4.jpg",
         "tit": "DC COMMUNITY^SHARE YOUR DC PRIDE FANWORKS",
         "btn" : "SUBMIT YOUR ART",
-        "link" : "/co"
+        "link" : "/vd"
     },
 
 ]

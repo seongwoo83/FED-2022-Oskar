@@ -1,21 +1,22 @@
 import $ from 'jquery';
 import './css/menubtn.css'
+import { Link } from 'react-router-dom';
 
 function jqfn(){$(()=>{});}
 function MenuBtn(pros){
     return(
         <>
-            <section class="menubtn">
+            <section className="menubtn">
                 <div >
-                    <div class="imbx">
+                    <div className="imbx">
                         <img src={pros.rec.isrc} alt="cardboard" />
                     </div>
-                    <div class="titbx">
+                    <div className="titbx">
                         <h3>{pros.rec.tit.split("^")[0]}</h3>
                         <h2>{pros.rec.tit.split("^")[1]}</h2>
                     </div>
-                    <div class="btnbx">
-                        <button ><a href={pros.rec.link}>{pros.rec.btn}</a></button>
+                    <div className="btnbx">
+                        <button ><Link to={pros.rec.link}>{pros.rec.btn}</Link></button>
                     </div>
                 </div>
             </section>

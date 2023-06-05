@@ -68,3 +68,26 @@
     font-weight: bold;
     letter-spacing:  -1px;
 }
+
+@media screen and (max-width: 1300px){
+    .btnbx{
+        bottom: 10%;
+    }
+}
+@media screen and (max-width: 1130px){
+    .btnbx{
+        bottom: 15%;
+    }
+}
+@media screen and (max-width: 980px){
+    .menubx{
+        flex-wrap: wrap;
+    }
+    .menubtn{
+        width: 40%;
+        padding-bottom: 6%;
+    }
+    .btnbx{
+        bottom: 5%;
+    }
+}

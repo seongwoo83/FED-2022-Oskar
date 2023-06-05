@@ -91,3 +91,9 @@
         bottom: 5%;
     }
 }
+@media screen and (max-width: 600px){
+    .menubtn{
+        width: 80%;
+        padding-bottom: 10%;
+    }
+}

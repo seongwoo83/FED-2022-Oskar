@@ -1,6 +1,16 @@
 @charset "UTF-8";
 
+a{
+    color: inherit;
+}
 .vid_box{
+    width: 100%;
+}
+.vid_box.on{
+    background-color: #0074e8;
+    color: #fff;
+}
+.vid_container{
     max-width: 1400px;
     width: 80%;
     padding: 40px 0;
@@ -52,4 +62,16 @@
     background-color: #0074eb;
     color: #fff;
     border: 2px solid #fff;
+}
+
+@media screen and (max-width:1024px) {
+    .vid_container{
+        flex-direction: column;
+    }
+    .video_box{
+        width: 100%;
+    }
+    .title_box{
+        width: 100%;
+    }
 }

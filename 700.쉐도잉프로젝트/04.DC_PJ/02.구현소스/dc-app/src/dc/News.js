@@ -1,6 +1,6 @@
 // DC 뉴스 페이지 컴포넌트
 import React from "react";
-import Ban from "./ban";
+import Ban from "./modules/ban";
 
 const News = () =>{
     return(

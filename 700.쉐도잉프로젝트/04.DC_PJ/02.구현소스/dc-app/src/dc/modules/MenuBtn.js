@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import './css/menubtn.css'
+import '../css/menubtn.css'
 import { Link } from 'react-router-dom';
 
 function jqfn(){$(()=>{});}

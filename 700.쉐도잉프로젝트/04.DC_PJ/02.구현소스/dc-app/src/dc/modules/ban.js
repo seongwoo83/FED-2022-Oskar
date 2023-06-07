@@ -1,5 +1,5 @@
-import "./css/ban.css";
-import ban_data from "./data/banner";
+import "../css/ban.css";
+import ban_data from "../data/banner";
 import $ from "jquery";
 
 

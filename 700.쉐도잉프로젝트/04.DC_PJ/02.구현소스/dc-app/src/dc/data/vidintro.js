@@ -4,8 +4,8 @@ const vidintro_data = {
         "stit": "FEATURED VIDEO",
         "btit": "THE FLASH – OFFICIAL TRAILER 2",
         "sum": "Watch worlds collide in trailer 2 for The Flash - Only in Theaters June 16.",
-        "desc": "Warner Bros. Pictures presents The Flash, directed by Andy Muschietti (the IT films, Mama). Ezra Miller reprises their role as Barry Allen in the DC Super Hero’s first-ever standalone feature film.",
-        "link": ["Visit Our Official Flash!", "https://www.dc.com/theflash"],
+        "desc": "Advance tickets available now! * hub for tickets and showtimes!",
+        "link": ["Visit Our Official Flash", "https://www.dc.com/theflash"],
     },
     "CHARACTERS": {
         "vsrc": "https://www.youtube.com/embed/bFmeHsaYn8Y",
@@ -48,12 +48,12 @@ const vidintro_data = {
         "link": ["","관련링크"],
     },
     "VIDEO": {
-        "vsrc": "유튜브 동영상 경로",
-        "stit": "작은타이틀",
-        "btit": "큰타이틀",
-        "sum": "요약소개",
-        "desc": "설명",
-        "link": ["","관련링크"],
+        "vsrc": "https://www.youtube.com/embed/uJ1IEYeHCgE",
+        "stit": "FEATURED VIDEO",
+        "btit": "THE FLASH - DRONE SHOW AT VIVID SYDNEY",
+        "sum": "Visit our Flash Hub for all things The Flash and to find tickets and showtimes near you!",
+        "desc": "In case you missed it - The Flash was included as part of the biggest ever opening weekend of * where 1,053 drones were used to create the largest drone show in the southern hemisphere!",
+        "link": ["Vivid Sydney", "https://www.vividsydney.com/"],
     },
 };
 

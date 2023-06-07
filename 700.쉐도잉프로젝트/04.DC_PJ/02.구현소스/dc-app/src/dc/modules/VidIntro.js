@@ -8,8 +8,15 @@ function jqfn(){
 
     });
 }
+
+
+
 function VidIntro(props){
     let sdt = vidintro_data[props.pg]
+
+    const lcode =(data)=>{
+
+    }
     return(
         <>
             <section className='vid_box'>
@@ -20,10 +27,14 @@ function VidIntro(props){
                     <h3>{sdt.stit}</h3>
                     <h2>{sdt.btit}</h2>
                     <p>{sdt.sum}</p>
-                    <p>{sdt.desc}</p>
+                    <p className='desc'>
+                        {sdt.desc.split("*")[0]}
+                        <a href={sdt.link[1]} target="_blank">
+                            {sdt.link[0]}</a> 
+                        { sdt.desc.split("*")[1]}
+                    </p>
                     {
-                        sdt.link[0] != "" && 
-                        <a className='link_btn' href={sdt.link[1]} target='_blank'>{sdt.link[0]}</a>
+                        sdt.link[0] != "" && <a className='link_btn' href={sdt.link[1]} target='_blank'>{sdt.link[0]}</a>
                     }
                 </div>
             </section>

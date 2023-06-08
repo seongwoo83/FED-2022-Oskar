@@ -12,6 +12,7 @@
     box-shadow: 0 0 5px #aaa;
     min-height: 280px;
     justify-content: space-between;
+    cursor: pointer;
 }
 .swiper-slide h4{
     margin: 0;

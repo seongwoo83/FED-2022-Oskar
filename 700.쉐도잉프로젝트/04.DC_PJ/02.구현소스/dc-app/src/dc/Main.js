@@ -4,6 +4,7 @@ import mdata from "./data/menu";
 import Ban from "./modules/ban";
 import MenuBtn from "./modules/MenuBtn";
 import VidIntro from "./modules/VidIntro";
+import Vidswipe from "./modules/VidSwipe";
 
 const Main = () =>{
     return(
@@ -15,6 +16,7 @@ const Main = () =>{
                 })}
             </div>
             <VidIntro pg={"main"}/>
+            <Vidswipe />
         </>
     );
 };

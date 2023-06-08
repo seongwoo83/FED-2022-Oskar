@@ -1,31 +1,37 @@
-import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from 'swiper';
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-
 import "./swipervid.css";
+import swipervid_data from "../data/swipervid";
 
-// import required modules
+export default function SwiperVId() {
 
-export default function SwiperVId(props) {
-
-    const data = [];
-
-
+    let sdt = swipervid_data;
     return (
         <>
             <Swiper
                 slidesPerView={4}
                 spaceBetween={10}
                 navigation
-                loop={true}
                 modules={[Navigation]}
                 className="mySwiper"
             >
-                <SwiperSlide>Slide 1</SwiperSlide>
+                {
+                    sdt.map((x,i)=>{
+                        return (
+                            <SwiperSlide key={i}>
+                                <img src={x.isrc} alt="cardboard" />
+                                <p style={{visibility:"hidden", display:"none"}}>{x.vsrc}</p>
+                                <h4>{x.cat}</h4>
+                                <h2>{x.tit}</h2>
+                            </SwiperSlide>
+                        )
+                    })
+                }
+                
             </Swiper>
         </>
     );

@@ -26,11 +26,39 @@ const Layout = () => {
         },
         {
             txt:"COMICS",
-            link:"/co"
+            link:"/co",
+            sub:[
+                {
+                    txt:"LATEST COMICS",
+                    link:"/lc"
+                },
+                {
+                    txt:"DC UNIVERSE INFINITE",
+                    link:"/du"
+                },
+                {
+                    txt:"ALL COMICS SERIES",
+                    link:"/ac"
+                },
+            ]
         },
         {
             txt:"MOVIES & TV",
-            link:"/mv"
+            link:"/mv",
+            sub:[
+                {
+                    txt:"DC MOVIES",
+                    link:"/dm"
+                },
+                {
+                    txt:"DC SERIES",
+                    link:"/ds"
+                },
+                {
+                    txt:"DC ON HBO MAX",
+                    link:"/hbo"
+                },
+            ]
         },
         {
             txt:"GAMES",
@@ -59,7 +87,21 @@ const Layout = () => {
                         {
                             gnb_data.map((v,i)=>
                                 <li key={i}>
-                                    <Link to={v.link}>{v.txt}</Link> 
+                                    <Link to={v.link}>{v.txt}</Link>
+                                    {
+                                        v.sub !== undefined && 
+                                        <div className="smenu">
+                                            <ol>
+                                                {
+                                                    v.sub.map((v,i)=>
+                                                        <li>
+                                                            <Link to={v.link}>{v.txt}</Link>
+                                                        </li>
+                                                    )
+                                                }
+                                            </ol>
+                                        </div>
+                                    }
                                 </li>
                             )
                         }

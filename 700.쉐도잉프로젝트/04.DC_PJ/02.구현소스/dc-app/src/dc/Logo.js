@@ -7,6 +7,7 @@ const Logo = () => {
         width: "45px",
         height: "45px",
         borderRadius: "50%",
+        marginRight:"20px"
         // outline:"3px solid lime"
     };
 

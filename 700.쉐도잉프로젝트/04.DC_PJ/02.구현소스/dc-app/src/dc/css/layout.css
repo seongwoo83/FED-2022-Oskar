@@ -27,6 +27,7 @@
     color: #222;
     text-decoration: none;
     font-weight: bold;
+    letter-spacing: -2px;
 }
 .gnb a:hover{
     color: hotpink;
@@ -95,7 +96,29 @@ iframe{
 /* 하단영역 */
 .info{
     text-align: center;
-    padding: 30px;
+    padding: 15px;
     background-image: linear-gradient(to bottom, #CCC, #777);
     color: #fff;
+}
+.info ul{
+    display: flex;
+    flex-direction: column;
+}
+.info>ul>li>h1{
+    margin: 0 auto !important;
+}
+.bmenu{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.bmenu li{
+    padding-right: 10px;
+}
+.bmenu a:hover{
+    color: #0ff;
+}
+.bmenu li+li{
+    padding-left: 10px;
+    border-left: 1px solid #fff;
 }

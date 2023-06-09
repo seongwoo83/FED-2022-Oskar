@@ -20,10 +20,6 @@ const Layout = () => {
     /* GNB메뉴 데이터 구성하기 */
     const gnb_data = [
         {
-            txt:"Home",
-            link:"/"
-        },
-        {
             txt:"CHARACTERS",
             link:"/ct"
         },
@@ -76,6 +72,7 @@ const Layout = () => {
             link:"/vd"
         },
     ];
+    const bmenu=['PRIVACY POLICY', 'TERMS', 'AD CHOICES', 'ACCESABILITY', 'COOKIE SETTINGS']
 
     return (
         <>
@@ -85,7 +82,7 @@ const Layout = () => {
                 <nav className="gnb">
                     <ul>
                         <li>
-                            <Logo />
+                            <Link to="/"><Logo /></Link>
                         </li>
                         {
                             gnb_data.map((v,i)=>
@@ -127,9 +124,20 @@ const Layout = () => {
             </main>
             {/* 3.하단영역 */}
             <footer className="info">
-                All Site Content © &amp; TM DC, unless otherwise noted here.
-                <br />
-                All rights reserved.
+                <ul>
+                    <li><Logo /></li>
+                    <li>
+                        <ol className="bmenu">
+                            {
+                                bmenu.map((v,i)=>
+                                    <li><a href=" ">{v}</a></li>
+                                )
+                            }
+                        </ol>
+                    </li>
+                    <li>All Site Content © &amp; TM DC, unless otherwise noted here.</li>
+                    <li>All rights reserved.</li>
+                </ul>
             </footer>
         </>
     );

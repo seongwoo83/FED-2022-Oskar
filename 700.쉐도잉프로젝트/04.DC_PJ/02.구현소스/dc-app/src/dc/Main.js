@@ -17,6 +17,7 @@ const Main = () =>{
             </div>
             <VidIntro pg={"main"}/>
             <Vidswipe />
+            <Ban cat="Characters" />
         </>
     );
 };

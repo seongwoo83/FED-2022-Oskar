@@ -29,15 +29,15 @@ const Layout = () => {
             sub:[
                 {
                     txt:"LATEST COMICS",
-                    link:"/lc"
+                    link:"/co1"
                 },
                 {
                     txt:"DC UNIVERSE INFINITE",
-                    link:"/du"
+                    link:"/co2"
                 },
                 {
                     txt:"ALL COMICS SERIES",
-                    link:"/ac"
+                    link:"/co3"
                 },
             ]
         },
@@ -47,15 +47,15 @@ const Layout = () => {
             sub:[
                 {
                     txt:"DC MOVIES",
-                    link:"/dm"
+                    link:"/mv"
                 },
                 {
                     txt:"DC SERIES",
-                    link:"/ds"
+                    link:"/mv"
                 },
                 {
                     txt:"DC ON HBO MAX",
-                    link:"/hbo"
+                    link:"/mv"
                 },
             ]
         },
@@ -130,7 +130,7 @@ const Layout = () => {
                         <ol className="bmenu">
                             {
                                 bmenu.map((v,i)=>
-                                    <li><a href=" ">{v}</a></li>
+                                    <li key={i}><a href=" ">{v}</a></li>
                                 )
                             }
                         </ol>

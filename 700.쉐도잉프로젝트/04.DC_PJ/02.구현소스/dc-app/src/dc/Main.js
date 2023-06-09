@@ -9,7 +9,7 @@ import Vidswipe from "./modules/VidSwipe";
 const Main = () =>{
     return(
         <>
-            <Ban cat="Main" />
+            <Ban cat={"Main"+Math.ceil(Math.random()*2)}/>
             <div className="menubx" >
                 {mdata.map((x, i)=>{
                     return <MenuBtn rec={x} key={i} /> 

@@ -2,10 +2,19 @@
 import React from "react";
 import VidIntro from "./modules/VidIntro";
 
-const Comics = () =>{
+const Comics = (props) =>{
+    console.log(props.sub);
+    const tit_data=[
+        "",
+        "LATEST COMICS & GRAPHIC NOVELS ",
+        "DC UNIVERSE INFINITE",
+        "ALL COMICS SERIES"
+    ]
+
     return(
         <>
-            <h2>COMICS 페이지</h2>
+            <h1>COMICS 페이지</h1>
+            <h2>{tit_data[props.sub]}</h2>
             <VidIntro pg='COMICS' />
         </>
     );

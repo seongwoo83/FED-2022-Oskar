@@ -12,6 +12,7 @@ import Games from './dc/Games';
 import News from './dc/News';
 import Video from './dc/Video';
 import Member from './dc/Member';
+import ScrollTop from './dc/common/ScrollTop';
 
 /***********************************************************
     [ 리액트 라우터 ]
@@ -37,6 +38,7 @@ import Member from './dc/Member';
 export default function App(){
     return (
         <BrowserRouter>
+            <ScrollTop />
             <Routes>
                 {/* 중요!!! : 레이아웃 컴포넌트를 루트로 잡아줌*/}
                 <Route path="/" element={<Layout />}>

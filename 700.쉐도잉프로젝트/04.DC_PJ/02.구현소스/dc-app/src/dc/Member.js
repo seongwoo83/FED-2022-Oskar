@@ -64,10 +64,31 @@ function Member(){
     // 1. 아이디 유효성 검사
     const changeUserId = e =>{
         const valid = /^[A-Za-z0-9+]{5,}$/;
-        // 입력값 확인
-        console.log(e.target.value)
-    }
+        
+        // 에러아님 상태 if문
+        // 조건 : 유효성 검사결과가 true인가? 에러상태 false(에러 아님)
+        // 정규식.test() -> 정규식 검사결과 리턴 메서드
+        // 결과: true이면 에러상태값  false/ false이면 에러상태값 true
+        if(valid.test(e.target.value)){
+            setUserIdError(false);
+        }else{
+            setUserIdError(true);
+        }
 
+        // 실제 userId 후크 변수 값이 업데이트 되어야 화면에 출력됨
+        setUserId(e.target.value);
+
+    }
+    // 2. 비밀번호 유효성 검사
+    const changePwd = e =>{
+        const valid = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if(valid.test(e.target.value)){
+            setPwdError(false);
+        }else{
+            setPwdError(true);
+        }
+        setPwd(e.target.value);
+    }
 
 
     return(
@@ -82,14 +103,29 @@ function Member(){
                     {
                         // 에러일 경우 메세지 보여주기
                         // 조건문 && 요소 => 조건이 true이면 요소 출력
+                        userIdError &&
                         <div className='msg'>
                             <small style={{color:"red", fontSize:"10px"}}>
                                 사용자 아이디는 5글자 이상 문자 또는 숫자를 포함해야 합니다.
                             </small>
                         </div>
+                        // value={userId}값은 setUserId를 통해서만 업데이트되어 화면에 출력된다
+                        
+                        // onChange={changeUserId} ->change이벤트 발생시 changeUserId호출
                     }
+                    
 
                     {/* 2. 비밀번호 */}
+                    <label>비밀번호를 입력하세요</label>
+                    <input type='password' maxLength="20"  placeholder='비밀번호를 입력하세요' value={pwd} onChange={changePwd}/>
+                    {
+                        pwdError &&
+                        <div className='msg'>
+                            <small style={{color:"red", fontSize:"10px"}}>
+                            비밀번호는 8자 이상이어야 하며 문자와 숫자를 각각 하나 이상 포함해야 합니다.
+                            </small>
+                        </div>
+                    }
                     {/* 3. 이름 */}
                     {/* 4. 이메일 */}
                     {/* 5. 버튼 */}

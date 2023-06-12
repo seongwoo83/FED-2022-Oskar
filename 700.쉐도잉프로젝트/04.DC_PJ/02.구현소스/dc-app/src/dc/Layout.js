@@ -94,7 +94,7 @@ const Layout = () => {
                                             <ol>
                                                 {
                                                     v.sub.map((v,i)=>
-                                                        <li>
+                                                        <li key={i}>
                                                             <Link to={v.link}>{v.txt}</Link>
                                                         </li>
                                                     )
@@ -109,7 +109,7 @@ const Layout = () => {
                             <FontAwesomeIcon icon={faMagnifyingGlass} fade size="lg"/>
                         </li>
                         <li>
-                            <Link to="/signup">SIGN UP</Link>
+                            <Link to="/mem">JOIN US</Link>
                         </li>
                         <li>
                             <Link to="/login">LOGIN</Link>

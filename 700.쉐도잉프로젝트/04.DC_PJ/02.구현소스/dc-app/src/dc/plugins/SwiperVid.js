@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Import Swiper React components
 import  {React, useRef, useState} from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";

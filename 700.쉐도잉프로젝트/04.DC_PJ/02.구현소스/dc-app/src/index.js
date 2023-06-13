@@ -37,8 +37,8 @@ import ScrollTop from './dc/common/ScrollTop';
 // 레이아웃 컴포넌트를 라우터에 입혀서 화면에 출력해야하기 때문에 스스로 내보내기를  세팅한다.
 export default function App(){
     return (
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
-            {/* <BrowserRouter> */}
+            <BrowserRouter>
+            {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
             <ScrollTop />
             <Routes>
                 {/* 중요!!! : 레이아웃 컴포넌트를 루트로 잡아줌*/}

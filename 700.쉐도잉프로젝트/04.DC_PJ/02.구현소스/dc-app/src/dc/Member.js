@@ -97,7 +97,7 @@ function Member() {
     // 4. 이름 유효성 검사
     const changeUserName = (e) => {
         // 1. 에러상태를 먼저 false로 세팅
-        if(userName !== ""){
+        if(e.target.value !== ""){
             setUserNameError(false);
         }else{
             setUserNameError(true);

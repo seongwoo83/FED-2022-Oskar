@@ -37,7 +37,8 @@ import ScrollTop from './dc/common/ScrollTop';
 // 레이아웃 컴포넌트를 라우터에 입혀서 화면에 출력해야하기 때문에 스스로 내보내기를  세팅한다.
 export default function App(){
     return (
-        <BrowserRouter>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
+            {/* <BrowserRouter> */}
             <ScrollTop />
             <Routes>
                 {/* 중요!!! : 레이아웃 컴포넌트를 루트로 잡아줌*/}
@@ -47,6 +48,7 @@ export default function App(){
                         -> Layout 의 Link to="/"에 해당는는 세팅임. 필수 세팅
                     */}
                     <Route index element={<Main />}/>
+                    <Route path='main' element={<Main />}/>
                     <Route path='ct' element={<Characters />}/>
                     <Route path='co' element={<Comics />}/>
                     <Route path='co1' element={<Comics sub={1}/>}/>

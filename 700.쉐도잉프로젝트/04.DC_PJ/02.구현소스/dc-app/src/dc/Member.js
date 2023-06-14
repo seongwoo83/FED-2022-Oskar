@@ -1,6 +1,7 @@
 import $ from "jquery";
 import "./css/member.css";
 import { React, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 function jqfn() {
     $(() => {});
@@ -55,6 +56,17 @@ function Member() {
     // 5. 이메일 에러 변수
     const [emailError, setEmailError] = useState(false);
 
+
+    // 아이디 관련 메시지 프리셋
+    const msgId = [
+        "User ID must contain a minimum of 5 characters long",
+        "This ID is already in use!",
+        "That's a great ID!"
+    ]
+
+    // 후크 변수 메시지
+    const [idMsg, setIdMsg] = useState(msgId[0])
+
     // 유효성 검사 메서드
     // 1. 아이디 유효성 검사
     const changeUserId = (e) => {
@@ -65,6 +77,18 @@ function Member() {
         // 정규식.test() -> 정규식 검사결과 리턴 메서드
         // 결과: true이면 에러상태값  false/ false이면 에러상태값 true
         if (valid.test(e.target.value)) {
+            let memData = localStorage.getItem("mem-data");
+            if(memData){
+                memData = JSON.parse(memData);
+                memData.forEach(v => {
+                    if(v.uid === e.target.value){
+                        setIdMsg(msgId[1]);
+                        userIdError(true);
+                    }else{
+                        console.log("There's no DB");
+                    }
+                });
+            }
             setUserIdError(false);
         } else {
             setUserIdError(true);
@@ -109,7 +133,7 @@ function Member() {
     const changeEmail = (e) => {
 
         // 이메일 정규식 세팅
-        const valid = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        const valid = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
         
         if(valid.test(e.target.value)){
             setEmailError(false);
@@ -118,6 +142,56 @@ function Member() {
         }
         setEmail(e.target.value);
     };
+
+    // 6. 전체 유효성 검사 함수
+    const totalValid = ()=>{
+        if(!userId) setUserIdError(true);
+        if(!pwd) setPwdError(true);
+        if(!chkPwd) setChkPwdError(true);
+        if(!userName) setUserNameError(true);
+        if(!email) setEmailError(true);
+
+        // 에러 후크 변수가 모두 false일 경우 true 값 리턴
+        if(userId && pwd && chkPwd && userName && email && !userIdError && !pwdError && !chkPwdError && !userNameError && !emailError){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+
+    // 7. submit 기능 함수
+    const onSubmit = (e)=>{
+        e.preventDefault();
+        // 유효성 검사 전체 통과시
+        if(totalValid()){
+            // alert("처리페이지로 이동!");
+            // 만약 localstorage "mem-data"가 null이면 만들어준다
+            if(localStorage.getItem("mem-data") === null){ localStorage.setItem("mem-data",` [{"idx": "1", "uid": "tomtom", "pwd":"1111", "unm":"Tom", "eml":"tom@gmail.com"}] `) }
+            
+            // localstorage 변수할당
+            let memData = localStorage.getItem("mem-data");
+            console.log(localStorage.getItem("mem-data"));
+            
+            // localstorage 객체로 변환하기
+            memData = JSON.parse(memData);
+            console.log(memData);
+            
+            // 새로운 데이터 구성
+            let newObj = { "idx": memData.length+1, "uid": userId, "pwd":pwd, "unm":userName, "eml":email };
+            
+            memData.push(newObj);
+            console.log(memData);
+            localStorage.setItem("mem-data", JSON.stringify(memData));
+            console.log(localStorage.getItem("mem-data"));
+        }else{
+            // alert('입력을 수정하세요!');
+        }
+
+    }
+
+
     return (
         <>
             {/* 모듈코드 */}
@@ -134,7 +208,7 @@ function Member() {
                                 // 조건문 && 요소 => 조건이 true이면 요소 출력
                                 userIdError && (
                                     <div className="msg">
-                                        <small style={{ color: "red", fontSize: "10px" }}>User ID must contain a minimum of 5 characters long.</small>
+                                        <small style={{ color: "red", fontSize: "10px" }}>{idMsg}</small>
                                     </div>
                                 )
                                 // value={userId}값은 setUserId를 통해서만 업데이트되어 화면에 출력된다
@@ -182,8 +256,17 @@ function Member() {
                                 </div>
                             )}
                         </li>
-                        <li>{/* 6. 버튼 */}</li>
-                        <li>{/* 7. 로그인 페이지 링크 */}</li>
+                        <li style={{overflow:"hidden"}}>
+                            {/* 6. 버튼 */}
+                            <button className="sbtn" onClick={onSubmit}>
+                                Submit
+                            </button>
+                        </li>
+                        <li>
+                            {/* 7. 로그인 페이지 링크 */}
+                            Are you already a member? 
+                            <Link to="/login">Log In</Link>
+                        </li>
                     </ul>
                 </form>
             </section>

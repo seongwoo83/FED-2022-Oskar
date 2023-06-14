@@ -2,6 +2,7 @@
 /* Member 모듈용 CSS - member.css  */
 main.cont{
     padding: 25px;
+    text-align: left;
 }
 /* 전체박스 */
 .membx{

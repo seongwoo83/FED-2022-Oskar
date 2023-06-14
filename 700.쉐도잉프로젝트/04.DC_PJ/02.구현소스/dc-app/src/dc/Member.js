@@ -102,14 +102,27 @@ function Member() {
         }else{
             setUserNameError(true);
         }
-        setUserName(e.target.value)
+        setUserName(e.target.value);
     };
+    
+    // 5. 이메일 유효성 검사
+    const changeEmail = (e) => {
 
+        // 이메일 정규식 세팅
+        const valid = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        
+        if(valid.test(e.target.value)){
+            setEmailError(false);
+        }else{
+            setEmailError(true);
+        }
+        setEmail(e.target.value);
+    };
     return (
         <>
             {/* 모듈코드 */}
             <section className="membx">
-                <h2>Member</h2>
+                <h2>Join Us</h2>
                 <form>
                     <ul>
                         <li>
@@ -159,7 +172,16 @@ function Member() {
                                 </div>
                             )}
                         </li>
-                        <li>{/* 5. 이메일 */}</li>
+                        <li>
+                            {/* 5. 이메일 */}
+                            <label>Email : </label>
+                            <input type="text" maxLength="20" placeholder="Please enter your Name" value={email} onChange={changeEmail} />
+                            {emailError && (
+                                <div className="msg">
+                                    <small style={{ color: "red", fontSize: "10px" }}>Please enter a valid eamil format.</small>
+                                </div>
+                            )}
+                        </li>
                         <li>{/* 6. 버튼 */}</li>
                         <li>{/* 7. 로그인 페이지 링크 */}</li>
                     </ul>

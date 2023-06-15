@@ -3,8 +3,13 @@
 // 회원가입과 디자인동일
 import { useState } from "react";
 import "./css/member.css";
+import { initData } from "./fns/fnMem";
+import $ from 'jquery';
+import { useNavigate } from "react-router-dom";
 
 export default function LogIn() {
+    let goRoute = useNavigate();
+
     // [ 후크 useState 메서드 셋팅하기 ]
     // [ 1. 입력요소 후크변수 ]
     // 1. 아이디변수
@@ -81,10 +86,62 @@ export default function LogIn() {
         // 유효성검사 전체 통과시 ////
         if (totalValid()) {
             console.log("성공!");
+            initData();
+            
+            let memData = localStorage.getItem("mem-data");
+            console.log(memData);
+
+            memData = JSON.parse(memData);
+            console.log(memData);
+
+            let isOK = true;
+
+            memData.forEach(v=>{
+                // 같은 아이디가 있는가?
+                if(v["uid"]===userId){
+                    console.log("아이디 같아요~~!");
+                    // 아이디에러 상태 업데이트
+                    setUserIdError(false);
+
+                    // 같은 아이디 검사 상태변수 변경
+                    isOK = false;
+
+                    // 비밀번호가 일치하는가?
+                    if(v["pwd"]===pwd){
+                        console.log("비번 같아요~~!^^")
+                        // 비번에러 상태 업데이트
+                        setPwdError(false);
+                        $(".sbtn").text("로그인된거야~!");
+                        // [ 로그인후 셋팅작업 ]
+                        // 1. 로그인한 회원정보를 로컬쓰에 셋팅(세션대신사용!)
+                        // -> 실제로그인을 하면 서버의 세션변수가 셋팅됨!
+                        localStorage.setItem("minfo",JSON.stringify(v));
+                        console.log(localStorage.getItem("minfo"));
+                        // 2. 라우팅 페이지 이동하기(useNavigate)
+                        goRoute('/'); // 첫페이지로 이동!
+                    }
+                    else{
+                        console.log("비번달라요!ㅜ.ㅜ");
+                        // 비번가 다를때 메시지 변경
+                        setPwdMsg(msgTxt[2]);
+                        // 비번에러 상태 업데이트
+                        setPwdError(true);
+                    }
+                } ////////// if ///////
+            }); //////////// forEach //////////
+
+            if(isOK){
+                console.log("아이디 다름");
+                setIdMsg(msgTxt[1]);
+                setUserIdError(true);
+            }
+
         } /// if ////
         // 불통과시 ////////////////
         else {
             console.log("실패!");
+            setIdMsg(msgTxt[0]);
+            setPwdMsg(msgTxt[0]);
         } /// else /////
     }; ///////////// onSubmit ////////////////
 

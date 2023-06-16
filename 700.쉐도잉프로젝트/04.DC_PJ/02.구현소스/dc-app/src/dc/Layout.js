@@ -110,14 +110,30 @@ const Layout = () => {
                         ))}
 
                         <li style={{ marginLeft: "auto" }}>
-                            <FontAwesomeIcon icon={faSearch} />
+                            <FontAwesomeIcon icon={faSearch} fade/>
                         </li>
-                        <li>
-                            <Link to="/mem">Join Us</Link>
-                        </li>
-                        <li>
-                            <Link to="/login">LOG IN</Link>
-                        </li>
+                        {
+                            /* 회원가입, 로그인은 로그인 아닌 상태일 때만 */
+                            logSts === null && 
+                            <>
+                                <li>
+                                    <Link to="/mem">Join Us</Link>
+                                </li>
+                                <li>
+                                    <Link to="/login">LOG IN</Link>
+                                </li>
+                            </>
+                        }
+                        {
+                            // 로그아웃 버튼은 로그인 상태일 때만
+                            logSts !== null &&
+                            <>
+                                <li>
+                                    { /*eslint-disable-next-line jsx-a11y/anchor-is-valid*/ }
+                                    <a href="#" onClick={logout}>LOG OUT</a>
+                                </li>
+                            </>
+                        }
                     </ul>
                 </nav>
             </header>

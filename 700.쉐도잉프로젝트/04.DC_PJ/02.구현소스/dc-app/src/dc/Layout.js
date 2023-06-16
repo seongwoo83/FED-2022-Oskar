@@ -156,7 +156,7 @@ const Layout = () => {
                                         {v.txt.toUpperCase()}
                                     </a>
                                 </li>
-                            ))}
+                            ))} 
                         </ol>
                     </li>
                     <li>© & ™ DC. ALL RIGHTS RESERVED</li>

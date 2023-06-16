@@ -14,7 +14,7 @@ export default function ScrollTop(){
     // useEffect(함수,[사용할 라우터 페이지]) -> 함수가 실행됨
     useEffect(()=>{
         window.scrollTo(0, 0)
-        console.log("useEffect : ",localStorage.getItem("minfo"));
+        // console.log("useEffect : ",localStorage.getItem("minfo"));
     }, [pathname]);
 
     // 이 컴포넌트 실행은 다른 부가적인 코드를 실행시키지 않는 다는 의미의 null값을 리턴함

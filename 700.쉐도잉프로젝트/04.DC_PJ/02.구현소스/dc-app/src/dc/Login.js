@@ -3,11 +3,12 @@
 // 회원가입과 디자인동일
 import { useState } from "react";
 import "./css/member.css";
-import { initData } from "./fns/fnMem";
+import { clearData, initData } from "./fns/fnMem"; 
 import $ from 'jquery';
 import { useNavigate } from "react-router-dom";
 
 export default function LogIn() {
+    // 라우트이동메서드
     let goRoute = useNavigate();
 
     // [ 후크 useState 메서드 셋팅하기 ]
@@ -40,7 +41,10 @@ export default function LogIn() {
     const changeUserId = (e) => {
         // 1. 빈값 체크
         if (e.target.value !== "") setUserIdError(false);
-        else setUserIdError(true);
+        else {
+            setIdMsg(msgTxt[0]);
+            setUserIdError(true);
+        }
 
         // 2. 입력값 반영하기
         setUserId(e.target.value);
@@ -50,7 +54,10 @@ export default function LogIn() {
     const changePwd = (e) => {
         // 1. 빈값 체크
         if (e.target.value !== "") setPwdError(false);
-        else setPwdError(true);
+        else {
+            setPwdMsg(msgTxt[0]);
+            setPwdError(true);
+        }
 
         // 2. 입력값 반영하기
         setPwd(e.target.value);
@@ -84,18 +91,23 @@ export default function LogIn() {
         console.log("서브밋!");
 
         // 유효성검사 전체 통과시 ////
-        if (totalValid()) {
+        if (totalValid()) {            
             console.log("성공!");
+            // 데이터 체크 초기화
             initData();
-            
+
+            // 로컬쓰 "mem-data" 데이터 확인하기
             let memData = localStorage.getItem("mem-data");
-            console.log(memData);
-
+            console.log(memData); 
+            
+            // 로컬쓰 데이터 객체화하기
             memData = JSON.parse(memData);
-            console.log(memData);
+            console.log(memData); 
 
+            // 같은 아이디 검사 상태변수
             let isOK = true;
 
+            // 입력데이터중 아이디 비교하기
             memData.forEach(v=>{
                 // 같은 아이디가 있는가?
                 if(v["uid"]===userId){
@@ -130,9 +142,12 @@ export default function LogIn() {
                 } ////////// if ///////
             }); //////////// forEach //////////
 
+            // 아이디가 불일치할 경우
             if(isOK){
-                console.log("아이디 다름");
+                console.log("아이디가 달라요!ㅜ.ㅜ");
+                // 아이디가 다를때 메시지 변경
                 setIdMsg(msgTxt[1]);
+                // 아이디에러 상태 업데이트
                 setUserIdError(true);
             }
 
@@ -149,7 +164,7 @@ export default function LogIn() {
         <div className="outbx">
             {/* 모듈코드 */}
             <section className="membx" style={{minHeight:"300px"}}>
-                <h2>LOG IN</h2>
+                <h2 onClick={clearData}>LOG IN</h2>
                 <form method="post" action="process.php">
                     <ul>
                         <li>

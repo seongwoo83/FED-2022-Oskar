@@ -12,7 +12,6 @@ import Games from './dc/Games';
 import News from './dc/News';
 import Video from './dc/Video';
 import Member from './dc/Member';
-import ScrollTop from './dc/common/ScrollTop';
 import LogIn from './dc/Login';
 
 /***********************************************************
@@ -40,7 +39,7 @@ export default function App(){
     return (
             <HashRouter>
             {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
-            <ScrollTop />
+            
             <Routes>
                 {/* 중요!!! : 레이아웃 컴포넌트를 루트로 잡아줌*/}
                 <Route path="/" element={<Layout />}>

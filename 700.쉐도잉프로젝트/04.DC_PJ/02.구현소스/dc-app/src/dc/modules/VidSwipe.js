@@ -4,11 +4,11 @@ import SwiperVId from '../plugins/SwiperVid';
 
 function jqfn(){
     $(()=>{
-        $(".swiper-slide").on("click",function(){
+        $(".vidswbox .swiper-slide").on("click",function(){
             $(".playvid").show().find("iframe").attr("src", $(this).find("p").text()+ "?autoplay=1&mute=1");
             $(".vidtit h2").text($(this).find("h2").text());
         });
-        $(".cbtn").on("click",function(){
+        $(".vidswbox .cbtn").on("click",function(){
             $(".playvid").hide().find("iframe").attr("src", "");
             $(".vidtit h2").text("");
         })

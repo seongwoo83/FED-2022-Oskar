@@ -1,7 +1,7 @@
 const cat_data = [
     {
         idx:"1",
-        tmsrc:"./image/cat/cat1.jpg",
+        tmsrc:"./images/cat/cat1.jpg",
         cname:"SUPERMAN",
         cdesc:`
         Faster than a speeding bullet, more powerful than a locomotive… The Man of Steel fights a never-ending battle for truth, justice, and the American way.
@@ -36,7 +36,7 @@ const cat_data = [
     },
     {
         idx:"2",
-        tmsrc:"./image/cat/cat2.jpg",
+        tmsrc:"./images/cat/cat2.jpg",
         cname:"BATMAN",
         cdesc:`
         Faster than a speeding bullet, more powerful than a locomotive… The Man of Steel fights a never-ending battle for truth, justice, and the American way.
@@ -71,7 +71,7 @@ const cat_data = [
     },
     {
         idx:"3",
-        tmsrc:"./image/cat/cat3.jpg",
+        tmsrc:"./images/cat/cat3.jpg",
         cname:"WONDER WOMAN",
         cdesc:`
         Faster than a speeding bullet, more powerful than a locomotive… The Man of Steel fights a never-ending battle for truth, justice, and the American way.
@@ -106,7 +106,7 @@ const cat_data = [
     },
     {
         idx:"4",
-        tmsrc:"./image/cat/cat4.jpg",
+        tmsrc:"./images/cat/cat4.jpg",
         cname:"GREEN LANTERN",
         cdesc:`
         Faster than a speeding bullet, more powerful than a locomotive… The Man of Steel fights a never-ending battle for truth, justice, and the American way.
@@ -141,7 +141,7 @@ const cat_data = [
     },
     {
         idx:"5",
-        tmsrc:"./image/cat/cat5.jpg",
+        tmsrc:"./images/cat/cat5.jpg",
         cname:"THE FLASH",
         cdesc:`
         Faster than a speeding bullet, more powerful than a locomotive… The Man of Steel fights a never-ending battle for truth, justice, and the American way.
@@ -176,7 +176,7 @@ const cat_data = [
     },
     {
         idx:"6",
-        tmsrc:"./image/cat/cat6.jpg",
+        tmsrc:"./images/cat/cat6.jpg",
         cname:"AQUAMAN",
         cdesc:`
         Faster than a speeding bullet, more powerful than a locomotive… The Man of Steel fights a never-ending battle for truth, justice, and the American way.
@@ -211,7 +211,7 @@ const cat_data = [
     },
     {
         idx:"7",
-        tmsrc:"./image/cat/cat7.jpg",
+        tmsrc:"./images/cat/cat7.jpg",
         cname:"CYBORG",
         cdesc:`
         Faster than a speeding bullet, more powerful than a locomotive… The Man of Steel fights a never-ending battle for truth, justice, and the American way.
@@ -245,3 +245,5 @@ const cat_data = [
         type:"indiv"
     },
 ];
+
+export default cat_data;

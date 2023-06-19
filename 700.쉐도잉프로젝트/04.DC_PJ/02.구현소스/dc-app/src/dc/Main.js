@@ -7,6 +7,7 @@ import MenuBtn from "./modules/MenuBtn";
 import VidIntro from "./modules/VidIntro";
 import Vidswipe from "./modules/VidSwipe";
 import { Tilt } from 'react-tilt';
+import Catswipe from "./modules/CatSwipe";
 
 const defaultOptions = {
 	reverse:        false,  // reverse the tilt direction
@@ -30,6 +31,7 @@ const Main = () =>{
                 })}
             </div>
             <VidIntro pg={"main"}/>
+            <Catswipe tit="WHO'S WHO: THE JUSTICE LEAGUE"/>
             <Vidswipe />
             <Ban cat="Characters" />
         </>

@@ -13,6 +13,7 @@ import News from './dc/News';
 import Video from './dc/Video';
 import Member from './dc/Member';
 import LogIn from './dc/Login';
+import Detail from './dc/Detail';
 
 /***********************************************************
     [ 리액트 라우터 ]
@@ -60,6 +61,7 @@ export default function App(){
                     <Route path='vd' element={<Video />}/>
                     <Route path='mem' element={<Member />}/>
                     <Route path='login' element={<LogIn />}/>
+                    <Route path='det' element={<Detail />}/>
                 </Route>
             </Routes>
         </HashRouter>

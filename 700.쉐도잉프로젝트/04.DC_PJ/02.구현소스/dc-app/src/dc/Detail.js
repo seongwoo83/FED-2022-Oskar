@@ -10,7 +10,7 @@ function jqfn(){
 
     });
 }
-function Detail(props){
+function Detail(){
     /* 라우터 전달값을 받기위한 useLocation 생성하기' */
     const loc = useLocation();
     const cname = loc.state.cname;

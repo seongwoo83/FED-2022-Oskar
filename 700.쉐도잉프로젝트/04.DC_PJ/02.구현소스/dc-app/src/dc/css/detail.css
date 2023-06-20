@@ -22,7 +22,18 @@
     background-color: #eeeeee;
     padding: 16px;
 }
+.facts h3{
+    font-size: 45px;
+    margin: 0;
+}
 .facts>div{    
     max-width: 80%;
     margin: 0 auto;
+}
+.facts table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.facts td{
+    padding: 10px;
 }

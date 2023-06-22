@@ -46,6 +46,7 @@ const ban_data={
             "cont":`When the original Atom went missing, he left his student with. size-changing belt -- and Ryan Choi fulfilled his destiny as the All-New Atom!`,
             "btn":"MEET RYAN",
         },
+        
     ],
     "Comics":[
         {
@@ -343,6 +344,119 @@ const ban_data={
         },
         {
             "src":"./images/cat/theflash/7.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+    ],
+    "HARLEY QUINN":[
+        {
+            "src":"./images/cat/harleyquinn/1.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/harleyquinn/2.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/harleyquinn/3.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/harleyquinn/4.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/harleyquinn/5.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/harleyquinn/6.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/harleyquinn/7.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+    ],
+    "PEACEMAKER":[
+        {
+            "src":"./images/cat/peacemaker/1.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/peacemaker/2.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/peacemaker/3.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+    ],
+    "BLACK ADAM":[
+        {
+            "src":"./images/cat/blackadam/1.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/blackadam/2.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+    ],
+    "CHESHIRE":[
+        {
+            "src":"./images/cat/cheshire/1.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/cheshire/2.jpg",
+            "tit1":"",
+            "tit2":"",
+            "cont":``,
+            "btn":"",
+        },
+        {
+            "src":"./images/cat/cheshire/3.jpg",
             "tit1":"",
             "tit2":"",
             "cont":``,

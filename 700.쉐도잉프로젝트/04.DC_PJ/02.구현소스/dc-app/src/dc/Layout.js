@@ -110,7 +110,7 @@ const Layout = () => {
                         ))}
 
                         <li style={{ marginLeft: "auto" }}>
-                            <FontAwesomeIcon icon={faSearch} fade/>
+                            <Link to="/sch"><FontAwesomeIcon icon={faSearch} fade/></Link>
                         </li>
                         {
                             /* 회원가입, 로그인은 로그인 아닌 상태일 때만 */

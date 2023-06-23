@@ -49,7 +49,7 @@ function Search(){
         console.log(newList);
 
         // 4. 검색결과 리스트 업데이트 하기
-        setSdt(newList[0]);
+        setSdt([newList, 2]);
         setTot(newList.length)
 
 

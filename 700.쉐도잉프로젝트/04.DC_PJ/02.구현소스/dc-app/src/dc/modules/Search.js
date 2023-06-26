@@ -113,6 +113,7 @@ function Search(){
         
         if(checked){  // 체크박스 true 일때
             //  현재 데이터 변수에 담기
+            // eslint-disable-next-line array-callback-return
             let nowdt = cat_data.filter(v=>{
                 if(v.alignment === cid) return true;
             })
@@ -133,6 +134,10 @@ function Search(){
                     // 중요! splice로 지우면 배열항목 자체가 삭제되므로 for문 돌 떄 개수가 줄어든다
                     // 따라서 다음번호를 지울 때 ++을 --처리 필수
                     i--;
+
+                    // delete temp[i]  ->> 값만 지우기 때문에 undefined 처리 됨
+                    // 따라서 리스트 처리시 에러가 발생함
+                    // 이경우 꼭 배열 주소 전체를 삭제하는 splice를 사용해야함.
                 }
             }
             // 삭제처리된 temp를 결과에 넣기

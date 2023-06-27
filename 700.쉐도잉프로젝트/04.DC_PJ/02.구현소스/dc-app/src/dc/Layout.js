@@ -1,7 +1,7 @@
 // 메인 레이아웃 컴포넌트
 import Logo from "./Logo";
 import "./css/layout.css";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import ScrollTop from "./common/ScrollTop";
 
 /* 폰트어썸 임포트 */
@@ -19,6 +19,8 @@ import { gnb_data, bmenu } from "./data/common";
 *******************************************************/
 
 const Layout = () => {
+    // 라우터 이동 메서드 세팅
+    const goNav = useNavigate();
     /* GNB메뉴 데이터구성하기 */
     
     const [logSts, setLogSts] = useState(localStorage.getItem("minfo"));
@@ -57,6 +59,29 @@ const Layout = () => {
     const callMe = (x) => {
         console.log("누구?",x);
     }; ////////// callMe /////////////
+
+
+    /* 검색창 보이기 함수 */
+    const showSearch = (e) =>{
+        // 1. 자기자신 숨기기
+        document.querySelector(".searchingGnb+a").style.opacity = "0";
+        // 2. 검색창 보이기
+        let tg = document.querySelector(".searchingGnb");
+        tg.style.display = "block";
+        tg.querySelector("input").focus();
+    }
+
+    
+    const goSearch =()=>{
+        let kw = document.querySelector(".searchingGnb input").value;
+        // 라우터 이동하기 : 전달값 가져가기(검색어)
+        goNav('/res', {state:{keyword: kw}})
+    }
+    // 입력창에서 엔터키를 누르면 검색함수 호출
+    const enterKey = (e)=>{
+        if(e.key=== "Enter") goSearch();
+    }
+
 
     return (
         <>
@@ -110,7 +135,29 @@ const Layout = () => {
                         ))}
 
                         <li style={{ marginLeft: "auto" }}>
-                            <Link to="/sch"><FontAwesomeIcon icon={faSearch} fade/></Link>
+                            {/* 검색입력박스 */}
+                            <div className="searchingGnb">
+                        {/* 검색버튼 돋보기아이콘 */}
+                        <FontAwesomeIcon
+                            icon={faSearch}
+                            className="schbtnGnb"
+                            title="Open search"
+                            fade
+                            onClick={goSearch}
+                        />
+                        {/* 입력창 */}
+                        <input
+                            id="schinGnb"
+                            type="text"
+                            placeholder="Filter by Keyword"
+                            onKeyUp={enterKey}
+                        />
+                    </div>
+                            {/* 검색기능링크 */}
+                            {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                            <a href="#" onClick={showSearch}>
+                                <FontAwesomeIcon icon={faSearch}/>
+                            </a>
                         </li>
                         {
                             /* 회원가입, 로그인은 로그인 아닌 상태일 때만 */

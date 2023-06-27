@@ -170,7 +170,7 @@ function Search(props){
     }
     // 검색어가 있을 때 검색함수의 호출은 페이지로딩 후
     // 체크해주는  useEffect 를 사용한다.
-    useEffect(linkSearch, []);
+    useEffect(linkSearch);
     return(
         <>
             {/* 모듈코드 */}

@@ -15,7 +15,7 @@ function Result(){
     return(
         <>
             {/* 모듈코드 */}
-            <h2>Search Result</h2>
+            <h2 className='tit' style={{textAlign:"center"}}>Search Result</h2>
             <Search skw={kw}/>
             {jqfn()}
         </>

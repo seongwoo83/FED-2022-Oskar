@@ -4,10 +4,18 @@ import { useEffect, useState } from "react";
 import orgdata from './data/data.json'
 
 // 컴포넌트에서 json 데이터를 할당하지 않고 반드시 밖에서 할당해야 함
-let jsn = orgdata;
+// 초기데이터 처리는 로컬스토리지 "bdata"가 있으면 로컬스토리지 데이터를 가져오고
+// 없으면 제이슨 데이터를 사용하여 초기화 함
 
-jsn.sort((x,y)=>{
-    return Number(x.idx) === Number(y.idx)? 0 : Number(x.idx) > Number(y.idx)? 1 : 0;
+let org;
+if(localStorage.getItem("bdata")){
+    org = JSON.parse(localStorage.getItem('bdata'));
+}else{
+    org = orgdata;
+}
+
+org.sort((x,y)=>{
+    return Number(x.idx) === Number(y.idx)? 0 : Number(x.idx) > Number(y.idx)? -1 : 1;
 })
 
 function jqfn() {
@@ -17,14 +25,16 @@ function Board() {
 
 // [ json 파일 데이터 로컬 스토리지에 넣기 ]
 // 1. 변수에 json파일 문자화 하여 불러오기
+// 실시간 데이터 변경관리를 Hook변수화 하여 처리함
+const [jsn, setJsn] = useState(org)
 
 // 2. 로컬 스토리지 변수를 설정하여 할당하기
-localStorage.setItem("bdata", JSON.stringify(jsn));
+// localStorage.setItem("bdata", JSON.stringify(jsn));
 // console.log(localStorage.getItem("bdata"));
 
 // 3. 로컬 스토리지 데이터를 파싱하여 게시판 리스트에 넣기
 // 3-1 로컬 스토리지 데이터 파싱하기
-let bdata = JSON.parse(localStorage.getItem("bdata"));
+// let bdata = JSON.parse(localStorage.getItem("bdata"));
 // console.log(bdata);
 
 // 3-2 게시판 리스트 생성하기
@@ -46,18 +56,24 @@ let pgblock = 9;
 function bindList(pgnum) {
     // 1. 반복문으로 코드 작성
     let blist = "";
+    let totnum = jsn.length;
+
+    jsn.sort((x,y)=>{
+        return Number(x.idx)===Number(y.idx)? 0 : Number(x.idx)>Number(y.idx)? -1 : 1;
+    })
+
     for (let i = (pgnum - 1) * pgblock; i < pgnum * pgblock; i++) {
         // 마지막 번호 한계값 조건으로 마지막 페이지 데이터 존재하는 데이터까지만 바인딩하기
-        if (i < bdata.length) {
+        if (i < totnum) {
             blist += `
                 <tr>
                     <td>${i+1}</td>
                     <td>
-                        <a href="view.html?idx=${bdata[i]["idx"]}">${bdata[i]["tit"]}</a>
+                        <a href="view.html?idx=${jsn[i]["idx"]}">${jsn[i]["tit"]}</a>
                         </td>
-                    <td>${bdata[i]["writer"]}</td>
-                    <td>${bdata[i]["date"]}</td>
-                    <td>${bdata[i]["cnt"]}</td>
+                    <td>${jsn[i]["writer"]}</td>
+                    <td>${jsn[i]["date"]}</td>
+                    <td>${jsn[i]["cnt"]}</td>
                 </tr>
             `;
         }
@@ -68,8 +84,8 @@ function bindList(pgnum) {
     // 3. 페이징 블록 만들기
     // 3-1 전체 페이지 번호수 계산하기
     // 전체 레코드수 / 페이지 단위수 + (나머지 있으면 한페이지 더)
-    let pgtotal = Math.floor(bdata.length / pgblock);
-    let pgadd = bdata.length % pgblock;
+    let pgtotal = Math.floor(jsn.length / pgblock);
+    let pgadd = jsn.length % pgblock;
     // 페이징 코드 변수
     let pgcode = "";
 
@@ -132,8 +148,10 @@ const chgMode = (e) =>{
     console.log("버튼", txt);
     if(txt==="Write"){
         setBdmode("C")
-        $(".dtblview .name").val(nowmem.unm);
-        $(".dtblview .email").val(nowmem.eml)
+        $(()=>{
+            $(".dtblview .name").val(nowmem.unm);
+            $(".dtblview .email").val(nowmem.eml)
+        })
     }else if(txt==="List"){
         setBdmode("L");
     }else if(txt ==="Submit" && bdmode==="C"){
@@ -141,6 +159,46 @@ const chgMode = (e) =>{
         let cont = $(".dtblview .content").val();
         if(tit.trim() === "" || cont.trim()===""){
             alert("Title and content ar required");
+        }else{
+
+            let today = new Date();
+            let yy = today.getFullYear();
+            let mm = today.getMonth();
+            mm = mm<10?"0"+mm:mm
+            let dd = today.getDate();
+            dd = dd<10?"0"+dd:dd
+
+            // 1. 원본데이터 변수할당
+            let orgtemp = jsn;
+
+            // 2.임시변수에 입력할 객체데이터 생성하기
+            let temp = {
+                "idx": jsn.length+1,
+                "tit" : tit,
+                "cont" : cont,
+                "att" : "",
+                "date": `${yy}-${mm}-${dd}`,
+                "writer": nowmem.uid,
+                "pwd": nowmem.pwd,
+                "cnt" : "1"
+            };
+
+            // 3. 원본 임시변수에 데이터 push하기
+            orgtemp.push(temp);
+
+            // 4. Hook 관리변수에 최종 업데이트
+            setJsn(orgtemp);
+
+            // 5. 로컬스토리지 변수에 반영하기
+            localStorage.setItem("bdata", JSON.stringify(jsn));
+
+            console.log("반영된 데이터",localStorage.getItem("bdata"));
+
+            // 6. 게시판 모드 업데이트("L"모드)
+            setBdmode("L");
+            bindList(1);
+
+
         }
     }else if(txt==="Modify"){
         setBdmode("U")

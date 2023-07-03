@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import "./css/layout.css";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import ScrollTop from "./common/ScrollTop";
+import $ from 'jquery';
 
 /* 폰트어썸 임포트 */
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -83,7 +84,11 @@ const Layout = () => {
     }
     
     const chgMenu = () =>{
-        
+        $(".top").toggleClass("on");
+        console.log($(window).innerWidth());
+        if($(window).innerWidth() > 1024){
+            $('.top').removeClass("on");
+        }
     }
 
 
@@ -113,7 +118,7 @@ const Layout = () => {
                             </Link>
                         </li>
                         {gnb_data.map((v, i) => (
-                            <li key={i}>
+                            <li key={i} onClick={chgMenu}>
                                 <Link to={v.link}>{v.txt}</Link>
                                 {/* {console.log(v.sub)} */}
                                 {/* v.sub가 없으면 undefined */}
@@ -167,10 +172,10 @@ const Layout = () => {
                             /* 회원가입, 로그인은 로그인 아닌 상태일 때만 */
                             logSts === null && 
                             <>
-                                <li>
+                                <li onClick={chgMenu}>
                                     <Link to="/mem">Join Us</Link>
                                 </li>
-                                <li>
+                                <li onClick={chgMenu}>
                                     <Link to="/login">LOG IN</Link>
                                 </li>
                             </>
@@ -179,7 +184,7 @@ const Layout = () => {
                             // 로그아웃 버튼은 로그인 상태일 때만
                             logSts !== null &&
                             <>
-                                <li>
+                                <li onClick={chgMenu}>
                                     { /*eslint-disable-next-line jsx-a11y/anchor-is-valid*/ }
                                     <a href="#" onClick={logout}>LOG OUT</a>
                                 </li>

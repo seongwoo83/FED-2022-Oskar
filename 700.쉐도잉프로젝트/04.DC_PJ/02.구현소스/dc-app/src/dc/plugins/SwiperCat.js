@@ -6,7 +6,7 @@ import { Navigation } from 'swiper';
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-import "./swipervid.css";
+import "./swipercat.css";
 // import swipervid_data from "../data/swipervid";
 import $ from 'jquery';
 import cat_data from '../data/cat';
@@ -30,7 +30,7 @@ export default function SwiperVId() {
                 spaceBetween={10}
                 navigation
                 modules={[Navigation]}
-                className="mySwiper"
+                className="mySwiper2"
                 breakpoints={{
                     700:{slidesPerView:3},
                     1000:{slidesPerView:5},
@@ -52,11 +52,11 @@ export default function SwiperVId() {
                                     cdesc:x.cdesc,
                                     facts:x.facts
                                     }}>
-                                    <section className='swinbx'>
-                                        <div className='catimg'>
+                                    <section className='swinbx2'>
+                                        <div className='catimg2'>
                                             <img src={x.tmsrc} alt={x.cname} />
                                         </div>
-                                        <div className="cattit">
+                                        <div className="cattit2">
                                             <h3>{x.cname}</h3>
                                         </div>
                                     </section>

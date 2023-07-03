@@ -81,6 +81,10 @@ const Layout = () => {
     const enterKey = (e)=>{
         if(e.key=== "Enter") goSearch();
     }
+    
+    const chgMenu = () =>{
+        
+    }
 
 
     return (
@@ -182,6 +186,7 @@ const Layout = () => {
                             </>
                         }
                     </ul>
+                    <button className="hambtn" onClick={chgMenu}></button>
                 </nav>
             </header>
             {/* 2. 메인영역 */}

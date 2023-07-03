@@ -6,6 +6,9 @@ import orgdata from './data/data.json'
 // 컴포넌트에서 json 데이터를 할당하지 않고 반드시 밖에서 할당해야 함
 let jsn = orgdata;
 
+jsn.sort((x,y)=>{
+    return Number(x.idx) === Number(y.idx)? 0 : Number(x.idx) > Number(y.idx)? 1 : 0;
+})
 
 function jqfn() {
     $(() => {});
@@ -48,7 +51,7 @@ function bindList(pgnum) {
         if (i < bdata.length) {
             blist += `
                 <tr>
-                    <td>${bdata[i]["idx"]}</td>
+                    <td>${i+1}</td>
                     <td>
                         <a href="view.html?idx=${bdata[i]["idx"]}">${bdata[i]["tit"]}</a>
                         </td>
@@ -94,10 +97,20 @@ $(() => {
     bindList(1);
 });
 
+let [nowmem, setNowmem] = useState("");
+
+
 const chkLogin = () =>{
     let chk = localStorage.getItem("minfo");
     if(chk) setLog(true);
     else setLog(false);
+
+    if(chk){
+        setNowmem(JSON.parse(chk));
+        console.log('현재멤',nowmem);
+    }
+    
+
 }
 
 // 게시판 모드별 상태구분 Hook 변수 만들기
@@ -119,8 +132,16 @@ const chgMode = (e) =>{
     console.log("버튼", txt);
     if(txt==="Write"){
         setBdmode("C")
+        $(".dtblview .name").val(nowmem.unm);
+        $(".dtblview .email").val(nowmem.eml)
     }else if(txt==="List"){
         setBdmode("L");
+    }else if(txt ==="Submit" && bdmode==="C"){
+        let tit = $(".dtblview .subject").val();
+        let cont = $(".dtblview .content").val();
+        if(tit.trim() === "" || cont.trim()===""){
+            alert("Title and content ar required");
+        }
     }else if(txt==="Modify"){
         setBdmode("U")
     }
@@ -186,7 +207,7 @@ const chgMode = (e) =>{
             
             {
                 bdmode === "C" &&
-                <table class="dtblview">
+                <table className="dtblview">
                 <caption>OPINION</caption>
                 <tbody>
                     <tr>
@@ -194,15 +215,15 @@ const chgMode = (e) =>{
                             Name
                         </td>
                         <td width="650">
-                            <input type="text" name="name" size="20" />
+                            <input type="text" className="name" size="20" readOnly/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Emial
+                            Email
                         </td>
                         <td>
-                            <input type="text" name="email" size="40" />
+                            <input type="text" className="email" size="40" readOnly/>
                         </td>
                     </tr>
                     <tr>
@@ -210,7 +231,7 @@ const chgMode = (e) =>{
                             Title
                         </td>
                         <td>
-                            <input type="text" name="subject" size="60" />
+                            <input type="text" className="subject" size="60" />
                         </td>
                     </tr>
                     <tr>
@@ -218,7 +239,7 @@ const chgMode = (e) =>{
                             Content
                         </td>
                         <td>
-                            <textarea name="content" cols="60" rows="10"></textarea>
+                            <textarea className="content" cols="60" rows="10"></textarea>
                         </td>
                     </tr>
                 </tbody>

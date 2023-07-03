@@ -1,6 +1,6 @@
 import $ from "jquery";
 import "./css/board.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import orgdata from './data/data.json'
 
 // 컴포넌트에서 json 데이터를 할당하지 않고 반드시 밖에서 할당해야 함
@@ -94,56 +94,193 @@ $(() => {
     bindList(1);
 });
 
+const chkLogin = () =>{
+    let chk = localStorage.getItem("minfo");
+    if(chk) setLog(true);
+    else setLog(false);
+}
 
-    const callFn = ()=>bindList(1)
+// 게시판 모드별 상태구분 Hook 변수 만들기
+// 모드 구분 : CRUD (Create/Read/Update/Delete)
+// C - 글쓰기
+// R - 글읽기
+// U - 글수정
+// D - 글삭제
+// 상태 추가: L - 글 목록
+const [bdmode, setBdmode] = useState("L");
+
+// 로그인 상태  Hook변수 
+// 상태값: false - 로그아웃상태 / true - 로그인상태
+const [log, setLog] = useState(false)
+
+const chgMode = (e) =>{
+    e.preventDefault();
+    let txt = $(e.target).text();
+    console.log("버튼", txt);
+    if(txt==="Write"){
+        setBdmode("C")
+    }else if(txt==="List"){
+        setBdmode("L");
+    }else if(txt==="Modify"){
+        setBdmode("U")
+    }
+
+    // 리스트 태그로딩구역에서 일괄호출
+    // 리스트 태그가 출력되었을 때 적용됨
+    $(()=>{
+        bindList(1);
+    })
+}
+
+    const callFn = ()=>{
+        // 리스트 상태일 때만 호출
+        if(bdmode === "L"){
+            bindList(1)
+        }
+        // 로그인 상태 체크
+        chkLogin();
+
+        console.log("로그인", log, "/모드", bdmode);
+    }
     useEffect(callFn,[])
 
     return (
         <>
             {/* 모듈코드 */}
-            {/* 게시판 리스트 */}
-            <table className="dtbl" id="board">
-                <caption>OPINION</caption>
-                {/* 상단 컬럼명 표시영역 */}
-                <thead>
-                    <tr>
-                        <th>Number</th>
-                        <th>Title</th>
-                        <th>Writer</th>
-                        <th>Date</th>
-                        <th>Hits</th>
-                    </tr>
-                </thead>
+            {/* 1 .게시판 리스트 : 게시판 모드 "L"일때 출력*/}
+            {
+                bdmode === "L" &&
+                <table className="dtbl" id="board">
+                    <caption>OPINION</caption>
+                    {/* 상단 컬럼명 표시영역 */}
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>Title</th>
+                            <th>Writer</th>
+                            <th>Date</th>
+                            <th>Hits</th>
+                        </tr>
+                    </thead>
 
-                {/* 중앙 레코드 표시부분 */}
+                    {/* 중앙 레코드 표시부분 */}
+                    <tbody>
+                        <tr>
+                            <td colSpan="5">There is no data</td>
+                        </tr>
+                    </tbody>
+
+                    {/* 하단 페이징 표시부분 */}
+                    <tfoot>
+                        <tr>
+                            <td colSpan="5" className="paging">
+                                {/* PHP에서 페이징을 구성하여 표시한다! */}
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            }
+
+            {/* 2. 글쓰기 테이블  : 게시판 모드 "C"일때만 출력 */}
+            
+            {
+                bdmode === "C" &&
+                <table class="dtblview">
+                <caption>OPINION</caption>
                 <tbody>
                     <tr>
-                        <td colspan="5">There is no data</td>
-                    </tr>
-                </tbody>
-
-                {/* 하단 페이징 표시부분 */}
-                <tfoot>
-                    <tr>
-                        <td colspan="5" className="paging">
-                            {/* PHP에서 페이징을 구성하여 표시한다! */}
+                        <td width="100">
+                            Name
+                        </td>
+                        <td width="650">
+                            <input type="text" name="name" size="20" />
                         </td>
                     </tr>
-                </tfoot>
+                    <tr>
+                        <td>
+                            Emial
+                        </td>
+                        <td>
+                            <input type="text" name="email" size="40" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Title
+                        </td>
+                        <td>
+                            <input type="text" name="subject" size="60" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Content
+                        </td>
+                        <td>
+                            <textarea name="content" cols="60" rows="10"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
+            }
 
             <br />
             <table className="dtbl btngrp">
+                <tbody>
                 <tr>
                     <td>
-                        <button>
-                            <a href="list.php">List</a>
-                        </button>
-                        <button className="wbtn">
-                            <a href="write.php">Write</a>
-                        </button>
+                        {
+                            /* 글목록 모드 */
+                            bdmode === "L" &&
+                            <>
+                                <button onClick={chgMode}>
+                                    <a href="#">Write</a>
+                                </button>
+                            </>
+                        }
+                        {
+                            /* 글쓰기 모드 */
+                            bdmode === "C" &&
+                            <>
+                                <button onClick={chgMode}>
+                                    <a href="list.php">Submit</a>
+                                </button>
+                                <button onClick={chgMode}>
+                                    <a href="write.php">List</a>
+                                </button>
+                            </>
+                        }
+                        {
+                            /* 수정 모드 */
+                            bdmode === "U" &&
+                            <>
+                                <button onClick={chgMode}>
+                                    <a href="list.php">Submit</a>
+                                </button>
+                                <button onClick={chgMode}>
+                                    <a href="write.php">Delete</a>
+                                </button>
+                                <button onClick={chgMode}>
+                                    <a href="write.php">List</a>
+                                </button>
+                            </>
+                        }
+                        {
+                            /* 읽기 모드 */
+                            bdmode === "R" &&
+                            <>
+                                <button onClick={chgMode}>
+                                    <a href="list.php">List</a>
+                                </button>
+                                <button onClick={chgMode}>
+                                    <a href="write.php">Modify</a>
+                                </button>
+                            </>
+                        }
                     </td>
                 </tr>
+                </tbody>
             </table>
             {jqfn()}
         </>
@@ -151,3 +288,18 @@ $(() => {
 }
 
 export default Board;
+
+/* 게시판 기능정의 */
+/* 
+    1. 글쓰기 버튼은 로그인 한 경우에만 노출
+    2. 글쓰기 한 후 저장할 떄 로그인한 계정으로 저장
+    3. 글보기 모드에서 글 수정버튼은 해당 글쓴이일 때만 노출
+    4. 수정모드에서 삭제버튼은 확인 후 글쓴이일 경우에만 가능
+*/
+
+/* 페이지별 기능버튼 */
+/* 
+    1. 목록: 글쓰기(로그인 후) / 글보기는 제목 클릭시
+    2. 글보기 : 글수정 / 글삭제(해당계정일 때) / 목록버튼
+    3. 글수정: 글수정확인 / 글삭제(해당계정일 때) / 목록버튼
+*/

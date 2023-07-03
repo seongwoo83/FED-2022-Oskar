@@ -85,10 +85,13 @@ const Layout = () => {
     
     const chgMenu = () =>{
         $(".top").toggleClass("on");
-        console.log($(window).innerWidth());
-        if($(window).innerWidth() > 1024){
-            $('.top').removeClass("on");
-        }
+        // console.log($(window).innerWidth());
+        // if($(window).innerWidth() > 1024){
+        //     $('.top').removeClass("on");
+        // }
+    }
+    const rmCls = () =>{
+        $('.top').removeClass("on");
     }
 
 
@@ -118,7 +121,7 @@ const Layout = () => {
                             </Link>
                         </li>
                         {gnb_data.map((v, i) => (
-                            <li key={i} onClick={chgMenu}>
+                            <li key={i} onClick={rmCls}>
                                 <Link to={v.link}>{v.txt}</Link>
                                 {/* {console.log(v.sub)} */}
                                 {/* v.sub가 없으면 undefined */}
@@ -172,10 +175,10 @@ const Layout = () => {
                             /* 회원가입, 로그인은 로그인 아닌 상태일 때만 */
                             logSts === null && 
                             <>
-                                <li onClick={chgMenu}>
+                                <li onClick={rmCls}>
                                     <Link to="/mem">Join Us</Link>
                                 </li>
-                                <li onClick={chgMenu}>
+                                <li onClick={rmCls}>
                                     <Link to="/login">LOG IN</Link>
                                 </li>
                             </>
@@ -184,7 +187,7 @@ const Layout = () => {
                             // 로그아웃 버튼은 로그인 상태일 때만
                             logSts !== null &&
                             <>
-                                <li onClick={chgMenu}>
+                                <li onClick={rmCls}>
                                     { /*eslint-disable-next-line jsx-a11y/anchor-is-valid*/ }
                                     <a href="#" onClick={logout}>LOG OUT</a>
                                 </li>

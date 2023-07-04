@@ -29,7 +29,7 @@ function Board() {
     const [jsn, setJsn] = useState(org);
 
     // 현재 로그인 사용자 정보 => 처음에 현재로그인 정보로 세팅함
-    let [nowmem, setNowmem] = useState(JSON.parse(localStorage.getItem("minfo")));
+    let [nowmem, setNowmem] = useState(localStorage.getItem("minfo")? JSON.parse(localStorage.getItem("minfo")) : '');
 
     // 게시판 모드별 상태구분 Hook 변수 만들기
     // 모드 구분 : CRUD (Create/Read/Update/Delete)

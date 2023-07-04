@@ -199,7 +199,7 @@ function Board() {
             } else {
                 let today = new Date();
                 let yy = today.getFullYear();
-                let mm = today.getMonth();
+                let mm = today.getMonth()+1;
                 mm = mm < 10 ? "0" + mm : mm;
                 let dd = today.getDate();
                 dd = dd < 10 ? "0" + dd : dd;
@@ -247,14 +247,16 @@ function Board() {
         
         }else if(txt=="Submit" && bdmode=='U'){
         // (5) 수정모드("U")에서 Submit 버튼 클릭시 
-            // 제목과 내용을 읽어옴(고친내용읽기)
+            // 1. 제목과 내용을 읽어옴(고친내용읽기)
             let tit = $(".updateone .subject").val();
             let cont = $(".updateone .content").val();
 
-            // 빈값 체크하기
+            // 2. 빈값 체크하기
             if(tit.trim()==''||cont.trim()==''){
                 alert("Title and content are required");
             }else{
+                // 3. 빈값이 아니면 해당 데이터 찾아서 값을 변경하기
+                // 4. 원본데이터에서 idx값이 일치하는 레코드의 값 변경
                 jsn.find(v=>{
                     if(v.idx==currItem[0]){
                         v.tit = tit;
@@ -263,13 +265,31 @@ function Board() {
                     }
                 })
 
-                 // 6. 게시판 모드 업데이트('L')
+                 // 5. 게시판 모드 업데이트('L')
                 setBdmode('L');
 
-                 // 7. 리스트 바인딩호출
+                 // 6. 리스트 바인딩호출
                 bindList(1);
             }
             
+        }else if(txt=="Delete" && bdmode=='U'){
+            // (6) 수정모드("U")에서 Delete버튼 클릭시
+            // 1. 확인 대화창을 띄워 OK 클릭시 true 처리
+            if(window.confirm('Are you sure you want to delete it?')){
+                // 2. 원본데이터에서 해당 항목 레코드 찾아 삭제
+                jsn.find((v,i)=>{
+                    if(v.idx==currItem[0]){
+                        console.log(v.idx,currItem[0]);
+                        jsn.splice(i,1);
+                        return true;
+                    }
+                })
+                 // 3. 게시판 모드 업데이트('L')
+                setBdmode('L');
+
+                 // 4. 리스트 바인딩호출
+                bindList(1);
+            }
         }
 
         // 리스트 태그로딩구역에서 일괄호출
